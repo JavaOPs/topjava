@@ -59,10 +59,9 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
      -  поле UserMealWithExceed.exceed должно показывать, 
         превышает ли сумма калорий за весь день параметра метода caloriesPerDay  
         
-    Т.е UserMealWithExceed - это запись одной еды, но поле exceeded будет одинаково для всех записей за этот день.
-    Поле LocalDateTime dateTime содержит в себе как дату, так и время.
-        
-     
+    Т.е UserMealWithExceed - это запись одной еды, но поле exceeded 
+    будет одинаково для всех записей за этот день.
+    
 Optional
 
      Сделать реализация через Java 8 Stream API
