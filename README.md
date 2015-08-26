@@ -24,6 +24,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
     -  <a href="http://habrahabr.ru/post/125799/">Как начать работать с GitHub: быстрый старт</a>
     -  <a href="http://ndpsoftware.com/git-cheatsheet.html">Справочник в графическом виде</a>
     -  <a href="https://blog.interlinked.org/tutorials/git.html">Git Overview</a>
+    -  <a href="http://geekbrains.ru/gitstart">Видеокурс по Git</a>
 
 ##  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZDdaaU5fZEo4X3c">Работа с проектом (выполнять инструкции)</a>
 - **<a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFWEpvcjUwWGhsTnM">Prepare_ to_ HW0.patch (скачать и положить в каталог вашего проекта)</a>**
