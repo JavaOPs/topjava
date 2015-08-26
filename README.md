@@ -57,6 +57,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
      -  должны возвращаться только записи между startTime и endTime 
      -  поле UserMealWithExceed.exceed должно показывать, 
         превышает ли сумма калорий за весь день параметра метода caloriesPerDay  
+        
     Т.е UserMealWithExceed - это запись одной еды, но поле exceeded будет одинаково для всех записей за этот день.
     поле LocalDateTime dateTime содержит в себе как дату, так и время.
         
