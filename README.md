@@ -27,7 +27,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
     -  <a href="http://geekbrains.ru/gitstart">Видеокурс по Git</a>
 
 ##  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZDdaaU5fZEo4X3c">Работа с проектом (выполнять инструкции)</a>
-- **<a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFcGhmdHpqdjVreVU">Prepare_ to_ HW0.patch (скачать и положить в каталог вашего проекта)</a>**
+- **<a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFNHk5dVJ4N0xJTWc">Prepare_ to_ HW0.patch (скачать и положить в каталог вашего проекта)</a>**
 -  <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Доступно о Java 8 Lambda</a>
 
 ##  Инструкция по шагам (из видео):</h3>
