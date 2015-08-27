@@ -3,7 +3,7 @@ Java Enterprise Online Project
 Наиболее востребованные технологии /инструменты / фреймворки Java Enterprise:
 Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery + plugins.
 
-**Старт проекта 10.09.2015**
+### **<a href="http://javawebinar.ru/topjava/">Старт проекта 10.09.2015</a>**
 
 Вводное занятие
 ===============
