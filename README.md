@@ -62,6 +62,8 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
     Т.е UserMealWithExceed - это запись одной еды, но поле exceeded 
     будет одинаково для всех записей за этот день.
     
+    Проверте результат выполнения ДЗ!
+    
 Optional
 
      Сделать реализация через Java 8 Stream API
