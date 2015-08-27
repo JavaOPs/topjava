@@ -64,7 +64,7 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
     будет одинаково для всех записей за этот день.
     
      - Проверте результат выполнения ДЗ!
-     -  Оцените Time complexity вашего алгоритма.
+     - Оцените Time complexity вашего алгоритма.
 
 Optional
 
