@@ -1,3 +1,4 @@
+*.patch
 .idea
 out
 target
