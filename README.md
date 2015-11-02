@@ -3,16 +3,19 @@ Java Enterprise Online Project
 Наиболее востребованные технологии /инструменты / фреймворки Java Enterprise:
 Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery + plugins.
 
-**Старт проекта 10.09.2015**
-
 Вводное занятие
 ===============
 
 ## <a href="description.md">Описание проекта</a>
+### <a href="http://topjava.herokuapp.com/" target=_blank>Демо разрабатываемого приложения</a>
+### <a href="cv.md">Ваше резюме</a>
 
-#### <a href="http://topjava.herokuapp.com/" target=_blank>Демо разрабатываемого приложения</a>
+#### <a href="https://github.com/JavaOPs/topjava/wiki">Wiki</a>
+#### <a href="https://gitter.im/JavaOPs/topjava">Форум</a>
 
-## <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFSUNrdVc0bDZuX2s">Системы управления версиями. Git.
+
+
+## ![video](http://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico) <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFSUNrdVc0bDZuX2s">Системы управления версиями. Git.
 
 -  <a href="http://ru.wikipedia.org/wiki/Система_управления_версиями">Система управления версиями</a>. <a
                     href="http://ru.wikipedia.org/wiki/%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F_%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F%D0%BC%D0%B8#.D0.A0.D0.B0.D1.81.D0.BF.D1.80.D0.B5.D0.B4.D0.B5.D0.BB.D1.91.D0.BD.D0.BD.D1.8B.D0.B5_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC.D1.8B_.D1.83.D0.BF.D1.80.D0.B0.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D1.8F_.D0.B2.D0.B5.D1.80.D1.81.D0.B8.D1.8F.D0.BC.D0.B8">VCS/DVSC</a>.
@@ -24,9 +27,10 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
     -  <a href="http://habrahabr.ru/post/125799/">Как начать работать с GitHub: быстрый старт</a>
     -  <a href="http://ndpsoftware.com/git-cheatsheet.html">Справочник в графическом виде</a>
     -  <a href="https://blog.interlinked.org/tutorials/git.html">Git Overview</a>
+    -  <a href="http://geekbrains.ru/gitstart">Видеокурс по Git</a>
 
-##  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZDdaaU5fZEo4X3c">Работа с проектом (выполнять инструкции)</a>
-- **<a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFWEpvcjUwWGhsTnM">Prepare_ to_ HW0.patch (скачать и положить в каталог вашего проекта)</a>**
+##  ![video](http://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZDdaaU5fZEo4X3c">Работа с проектом (выполнять инструкции)</a>
+- **<a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFNHk5dVJ4N0xJTWc">Prepare_ to_ HW0.patch (скачать и положить в каталог вашего проекта)</a>**
 -  <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Доступно о Java 8 Lambda</a>
 
 ##  Инструкция по шагам (из видео):</h3>
@@ -51,3 +55,20 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
     -  <a href="http://devcolibri.com/4274#t7">Java 8: Потоки</a>
     -  <a href="http://prologistic.com.ua/polnoe-rukovodstvo-po-java-8-stream.html">Pуководство по Java 8 Stream</a>
     -  <a href="http://habrahabr.ru/post/224593/">Лямбда-выражения в Java 8</a>
+    -  <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFNEJWRFJkVDA3TkU/view">Time complexity</a>
+
+## Домашнее задание HW0
+     Реализовать UserMealsUtil.getFilteredMealsWithExceeded:
+     -  должны возвращаться только записи между startTime и endTime 
+     -  поле UserMealWithExceed.exceed должно показывать, 
+        превышает ли сумма калорий за весь день параметра метода caloriesPerDay  
+        
+    Т.е UserMealWithExceed - это запись одной еды, но поле exceeded 
+    будет одинаково для всех записей за этот день.
+    
+     - Проверте результат выполнения ДЗ!
+     - Оцените Time complexity вашего алгоритма.
+
+Optional
+
+     Сделать реализация через Java 8 Stream API

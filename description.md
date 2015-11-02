@@ -1,4 +1,7 @@
-####   Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей используя <a href="http://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-for-2014/" target="_blank">наиболее популярные инструменты и технологии Java</a>: Maven, Spring, Security, JPA(Hibernate), REST(Jackson), Bootstrap, jQuery + plugins
+#### Старт проекта 26.11.2015
+Присылайте заявки в skype:grigory.kislin
+
+####   Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей используя <a href="http://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-for-2014/" target="_blank">наиболее популярные инструменты и технологии Java</a>: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API
 -  Основное внимание будет уделяться способам решения многочисленных проблем разработки в Spring/JPA, а также структурному (красивому и надежному) java кодированию и архитектуре приложения.
 -  Каждая итерация проекта в закрепляется домашним заданием по реализации схожей функциональности. Следующее занятие начинается с разбора домашних заданий.
 -  Большое внимание уделяется тестированию кода: в проекте ~ 85 JUnit тестов.
@@ -49,7 +52,7 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 -  Тестирование REST контроллеров. Jackson.
 -  jackson-datatype-hibernate. Тестирование через матчеры.
 -  Тестирование через SoapUi. UTF-8
--  WebJars. Dandelion bundles
+-  WebJars.
 -  Bootstrap. Datatables.
 -  AJAX. jQuery. Notifications.
 -  Spring Security
