@@ -1,5 +1,4 @@
 #### Старт проекта 26.11.2015
-Присылайте заявки в skype:grigory.kislin
 
 #### <a href="https://github.com/JavaOPs/topjava">Вводное занятие</a>
 
