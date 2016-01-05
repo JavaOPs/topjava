@@ -57,17 +57,15 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 -  <a href="https://ru.wikipedia.org/wiki/Временная_сложность_алгоритма">Временная сложность алгоритма</a>
 -  <a href="https://ru.wikipedia.org/wiki/Вычислительная_сложность">Вычислительная сложность</a>
 ```
-     Реализовать UserMealsUtil.getFilteredMealsWithExceeded:
-     -  должны возвращаться только записи между startTime и endTime 
-     -  поле UserMealWithExceed.exceed должно показывать, 
-        превышает ли сумма калорий за весь день параметра метода caloriesPerDay  
+Реализовать UserMealsUtil.getFilteredMealsWithExceeded:
+-  должны возвращаться только записи между startTime и endTime 
+-  поле UserMealWithExceed.exceed должно показывать, 
+                                     превышает ли сумма калорий за весь день параметра метода caloriesPerDay  
         
-    Т.е UserMealWithExceed - это запись одной еды, но поле exceeded 
-    будет одинаково для всех записей за этот день.
+Т.е UserMealWithExceed - это запись одной еды, но поле exceeded будет одинаково для всех записей за этот день.
     
-     - Проверте результат выполнения ДЗ 
-     -               (можно проверить логику в http://topjava.herokuapp.com , список еды)
-     - Оцените Time complexity вашего алгоритма (если он O(N*N)- попробуйте сделать O(N).
+- Проверте результат выполнения ДЗ (можно проверить логику в http://topjava.herokuapp.com , список еды)
+- Оцените Time complexity вашего алгоритма (если он O(N*N)- попробуйте сделать O(N).
 ```
 Optional
 
@@ -79,7 +77,7 @@ Optional
 -  <a href="http://stackoverflow.com/questions/28319064/java-8-best-way-to-transform-a-list-map-or-foreach">stream.map vs forEach</a>
 
 ```
-     Сделать реализация через Java 8 Stream API. Заменяйте forEach оператором stream.map(..)
+Сделать реализация через Java 8 Stream API. Заменяйте forEach оператором stream.map(..)
 ```
 
 ### Ресурсы для подготовки к проекту 
