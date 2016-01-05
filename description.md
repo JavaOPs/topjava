@@ -37,10 +37,10 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 -  Профили Maven и Spring
 -  Пул коннектов
 -  Spring Data JPA
--  Spring кэш
 -  Кэш Hibernate
 
 ## Разработка WEB
+-  Spring кэш
 -  Spring Web
 -  JPS, JSTL, i18n
 -  Tomcat maven plugin. JNDI
