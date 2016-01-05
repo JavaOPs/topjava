@@ -52,9 +52,6 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 -  Сделать ветку домашнего задания
 -  Выполнить задание и залить на GitHub (commit + push)
 -  Переключиться в основную ветку проекта master.
-
-### Вы готовы к участию в проекте!
-
 -  Ресурсы
     -  <a href="http://devcolibri.com/4137#t2">Java 8: Lambda выражения</a>
     -  <a href="http://www.mscharhag.com/2014/02/java-8-datetime-api.html">Java 8 Date and Time API</a>
