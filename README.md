@@ -18,9 +18,6 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 ### <a href="cv.md">Поиск работы</a>
 
 #### <a href="https://github.com/JavaOPs/topjava/wiki">Wiki</a>
-#### <a href="https://gitter.im/JavaOPs/topjava">Форум</a>
-
-
 
 ## ![video](http://s.ytimg.com/yts/img/favicon-vflz7uhzw.ico) <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFSUNrdVc0bDZuX2s">Системы управления версиями. Git.
 
@@ -52,18 +49,14 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
 -  Сделать ветку домашнего задания
 -  Выполнить задание и залить на GitHub (commit + push)
 -  Переключиться в основную ветку проекта master.
--  Ресурсы
-    -  <a href="http://devcolibri.com/4137#t2">Java 8: Lambda выражения</a>
-    -  <a href="http://www.mscharhag.com/2014/02/java-8-datetime-api.html">Java 8 Date and Time API</a>
-    -  <a href="http://devcolibri.com/4274#t7">Java 8: Потоки</a>
-    -  <a href="http://prologistic.com.ua/polnoe-rukovodstvo-po-java-8-stream.html">Pуководство по Java 8 Stream</a>
-    -  <a href="http://habrahabr.ru/post/224593/">Лямбда-выражения в Java 8</a>
-    -  <a href="http://habrahabr.ru/company/luxoft/blog/270383/">Шпаргалка Java Stream API</a>
-    -  <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFNEJWRFJkVDA3TkU/view">Time complexity</a>
-    -  <a href="https://ru.wikipedia.org/wiki/Временная_сложность_алгоритма">Временная сложность алгоритма</a>
-    -  <a href="https://ru.wikipedia.org/wiki/Вычислительная_сложность">Вычислительная сложность</a>
-    
+
 ## Домашнее задание HW0
+
+-  <a href="http://www.mscharhag.com/2014/02/java-8-datetime-api.html">Java 8 Date and Time API</a>
+-  <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFNEJWRFJkVDA3TkU/view">Time complexity</a>
+-  <a href="https://ru.wikipedia.org/wiki/Временная_сложность_алгоритма">Временная сложность алгоритма</a>
+-  <a href="https://ru.wikipedia.org/wiki/Вычислительная_сложность">Вычислительная сложность</a>
+```
      Реализовать UserMealsUtil.getFilteredMealsWithExceeded:
      -  должны возвращаться только записи между startTime и endTime 
      -  поле UserMealWithExceed.exceed должно показывать, 
@@ -75,12 +68,19 @@ Maven/ Spring/ Security/ JPA(Hibernate)/ REST(Jackson)/ Bootstrap(CSS)/ jQuery +
      - Проверте результат выполнения ДЗ 
      -               (можно проверить логику в http://topjava.herokuapp.com , список еды)
      - Оцените Time complexity вашего алгоритма (если он O(N*N)- попробуйте сделать O(N).
-
+```
 Optional
 
-     Сделать реализация через Java 8 Stream API. Заменяйте forEach оператором stream.map(..)
+-  <a href="http://devcolibri.com/4137#t2">Java 8: Lambda выражения</a>
+-  <a href="http://devcolibri.com/4274#t7">Java 8: Потоки</a>
+-  <a href="http://prologistic.com.ua/polnoe-rukovodstvo-po-java-8-stream.html">Pуководство по Java 8 Stream</a>
+-  <a href="http://habrahabr.ru/post/224593/">Лямбда-выражения в Java 8</a>
+-  <a href="http://habrahabr.ru/company/luxoft/blog/270383/">Шпаргалка Java Stream API</a>
+-  <a href="http://stackoverflow.com/questions/28319064/java-8-best-way-to-transform-a-list-map-or-foreach">stream.map vs forEach</a>
 
-<a href="http://stackoverflow.com/questions/28319064/java-8-best-way-to-transform-a-list-map-or-foreach">stream.map vs forEach</a>
+```
+     Сделать реализация через Java 8 Stream API. Заменяйте forEach оператором stream.map(..)
+```
 
 ### Ресурсы для подготовки к проекту 
 #### (желательно иметь представление для лучшего усвоения материала)
