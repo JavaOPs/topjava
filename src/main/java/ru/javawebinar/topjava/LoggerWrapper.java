@@ -72,7 +72,7 @@ public class LoggerWrapper {
     }
 
     public NotFoundException getNotFoundException(String reason) {
-        logger.error("No data found");
+        logger.error(reason);
         return new NotFoundException(reason);
     }
 }
