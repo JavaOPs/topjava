@@ -11,6 +11,7 @@
             <property name="repository" ref="mockUserRepository"/>
         </bean>
     -->
+    <import resource="spring-tools.xml"/>
 
     <context:annotation-config/>
 
