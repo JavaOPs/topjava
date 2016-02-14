@@ -58,3 +58,6 @@ public class DataJpaUserMealRepositoryImpl implements UserMealRepository {
 
     }
 
+    @Override
+    public UserMeal getWithUser(Integer id, Integer userId) {
+        return proxy.getWithUser(id, userId);
