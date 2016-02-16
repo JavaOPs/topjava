@@ -22,42 +22,41 @@ public class DataJpaUserMealRepositoryImpl implements UserMealRepository {
     private ProxyUserRepository userProxy;
 
 
-
-        @Override
-        @Transactional
-        public UserMeal save(UserMeal userMeal, int userId) {
-            if (!userMeal.isNew() && get(userMeal.getId(), userId) == null) {
-                return null;
-            }
-            userMeal.setUser(userProxy.getOne(userId));
-            return proxy.save(userMeal);
-
+    @Override
+    @Transactional
+    public UserMeal save(UserMeal userMeal, int userId) {
+        if (!userMeal.isNew() && get(userMeal.getId(), userId) == null) {
+            return null;
         }
-
-        @Override
-        public boolean delete(int id, int userId) {
-            return proxy.delete(id, userId) != 0;
-        }
-
-        @Override
-        public UserMeal get(int id, int userId) {
-            return proxy.get(id, userId);
-        }
-
-        @Override
-        public List<UserMeal> getAll(int userId) {
-            return proxy.getAll(userId);
-        }
-
-        @Override
-        public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-            return proxy.getBetween(startDate, endDate, userId);
-
-        }
-
+        userMeal.setUser(userProxy.getOne(userId));
+        return proxy.save(userMeal);
 
     }
 
     @Override
+    public boolean delete(int id, int userId) {
+        return proxy.delete(id, userId) != 0;
+    }
+
+    @Override
+    public UserMeal get(int id, int userId) {
+        return proxy.get(id, userId);
+    }
+
+    @Override
+    public List<UserMeal> getAll(int userId) {
+        return proxy.getAll(userId);
+    }
+
+    @Override
+    public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
+        return proxy.getBetween(startDate, endDate, userId);
+
+    }
+
+
+    @Override
     public UserMeal getWithUser(Integer id, Integer userId) {
         return proxy.getWithUser(id, userId);
+    }
+}
