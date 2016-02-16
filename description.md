@@ -17,8 +17,8 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 
 ## План проекта (ссылки на некоторые темы открыты для просмотра)
 ### Архитектура проекта. Персистентность.
--  Системы управления версиями
--  Java 8: Lambda, Stream API
+-  <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFSUNrdVc0bDZuX2s">Системы управления версиями</a>
+-  <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Java 8: Lambda</a>, Stream API
 -  Обзор используемых в проекте технологий и инструментов.
 -  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFSlZMTXBJRXJpakU">Инструмент сборки Maven.</a>
 -  WAR. Веб-контейнер Tomcat. Сервлеты.
