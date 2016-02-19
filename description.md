@@ -1,10 +1,10 @@
-####   Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей используя <a href="http://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-for-2014/" target="_blank">наиболее популярные инструменты и технологии Java</a>: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API
+####   Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием <a href="http://zeroturnaround.com/rebellabs/java-tools-and-technologies-landscape-for-2014/" target="_blank">наиболее популярных инструментов и технологий Java</a>: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API
 -  Основное внимание будет уделяться способам решения многочисленных проблем разработки в Spring/JPA, а также структурному (красивому и надежному) java кодированию и архитектуре приложения.
 -  Каждая итерация проекта в закрепляется домашним заданием по реализации схожей функциональности. Следующее занятие начинается с разбора домашних заданий.
 -  Большое внимание уделяется тестированию кода: в проекте 88 JUnit тестов.
 -  Несмотря на относительно небольшой размер, приложение разрабатывается с нуля как большой проект (например мы используем кэш 2-го уровня Hibernate, настраиваем Jenkins для работы с ленивой загрузкой
 Hibernate, делаем конверторы для типов LocalDateTime (Java 8 time API), которые еще не поддерживаются ни JPA/Hibernate, ни Jackson/json).
-            Разбираются архитектурные паттерны: слои приложения и как правильно разбивать логику по слоям, когда нужно применят Data Transfer Object.
+            Разбираются архитектурные паттерны: слои приложения и как правильно разбивать логику по слоям, когда нужно применять Data Transfer Object.
             Т.е на выходе получается не учебный проект, а хорошо маштабируемый шаблон для большого проекта на всех пройденных технологиях.
 -   Большое внимание уделяется деталям: популяция базы, использование транзакционности, тесты сервисов и REST
             контроллеров, насторойка EntityManagerFactory,
@@ -60,7 +60,7 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 -  Работа с Datatables через Ajax.
 -  Spring Security Test
 -  Encoding password
--  <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFNDlPZGdUNThzNUU/view">CSRF (добавление в Spring проект защиты от межсайтовой подделки запроса)</a>
+-  <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFNDlPZGdUNThzNUU/view">CSRF (добавление в проект защиты от межсайтовой подделки запроса)</a>
 -  form-login. Spring Security Taglib
 -  Handler interceptor
 -  Spring Exception Handling
