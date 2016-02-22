@@ -24,6 +24,7 @@
         </encoder>
     </appender>
 
+    <logger name="org.springframework.web" level="DEBUG"/>
     <logger name="ru.javawebinar.topjava" level="DEBUG"/>
 
     <root level="DEBUG">

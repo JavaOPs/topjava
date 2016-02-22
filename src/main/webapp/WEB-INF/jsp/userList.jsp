@@ -8,6 +8,7 @@
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <section>
+    <h3><fmt:message key="users.title"/></h3>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
