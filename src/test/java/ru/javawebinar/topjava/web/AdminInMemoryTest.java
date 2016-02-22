@@ -21,7 +21,7 @@ public class AdminInMemoryTest {
 
     @BeforeClass
     public static void beforeClass() {
-        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/mock.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/spring-mvc.xml", "spring/mock.xml");
         System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
         controller = appCtx.getBean(AdminRestController.class);
     }
