@@ -25,8 +25,8 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
         );
-        getFilteredMealsWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 900)
-                .forEach(userMealWithExceed -> System.out.println(userMealWithExceed.toString()));
+        getFilteredMealsWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+//                .forEach(userMealWithExceed -> System.out.println(userMealWithExceed));
 
 //        .toLocalDate();
 //        .toLocalTime();
@@ -37,7 +37,7 @@ public class UserMealsUtil {
 
         List<UserMealWithExceed> list = new ArrayList<>();
         mealList.stream()
-                .filter(userMeal -> userMeal.getDateTime().getSecond() >= startTime.getSecond() && userMeal.getDateTime().getSecond() <= endTime.getSecond() && userMeal.getCalories() > caloriesPerDay)
+                .filter(userMeal -> TimeUtil.isBetween(userMeal.getDateTime().toLocalTime(), startTime, endTime) && userMeal.getCalories() > caloriesPerDay)
                 .forEach(userMeal -> list.add(new UserMealWithExceed(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), true)));
 
         return list;
