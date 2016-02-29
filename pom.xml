@@ -34,6 +34,7 @@
         <hibernate.version>5.0.6.Final</hibernate.version>
         <hibernate-validator.version>5.1.3.Final</hibernate-validator.version>
         <!--Tools-->
+        <hamcrest.version>1.3</hamcrest.version>
         <ehcache.version>2.10.1</ehcache.version>
     </properties>
 
@@ -189,14 +190,27 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <profiles>
