@@ -1,6 +1,23 @@
 package ru.javawebinar.topjava.web.meal;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import ru.javawebinar.topjava.LoggedUser;
+import ru.javawebinar.topjava.model.UserMeal;
+import ru.javawebinar.topjava.to.UserMealWithExceed;
+import ru.javawebinar.topjava.util.UserMealsUtil;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
+
+import static org.springframework.format.annotation.DateTimeFormat.*;
 
 /**
  * GKislin
@@ -8,4 +25,47 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class UserMealRestController extends AbstractUserMealController {
+
+    static final String REST_URL = "/rest/meals";
+
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UserMealWithExceed> getAll()
+    {
+     return super.getAll();
+    }
+
+    @RequestMapping(value = "/id", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserMeal get(int id)
+    {
+        return super.get(id);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void delete (@RequestParam (value = "id") int id)
+    {
+        super.delete(id);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestBody UserMeal meal, @RequestParam (value = "id") int id)
+    {
+        super.update(meal, id);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public UserMeal create(@RequestBody UserMeal meal)
+    {
+        return super.create(meal);
+    }
+
+    @RequestMapping(value = "/between", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UserMealWithExceed> getBetween(@RequestParam @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime startDate,@RequestParam @DateTimeFormat(iso = ISO.DATE_TIME)  LocalDateTime endDate) {
+        return super.getBetween(startDate.toLocalDate(), startDate.toLocalTime(), endDate.toLocalDate(), endDate.toLocalTime());
+
+
+    }
+
+
+
+
 }
