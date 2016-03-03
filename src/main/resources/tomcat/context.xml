@@ -45,5 +45,5 @@
               password="password"
               driverClassName="org.postgresql.Driver"
               url="jdbc:postgresql://localhost:5432/topjava"/>
-              <!--url="database.url=jdbc:postgresql://ec2-54-217-202-110.eu-west-1.compute.amazonaws.com:5432/dehm6lvm8bink0?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"-->
+              <!--url="jdbc:postgresql://ec2-54-217-202-110.eu-west-1.compute.amazonaws.com:5432/dehm6lvm8bink0?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"-->
 </Context>
