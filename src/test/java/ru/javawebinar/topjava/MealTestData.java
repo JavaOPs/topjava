@@ -21,7 +21,7 @@ import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
 public class MealTestData {
 
     public static final ModelMatcher<UserMeal, String> MATCHER = new ToStringModelMatcher<>(UserMeal.class);
-    public static final ModelMatcher<UserMealWithExceed, String> USER_MEAL_WITH_EXCEED_STRING_MODEL_MATCHER = new ToStringModelMatcher<>(UserMealWithExceed.class);
+    public static final ModelMatcher<UserMealWithExceed, String> MATCHER_WITH_EXCEED = new ToStringModelMatcher<>(UserMealWithExceed.class);
 
     public static final int MEAL1_ID = START_SEQ + 2;
     public static final int ADMIN_MEAL_ID = START_SEQ + 8;

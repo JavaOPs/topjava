@@ -4,6 +4,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import ru.javawebinar.topjava.matcher.ModelMatcher;
 
 import java.io.UnsupportedEncodingException;
+import java.util.function.Function;
 
 /**
  * GKislin
@@ -25,7 +26,12 @@ public class TestUtil {
      */
     public static class ToStringModelMatcher<T> extends ModelMatcher<T, String> {
         public ToStringModelMatcher(Class<T> entityClass) {
-            super(Object::toString, entityClass);
+            super(new Function<T, String>() {
+                @Override
+                public String apply(T t) {
+                    return t.toString();
+                }
+            }, entityClass);
         }
     }
 }
