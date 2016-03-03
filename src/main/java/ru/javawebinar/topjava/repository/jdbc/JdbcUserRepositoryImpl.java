@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  */
 
 @Repository
-@Transactional
+@Transactional (readOnly = true)
 public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
@@ -50,6 +50,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public User save(User user) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", user.getId())
@@ -75,6 +76,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
         return jdbcTemplate.update("DELETE FROM users WHERE id=?", id) != 0;
     }

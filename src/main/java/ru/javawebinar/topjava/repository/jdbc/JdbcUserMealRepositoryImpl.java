@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @Repository
-@Transactional
+@Transactional (readOnly = true)
 public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     private static final RowMapper<UserMeal> ROW_MAPPER =
@@ -47,6 +47,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
+    @Transactional
     public UserMeal save(UserMeal userMeal, int userId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", userMeal.getId())
@@ -69,6 +70,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id, int userId) {
         return jdbcTemplate.update("DELETE FROM meals WHERE id=? AND user_id=?", id, userId) != 0;
     }
