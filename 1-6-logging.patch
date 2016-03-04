@@ -1,0 +1,128 @@
+Index: src/main/resources/logback.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/logback.xml	(revision )
++++ src/main/resources/logback.xml	(revision )
+@@ -0,0 +1,33 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<configuration scan="true" scanPeriod="30 seconds">
++
++    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
++        <resetJUL>true</resetJUL>
++    </contextListener>
++
++    <!-- To enable JMX Management -->
++    <jmxConfigurator/>
++
++    <appender name="file" class="ch.qos.logback.core.FileAppender">
++        <file>${TOPJAVA_ROOT}/log/topjava.log</file>
++
++        <encoder>
++            <charset>UTF-8</charset>
++            <pattern>%date %-5level %logger{0} [%file:%line] %msg%n</pattern>
++        </encoder>
++    </appender>
++
++    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
++        <encoder>
++            <charset>UTF-8</charset>
++            <pattern>%-5level %logger{0} [%file:%line] %msg%n</pattern>
++        </encoder>
++    </appender>
++
++    <logger name="ru.javawebinar.topjava" level="debug"/>
++
++    <root level="info">
++        <appender-ref ref="file"/>
++        <appender-ref ref="console"/>
++    </root>
++</configuration>
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(date 1456910037000)
++++ pom.xml	(revision )
+@@ -15,6 +15,10 @@
+         <java.version>1.8</java.version>
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
++
++        <!-- Logging -->
++        <logback.version>1.1.6</logback.version>
++        <slf4j.version>1.7.18</slf4j.version>
+     </properties>
+ 
+     <build>
+@@ -34,6 +38,34 @@
+     </build>
+ 
+     <dependencies>
++        <!-- Logging with SLF4J & LogBack -->
++        <dependency>
++            <groupId>org.slf4j</groupId>
++            <artifactId>slf4j-api</artifactId>
++            <version>${slf4j.version}</version>
++            <scope>compile</scope>
++        </dependency>
++
++        <dependency>
++            <groupId>org.slf4j</groupId>
++            <artifactId>jcl-over-slf4j</artifactId>
++            <version>${slf4j.version}</version>
++            <scope>runtime</scope>
++        </dependency>
++
++        <dependency>
++            <groupId>org.slf4j</groupId>
++            <artifactId>jul-to-slf4j</artifactId>
++            <version>${slf4j.version}</version>
++            <scope>runtime</scope>
++        </dependency>
++
++        <dependency>
++            <groupId>ch.qos.logback</groupId>
++            <artifactId>logback-classic</artifactId>
++            <version>${logback.version}</version>
++            <scope>runtime</scope>
++        </dependency>
+ 
+         <!--Web-->
+         <dependency>
+Index: src/main/java/ru/javawebinar/topjava/web/UserServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/UserServlet.java	(date 1456910037000)
++++ src/main/java/ru/javawebinar/topjava/web/UserServlet.java	(revision )
+@@ -1,18 +1,26 @@
+ package ru.javawebinar.topjava.web;
+ 
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++
+ import javax.servlet.ServletException;
+ import javax.servlet.http.HttpServlet;
+ import javax.servlet.http.HttpServletRequest;
+ import javax.servlet.http.HttpServletResponse;
+ import java.io.IOException;
+ 
++import static org.slf4j.LoggerFactory.getLogger;
++
+ /**
+  * User: gkislin
+  * Date: 19.08.2014
+  */
+ public class UserServlet extends HttpServlet {
++    private static final Logger LOG = getLogger(UserServlet.class);
+ 
+     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++        LOG.debug("redirect to userList");
++
+ //        request.getRequestDispatcher("/userList.jsp").forward(request, response);
+         response.sendRedirect("userList.jsp");
+     }
