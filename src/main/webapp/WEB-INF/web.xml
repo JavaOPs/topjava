@@ -20,8 +20,8 @@
     <servlet-name>mealServlet</servlet-name>
     <servlet-class>ru.javawebinar.topjava.web.MealServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
-
 </servlet>
+
     <servlet-mapping>
         <servlet-name>mealServlet</servlet-name>
         <url-pattern>/meal</url-pattern>
