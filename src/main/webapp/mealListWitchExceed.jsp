@@ -28,7 +28,7 @@
     <jsp:useBean id="mealList" scope="request" type="java.util.List"/>
     <c:forEach items="${mealList}" var="meal">
     <c:if test="${meal.exceed}">
-        <tr style="background:#27b738">
+        <tr style="background:#5a38b7">
             <td><c:out value="${meal.dateTime}"/></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
@@ -36,7 +36,7 @@
         </tr>
     </c:if>
     <c:if test="${!meal.exceed}">
-        <tr style="background:#fa21dc">
+        <tr style="background:#fa1ce5">
             <td><c:out value="${meal.dateTime}"/></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
@@ -48,7 +48,5 @@
     </c:forEach>
     </tbody>
 </table>
-
-
 </body>
 </html>
