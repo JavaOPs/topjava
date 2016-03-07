@@ -4,39 +4,61 @@
          id="WebApp_ID" version="2.5">
 
     <display-name>Topjava</display-name>
-
+    <!--UserServlet-->
     <servlet>
         <servlet-name>userServlet</servlet-name>
         <servlet-class>ru.javawebinar.topjava.web.UserServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>userServlet</servlet-name>
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
-
+    <!--UserServlet-->
+    <!--AllMeal-->
 <servlet>
     <servlet-name>mealServlet</servlet-name>
     <servlet-class>ru.javawebinar.topjava.web.MealServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
 </servlet>
-
     <servlet-mapping>
         <servlet-name>mealServlet</servlet-name>
         <url-pattern>/meal</url-pattern>
     </servlet-mapping>
+    <!--AllMeal-->
+    <!--AddMeal-->
     <servlet>
-
-        <servlet-name>mealActionsServlet</servlet-name>
-        <servlet-class>ru.javawebinar.topjava.web.MealActionsServlet</servlet-class>
+        <!--AllMeal-->
+        <!--AddMeal-->
+        <servlet-name>addActionsServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.AddActionsServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>mealActionsServlet</servlet-name>
-        <url-pattern>/doMeal</url-pattern>
+        <servlet-name>addActionsServlet</servlet-name>
+        <url-pattern>/meal/add</url-pattern>
     </servlet-mapping>
-
+    <!--AddMeal-->
+    <!--DeleteMeal-->
+    <servlet>
+        <servlet-name>deleteActionsServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.DeleteActionsServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteActionsServlet</servlet-name>
+        <url-pattern>meal/delete</url-pattern>
+    </servlet-mapping>
+    <!--DeleteMeal-->
+    <!--UpdateMeal-->
+    <servlet>
+        <servlet-name>updateActionsServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.UpdateActionsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateActionsServlet</servlet-name>
+        <url-pattern>meal/update</url-pattern>
+    </servlet-mapping>
+    <!--UpdateMeal-->
 
 </web-app>

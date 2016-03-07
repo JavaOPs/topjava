@@ -19,4 +19,7 @@ public interface MealDao {
     UserMeal getMeal(long id);
     List<UserMeal> getMealList();
 
+    default MealDao getMealDao() {
+        return this;
+    }
 }

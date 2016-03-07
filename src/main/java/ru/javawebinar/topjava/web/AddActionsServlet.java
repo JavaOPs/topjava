@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Created by Vladimir_Sentso on 07.03.2016.
  */
-public class MealActionsServlet extends HttpServlet {
+public class AddActionsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
