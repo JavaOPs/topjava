@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="HH" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Vladimir_Sentso
@@ -17,6 +18,7 @@
 <table style="border: 1px solid; width: 500px; text-align:center">
     <thead style="background:#4698ff">
     <tr>
+        <th>ID</th>
         <th>Date</th>
         <th>Description</th>
         <th>calories</th>
@@ -28,16 +30,18 @@
     <jsp:useBean id="mealList" scope="request" type="java.util.List"/>
     <c:forEach items="${mealList}" var="meal">
     <c:if test="${meal.exceed}">
-        <tr style="background:#45b768">
-            <td><c:out value="${meal.dateTime}"/></td>
+        <tr style="background:#ff16ed">
+            <td><c:out value="${meal.id}"/></td>
+            <td><c:out value="${meal.formattedDateTime}"/></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
             <td><c:out value="${meal.exceed}"/></td>
         </tr>
     </c:if>
     <c:if test="${!meal.exceed}">
-        <tr style="background:#fa1ce5">
-            <td><c:out value="${meal.dateTime}"/></td>
+        <tr style="background:#40fa4e">
+            <td><c:out value="${meal.id}"/></td>
+            <td><c:out value="${meal.formattedDateTime}"/></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
             <td><c:out value="${meal.exceed}"/></td>

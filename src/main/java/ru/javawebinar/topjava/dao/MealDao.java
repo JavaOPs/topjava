@@ -12,10 +12,11 @@ public interface MealDao {
 
     UserMeal addMeal(LocalDateTime dateTime, String description, int calories);
 
-    UserMeal removeMeal(UserMeal userMeal);
+    UserMeal removeMeal(long id);
 
     UserMeal updateMeal(UserMeal userMeal);
 
+    UserMeal getMeal(long id);
     List<UserMeal> getMealList();
 
 }

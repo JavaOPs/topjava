@@ -23,13 +23,18 @@ public class MealDaoMapImp implements MealDao {
     }
 
     @Override
-    public UserMeal removeMeal(UserMeal userMeal) {
-        return storage.remove(userMeal.getId());
+    public UserMeal removeMeal(long id) {
+        return storage.remove(id);
     }
 
     @Override
     public UserMeal updateMeal(UserMeal userMeal) {
         return storage.put(userMeal.getId(), userMeal);
+    }
+
+    @Override
+    public UserMeal getMeal(long id) {
+        return storage.get(id);
     }
 
     @Override
