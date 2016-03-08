@@ -37,11 +37,15 @@ public class MealServlet extends HttpServlet {
         //         LocalTime.of(0, 0), LocalTime.of(23, 59), 2200);
         // response.sendRedirect("mealListWitchExceed.jsp");
         MealDao dao = new MealDaoMapImp();
-        List<UserMealWithExceed> lst = UserMealsUtil.getFilteredMealsWithExceeded(dao.getMealList(),
-                LocalTime.of(0, 0), LocalTime.of(23, 59), 2000);
+        List<UserMealWithExceed> lst = getFilteredMealsWithExceeded(dao);
         LOG.debug("redirect to mealList");
         request.setAttribute("mealList", lst);
         request.getRequestDispatcher("/mealListWitchExceed.jsp").forward(request, response);
+    }
+
+    private List<UserMealWithExceed> getFilteredMealsWithExceeded(MealDao dao) {
+        return UserMealsUtil.getFilteredMealsWithExceeded(dao.getMealList(),
+                LocalTime.of(0, 0), LocalTime.of(23, 59), 2000);
     }
 
 

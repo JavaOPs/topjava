@@ -47,7 +47,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>deleteActionsServlet</servlet-name>
-        <url-pattern>meal/delete</url-pattern>
+        <url-pattern>/meal/delete</url-pattern>
     </servlet-mapping>
     <!--DeleteMeal-->
     <!--UpdateMeal-->
@@ -57,7 +57,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>updateActionsServlet</servlet-name>
-        <url-pattern>meal/update</url-pattern>
+        <url-pattern>/meal/update</url-pattern>
     </servlet-mapping>
     <!--UpdateMeal-->
 

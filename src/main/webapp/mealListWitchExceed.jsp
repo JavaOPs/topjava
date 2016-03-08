@@ -31,24 +31,34 @@
     <c:forEach items="${mealList}" var="meal">
     <c:if test="${meal.exceed}">
         <tr style="background:#ff16ed">
+            <c:url var="Update" value="/meal/update?id=${meal.id}"/>
+            <c:url var="Delete" value="/meal/delete?id=${meal.id}"/>
             <td><c:out value="${meal.id}"/></td>
             <td><c:out value="${meal.formattedDateTime}"/></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
             <td><c:out value="${meal.exceed}"/></td>
+            <td><a href="${Update}">Update</a></td>
+            <td><a href="${Delete}">Delete</a></td>
         </tr>
     </c:if>
     <c:if test="${!meal.exceed}">
         <tr style="background:#40fa4e">
+            <c:url var="Update" value="/meal/update?id=${meal.id}"/>
+            <c:url var="Delete" value="/meal/delete?id=${meal.id}"/>
             <td><c:out value="${meal.id}"/></td>
             <td><c:out value="${meal.formattedDateTime}"/></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
             <td><c:out value="${meal.exceed}"/></td>
+            <td><a href="${Update}">Update</a></td>
+            <td><a href="${Delete}">Delete</a></td>
         </tr>
     </c:if>
     </c:forEach>
     </tbody>
 </table>
+<c:url var="addUrl" value="/meal/add"/>
+<a href="${addUrl}">Add</a>
 </body>
 </html>
