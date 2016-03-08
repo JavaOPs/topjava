@@ -35,8 +35,8 @@ public class AddActionsServlet extends HttpServlet {
         LocalDateTime time = LocalDateTime
                 .parse(dateTime, DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm", Locale.ENGLISH));
         MealDao dao = new MealDaoMapImp();
-        long id = dao.addMeal(time, description, calories).getId();
-        LOG.debug("saved new user witch " + id);
+        dao.addMeal(time, description, calories);
+        LOG.debug("saved new user witch ");
         List<UserMealWithExceed> lst = getFilteredMealsWithExceeded(dao);
         request.setAttribute("mealList", lst);
         LOG.debug("redirect to mealListWitchExceed");
