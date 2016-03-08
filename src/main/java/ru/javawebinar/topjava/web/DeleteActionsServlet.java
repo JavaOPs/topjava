@@ -28,12 +28,10 @@ public class DeleteActionsServlet extends HttpServlet {
         MealDao dao = new MealDaoMapImp();
         dao.removeMeal(Long.parseLong(id));
         LOG.debug("remove meal witch id = " + id);
-        new MealServlet().doGet(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        List<UserMealWithExceed> lst = getFilteredMealsWithExceeded(dao);
+        req.setAttribute("mealList", lst);
+        LOG.debug("redirect to mealListWitchExceed");
+        req.getRequestDispatcher("/mealListWitchExceed.jsp").forward(req, resp);
     }
 
     private List<UserMealWithExceed> getFilteredMealsWithExceeded(MealDao dao) {

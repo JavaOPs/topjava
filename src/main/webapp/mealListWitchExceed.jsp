@@ -23,6 +23,7 @@
         <th>Description</th>
         <th>calories</th>
         <th>Exceed</th>
+        <th>Actions</th>
         <th colspan="3"></th>
     </tr>
     </thead>
@@ -38,8 +39,8 @@
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
             <td><c:out value="${meal.exceed}"/></td>
-            <td><a href="${Update}">Update</a></td>
-            <td><a href="${Delete}">Delete</a></td>
+            <td><a href="${Update}">Update/ </a>
+                <a href="${Delete}">Delete</a></td>
         </tr>
     </c:if>
     <c:if test="${!meal.exceed}">
@@ -51,8 +52,8 @@
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.calories}"/></td>
             <td><c:out value="${meal.exceed}"/></td>
-            <td><a href="${Update}">Update</a></td>
-            <td><a href="${Delete}">Delete</a></td>
+            <td><a href="${Update}">Update/ </a>
+                <a href="${Delete}">Delete</a></td>
         </tr>
     </c:if>
     </c:forEach>

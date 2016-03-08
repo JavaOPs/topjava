@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
  * GKislin
  * 31.05.2015.
  */
+@SuppressWarnings("SameParameterValue")
 public class UserMealsUtil {
     public static void main(String[] args) {
         List<UserMeal> mealList = Arrays.asList(
@@ -44,7 +45,7 @@ public class UserMealsUtil {
                 .collect(Collectors.toList());
     }
 
-    public static List<UserMealWithExceed> getFilteredMealsWithExceededByCycle(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    public static List<UserMealWithExceed> getFilteredMealsWithExceededByCycle(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, @SuppressWarnings("SameParameterValue") int caloriesPerDay) {
 
         final Map<LocalDate, Integer> caloriesSumPerDate = new HashMap<>();
         mealList.forEach(meal -> caloriesSumPerDate.merge(meal.getDateTime().toLocalDate(), meal.getCalories(), Integer::sum));

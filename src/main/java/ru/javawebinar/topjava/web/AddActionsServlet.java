@@ -47,9 +47,9 @@ public class AddActionsServlet extends HttpServlet {
 
         LOG.debug("redirect to addMeal");
         request.setCharacterEncoding("UTF-8");
-        request.setAttribute("dateTime", null);
-        request.setAttribute("description", null);
-        request.setAttribute("calories", null);
+        request.setAttribute("dateTime", "");
+        request.setAttribute("description", "");
+        request.setAttribute("calories", "");
         request.getRequestDispatcher("/addMeal.jsp").forward(request, response);
     }
 
