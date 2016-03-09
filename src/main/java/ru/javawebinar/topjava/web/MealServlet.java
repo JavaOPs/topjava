@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -26,16 +24,6 @@ public class MealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy HH:mm", Locale.ENGLISH);
-        // List<UserMealWithExceed> lst = UserMealsUtil.getFilteredMealsWithExceeded(Arrays.asList(
-        //         new UserMeal(1, parse("30/May/2015 10:00", formatter), "Завтрак", 500),
-        //         new UserMeal(2, of(2015, MAY, 30, 13, 0), "Обед", 1000),
-        //         new UserMeal(3, of(2015, MAY, 30, 20, 0), "Ужин", 500),
-        //         new UserMeal(4, of(2015, MAY, 31, 10, 0), "Завтрак", 1000),
-        //         new UserMeal(5, of(2015, MAY, 31, 13, 0), "Обед", 500),
-        //         new UserMeal(6, of(2015, MAY, 31, 20, 0), "Ужин", 510)),
-        //         LocalTime.of(0, 0), LocalTime.of(23, 59), 2200);
-        // response.sendRedirect("mealListWitchExceed.jsp");
         MealDao dao = new MealDaoMapImp();
         List<UserMealWithExceed> lst = getFilteredMealsWithExceeded(dao);
         LOG.debug("redirect to mealList");

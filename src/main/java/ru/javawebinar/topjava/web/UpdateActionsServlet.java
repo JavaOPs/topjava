@@ -39,10 +39,7 @@ public class UpdateActionsServlet extends HttpServlet {
         MealDao dao = new MealDaoMapImp();
         dao.updateMeal(userMeal);
         LOG.debug("updated  user witch " + id);
-        List<UserMealWithExceed> lst = getFilteredMealsWithExceeded(dao);
-        req.setAttribute("mealList", lst);
-        LOG.debug("redirect to mealListWitchExceed");
-        req.getRequestDispatcher("/mealListWitchExceed.jsp").forward(req, resp);
+        resp.sendRedirect("/topjava/meal");
 
     }
 
