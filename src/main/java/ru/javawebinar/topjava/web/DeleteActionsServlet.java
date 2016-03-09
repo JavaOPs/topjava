@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.dao.MealDao;
 import ru.javawebinar.topjava.dao.MealDaoMapImp;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
+import static org.slf4j.LoggerFactory.*;
 
-import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Created by Vladimir_Sentso on 07.03.2016.
@@ -28,10 +29,11 @@ public class DeleteActionsServlet extends HttpServlet {
         MealDao dao = new MealDaoMapImp();
         dao.removeMeal(Long.parseLong(id));
         LOG.debug("remove meal witch id = " + id);
-        List<UserMealWithExceed> lst = getFilteredMealsWithExceeded(dao);
-        req.setAttribute("mealList", lst);
-        LOG.debug("redirect to mealListWitchExceed");
-        req.getRequestDispatcher("/mealListWitchExceed.jsp").forward(req, resp);
+        //List<UserMealWithExceed> lst = getFilteredMealsWithExceeded(dao);
+        //req.setAttribute("mealList", lst);
+        //LOG.debug("redirect to mealListWitchExceed");
+        //req.getRequestDispatcher("/mealListWitchExceed.jsp").forward(req, resp);
+        resp.sendRedirect("/topjava/meal");
     }
 
     private List<UserMealWithExceed> getFilteredMealsWithExceeded(MealDao dao) {
