@@ -39,10 +39,6 @@ public class AddActionsServlet extends HttpServlet{
         MealDao dao = new MealDaoMapImp();
         dao.addMeal(time, description, calories);
         LOG.debug("saved new user witch ");
-        //List<UserMealWithExceed> lst = getFilteredMealsWithExceeded(dao);
-        //request.setAttribute("mealList", lst);
-        //LOG.debug("redirect to mealListWitchExceed");
-        //request.getRequestDispatcher("/mealListWitchExceed.jsp").forward(request, response);
         response.sendRedirect("/topjava/meal");
     }
 
