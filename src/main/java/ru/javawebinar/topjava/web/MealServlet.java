@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -22,7 +23,6 @@ import java.util.Objects;
  */
 public class MealServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(MealServlet.class);
-
     private UserMealRepository repository;
 
     @Override
@@ -62,6 +62,7 @@ public class MealServlet extends HttpServlet {
                     repository.get(getId(request));
             request.setAttribute("meal", meal);
             request.getRequestDispatcher("mealEdit.jsp").forward(request, response);
+
         }
     }
 
