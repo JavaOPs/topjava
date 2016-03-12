@@ -34,6 +34,7 @@ public class User extends NamedEntity {
     public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Set<Role> roles) {
         super(id, name);
         this.email = email;
+        checkEmail(email);
         this.password = password;
         this.caloriesPerDay = caloriesPerDay;
         this.enabled = enabled;
@@ -45,11 +46,8 @@ public class User extends NamedEntity {
     }
 
     public void setEmail(String email) {
+        checkEmail(email);
         this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Date getRegistered() {
@@ -58,10 +56,6 @@ public class User extends NamedEntity {
 
     public void setRegistered(Date registered) {
         this.registered = registered;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public int getCaloriesPerDay() {
@@ -76,12 +70,20 @@ public class User extends NamedEntity {
         return enabled;
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -94,5 +96,12 @@ public class User extends NamedEntity {
                 ", roles=" + roles +
                 ", caloriesPerDay=" + caloriesPerDay +
                 ')';
+    }
+
+    private void checkEmail(String email) {
+        if (email == null) return;
+        if (email.isEmpty()) return;
+        if (!email.matches("^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"))
+            throw new IllegalArgumentException("Non correct email");
     }
 }

@@ -6,6 +6,7 @@ import ru.javawebinar.topjava.repository.UserMealRepository;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -45,7 +46,7 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public Collection<UserMeal> getAll() {
-        return repository.values();
+        return Collections.unmodifiableCollection(repository.values());
     }
 }
 

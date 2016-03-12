@@ -31,9 +31,11 @@ public class MockUserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
-        Integer id = user.getId() != null ? user.getId() : counter.incrementAndGet();
+        Integer id = user.isNew() ? counter.incrementAndGet() : user.getId();
         user.setId(id);
         repository.put(id, user);
+        if (!checkEmail(user))
+            throw new IllegalArgumentException("To many email to repository");
         LOG.info("save " + user);
         return user;
     }
@@ -53,7 +55,13 @@ public class MockUserRepositoryImpl implements UserRepository {
     @Override
     public User getByEmail(final String email) {
         LOG.info("getByEmail " + email);
-        return getAll().stream().filter(u -> u.getEmail()
+        return getAll().parallelStream().filter(u -> u.getEmail()
                 .equals(email)).findAny().get();
+    }
+
+    private boolean checkEmail(User user) {
+        return (user.getEmail() == null || user.getEmail().isEmpty())
+                || repository.values().parallelStream().
+                filter(u -> u.getEmail().equals(user.getEmail())).count() == 1;
     }
 }
