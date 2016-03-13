@@ -30,13 +30,14 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
         if (userMeal.isNew()) {
             userMeal.setId(counter.incrementAndGet());
         }
+//        if(userMeal.getUsersID()==null) throw new IllegalArgumentException("Eater not defined");
         repository.put(userMeal.getId(), userMeal);
         return userMeal;
     }
 
     @Override
-    public void delete(int id) {
-        repository.remove(id);
+    public boolean delete(int id) {
+        return repository.remove(id) != null;
     }
 
     @Override

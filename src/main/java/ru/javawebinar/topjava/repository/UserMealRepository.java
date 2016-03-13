@@ -11,7 +11,7 @@ import java.util.Collection;
 public interface UserMealRepository {
     UserMeal save(UserMeal userMeal);
 
-    void delete(int id);
+    boolean delete(int id);
 
     UserMeal get(int id);
 
