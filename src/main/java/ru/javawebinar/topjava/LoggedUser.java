@@ -1,6 +1,6 @@
 package ru.javawebinar.topjava;
 
-import ru.javawebinar.topjava.util.UserMealsUtil;
+import static ru.javawebinar.topjava.util.UserMealsUtil.DEFAULT_CALORIES_PER_DAY;
 
 /**
  * GKislin
@@ -12,7 +12,8 @@ public class LoggedUser {
         return 1;
     }
 
+
     public static int getCaloriesPerDay() {
-        return UserMealsUtil.DEFAULT_CALORIES_PER_DAY;
+        return DEFAULT_CALORIES_PER_DAY;
     }
 }
