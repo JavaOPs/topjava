@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.service;
 
 import ru.javawebinar.topjava.model.UserMeal;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 
@@ -11,15 +12,17 @@ import java.util.Collection;
  */
 
 public interface UserMealService {
-    UserMeal save(UserMeal userMeal);
+    UserMeal save(UserMeal userMeal, int userID);
 
-    boolean update(UserMeal userMeal);
+    boolean update(UserMeal userMeal, int userID);
 
-    UserMeal get(int id);
+    UserMeal get(int id, int userID);
 
-    boolean remove(UserMeal userMeal);
-
-    boolean remove(int id);
+    boolean remove(int id, int userID);
 
     Collection<UserMeal> getAllUserMeal(int userID);
+
+    Collection<UserMeal> getBetweenUserMeal(int userID, LocalDate start, LocalDate end);
+
+    boolean deleteAllMeal(int userID);
 }

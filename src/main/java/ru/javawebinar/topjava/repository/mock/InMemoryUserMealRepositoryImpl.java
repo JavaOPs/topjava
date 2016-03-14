@@ -3,8 +3,8 @@ package ru.javawebinar.topjava.repository.mock;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
-import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.util.UserMealsUtil;
+import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static java.util.Collections.unmodifiableCollection;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
+import static ru.javawebinar.topjava.util.TimeUtil.isBetween;
 
 /**
  * GKislin
@@ -29,7 +30,7 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        UserMealsUtil.MEAL_LIST.forEach((userMeal -> save(userMeal, userMeal.getUserID())));
+        UserMealsUtil.MEAL_LIST.forEach(userMeal -> repository.put(userMeal.getId(), userMeal));
     }
 
     @Override
@@ -44,12 +45,14 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int id, int userID) {
+        ExceptionUtil.check(repository.get(id).getUserID() == userID, "illegal user " + id);
         return repository.remove(id) != null;
     }
 
     @Override
-    public UserMeal get(int id) {
+    public UserMeal get(int id, int userID) {
+        ExceptionUtil.check(repository.get(id).getUserID() == userID, "illegal user " + id);
         return repository.get(id);
     }
 
@@ -65,8 +68,7 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     public Collection<UserMeal> getBetween(LocalDate startDate, LocalDate endDate, int userID) {
         return unmodifiableCollection(
                 getAll(userID).stream()
-                        .filter(userMeal -> TimeUtil.isBetweenDate(userMeal.getDateTime().toLocalDate(), startDate, endDate)
-
+                        .filter(userMeal -> isBetween(userMeal.getDateTime().toLocalDate(), startDate, endDate))
                                 .collect(toList()));
     }
 }

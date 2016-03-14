@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.web.meal;
 
 import ru.javawebinar.topjava.model.UserMeal;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 /**
@@ -14,5 +15,13 @@ public interface MealRestController {
     void delete(int id);
 
     Collection<UserMeal> getAll();
+
+    void deleteAll();
+
+    void update(UserMeal meal);
+
+    UserMeal create(UserMeal meal);
+
+    Collection<UserMeal> getBetween(LocalDate start, LocalDate endTime);
 
 }

@@ -29,8 +29,10 @@ public class TimeUtil {
         return ldt == null ? "" : ldt.format(DATE_TIME_FORMATTER);
     }
 
-    public static <T extends Temporal> boolean betweenChrono(T lt, T startChrono, T endChrono) {
-        return
+    @SuppressWarnings("uncheked")
+    public static <T extends Temporal & Comparable> boolean isBetween(T lt, T startChrono, T endChrono) {
+        return lt.compareTo(startChrono) >= 0 && lt.compareTo(endChrono) <= 0;
     }
 
 }
+

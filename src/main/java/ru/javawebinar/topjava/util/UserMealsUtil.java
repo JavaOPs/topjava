@@ -26,14 +26,14 @@ public class UserMealsUtil {
 
     static {
         MEAL_LIST = of(
-                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
-                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
-                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
-                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
-                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
-                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510),
-                new UserMeal(adminID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
-                new UserMeal(adminID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500)
+                new UserMeal(1, userID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
+                new UserMeal(2, userID, LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
+                new UserMeal(3, userID, LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
+                new UserMeal(4, userID, LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
+                new UserMeal(5, userID, LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
+                new UserMeal(6, userID, LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510),
+                new UserMeal(7, adminID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
+                new UserMeal(8, adminID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500)
         ).collect(toList());
     }
 
@@ -54,7 +54,7 @@ public class UserMealsUtil {
                 );
 
         return mealList.stream()
-                .filter(um -> TimeUtil.isBetween(um.getDateTime().toLocalTime(), startTime, endTime))
+                .filter(um -> TimeUtil.isBetweenTime(um.getDateTime().toLocalTime(), startTime, endTime))
                 .map(um -> createWithExceed(um, caloriesSumByDate.get(um.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(toList());
     }

@@ -12,9 +12,9 @@ import java.util.Collection;
 public interface UserMealRepository {
     UserMeal save(UserMeal userMeal, int userID);
 
-    boolean delete(int id);
+    boolean delete(int id, int userId);
 
-    UserMeal get(int id);
+    UserMeal get(int id, int userID);
 
     Collection<UserMeal> getAll(int userID);
 
