@@ -20,7 +20,7 @@ public class UserMealServiceImpl implements UserMealService {
     @Override
     public UserMeal save(UserMeal userMeal) {
 
-        return repository.save(userMeal);
+        return repository.save(userMeal, userMeal.getUserID());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UserMealServiceImpl implements UserMealService {
     }
 
     @Override
-    public Collection<UserMeal> getAllUserMeal() {
-        return repository.getAll();
+    public Collection<UserMeal> getAllUserMeal(int userID) {
+        return repository.getAll(userID);
     }
 }

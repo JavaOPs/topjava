@@ -25,6 +25,10 @@ public class UserMeal {
         this.calories = calories;
     }
 
+    public UserMeal(Integer usersID, LocalDateTime dateTime, String description, int calories) {
+        this(null, usersID, dateTime, description, calories);
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -53,11 +57,12 @@ public class UserMeal {
         return id == null;
     }
 
-    public Integer getUsersID() {
+    public Integer getUserID() {
         return usersID;
     }
 
-    public void setUsersID(Integer usersID) {
+
+    public void setUserID(Integer usersID) {
         this.usersID = usersID;
     }
 

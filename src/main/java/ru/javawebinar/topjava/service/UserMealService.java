@@ -21,5 +21,5 @@ public interface UserMealService {
 
     boolean remove(int id);
 
-    Collection<UserMeal> getAllUserMeal();
+    Collection<UserMeal> getAllUserMeal(int userID);
 }

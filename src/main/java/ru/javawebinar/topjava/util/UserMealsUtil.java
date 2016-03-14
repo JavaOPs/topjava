@@ -7,27 +7,35 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
+import static java.util.stream.Stream.of;
 
 /**
  * GKislin
  * 31.05.2015.
  */
 public class UserMealsUtil {
-    public static final List<UserMeal> MEAL_LIST = Arrays.asList(
-            new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
-            new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
-            new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
-            new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
-            new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
-            new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
-    );
-
+    public static final List<UserMeal> MEAL_LIST;
     public static final int DEFAULT_CALORIES_PER_DAY = 2000;
+    private static final int userID = 1;
+    private final static int adminID = 2;
+
+    static {
+        MEAL_LIST = of(
+                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
+                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
+                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
+                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
+                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
+                new UserMeal(userID, LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510),
+                new UserMeal(adminID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
+                new UserMeal(adminID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500)
+        ).collect(toList());
+    }
 
     public static void main(String[] args) {
         List<UserMealWithExceed> filteredMealsWithExceeded = getFilteredWithExceeded(MEAL_LIST, LocalTime.of(7, 0), LocalTime.of(12, 0), DEFAULT_CALORIES_PER_DAY);
@@ -41,27 +49,27 @@ public class UserMealsUtil {
     public static List<UserMealWithExceed> getFilteredWithExceeded(Collection<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = mealList.stream()
                 .collect(
-                        Collectors.groupingBy(um -> um.getDateTime().toLocalDate(),
-                                Collectors.summingInt(UserMeal::getCalories))
+                        groupingBy(um -> um.getDateTime().toLocalDate(),
+                                summingInt(UserMeal::getCalories))
                 );
 
         return mealList.stream()
                 .filter(um -> TimeUtil.isBetween(um.getDateTime().toLocalTime(), startTime, endTime))
                 .map(um -> createWithExceed(um, caloriesSumByDate.get(um.getDateTime().toLocalDate()) > caloriesPerDay))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public static List<UserMealWithExceed> getFilteredWithExceeded(Collection<UserMeal> mealList, LocalDateTime startTime, LocalDateTime endTime, int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = mealList.stream()
                 .collect(
-                        Collectors.groupingBy(um -> um.getDateTime().toLocalDate(),
-                                Collectors.summingInt(UserMeal::getCalories))
+                        groupingBy(um -> um.getDateTime().toLocalDate(),
+                                summingInt(UserMeal::getCalories))
                 );
 
         return mealList.stream()
                 .filter(um -> TimeUtil.isBetweenDateTime(um.getDateTime(), startTime, endTime))
                 .map(um -> createWithExceed(um, caloriesSumByDate.get(um.getDateTime().toLocalDate()) > caloriesPerDay))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public static UserMealWithExceed createWithExceed(UserMeal um, boolean exceeded) {
