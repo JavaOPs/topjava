@@ -62,7 +62,7 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     @Override
     public Collection<UserMeal> getAll(final int userID) {
         return unmodifiableCollection(repository.values()
-                .parallelStream().filter(userMeal -> userMeal.getUserID().equals(userID))
+                .stream().filter(userMeal -> userMeal.getUserID().equals(userID))
                 .sorted(USER_MEAL_COMPARATOR)
                 .collect(toList()));
     }

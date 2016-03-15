@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
 import ru.javawebinar.topjava.repository.mock.InMemoryUserMealRepositoryImpl;
-import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import static ru.javawebinar.topjava.util.UserMealsUtil.DEFAULT_CALORIES_PER_DAY;
+import static ru.javawebinar.topjava.util.UserMealsUtil.getWithExceeded;
 
 /**
  * User: gkislin
@@ -38,7 +40,7 @@ public class MealServlet extends HttpServlet {
                 request.getParameter("description"),
                 Integer.valueOf(request.getParameter("calories")));
         LOG.info(userMeal.isNew() ? "Create {}" : "Update {}", userMeal);
-        repository.save(userMeal, 2);
+        repository.save(userMeal, 1);
         response.sendRedirect("meals");
     }
 
@@ -48,12 +50,12 @@ public class MealServlet extends HttpServlet {
         if (action == null) {
             LOG.info("getAll");
             request.setAttribute("mealList",
-                    UserMealsUtil.getWithExceeded(repository.getAll(2), UserMealsUtil.DEFAULT_CALORIES_PER_DAY));
+                    getWithExceeded(repository.getAll(1), DEFAULT_CALORIES_PER_DAY));
             request.getRequestDispatcher("/mealList.jsp").forward(request, response);
         } else if (action.equals("delete")) {
             int id = getId(request);
             LOG.info("Delete {}", id);
-            repository.delete(id, 2);
+            repository.delete(id, 1);
             response.sendRedirect("meals");
         } else {
             final UserMeal meal = action.equals("create") ?
