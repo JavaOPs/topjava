@@ -11,8 +11,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.*;
-import static java.util.stream.Stream.of;
 
 /**
  * GKislin
@@ -25,7 +25,7 @@ public class UserMealsUtil {
     private final static int adminID = 2;
 
     static {
-        MEAL_LIST = of(
+        MEAL_LIST = asList(
                 new UserMeal(1, userID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
                 new UserMeal(2, userID, LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
                 new UserMeal(3, userID, LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
@@ -34,7 +34,7 @@ public class UserMealsUtil {
                 new UserMeal(6, userID, LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510),
                 new UserMeal(7, adminID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
                 new UserMeal(8, adminID, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500)
-        ).collect(toList());
+        );
     }
 
     public static void main(String[] args) {

@@ -9,6 +9,7 @@ import ru.javawebinar.topjava.util.exception.ExceptionUtil;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,9 +28,11 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     private static final Comparator<UserMeal> USER_MEAL_COMPARATOR = comparing(UserMeal::getDateTime).reversed();
 
     private final Map<Integer, UserMeal> repository = new ConcurrentHashMap<>();
+    List lat = UserMealsUtil.MEAL_LIST;
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
+
         UserMealsUtil.MEAL_LIST.forEach(userMeal -> repository.put(userMeal.getId(), userMeal));
     }
 

@@ -24,6 +24,7 @@ public class SpringMain {
             AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
             UserMealRestController userMealRestController = appCtx.getBean(UserMealRestController.class);
             System.out.println(userMealRestController.create(new UserMeal(3, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500)));
+            userMealRestController.getAll().forEach(System.err::println);
             System.out.println(adminUserController.create(new User(1, "userName", "2@ru.ru", "password", Role.ROLE_ADMIN)));
         }
     }

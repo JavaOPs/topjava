@@ -17,9 +17,9 @@ public class UserMeal {
         this(null, null, dateTime, description, calories);
     }
 
-    public UserMeal(Integer id, Integer usersID, LocalDateTime dateTime, String description, int calories) {
+    public UserMeal(Integer id, Integer userID, LocalDateTime dateTime, String description, int calories) {
         this.id = id;
-        this.usersID = id;
+        this.usersID = userID;
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
@@ -70,6 +70,7 @@ public class UserMeal {
     public String toString() {
         return "UserMeal{" +
                 "id=" + id +
+                "usersID=" + usersID +
                 ", dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +
