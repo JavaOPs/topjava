@@ -11,7 +11,7 @@ public class UserMeal {
     private final String description;
     private final int calories;
     private Integer id;
-    private Integer usersID;
+    private Integer userID;
 
     public UserMeal(LocalDateTime dateTime, String description, int calories) {
         this(null, null, dateTime, description, calories);
@@ -19,7 +19,7 @@ public class UserMeal {
 
     public UserMeal(Integer id, Integer userID, LocalDateTime dateTime, String description, int calories) {
         this.id = id;
-        this.usersID = userID;
+        this.userID = userID;
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
@@ -58,19 +58,19 @@ public class UserMeal {
     }
 
     public Integer getUserID() {
-        return usersID;
+        return userID;
     }
 
 
     public void setUserID(Integer usersID) {
-        this.usersID = usersID;
+        this.userID = usersID;
     }
 
     @Override
     public String toString() {
         return "UserMeal{" +
                 "id=" + id +
-                "usersID=" + usersID +
+                "usersID=" + userID +
                 ", dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +
