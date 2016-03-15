@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.Temporal;
 
 /**
  * GKislin
@@ -22,6 +21,7 @@ public class TimeUtil {
     }
 
     public static boolean isBetweenDate(LocalDate lt, LocalDate startTime, LocalDate endTime) {
+
         return !(lt.isAfter(startTime) || lt.isBefore(endTime));
     }
 
@@ -29,9 +29,9 @@ public class TimeUtil {
         return ldt == null ? "" : ldt.format(DATE_TIME_FORMATTER);
     }
 
-    @SuppressWarnings("uncheked")
-    public static <T extends Temporal & Comparable> boolean isBetween(T lt, T startChrono, T endChrono) {
-        return lt.compareTo(startChrono) >= 0 && lt.compareTo(endChrono) <= 0;
+
+    public static <T extends Comparable<? super T>> boolean isBetween(T lt, T start, T end) {
+        return lt.compareTo(start) >= 0 && lt.compareTo(end) <= 0;
     }
 
 }
