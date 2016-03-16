@@ -25,12 +25,13 @@ import java.util.Objects;
  */
 public class MealServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(MealServlet.class);
-    MealRestController controller;
+    private MealRestController controller;
+    private ConfigurableApplicationContext appCtx;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         controller = appCtx.getBean(UserMealRestController.class);
     }
 
@@ -45,7 +46,6 @@ public class MealServlet extends HttpServlet {
         if (userMeal.isNew())
             controller.create(userMeal);
         else {
-            System.out.println("*******" + request.getAttribute("userID"));
             HttpSession session = request.getSession();
             userMeal.setUserID(Integer.valueOf(session.getAttribute("userID").toString()));
             controller.update(userMeal);
@@ -70,6 +70,7 @@ public class MealServlet extends HttpServlet {
                 break;
             case "create":
                 meal = new UserMeal(LocalDateTime.now(), "", 1000);
+                LOG.info("Create new meal");
                 request.setAttribute("meal", meal);
                 request.getRequestDispatcher("mealEdit.jsp").forward(request, response);
                 break;
@@ -89,5 +90,11 @@ public class MealServlet extends HttpServlet {
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
         return Integer.valueOf(paramId);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        appCtx.close();
     }
 }
