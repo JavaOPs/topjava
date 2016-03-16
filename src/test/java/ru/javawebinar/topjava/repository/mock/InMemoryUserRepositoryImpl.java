@@ -29,9 +29,6 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     public static final Comparator<User> USER_COMPARATOR = Comparator.comparing(User::getName);
 
-    public static final int USER_ID = 1;
-    public static final int ADMIN_ID = 2;
-
     @Override
     public User save(User user) {
         Objects.requireNonNull(user);
