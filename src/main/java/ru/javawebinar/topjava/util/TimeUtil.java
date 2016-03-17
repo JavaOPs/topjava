@@ -1,13 +1,13 @@
 package ru.javawebinar.topjava.util;
 
-import org.springframework.util.StringUtils;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+
+import static org.springframework.util.StringUtils.isEmpty;
 
 /**
  * GKislin
@@ -40,19 +40,23 @@ public class TimeUtil {
     }
 
     public static LocalDate parseLocalDate(String str, LocalDate def) {
-        return StringUtils.isEmpty(str) ? def : LocalDate.parse(str);
+        return isEmpty(str) ? def : LocalDate.parse(str);
     }
 
     public static LocalTime parseLocalTime(String str, LocalTime def) {
-        return StringUtils.isEmpty(str) ? def : LocalTime.parse(str);
+        return isEmpty(str) ? def : LocalTime.parse(str);
     }
 
     public static <T> T parse(String source, String pattern, T def, BiFunction<String, String, T> function) {
-        return StringUtils.isEmpty(source) ? parse(def.toString(), pattern, def, function) : function.apply(source, pattern);
+        return isEmpty(source) ? parse(def.toString(), pattern, def, function) : function.apply(source, pattern);
     }
 
     public static <T> T parse(String source, T def, Function<String, T> function) {
-        return StringUtils.isEmpty(source) ? parse(def.toString(), def, function) : function.apply(source);
+        return isEmpty(source) ? parse(def.toString(), def, function) : function.apply(source);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(parse("484584488483", 2, Double::valueOf));
     }
 }
 

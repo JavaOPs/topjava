@@ -23,7 +23,7 @@
     <h3>Meal list</h3>
 
 
-    <form method="post" action="filter">
+    <form method="post" action="meals?action=filter">
         <dl>
             <dt>From Date</dt>
             <dd><input type="date" name="startDate"></dd>
@@ -39,7 +39,10 @@
         <dl>
             <dt>To Time:</dt>
             <dd><input type="time" name="endDate"></dd>
+
         </dl>
+        <button type="submit">Filter</button>
+
     </form>
     <a href="meals?action=create">Add Meal</a>
     <hr>

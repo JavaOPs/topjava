@@ -15,10 +15,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
+import static java.time.LocalDate.MAX;
+import static java.time.LocalDate.MIN;
 import static ru.javawebinar.topjava.LoggedUser.LOGGED_USER;
+import static ru.javawebinar.topjava.util.TimeUtil.parse;
 
 
 /**
@@ -57,7 +62,16 @@ public class MealServlet extends HttpServlet {
                 }
                 break;
             case "filter":
-
+                LocalDate startDate = parse(request.getParameter("startDate"), MIN, LocalDate::parse);
+                LocalDate endDate = parse(request.getParameter("endDate"), MAX, LocalDate::parse);
+                LocalTime startTime = parse(request.getParameter("startTime"), LocalTime.MIN, LocalTime::parse);
+                LocalTime endTime = parse(request.getParameter("startTime"), LocalTime.MAX, LocalTime::parse);
+                request.setAttribute("mealList",
+                        controller.getBetweenExceedMealWitchTime(startDate, endDate, startTime, endTime));
+                request.getRequestDispatcher("/mealList.jsp").forward(request, response);
+                break;
+            default:
+                throw new ServletException(new IllegalAccessException("Not allow parameter"));
         }
 
         response.sendRedirect("meals");
