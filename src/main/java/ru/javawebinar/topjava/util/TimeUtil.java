@@ -47,12 +47,12 @@ public class TimeUtil {
         return StringUtils.isEmpty(str) ? def : LocalTime.parse(str);
     }
 
-    public static <T> T parseSomeThin(String source, String pattern, BiFunction<String, String, T> function) {
-        return function.apply(source, pattern);
+    public static <T> T parse(String source, String pattern, T def, BiFunction<String, String, T> function) {
+        return StringUtils.isEmpty(source) ? parse(def.toString(), pattern, def, function) : function.apply(source, pattern);
     }
 
-    public static <T> T parseSomeThin(String source, Function<String, T> function) {
-        return function.apply(source);
+    public static <T> T parse(String source, T def, Function<String, T> function) {
+        return StringUtils.isEmpty(source) ? parse(def.toString(), def, function) : function.apply(source);
     }
 }
 
