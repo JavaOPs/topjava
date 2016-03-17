@@ -1,9 +1,13 @@
 package ru.javawebinar.topjava.repository.mock;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +22,8 @@ import java.util.stream.Collectors;
  */
 @Repository
 public class InMemoryUserRepositoryImpl implements UserRepository {
+    private static final Logger LOG = LoggerFactory.getLogger(InMemoryUserRepositoryImpl.class);
+
     private Map<Integer, User> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
 
@@ -34,6 +40,16 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
         }
         repository.put(user.getId(), user);
         return user;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        LOG.info("+++ PostConstruct");
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        LOG.info("+++ PreDestroy");
     }
 
     @Override
