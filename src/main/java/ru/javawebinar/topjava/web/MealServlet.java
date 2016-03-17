@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import static ru.javawebinar.topjava.LoggedUser.LOGGED_USER;
+
 
 /**
  * User: gkislin
@@ -25,37 +27,46 @@ import java.util.Objects;
  */
 public class MealServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(MealServlet.class);
-    MealRestController controller;
+    ConfigurableApplicationContext appCtx;
+    private MealRestController controller;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        super.init();
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         controller = appCtx.getBean(UserMealRestController.class);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
-        UserMeal userMeal = new UserMeal(id.isEmpty() ? null : Integer.valueOf(id), null,
-                LocalDateTime.parse(request.getParameter("dateTime")),
-                request.getParameter("description"),
-                Integer.valueOf(request.getParameter("calories")));
-        LOG.info(userMeal.isNew() ? "Create {}" : "Update {}", userMeal);
-        if (userMeal.isNew())
-            controller.create(userMeal);
-        else {
-            System.out.println("*******" + request.getAttribute("userID"));
-            HttpSession session = request.getSession();
-            userMeal.setUserID(Integer.valueOf(session.getAttribute("userID").toString()));
-            controller.update(userMeal);
+        String action = request.getParameter("action");
+        switch (action == null ? "" : action) {
+            case "":
+                String id = request.getParameter("id");
+                UserMeal userMeal = new UserMeal(id.isEmpty() ? null : Integer.valueOf(id), null,
+                        LocalDateTime.parse(request.getParameter("dateTime")),
+                        request.getParameter("description"),
+                        Integer.valueOf(request.getParameter("calories")));
+                LOG.info(userMeal.isNew() ? "Create {}" : "Update {}", userMeal);
+                if (userMeal.isNew())
+                    controller.create(userMeal);
+                else {
+                    HttpSession session = request.getSession();
+                    userMeal.setUserID(LOGGED_USER.id(session.getId()));
+                    controller.update(userMeal);
+                }
+                break;
+            case "filter":
+
         }
+
         response.sendRedirect("meals");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         UserMeal meal;
+        if (LOGGED_USER.id(request.getSession().getId()) != null)
         switch (action != null ? action : "") {
             case "":
                 LOG.info("getAll");
@@ -89,5 +100,11 @@ public class MealServlet extends HttpServlet {
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
         return Integer.valueOf(paramId);
+    }
+
+    @Override
+    public void destroy() {
+        appCtx.close();
+        super.destroy();
     }
 }

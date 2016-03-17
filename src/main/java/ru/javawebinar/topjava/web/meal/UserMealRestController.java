@@ -8,9 +8,9 @@ import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
 import ru.javawebinar.topjava.service.UserMealService;
-import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
 
 import static java.time.LocalDate.MAX;
@@ -19,6 +19,8 @@ import static java.util.stream.Collectors.toList;
 import static ru.javawebinar.topjava.LoggedUser.getCaloriesPerDay;
 import static ru.javawebinar.topjava.LoggedUser.id;
 import static ru.javawebinar.topjava.util.TimeUtil.isBetween;
+import static ru.javawebinar.topjava.util.UserMealsUtil.DEFAULT_CALORIES_PER_DAY;
+import static ru.javawebinar.topjava.util.UserMealsUtil.getWithExceeded;
 
 /**
  * GKislin
@@ -85,9 +87,23 @@ public class UserMealRestController implements MealRestController {
     @Override
     public Collection<UserMealWithExceed> getBetweenExceedMeal(LocalDate start, LocalDate end, int calories) {
         LOG.info("get meal witch exceed for User {} witch calories {}", id());
-        return UserMealsUtil.getWithExceeded(service.getAllUserMeal(id()), calories).stream()
+        return getWithExceeded(service.getAllUserMeal(id()), calories).stream()
                 .filter(userMealWithExceed -> isBetween(userMealWithExceed.getDateTime().toLocalDate(), start, end))
                 .collect(toList());
+    }
+
+    @Override
+    public Collection<UserMealWithExceed> getBetweenExceedMealWitchTime(LocalDate startD, LocalDate endD,
+                                                                        LocalTime start, LocalTime end, int calories) {
+        return getBetweenExceedMeal(startD, endD, calories).stream()
+                .filter(userMealWithExceed -> isBetween(userMealWithExceed.getDateTime().toLocalTime(), start, end))
+                .collect(toList());
+    }
+
+    @Override
+    public Collection<UserMealWithExceed> getBetweenExceedMealWitchTime(LocalDate startD, LocalDate endD,
+                                                                        LocalTime start, LocalTime end) {
+        return getBetweenExceedMealWitchTime(startD, endD, start, end, DEFAULT_CALORIES_PER_DAY);
     }
 
     @Override

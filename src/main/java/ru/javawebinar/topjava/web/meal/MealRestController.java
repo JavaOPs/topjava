@@ -4,6 +4,7 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExceed;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
 
 /**
@@ -32,4 +33,10 @@ public interface MealRestController {
     Collection<UserMealWithExceed> getAllExceedMeal(int calories);
 
     Collection<UserMealWithExceed> getBetweenExceedMeal(LocalDate start, LocalDate end, int calories);
+
+    Collection<UserMealWithExceed> getBetweenExceedMealWitchTime(LocalDate startD, LocalDate endD, LocalTime start,
+                                                                 LocalTime end, int calories);
+
+    Collection<UserMealWithExceed> getBetweenExceedMealWitchTime(LocalDate startD, LocalDate endD, LocalTime start,
+                                                                 LocalTime end);
 }

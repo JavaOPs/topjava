@@ -1,9 +1,13 @@
 package ru.javawebinar.topjava.util;
 
+import org.springframework.util.StringUtils;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * GKislin
@@ -31,8 +35,24 @@ public class TimeUtil {
 
 
     public static <T extends Comparable<? super T>> boolean isBetween(T lt, T start, T end) {
-        return lt.compareTo(start) >= 0 && lt.compareTo(end) <= 0;
+        return start.compareTo(end) < 0 ? (lt.compareTo(start) >= 0 && lt.compareTo(end) <= 0) :
+                isBetween(lt, end, start);
     }
 
+    public static LocalDate parseLocalDate(String str, LocalDate def) {
+        return StringUtils.isEmpty(str) ? def : LocalDate.parse(str);
+    }
+
+    public static LocalTime parseLocalTime(String str, LocalTime def) {
+        return StringUtils.isEmpty(str) ? def : LocalTime.parse(str);
+    }
+
+    public static <T> T parseSomeThin(String source, String pattern, BiFunction<String, String, T> function) {
+        return function.apply(source, pattern);
+    }
+
+    public static <T> T parseSomeThin(String source, Function<String, T> function) {
+        return function.apply(source);
+    }
 }
 
