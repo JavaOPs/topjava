@@ -43,6 +43,7 @@
         <webjars-jquery.version>2.1.4</webjars-jquery.version>
         <webjars-datetimepicker.version>2.3.4</webjars-datetimepicker.version>
         <webjars-noty.version>2.2.4</webjars-noty.version>
+        <spring-security.version>4.0.3.RELEASE</spring-security.version>
         <webjars-datatables.version>1.10.9</webjars-datatables.version>
     </properties>
 
@@ -151,6 +152,18 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
 
         <!-- Webjars (static dependencies distributed as JAR files) -->
