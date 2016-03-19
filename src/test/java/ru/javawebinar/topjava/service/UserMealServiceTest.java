@@ -8,6 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.util.DbPopulator;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import static org.junit.Assert.*;
 import static ru.javawebinar.topjava.MealTestData.ID1;
@@ -40,6 +41,11 @@ public class UserMealServiceTest {
     public void testGet() throws Exception {
         UserMeal userMeal = service.get(ID1, USER_ID);
         MATCHER.assertEquals(MEAL1, userMeal);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void testGetNotFound() throws Exception {
+        service.get(ID1, 1);
     }
 
     @Test

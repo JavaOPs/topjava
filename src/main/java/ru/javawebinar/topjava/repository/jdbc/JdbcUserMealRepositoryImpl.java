@@ -24,12 +24,7 @@ import java.util.List;
 @Repository
 public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
-    private static final BeanPropertyRowMapper<UserMeal> ROW_MAPPER = new BeanPropertyRowMapper<UserMeal>(UserMeal.class) {
-        @Override
-        protected Object getColumnValue(ResultSet rs, int index, PropertyDescriptor pd) throws SQLException {
-            return super.getColumnValue(rs, index, pd);
-        }
-    };
+    private static final BeanPropertyRowMapper<UserMeal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(UserMeal.class);
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
