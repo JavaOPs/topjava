@@ -10,6 +10,9 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.repository.UserMealRepository;
 
 import javax.sql.DataSource;
+import java.beans.PropertyDescriptor;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,8 +24,12 @@ import java.util.List;
 @Repository
 public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
-    private static final BeanPropertyRowMapper<UserMeal> ROW_MAPPER = BeanPropertyRowMapper
-            .newInstance(UserMeal.class);
+    private static final BeanPropertyRowMapper<UserMeal> ROW_MAPPER = new BeanPropertyRowMapper<UserMeal>(UserMeal.class) {
+        @Override
+        protected Object getColumnValue(ResultSet rs, int index, PropertyDescriptor pd) throws SQLException {
+            return super.getColumnValue(rs, index, pd);
+        }
+    };
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
