@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.service;
 
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,10 +11,13 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.util.DbPopulator;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.Assert.*;
-import static ru.javawebinar.topjava.MealTestData.ID1;
-import static ru.javawebinar.topjava.MealTestData.MATCHER;
-import static ru.javawebinar.topjava.MealTestData.MEAL1;
+import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 /**
@@ -24,7 +28,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UserMealServiceTest {
+public class UserMealServiceTest extends TestCase {
 
     @Autowired
     UserMealService service;
@@ -50,7 +54,13 @@ public class UserMealServiceTest {
 
     @Test
     public void testDelete() throws Exception {
+        service.delete(ID1, USER_ID);
+        MATCHER.assertCollectionEquals(Collections.singletonList(MEAL2), service.getAll(USER_ID));
+    }
 
+    @Test(expected = NotFoundException.class)
+    public void testDeleteNotFound() throws Exception {
+        service.delete(ID1, 1);
     }
 
     @Test
@@ -65,7 +75,8 @@ public class UserMealServiceTest {
 
     @Test
     public void testGetAll() throws Exception {
-
+        Collection<UserMeal> all = service.getAll(USER_ID);
+        MATCHER.assertCollectionEquals(all, ALL_OF_ID_1);
     }
 
     @Test

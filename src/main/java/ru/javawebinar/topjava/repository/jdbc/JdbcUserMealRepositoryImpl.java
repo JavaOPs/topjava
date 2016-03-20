@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.UserMeal;
@@ -29,23 +30,34 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private SimpleJdbcInsert insertMeal;
+    /*private SimpleJdbcInsert insertMeal;
 
     @Autowired
     public JdbcUserMealRepositoryImpl(DataSource dataSource) {
         insertMeal = new SimpleJdbcInsert(dataSource)
                 .withTableName("MEALS")
                 .usingGeneratedKeyColumns("id");
-    }
+    }*/
 
     @Override
-    public UserMeal save(UserMeal UserMeal, int userId) {
-        return null;
+    public UserMeal save(UserMeal userMeal, int userId) {
+        MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("id", userMeal.getId())
+                .addValue("date_time", userMeal.getDateTime())
+                .addValue("description", userMeal.getDescription())
+                .addValue("calories", userMeal.getCalories())
+                .addValue("user_id", userId);
+        if (userMeal.isNew()) {
+
+        } else {
+
+        }
+        return userMeal;
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return false;
+        return jdbcTemplate.update("DELETE FROM meals WHERE id=? AND user_id=?", id, userId) != 0;
     }
 
     @Override
@@ -57,7 +69,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public List<UserMeal> getAll(int userId) {
-        return null;
+        return jdbcTemplate.query("SELECT * FROM meals WHERE user_id=? ORDER BY date_time DESC", ROW_MAPPER, userId);
     }
 
     @Override
