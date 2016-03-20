@@ -41,14 +41,15 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public UserMeal save(UserMeal userMeal, int userId) {
-        MapSqlParameterSource map = new MapSqlParameterSource()
+        final MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", userMeal.getId())
                 .addValue("date_time", userMeal.getDateTime())
                 .addValue("description", userMeal.getDescription())
                 .addValue("calories", userMeal.getCalories())
                 .addValue("user_id", userId);
         if (userMeal.isNew()) {
-
+            final Number newKey = insertMeal.executeAndReturnKey(map);
+            userMeal.setId(newKey.intValue());
         } else {
 
         }

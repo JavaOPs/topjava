@@ -27,6 +27,8 @@ public class MealTestData {
     public static final int ID5 = START_SEQ + 6;
     public static final int ID6 = START_SEQ + 7;
 
+    public static final int ID7 = START_SEQ + 8;
+
     public static final UserMeal MEAL1 = new UserMeal(ID1, LocalDateTime.of(2015, 5, 5, 4, 5, 6), "Завтрак", 600);
     public static final UserMeal MEAL2 = new UserMeal(ID2, LocalDateTime.of(2010, 5, 31, 22, 0, 0), "Ужин", 500);
 
@@ -35,9 +37,11 @@ public class MealTestData {
     public static final UserMeal MEAL5 = new UserMeal(ID5, LocalDateTime.of(2011, 1, 1, 14, 0, 0), "Плотный обед", 1600);
     public static final UserMeal MEAL6 = new UserMeal(ID6, LocalDateTime.of(2011, 1, 1, 10, 0, 0), "Завтрак", 500);
 
+    public static final UserMeal MEAL7_FOR_SAVE = new UserMeal(LocalDateTime.of(2004, 12, 12, 12, 0, 0), "Обед", 700);
 
-
-    public static final List<UserMeal> ALL_OF_ID_1 = Arrays.asList(MEAL1, MEAL2);
-    public static final List<UserMeal> BETWEEN_OF_ID_2 = Arrays.asList(MEAL4, MEAL5, MEAL6);
+    public static final List<UserMeal> ALL_OF_USER_ID = Arrays.asList(MEAL1, MEAL2);
+    public static final List<UserMeal> BETWEEN_OF_ADMIN_ID = Arrays.asList(MEAL4, MEAL5, MEAL6);
+    public static final List<UserMeal> ALL_OF_ADMIN_ID_AFTER_SAVE_MEAL7 = Arrays.asList(MEAL4, MEAL5, MEAL6, MEAL3,
+            MEAL7_FOR_SAVE);
 
 }

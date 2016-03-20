@@ -13,12 +13,9 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
-import static org.junit.Assert.*;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
@@ -70,20 +67,20 @@ public class UserMealServiceTest extends TestCase {
     public void testGetBetweenDates() throws Exception {
         final Collection<UserMeal> betweenDates = service.getBetweenDates(LocalDate.of(2011, 1, 1),
                 LocalDate.of(2015, 11, 25), ADMIN_ID);
-        MATCHER.assertCollectionEquals(betweenDates, BETWEEN_OF_ID_2);
+        MATCHER.assertCollectionEquals(betweenDates, BETWEEN_OF_ADMIN_ID);
     }
 
     @Test
     public void testGetBetweenDateTimes() throws Exception {
         final Collection<UserMeal> betweenDateTimes = service.getBetweenDateTimes(LocalDateTime.of(2011, 1, 1, 10, 0, 0),
                 LocalDateTime.of(2015, 11, 25, 15, 0, 0), ADMIN_ID);
-        MATCHER.assertCollectionEquals(betweenDateTimes, BETWEEN_OF_ID_2);
+        MATCHER.assertCollectionEquals(betweenDateTimes, BETWEEN_OF_ADMIN_ID);
     }
 
     @Test
     public void testGetAll() throws Exception {
         Collection<UserMeal> all = service.getAll(USER_ID);
-        MATCHER.assertCollectionEquals(all, ALL_OF_ID_1);
+        MATCHER.assertCollectionEquals(all, ALL_OF_USER_ID);
     }
 
     @Test
@@ -93,6 +90,8 @@ public class UserMealServiceTest extends TestCase {
 
     @Test
     public void testSave() throws Exception {
-
+        final UserMeal created = service.save(MEAL7_FOR_SAVE, ADMIN_ID);
+        assertEquals((int) created.getId(), ID7);
+        MATCHER.assertCollectionEquals(service.getAll(ADMIN_ID), ALL_OF_ADMIN_ID_AFTER_SAVE_MEAL7);
     }
 }
