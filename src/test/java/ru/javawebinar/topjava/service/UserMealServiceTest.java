@@ -11,6 +11,8 @@ import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.util.DbPopulator;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static ru.javawebinar.topjava.MealTestData.*;
+import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 /**
@@ -65,12 +68,16 @@ public class UserMealServiceTest extends TestCase {
 
     @Test
     public void testGetBetweenDates() throws Exception {
-
+        final Collection<UserMeal> betweenDates = service.getBetweenDates(LocalDate.of(2011, 1, 1),
+                LocalDate.of(2015, 11, 25), ADMIN_ID);
+        MATCHER.assertCollectionEquals(betweenDates, BETWEEN_OF_ID_2);
     }
 
     @Test
     public void testGetBetweenDateTimes() throws Exception {
-
+        final Collection<UserMeal> betweenDateTimes = service.getBetweenDateTimes(LocalDateTime.of(2011, 1, 1, 10, 0, 0),
+                LocalDateTime.of(2015, 11, 25, 15, 0, 0), ADMIN_ID);
+        MATCHER.assertCollectionEquals(betweenDateTimes, BETWEEN_OF_ID_2);
     }
 
     @Test

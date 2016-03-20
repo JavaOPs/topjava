@@ -30,14 +30,14 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    /*private SimpleJdbcInsert insertMeal;
+    private SimpleJdbcInsert insertMeal;
 
     @Autowired
     public JdbcUserMealRepositoryImpl(DataSource dataSource) {
         insertMeal = new SimpleJdbcInsert(dataSource)
                 .withTableName("MEALS")
                 .usingGeneratedKeyColumns("id");
-    }*/
+    }
 
     @Override
     public UserMeal save(UserMeal userMeal, int userId) {
@@ -74,6 +74,7 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     @Override
     public List<UserMeal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return null;
+        return jdbcTemplate.query("SELECT * FROM meals WHERE date_time BETWEEN ? AND ? AND user_id=? ORDER BY date_time DESC",
+                ROW_MAPPER, startDate, endDate, userId);
     }
 }
