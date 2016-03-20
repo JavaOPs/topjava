@@ -39,6 +39,8 @@ public class MealTestData {
 
     public static final UserMeal MEAL7_FOR_SAVE = new UserMeal(LocalDateTime.of(2004, 12, 12, 12, 0, 0), "Обед", 700);
 
+    public static final UserMeal MEAL4_UPDATED = new UserMeal(ID4, LocalDateTime.of(2003, 12, 12, 9, 0, 0), "Завтрак", 700);
+
     public static final List<UserMeal> ALL_OF_USER_ID = Arrays.asList(MEAL1, MEAL2);
     public static final List<UserMeal> BETWEEN_OF_ADMIN_ID = Arrays.asList(MEAL4, MEAL5, MEAL6);
     public static final List<UserMeal> ALL_OF_ADMIN_ID_AFTER_SAVE_MEAL7 = Arrays.asList(MEAL4, MEAL5, MEAL6, MEAL3,

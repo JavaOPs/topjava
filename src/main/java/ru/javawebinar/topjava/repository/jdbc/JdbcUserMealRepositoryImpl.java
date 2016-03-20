@@ -5,6 +5,7 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.UserMeal;
@@ -30,6 +31,9 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
     private SimpleJdbcInsert insertMeal;
 
     @Autowired
@@ -43,15 +47,16 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
     public UserMeal save(UserMeal userMeal, int userId) {
         final MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", userMeal.getId())
-                .addValue("date_time", userMeal.getDateTime())
+                .addValue("dateTime", userMeal.getDateTime())
                 .addValue("description", userMeal.getDescription())
                 .addValue("calories", userMeal.getCalories())
-                .addValue("user_id", userId);
+                .addValue("userId", userId);
         if (userMeal.isNew()) {
             final Number newKey = insertMeal.executeAndReturnKey(map);
             userMeal.setId(newKey.intValue());
-        } else {
-
+        } else if (namedParameterJdbcTemplate.update("UPDATE meals SET date_time=:dateTime,description=:description, " +
+                    "calories=:calories WHERE id=:id AND user_id=:userId", map) != 1) {
+            return null;
         }
         return userMeal;
     }

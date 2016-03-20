@@ -85,7 +85,13 @@ public class UserMealServiceTest extends TestCase {
 
     @Test
     public void testUpdate() throws Exception {
+        service.update(MEAL4_UPDATED, ADMIN_ID);
+        MATCHER.assertEquals(MEAL4_UPDATED, service.get(MEAL4_UPDATED.getId(), ADMIN_ID));
+    }
 
+    @Test(expected = NotFoundException.class)
+    public void testUpdateNotFound() throws Exception {
+        service.update(MEAL4_UPDATED, 1);
     }
 
     @Test
