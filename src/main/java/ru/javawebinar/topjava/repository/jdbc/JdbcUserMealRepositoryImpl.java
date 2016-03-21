@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
 import java.beans.PropertyDescriptor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,6 +29,11 @@ import java.util.List;
 public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
     private static final BeanPropertyRowMapper<UserMeal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(UserMeal.class);
+
+    /*private static final RowMapper<UserMeal> ROW_MAPPER = ((rs, rowNum) -> //All work without custom RowMapper
+        new UserMeal(rs.getInt("id"), rs.getTimestamp("date_time").toLocalDateTime(),
+                rs.getString("description"), rs.getInt("calories"))
+    );*/
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -51,10 +58,16 @@ public class JdbcUserMealRepositoryImpl implements UserMealRepository {
                 .addValue("description", userMeal.getDescription())
                 .addValue("calories", userMeal.getCalories())
                 .addValue("userId", userId);
+        /*final MapSqlParameterSource map = new MapSqlParameterSource()
+                .addValue("id", userMeal.getId())
+                .addValue("dateTime", Timestamp.valueOf(userMeal.getDateTime())) //All work without it
+                .addValue("description", userMeal.getDescription())
+                .addValue("calories", userMeal.getCalories())
+                .addValue("userId", userId);*/
         if (userMeal.isNew()) {
             final Number newKey = insertMeal.executeAndReturnKey(map);
             userMeal.setId(newKey.intValue());
-        } else if (namedParameterJdbcTemplate.update("UPDATE meals SET date_time=:dateTime,description=:description, " +
+        } else if (namedParameterJdbcTemplate.update("UPDATE meals SET date_time=:dateTime, description=:description, " +
                     "calories=:calories WHERE id=:id AND user_id=:userId", map) != 1) {
             return null;
         }
