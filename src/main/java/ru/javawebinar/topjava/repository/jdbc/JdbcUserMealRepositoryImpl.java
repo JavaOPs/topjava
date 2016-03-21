@@ -28,7 +28,7 @@ import java.util.List;
 @Repository
 public class JdbcUserMealRepositoryImpl implements UserMealRepository {
 
-    private static final BeanPropertyRowMapper<UserMeal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(UserMeal.class);
+    private static final RowMapper<UserMeal> ROW_MAPPER = BeanPropertyRowMapper.newInstance(UserMeal.class);
 
     /*private static final RowMapper<UserMeal> ROW_MAPPER = ((rs, rowNum) -> //All work without custom RowMapper
         new UserMeal(rs.getInt("id"), rs.getTimestamp("date_time").toLocalDateTime(),
