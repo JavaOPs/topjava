@@ -42,7 +42,7 @@ public class MealServlet extends HttpServlet {
         super.destroy();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
@@ -77,13 +77,13 @@ public class MealServlet extends HttpServlet {
             LOG.info("getAll");
             request.setAttribute("mealList", mealController.getAll());
             request.getRequestDispatcher("mealList.jsp").forward(request, response);
-        } else if (action.equals("delete")) {
+        } else if ("delete".equals(action)) {
             int id = getId(request);
             LOG.info("Delete {}", id);
             mealController.delete(id);
             response.sendRedirect("meals");
         } else {
-            final UserMeal meal = action.equals("create") ?
+            final UserMeal meal = "create".equals(action) ?
                     new UserMeal(LocalDateTime.now(), "", 1000) :   // create
                     mealController.get(getId(request));             // update
             request.setAttribute("meal", meal);
@@ -98,7 +98,7 @@ public class MealServlet extends HttpServlet {
     }
 
     private int getId(HttpServletRequest request) {
-        String paramId = Objects.requireNonNull(request.getParameter("id"));
+        String paramId = Objects.requireNonNull(request.getParameter("id"), "parameter id  must not be null");
         return Integer.valueOf(paramId);
     }
 }

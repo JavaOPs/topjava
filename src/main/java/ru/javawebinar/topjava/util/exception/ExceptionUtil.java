@@ -6,6 +6,9 @@ package ru.javawebinar.topjava.util.exception;
  * Date: 14.05.2014
  */
 public class ExceptionUtil {
+    private ExceptionUtil() {
+    }
+
     public static void check(boolean found, int id) {
         check(found, "id=" + id);
     }
@@ -20,6 +23,8 @@ public class ExceptionUtil {
     }
 
     public static void check(boolean found, String msg) {
-        if (!found) throw new NotFoundException("Not found entity with " + msg);
+        if (!found) {
+            throw new NotFoundException("Not found entity with " + msg);
+        }
     }
 }

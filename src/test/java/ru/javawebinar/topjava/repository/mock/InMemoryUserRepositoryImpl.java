@@ -3,6 +3,7 @@ package ru.javawebinar.topjava.repository.mock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
@@ -31,7 +32,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
-        Objects.requireNonNull(user);
+        Assert.notNull(user, "user must not be null");
         if (user.isNew()) {
             user.setId(counter.incrementAndGet());
         }
@@ -66,7 +67,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
 
     @Override
     public User getByEmail(String email) {
-        Objects.requireNonNull(email);
+        Assert.notNull(email, "email must not be null");
         return repository.values().stream().filter(u -> email.equals(u.getEmail())).findFirst().orElse(null);
     }
 }
