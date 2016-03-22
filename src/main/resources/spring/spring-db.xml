@@ -6,6 +6,8 @@
 
     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
 
+    <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
+
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="classpath:db/initDB.sql"/>
         <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
