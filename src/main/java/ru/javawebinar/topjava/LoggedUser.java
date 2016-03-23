@@ -1,7 +1,7 @@
 package ru.javawebinar.topjava;
 
-import ru.javawebinar.topjava.util.UserMealsUtil;
-
+import ru.javawebinar.topjava.model.BaseEntity;
+import ru.javawebinar.topjava.util.UserUtil;
 /**
  * GKislin
  * 06.03.2015.
@@ -18,6 +18,6 @@ public class LoggedUser {
     }
 
     public static int getCaloriesPerDay() {
-        return UserMealsUtil.DEFAULT_CALORIES_PER_DAY;
+        return UserUtil.DEFAULT_CALORIES_PER_DAY;
     }
 }
