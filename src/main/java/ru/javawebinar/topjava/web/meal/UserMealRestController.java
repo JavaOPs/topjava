@@ -3,10 +3,7 @@ package ru.javawebinar.topjava.web.meal;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
@@ -25,7 +22,8 @@ import static org.springframework.format.annotation.DateTimeFormat.*;
  * GKislin
  * 06.03.2015.
  */
-@Controller
+@RestController
+@RequestMapping (value = UserMealRestController.REST_URL)
 public class UserMealRestController extends AbstractUserMealController {
 
     static final String REST_URL = "/rest/meals";

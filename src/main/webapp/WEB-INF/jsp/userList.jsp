@@ -110,7 +110,12 @@
     var oTable_datatable;
     var oTable_datatable_params;
 
-    //            $(document).ready(function () {
+    function updateTable() {
+        $.get(ajaxUrl, function (data) {
+            updateTableByData(data);
+        });
+    }
+
     $(function () {
         oTable_datatable = $('#datatable');
         oTable_datatable_params = {
@@ -133,11 +138,11 @@
                     "mData": "registered"
                 },
                 {
-                    "sDefaultContent": "",
+                    "sDefaultContent": "Edit",
                     "bSortable": false
                 },
                 {
-                    "sDefaultContent": "",
+                    "sDefaultContent": "Delete",
                     "bSortable": false
                 }
             ],
