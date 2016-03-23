@@ -1,21 +1,36 @@
 function makeEditable() {
+    form = $('#detailsForm');
 
     $('#add').click(function () {
+        form.find(":input").val("");
         $('#id').val(0);
         $('#editRow').modal();
+    });
+
+    $('.edit').click(function () {
+        updateRow($(this).closest('tr').attr("id"));
     });
 
     $('.delete').click(function () {
         deleteRow($(this).closest('tr').attr("id"));
     });
 
-    $('#detailsForm').submit(function () {
+    form.submit(function () {
         save();
         return false;
     });
 
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(event, jqXHR, options, jsExc);
+    });
+}
+
+function updateRow(id) {
+    $.get(ajaxUrl + id, function (data) {
+        $.each(data, function (key, value) {
+            form.find("input[name='" + key + "']").val(value);
+        });
+        $('#editRow').modal();
     });
 }
 
@@ -54,7 +69,6 @@ function updateTableByData(data) {
 }
 
 function save() {
-    var form = $('#detailsForm');
     $.ajax({
         type: "POST",
         url: ajaxUrl,
@@ -89,7 +103,7 @@ function successNoty(text) {
 function failNoty(event, jqXHR, options, jsExc) {
     closeNoty();
     failedNote = noty({
-        text: 'Failed: ' + jqXHR.statusText + "<br>",
+        text: 'Failed: ' + jqXHR.statusText + "<br>" + jqXHR.responseJSON,
         type: 'error',
         layout: 'bottomRight'
     });
