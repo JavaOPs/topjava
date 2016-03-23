@@ -189,6 +189,10 @@
             return false;
         });
         makeEditable();
+        init();
     });
+
+    function init() {
+    }
 </script>
 </html>

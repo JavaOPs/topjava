@@ -30,12 +30,26 @@ function deleteRow(id) {
     });
 }
 
+function enable(chkbox) {
+    var enabled = chkbox.is(":checked");
+    chkbox.closest('tr').css("text-decoration", enabled ? "none" : "line-through");
+    $.ajax({
+        url: ajaxUrl + chkbox.attr('id'),
+        type: 'POST',
+        data: 'enabled=' + enabled,
+        success: function () {
+            successNoty(enabled ? 'Enabled' : 'Disabled');
+        }
+    });
+}
+
 function updateTableByData(data) {
     oTable_datatable.fnClearTable();
     $.each(data, function (key, item) {
         oTable_datatable.fnAddData(item);
     });
     oTable_datatable.fnDraw();
+    init();
 }
 
 function save() {
