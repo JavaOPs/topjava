@@ -6,7 +6,7 @@ function makeEditable() {
     });
 
     $('.delete').click(function () {
-        deleteRow($(this).attr("id"));
+        deleteRow($(this).closest('tr').attr("id"));
     });
 
     $('#detailsForm').submit(function () {
@@ -32,9 +32,10 @@ function deleteRow(id) {
 
 function enable(chkbox) {
     var enabled = chkbox.is(":checked");
-    chkbox.closest('tr').css("text-decoration", enabled ? "none" : "line-through");
+    var row = chkbox.closest('tr');
+    row.css("text-decoration", enabled ? "none" : "line-through");
     $.ajax({
-        url: ajaxUrl + chkbox.attr('id'),
+        url: ajaxUrl + row.attr('id'),
         type: 'POST',
         data: 'enabled=' + enabled,
         success: function () {
@@ -44,17 +45,16 @@ function enable(chkbox) {
 }
 
 function updateTableByData(data) {
-    oTable_datatable.fnClearTable();
+    datatableApi.clear();
     $.each(data, function (key, item) {
-        oTable_datatable.fnAddData(item);
+        datatableApi.row.add(item);
     });
-    oTable_datatable.fnDraw();
+    datatableApi.draw();
     init();
 }
 
 function save() {
     var form = $('#detailsForm');
-    debugger;
     $.ajax({
         type: "POST",
         url: ajaxUrl,

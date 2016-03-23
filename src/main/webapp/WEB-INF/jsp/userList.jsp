@@ -32,17 +32,17 @@
                     </thead>
                     <c:forEach items="${userList}" var="user">
                         <jsp:useBean id="user" scope="page" type="ru.javawebinar.topjava.model.User"/>
-                        <tr>
+                        <tr id="${user.id}">
                             <td><c:out value="${user.name}"/></td>
                             <td><a href="mailto:${user.email}">${user.email}</a></td>
                             <td>${user.roles}</td>
                             <td>
                                 <input type="checkbox"
-                                       <c:if test="${user.enabled}">checked</c:if> id="${user.id}"  onclick="enable($(this))"/>
+                                       <c:if test="${user.enabled}">checked</c:if> onclick="enable($(this))"/>
                             </td>
                             <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
-                            <td><a class="btn btn-xs btn-primary edit" id="${user.id}">Edit</a></td>
-                            <td><a class="btn btn-xs btn-danger delete" id="${user.id}">Delete</a></td>
+                            <td><a class="btn btn-xs btn-primary edit">Edit</a></td>
+                            <td><a class="btn btn-xs btn-danger delete">Delete</a></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -107,8 +107,7 @@
 <script type="text/javascript">
 
     var ajaxUrl = 'ajax/admin/users/';
-    var oTable_datatable;
-    var oTable_datatable_params;
+    var datatableApi;
 
     function updateTable() {
         $.get(ajaxUrl, function (data) {
@@ -117,8 +116,7 @@
     }
 
     $(function () {
-        oTable_datatable = $('#datatable');
-        oTable_datatable_params = {
+        datatableApi = $('#datatable').DataTable({
             "bPaginate": false,
             "bInfo": false,
             "aoColumns": [
@@ -152,9 +150,7 @@
                     "asc"
                 ]
             ]
-        };
-
-        oTable_datatable.dataTable(oTable_datatable_params);
+        });
         makeEditable();
         init();
     });
