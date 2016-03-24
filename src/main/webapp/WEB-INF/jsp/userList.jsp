@@ -30,21 +30,6 @@
                         <th></th>
                     </tr>
                     </thead>
-                    <c:forEach items="${userList}" var="user">
-                        <jsp:useBean id="user" scope="page" type="ru.javawebinar.topjava.model.User"/>
-                        <tr id="${user.id}">
-                            <td><c:out value="${user.name}"/></td>
-                            <td><a href="mailto:${user.email}">${user.email}</a></td>
-                            <td>${user.roles}</td>
-                            <td>
-                                <input type="checkbox"
-                                       <c:if test="${user.enabled}">checked</c:if> onclick="enable($(this))"/>
-                            </td>
-                            <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
-                            <td><a class="btn btn-xs btn-primary edit">Edit</a></td>
-                            <td><a class="btn btn-xs btn-danger delete">Delete</a></td>
-                        </tr>
-                    </c:forEach>
                 </table>
             </div>
         </div>
@@ -104,63 +89,5 @@
 <script type="text/javascript" src="webjars/datatables/1.10.9/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.2.4/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
-<script type="text/javascript">
-
-    var ajaxUrl = 'ajax/admin/users/';
-    var datatableApi;
-
-    function updateTable() {
-        $.get(ajaxUrl, function (data) {
-            updateTableByData(data);
-        });
-    }
-
-    $(function () {
-        datatableApi = $('#datatable').DataTable({
-            "bPaginate": false,
-            "bInfo": false,
-            "aoColumns": [
-                {
-                    "mData": "name"
-                },
-                {
-                    "mData": "email"
-                },
-                {
-                    "mData": "roles"
-                },
-                {
-                    "mData": "enabled"
-                },
-                {
-                    "mData": "registered"
-                },
-                {
-                    "sDefaultContent": "Edit",
-                    "bSortable": false
-                },
-                {
-                    "sDefaultContent": "Delete",
-                    "bSortable": false
-                }
-            ],
-            "aaSorting": [
-                [
-                    0,
-                    "asc"
-                ]
-            ]
-        });
-        makeEditable();
-        init();
-    });
-
-    function init(){
-        $(':checkbox').each(function () {
-            if (!$(this).is(":checked")) {
-                $(this).closest('tr').css("text-decoration", "line-through");
-            }
-        });
-    }
-</script>
+<script type="text/javascript" src="resources/js/userDatatables.js"></script>
 </html>
