@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -32,6 +33,7 @@ public class UserMeal extends BaseEntity {
 
     @Column(name = "date_time", nullable = false)
     @NotNull
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     protected LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
@@ -40,7 +42,8 @@ public class UserMeal extends BaseEntity {
 
     @Column(name = "calories", nullable = false)
     @Range(min = 10, max = 5000)
-    protected int calories;
+    @NotNull
+    protected Integer calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -60,10 +63,6 @@ public class UserMeal extends BaseEntity {
         this.calories = calories;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -76,10 +75,6 @@ public class UserMeal extends BaseEntity {
         return calories;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
@@ -88,7 +83,7 @@ public class UserMeal extends BaseEntity {
         this.description = description;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(Integer calories) {
         this.calories = calories;
     }
 

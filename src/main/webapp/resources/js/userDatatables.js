@@ -9,17 +9,19 @@ function updateTable() {
 
 $(function () {
     datatableApi = $('#datatable').DataTable({
-        "sAjaxSource": ajaxUrl,
-        "sAjaxDataProp": "",
-        "bPaginate": false,
-        "bInfo": false,
-        "aoColumns": [
+        "ajax": {
+            "url": ajaxUrl,
+            "dataSrc": ""
+        },
+        "paging": false,
+        "info": true,
+        "columns": [
             {
-                "mData": "name"
+                "data": "name"
             },
             {
-                "mData": "email",
-                "mRender": function (data, type, row) {
+                "data": "email",
+                "render": function (data, type, row) {
                     if (type == 'display') {
                         return '<a href="mailto:' + data + '">' + data + '</a>';
                     }
@@ -27,11 +29,11 @@ $(function () {
                 }
             },
             {
-                "mData": "roles"
+                "data": "roles"
             },
             {
-                "mData": "enabled",
-                "mRender": function (data, type, row) {
+                "data": "enabled",
+                "render": function (data, type, row) {
                     if (type == 'display') {
                         return '<input type="checkbox" ' + (data ? 'checked' : '') + ' onclick="enable($(this),' + row.id + ');"/>';
                     }
@@ -39,8 +41,8 @@ $(function () {
                 }
             },
             {
-                "mData": "registered",
-                "mRender": function (date, type, row) {
+                "data": "registered",
+                "render": function (date, type, row) {
                     if (type == 'display') {
                         var dateObject = new Date(date);
                         return '<span>' + dateObject.toISOString().substring(0, 10) + '</span>';
@@ -49,17 +51,17 @@ $(function () {
                 }
             },
             {
-                "bSortable": false,
+                "orderable": false,
                 "sDefaultContent": "",
-                "mRender": renderEditBtn
+                "render": renderEditBtn
             },
             {
-                "bSortable": false,
-                "sDefaultContent": "",
-                "mRender": renderDeleteBtn
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderDeleteBtn
             }
         ],
-        "aaSorting": [
+        "order": [
             [
                 0,
                 "asc"
