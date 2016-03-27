@@ -2,6 +2,7 @@ package ru.javawebinar.topjava;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.javawebinar.topjava.util.exception.ErrorInfo;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 /**
@@ -74,5 +75,10 @@ public class LoggerWrapper {
     public NotFoundException getNotFoundException(String reason) {
         logger.error(reason);
         return new NotFoundException(reason);
+    }
+
+    public ErrorInfo getErrorInfo(CharSequence requestUrl, Exception e) {
+        logger.error("Exception at request " + requestUrl);
+        return new ErrorInfo(requestUrl, e);
     }
 }

@@ -4,17 +4,20 @@ import org.junit.Test;
 import org.springframework.http.MediaType;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.TestUtil;
+import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 
 import java.util.Arrays;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.javawebinar.topjava.MealTestData.MATCHER_WITH_EXCEED;
 import static ru.javawebinar.topjava.MealTestData.USER_MEALS_WITH_EXCEED;
+import static ru.javawebinar.topjava.TestUtil.userHttpBasic;
 import static ru.javawebinar.topjava.web.meal.UserMealRestController.REST_URL;
 import static ru.javawebinar.topjava.MealTestData.*;
 
@@ -23,6 +26,8 @@ import static ru.javawebinar.topjava.MealTestData.*;
  */
 public class UserMealRestControllerTest extends AbstractControllerTest {
 
+
+    private static final User USER = new User();
 
     @Test
     public void testGet() throws Exception {
@@ -43,6 +48,20 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
+    public void testGetNotFound() throws Exception {
+        mockMvc.perform(get(REST_URL + ADMIN_MEAL_ID)
+                .with(userHttpBasic(USER)))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testDeleteNotFound() throws Exception {
+        mockMvc.perform(delete(REST_URL + ADMIN_MEAL_ID).contentType(MediaType.APPLICATION_JSON)
+                .with(userHttpBasic(USER)))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+    }
+
     public void testFilterAll() throws Exception {
         mockMvc.perform(get(REST_URL + "filter?startDate=&endTime="))
                 .andExpect(status().isOk())
