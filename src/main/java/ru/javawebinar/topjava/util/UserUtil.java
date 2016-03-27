@@ -22,6 +22,7 @@ public class UserUtil {
     public static User updateFromTo(User user, UserTo userTo) {
         user.setName(userTo.getName());
         user.setEmail(userTo.getEmail().toLowerCase());
+        user.setCaloriesPerDay(userTo.getCaloriesPerDay());
         String password = userTo.getPassword();
         if (!StringUtils.isEmpty(password)) {
             user.setPassword(password);

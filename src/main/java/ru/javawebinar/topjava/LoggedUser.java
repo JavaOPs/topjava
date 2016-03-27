@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  * Mock implementation
  */
 public class LoggedUser extends org.springframework.security.core.userdetails.User {
-    private final UserTo userTo;
+    private UserTo userTo;
     public static int id = 1;
 
     public LoggedUser(User user) {
@@ -52,5 +52,9 @@ public class LoggedUser extends org.springframework.security.core.userdetails.Us
 
     public static int getCaloriesPerDay() {
         return get().userTo.getCaloriesPerDay();
+    }
+
+    public void update(UserTo newTo) {
+        userTo = newTo;
     }
 }
