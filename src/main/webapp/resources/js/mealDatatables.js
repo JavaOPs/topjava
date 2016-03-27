@@ -63,6 +63,43 @@ $(function () {
                 updateTable();
                 return false;
             });
+
+            var startDate = $('#startDate');
+            var endDate = $('#endDate');
+            startDate.datetimepicker({
+                timepicker: false,
+                format: 'Y-m-d',
+                lang: 'ru',
+                formatDate: 'Y-m-d',
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: endDate.val() ? endDate.val() : false
+                    })
+                }
+            });
+            endDate.datetimepicker({
+                timepicker: false,
+                format: 'Y-m-d',
+                lang: 'ru',
+                formatDate: 'Y-m-d',
+                onShow: function (ct) {
+                    this.setOptions({
+                        minDate: startDate.val() ? startDate.val() : false
+                    })
+                }
+            });
+
+            $('.time-picker').datetimepicker({
+                datepicker: false,
+                format: 'H:i',
+                lang: 'ru'
+            });
+
+            $('#dateTime').datetimepicker({
+                format: 'Y-m-d\\TH:i',
+                lang: 'ru'
+            });
+
             makeEditable();
         }
     });
