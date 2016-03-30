@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
 import ru.javawebinar.topjava.util.TimeUtil;
-import ru.javawebinar.topjava.web.ExceptionInfoHandler;
 
 import javax.validation.Valid;
 import javax.validation.ValidationException;
@@ -22,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "/ajax/profile/meals")
-public class UserMealAjaxController extends AbstractUserMealController implements ExceptionInfoHandler {
+public class UserMealAjaxController extends AbstractUserMealController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserMealWithExceed> getAll() {

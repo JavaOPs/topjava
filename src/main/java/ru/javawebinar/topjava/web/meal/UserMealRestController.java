@@ -8,7 +8,6 @@ import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.to.UserMealWithExceed;
 import ru.javawebinar.topjava.util.TimeUtil;
-import ru.javawebinar.topjava.web.ExceptionInfoHandler;
 import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import java.net.URI;
@@ -25,7 +24,7 @@ import static org.springframework.format.annotation.DateTimeFormat.*;
  */
 @RestController
 @RequestMapping (value = UserMealRestController.REST_URL)
-public class UserMealRestController extends AbstractUserMealController implements ExceptionInfoHandler {
+public class UserMealRestController extends AbstractUserMealController {
 
     static final String REST_URL = "/rest/meals";
 

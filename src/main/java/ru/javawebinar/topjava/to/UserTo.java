@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 public class UserTo implements Serializable {
+    static final long serialVersionUID = 1L;
+
     protected int id;
 
     @NotEmpty
