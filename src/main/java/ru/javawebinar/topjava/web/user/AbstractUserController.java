@@ -5,6 +5,7 @@ import ru.javawebinar.topjava.LoggerWrapper;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
 import ru.javawebinar.topjava.to.UserTo;
+import ru.javawebinar.topjava.util.UserUtil;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public abstract class AbstractUserController {
     public User create(User user) {
         user.setId(null);
         LOG.info("create " + user);
-        return service.save(user);
+        return service.save(UserUtil.prepareToSave(user));
     }
 
     public void delete(int id) {
@@ -41,7 +42,7 @@ public abstract class AbstractUserController {
     public void update(User user, int id) {
         user.setId(id);
         LOG.info("update " + user);
-        service.update(user);
+        service.update(UserUtil.prepareToSave(user));
     }
 
     public void update(UserTo userTo) {
