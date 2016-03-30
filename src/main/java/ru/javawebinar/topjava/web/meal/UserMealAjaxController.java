@@ -11,6 +11,7 @@ import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.web.ExceptionInfoHandler;
 
 import javax.validation.Valid;
+import javax.validation.ValidationException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
