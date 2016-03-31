@@ -98,6 +98,31 @@
         </bean>
     </beans>
 
+    <beans profile="heroku">
+        <context:property-placeholder location="classpath:/db/heroku.properties" system-properties-mode="OVERRIDE"/>
+
+        <bean class="java.net.URI" id="dbUrl">
+            <constructor-arg value="${DATABASE_URL}"/>
+        </bean>
+        <bean id="dataSource"
+              class="org.apache.tomcat.jdbc.pool.DataSource"
+              p:url="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + @dbUrl.getPath() }"
+              p:username="#{ @dbUrl.getUserInfo().split(':')[0] }"
+              p:password="#{ @dbUrl.getUserInfo().split(':')[1] }"
+              p:driverClassName="org.postgresql.Driver"
+              p:validationQuery="SELECT 1 FROM users"
+              p:maxActive="10"
+              p:minIdle="2"
+              p:maxWait="20000"
+              p:initialSize="2"
+              p:maxIdle="5"
+              p:testOnBorrow="true"
+              p:removeAbandoned="true"
+              p:testOnConnect="true"
+              p:testWhileIdle="true"/>
+    </beans>
+
+    <!--Repository implementation-->
     <beans profile="datajpa,jpa">
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
               p:dataSource-ref="dataSource"
