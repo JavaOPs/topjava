@@ -20,7 +20,7 @@ public class UserTestData {
     public static final int ADMIN_ID = START_SEQ + 1;
 
     public static final User USER = new User(USER_ID, "User", "user@yandex.ru", "password", Role.ROLE_USER);
-    public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN);
+    public static final User ADMIN = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ROLE_ADMIN, Role.ROLE_USER);
 
     public static final ModelMatcher<User, TestUser> MATCHER = new ModelMatcher<>(u -> ((u instanceof TestUser) ? (TestUser) u : new TestUser(u)));
 
@@ -69,7 +69,8 @@ public class UserTestData {
                     && Objects.equals(this.name, that.name)
                     && Objects.equals(this.email, that.email)
                     && Objects.equals(this.caloriesPerDay, that.caloriesPerDay)
-                    && Objects.equals(this.enabled, that.enabled);
+                    && Objects.equals(this.enabled, that.enabled)
+                    && Objects.equals(this.roles, that.roles);
         }
     }
 }
