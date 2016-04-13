@@ -30,7 +30,7 @@ public class JspUserMealController extends AbstractUserMealController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete(HttpServletRequest request) {
         super.delete(getId(request));
-        return "redirect:meals";
+        return "redirect:/meals";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.GET)
@@ -58,7 +58,7 @@ public class JspUserMealController extends AbstractUserMealController {
         } else {
             super.update(userMeal, userMeal.getId());
         }
-        return "redirect:meals";
+        return "redirect:/meals";
     }
 
     @RequestMapping(value = "/filter", method = RequestMethod.POST)
