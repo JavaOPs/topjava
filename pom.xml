@@ -35,6 +35,7 @@
 
         <!--Tools-->
         <hamcrest.version>1.3</hamcrest.version>
+        <jackson-json.version>2.7.3</jackson-json.version>
         <ehcache.version>2.10.1</ehcache.version>
     </properties>
 
@@ -139,6 +140,13 @@
                     <groupId>org.hamcrest</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-json.version}</version>
         </dependency>
 
         <dependency>
