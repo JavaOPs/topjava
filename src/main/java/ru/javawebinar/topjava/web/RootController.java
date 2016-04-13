@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.service.UserMealService;
 import ru.javawebinar.topjava.service.UserService;
-import ru.javawebinar.topjava.util.UserMealsUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,13 +32,6 @@ public class RootController {
     public String userList(Model model) {
         model.addAttribute("userList", userService.getAll());
         return "userList";
-    }
-
-    @RequestMapping(value = "/meals", method = RequestMethod.GET)
-    public String mealList(Model model) {
-        model.addAttribute("mealList",
-                UserMealsUtil.getWithExceeded(mealService.getAll(LoggedUser.id()), LoggedUser.getCaloriesPerDay()));
-        return "mealList";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
