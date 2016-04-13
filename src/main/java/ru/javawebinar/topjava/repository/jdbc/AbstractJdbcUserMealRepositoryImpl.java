@@ -20,15 +20,10 @@ import java.util.List;
  */
 
 public abstract class AbstractJdbcUserMealRepositoryImpl<T> implements UserMealRepository {
+
+    private final SimpleJdbcInsert insertUserMeal;
+
     private final RowMapper<UserMeal> rowMapper;
-
-    public AbstractJdbcUserMealRepositoryImpl(RowMapper<UserMeal> rowMapper, DataSource dataSource) {
-        this.rowMapper = rowMapper;
-        this.insertUserMeal = new SimpleJdbcInsert(dataSource)
-                .withTableName("meals")
-                .usingGeneratedKeyColumns("id");
-
-    }
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -36,7 +31,12 @@ public abstract class AbstractJdbcUserMealRepositoryImpl<T> implements UserMealR
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private SimpleJdbcInsert insertUserMeal;
+    public AbstractJdbcUserMealRepositoryImpl(RowMapper<UserMeal> rowMapper, DataSource dataSource) {
+        this.rowMapper = rowMapper;
+        this.insertUserMeal = new SimpleJdbcInsert(dataSource)
+                .withTableName("meals")
+                .usingGeneratedKeyColumns("id");
+    }
 
     protected abstract T toDbValue(LocalDateTime ldt);
 
