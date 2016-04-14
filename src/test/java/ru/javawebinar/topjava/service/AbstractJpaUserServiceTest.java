@@ -1,6 +1,6 @@
 package ru.javawebinar.topjava.service;
 
-import org.junit.Before;
+import org.junit.After;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.javawebinar.topjava.repository.JpaUtil;
 
@@ -13,9 +13,9 @@ abstract public class AbstractJpaUserServiceTest extends AbstractUserServiceTest
     @Autowired
     private JpaUtil jpaUtil;
 
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
+    @After
+    public void tearDown() throws Exception {
+        super.tearDown();
         jpaUtil.clear2ndLevelHibernateCache();
     }
 }

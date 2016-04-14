@@ -1,7 +1,6 @@
 package ru.javawebinar.topjava.service.datajpa;
 
 import org.junit.Test;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.model.User;

@@ -37,12 +37,12 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdate() throws Exception {
-        User updated = new User(LoggedUser.id(), "newName", "newEmail", "newPassword", Role.ROLE_USER);
+        User updated = new User(LoggedUser.id(), "newName", "newEmail@ya.ru", "newPassword", Role.ROLE_USER);
         mockMvc.perform(put(REST_URL).contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        MATCHER.assertEquals(updated, new User(userService.getByEmail("newEmail")));
+        MATCHER.assertEquals(updated, new User(userService.getByEmail("newEmail@ya.ru")));
     }
 }
