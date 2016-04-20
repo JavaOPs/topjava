@@ -1,7 +1,5 @@
 package ru.javawebinar.topjava.web.user;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,13 +31,12 @@ public class AdminRestController extends AbstractUserController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createWithLocation(@RequestBody User user) {
         User created = super.create(user);
+
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(uriOfNewResource);
 
-        return new ResponseEntity<>(created, httpHeaders, HttpStatus.CREATED);
+        return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
