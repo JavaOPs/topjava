@@ -24,7 +24,8 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework.web" level="DEBUG"/>
+    <!--<logger name="org.springframework.web" level="DEBUG"/>-->
+    <logger name="org.springframework.security" level="debug"/>
     <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="debug"/>
     <logger name="ru.javawebinar.topjava" level="debug"/>
 

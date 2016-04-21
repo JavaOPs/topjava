@@ -18,6 +18,8 @@
 
         <spring-data-jpa.version>1.9.4.RELEASE</spring-data-jpa.version>
         <spring.version>4.2.5.RELEASE</spring.version>
+        <spring-security.version>4.0.4.RELEASE</spring-security.version>
+
         <tomcat.version>7.0.57</tomcat.version>
 
         <!-- Logging -->
@@ -147,6 +149,18 @@
                     <groupId>org.hamcrest</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
         </dependency>
 
         <!-- Webjars (static dependencies distributed as JAR files) -->
