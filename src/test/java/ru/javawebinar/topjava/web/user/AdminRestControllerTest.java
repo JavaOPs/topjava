@@ -20,7 +20,7 @@ import static ru.javawebinar.topjava.UserTestData.*;
 
 public class AdminRestControllerTest extends AbstractControllerTest {
 
-    public static final String REST_URL = AdminRestController.REST_URL + '/';
+    private static final String REST_URL = AdminRestController.REST_URL + '/';
 
     @Test
     public void testGet() throws Exception {
@@ -41,7 +41,7 @@ public class AdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + USER_ID).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete(REST_URL + USER_ID))
                 .andDo(print())
                 .andExpect(status().isOk());
         MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), userService.getAll());

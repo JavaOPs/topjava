@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -43,7 +43,7 @@
         <!--web-->
         <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
         <webjars-jquery.version>2.2.3</webjars-jquery.version>
-        <webjars-datetimepicker.version>2.5.1</webjars-datetimepicker.version>
+        <webjars-datetimepicker.version>2.4.7</webjars-datetimepicker.version>
         <webjars-noty.version>2.3.8</webjars-noty.version>
         <webjars-datatables.version>1.10.11</webjars-datatables.version>
     </properties>
@@ -175,7 +175,7 @@
             <version>${webjars-jquery.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.webjars</groupId>
+            <groupId>org.webjars.bower</groupId>
             <artifactId>datetimepicker</artifactId>
             <version>${webjars-datetimepicker.version}</version>
         </dependency>

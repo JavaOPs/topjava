@@ -23,7 +23,7 @@ import static ru.javawebinar.topjava.model.BaseEntity.START_SEQ;
 
 public class UserMealRestControllerTest extends AbstractControllerTest {
 
-    public static final String REST_URL = UserMealRestController.REST_URL + '/';
+    private static final String REST_URL = UserMealRestController.REST_URL + '/';
 
     @Autowired
     private UserMealService service;
@@ -39,7 +39,7 @@ public class UserMealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL + MEAL1_ID).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete(REST_URL + MEAL1_ID))
                 .andExpect(status().isOk());
         MATCHER.assertCollectionEquals(Arrays.asList(MEAL6, MEAL5, MEAL4, MEAL3, MEAL2), service.getAll(START_SEQ));
     }

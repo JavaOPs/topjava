@@ -30,7 +30,7 @@ public class ProfileRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testDelete() throws Exception {
-        mockMvc.perform(delete(REST_URL).contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete(REST_URL))
                 .andExpect(status().isOk());
         MATCHER.assertCollectionEquals(Collections.singletonList(ADMIN), userService.getAll());
     }

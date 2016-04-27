@@ -99,13 +99,13 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         List<User> users = jdbcTemplate.query("SELECT * FROM users ORDER BY name, email", ROW_MAPPER);
 
         class UserRole {
-            UserRole(Role role, int userId) {
+            final private Role role;
+            final private int userId;
+
+            private UserRole(Role role, int userId) {
                 this.role = role;
                 this.userId = userId;
             }
-
-            final private Role role;
-            final private int userId;
 
             public Role getRole() {
                 return role;
