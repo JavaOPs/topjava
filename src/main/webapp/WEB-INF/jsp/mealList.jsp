@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </form>
-                <a class="btn btn-sm btn-info" id="add"><fmt:message key="meals.add"/></a>
+                <a class="btn btn-sm btn-info" onclick="add()"><fmt:message key="meals.add"/></a>
                 <table class="table table-striped display" id="datatable">
                     <thead>
                     <tr>
@@ -70,8 +70,8 @@
                             </td>
                             <td>${meal.description}</td>
                             <td>${meal.calories}</td>
-                            <td><a class="btn btn-xs btn-primary edit" id="${meal.id}">Edit</a></td>
-                            <td><a class="btn btn-xs btn-danger delete" id="${meal.id}">Delete</a></td>
+                            <td><a class="btn btn-xs btn-primary">Edit</a></td>
+                            <td><a class="btn btn-xs btn-danger" onclick="deleteRow(${meal.id})">Delete</a></td>
                         </tr>
                     </c:forEach>
                 </table>
