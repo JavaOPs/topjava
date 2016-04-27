@@ -29,19 +29,16 @@ function deleteRow(id) {
     });
 }
 
-function updateTable() {
-    $.get(ajaxUrl, function (data) {
-        datatableApi.fnClearTable();
-        $.each(data, function (key, item) {
-            datatableApi.fnAddData(item);
-        });
-        datatableApi.fnDraw();
+function updateTableByData(data) {
+    datatableApi.fnClearTable();
+    $.each(data, function (key, item) {
+        datatableApi.fnAddData(item);
     });
+    datatableApi.fnDraw();
 }
 
 function save() {
     var form = $('#detailsForm');
-    debugger;
     $.ajax({
         type: "POST",
         url: ajaxUrl,
