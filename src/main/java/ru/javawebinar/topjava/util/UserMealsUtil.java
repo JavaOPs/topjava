@@ -24,13 +24,11 @@ public class UserMealsUtil {
             new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
     );
 
-    public static final int DEFAULT_CALORIES_PER_DAY = 2000;
-
     public static void main(String[] args) {
-        List<UserMealWithExceed> filteredMealsWithExceeded = getFilteredWithExceeded(MEAL_LIST, LocalTime.of(7, 0), LocalTime.of(12, 0), DEFAULT_CALORIES_PER_DAY);
+        List<UserMealWithExceed> filteredMealsWithExceeded = getFilteredWithExceeded(MEAL_LIST, LocalTime.of(7, 0), LocalTime.of(12, 0), UserUtil.DEFAULT_CALORIES_PER_DAY);
         filteredMealsWithExceeded.forEach(System.out::println);
 
-        System.out.println(getFilteredWithExceededByCycle(MEAL_LIST, LocalTime.of(7, 0), LocalTime.of(12, 0), DEFAULT_CALORIES_PER_DAY));
+        System.out.println(getFilteredWithExceededByCycle(MEAL_LIST, LocalTime.of(7, 0), LocalTime.of(12, 0), UserUtil.DEFAULT_CALORIES_PER_DAY));
     }
 
     public static List<UserMealWithExceed> getWithExceeded(Collection<UserMeal> mealList, int caloriesPerDay) {

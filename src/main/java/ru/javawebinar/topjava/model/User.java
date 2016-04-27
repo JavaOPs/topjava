@@ -5,7 +5,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import ru.javawebinar.topjava.util.UserMealsUtil;
+import ru.javawebinar.topjava.util.UserUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -57,7 +57,7 @@ public class User extends NamedEntity {
 
     @Column(name = "calories_per_day", columnDefinition = "default 2000")
     @Digits(fraction = 0, integer = 4)
-    protected int caloriesPerDay = UserMealsUtil.DEFAULT_CALORIES_PER_DAY;
+    protected int caloriesPerDay = UserUtil.DEFAULT_CALORIES_PER_DAY;
 
     @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "user")
     @OrderBy("dateTime DESC")
@@ -72,7 +72,7 @@ public class User extends NamedEntity {
     }
 
     public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-        this(id, name, email, password, UserMealsUtil.DEFAULT_CALORIES_PER_DAY, true, EnumSet.of(role, roles));
+        this(id, name, email, password, UserUtil.DEFAULT_CALORIES_PER_DAY, true, EnumSet.of(role, roles));
     }
 
     public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Set<Role> roles) {
@@ -92,20 +92,12 @@ public class User extends NamedEntity {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Date getRegistered() {
         return registered;
     }
 
     public void setRegistered(Date registered) {
         this.registered = registered;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
     }
 
     public int getCaloriesPerDay() {
@@ -120,20 +112,28 @@ public class User extends NamedEntity {
         return enabled;
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public Set<Role> getRoles() {
         return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = EnumSet.copyOf(roles);
     }
 
     public String getPassword() {
         return password;
     }
 
-    public List<UserMeal> getMeals() {
-        return meals;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = EnumSet.copyOf(roles);
+    public List<UserMeal> getMeals() {
+        return meals;
     }
 
     @Override
