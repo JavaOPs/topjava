@@ -1,5 +1,9 @@
+var form;
+
 function makeEditable() {
-    $('#detailsForm').submit(function () {
+    form = $('#detailsForm');
+
+    form.submit(function () {
         save();
         return false;
     });
@@ -10,8 +14,18 @@ function makeEditable() {
 }
 
 function add() {
+    form.find(":input").val("");
     $('#id').val(0);
     $('#editRow').modal();
+}
+
+function updateRow(id) {
+    $.get(ajaxUrl + id, function (data) {
+        $.each(data, function (key, value) {
+            form.find("input[name='" + key + "']").val(value);
+        });
+        $('#editRow').modal();
+    });
 }
 
 function deleteRow(id) {
@@ -43,7 +57,6 @@ function updateTableByData(data) {
 }
 
 function save() {
-    var form = $('#detailsForm');
     $.ajax({
         type: "POST",
         url: ajaxUrl,

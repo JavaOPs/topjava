@@ -41,7 +41,7 @@
                                        onclick="enable($(this), ${user.id})"/>
                             </td>
                             <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
-                            <td><a class="btn btn-xs btn-primary">Edit</a></td>
+                            <td><a class="btn btn-xs btn-primary" onclick="updateRow(${user.id})">Edit</a></td>
                             <td><a class="btn btn-xs btn-danger" onclick="deleteRow(${user.id})">Delete</a></td>
                         </tr>
                     </c:forEach>

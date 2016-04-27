@@ -20,6 +20,11 @@ public class AdminAjaxController extends AbstractUserController {
         return super.getAll();
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public User get(@PathVariable("id") int id) {
+        return super.get(id);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
@@ -29,6 +34,8 @@ public class AdminAjaxController extends AbstractUserController {
     public void createOrUpdate(UserTo userTo) {
         if (userTo.getId() == 0) {
             super.create(UserUtil.createFromTo(userTo));
+        } else {
+            super.update(userTo);
         }
     }
 
