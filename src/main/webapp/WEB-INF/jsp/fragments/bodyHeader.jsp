@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse">
             <form class="navbar-form navbar-right">
                 <a class="btn btn-info" role="button" href="users"><fmt:message key="users.title"/></a>
-                <a class="btn btn-primary" role="button" href=""><fmt:message key="app.login"/></a>
+                <a class="btn btn-primary" role="button" href="logout"><fmt:message key="app.logout"/></a>
             </form>
         </div>
     </div>
