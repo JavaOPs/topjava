@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <link rel="stylesheet" href="webjars/datatables/1.10.11/css/jquery.dataTables.min.css">
@@ -15,7 +17,7 @@
             <h3><fmt:message key="meals.title"/></h3>
 
             <div class="view-box">
-                <form method="post" class="form-horizontal" role="form" id="filter">
+                <form:form method="post" class="form-horizontal" role="form" id="filter">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="startDate">From Date:</label>
 
@@ -47,7 +49,7 @@
                             <button type="submit" class="btn btn-primary pull-right">Filter</button>
                         </div>
                     </div>
-                </form>
+                </form:form>
                 <a class="btn btn-sm btn-info" onclick="add()"><fmt:message key="meals.add"/></a>
                 <table class="table table-striped display" id="datatable">
                     <thead>
@@ -74,7 +76,7 @@
                 <h2 class="modal-title"><fmt:message key="meals.edit"/></h2>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="post" id="detailsForm">
+                <form:form class="form-horizontal" method="post" id="detailsForm">
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
@@ -105,7 +107,7 @@
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>
