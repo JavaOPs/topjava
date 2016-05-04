@@ -14,10 +14,11 @@
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <h2>${userTo.name} profile</h2>
+            <h2>${register ? 'Register new' : userTo.name.concat(' profile')}</h2>
 
             <div class="view-box">
-                <form:form modelAttribute="userTo" class="form-horizontal" method="post" action="profile" charset="utf-8"
+                <form:form modelAttribute="userTo" class="form-horizontal" method="post"
+                           action="${register ? 'register' : 'profile'}" charset="utf-8"
                            accept-charset="UTF-8">
 
                     <topjava:inputField label="Name" name="name"/>
@@ -27,7 +28,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-2 col-xs-10">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">${register ? 'Add' : 'Update'}</button>
                         </div>
                     </div>
                 </form:form>

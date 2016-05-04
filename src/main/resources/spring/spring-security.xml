@@ -18,6 +18,8 @@
 
     <http>
         <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/register" access="permitAll"/>
+
         <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
         <form-login login-page="/login" default-target-url="/meals"
