@@ -30,9 +30,11 @@
     </http>
 
 
+    <beans:bean class="ru.javawebinar.topjava.util.PasswordUtil" id="passwordEncoder" factory-method="getPasswordEncoder"/>
+
     <authentication-manager>
         <authentication-provider user-service-ref="userService">
-
+            <password-encoder ref="passwordEncoder"/>
             <!--
                         <jdbc-user-service data-source-ref="dataSource"
                                            users-by-username-query="SELECT email, password, enabled FROM users WHERE email = ?"
