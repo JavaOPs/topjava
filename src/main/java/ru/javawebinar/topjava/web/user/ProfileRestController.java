@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.javawebinar.topjava.LoggedUser;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.to.UserTo;
+import ru.javawebinar.topjava.web.ExceptionInfoHandler;
 
 /**
  * GKislin
@@ -15,7 +16,7 @@ import ru.javawebinar.topjava.to.UserTo;
  */
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
-public class ProfileRestController extends AbstractUserController {
+public class ProfileRestController extends AbstractUserController implements ExceptionInfoHandler {
     public static final String REST_URL = "/rest/profile";
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
