@@ -15,6 +15,10 @@
 
     <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
+    <mvc:interceptors>
+        <bean class="ru.javawebinar.topjava.web.interceptor.ModelInterceptor"/>
+    </mvc:interceptors>
+
     <mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
