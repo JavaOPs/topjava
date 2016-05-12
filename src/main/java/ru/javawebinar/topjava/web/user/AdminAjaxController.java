@@ -1,9 +1,10 @@
 package ru.javawebinar.topjava.web.user;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.to.UserTo;
@@ -18,6 +19,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/ajax/admin/users")
 public class AdminAjaxController extends AbstractUserController {
+
+    @Autowired
+    private MessageSource messageSource;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
@@ -35,19 +39,16 @@ public class AdminAjaxController extends AbstractUserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<String> createOrUpdate(@Valid UserTo userTo, BindingResult result) {
-        if (result.hasErrors()) {
-            // TODO change to exception handler
-            StringBuilder sb = new StringBuilder();
-            result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
-            return new ResponseEntity<>(sb.toString(), HttpStatus.UNPROCESSABLE_ENTITY);
+    public void createOrUpdate(@Valid UserTo userTo) {
+        try {
+            if (userTo.getId() == 0) {
+                super.create(UserUtil.createFromTo(userTo));
+            } else {
+                super.update(userTo);
+            }
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException(messageSource.getMessage("exception.duplicate_email", null, LocaleContextHolder.getLocale()));
         }
-        if (userTo.getId() == 0) {
-            super.create(UserUtil.createFromTo(userTo));
-        } else {
-            super.update(userTo);
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)

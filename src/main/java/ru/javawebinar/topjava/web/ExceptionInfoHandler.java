@@ -6,11 +6,14 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.util.exception.ErrorInfo;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ValidationException;
 
 /**
  * User: gkislin
@@ -34,6 +37,17 @@ public class ExceptionInfoHandler {
     @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
         return logAndGetErrorInfo(req, e, true);
+    }
+
+    @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)  // 422
+    @ExceptionHandler(BindException.class)
+    @ResponseBody
+    @Order(Ordered.HIGHEST_PRECEDENCE + 2)
+    public ErrorInfo bindValidationError(HttpServletRequest req, BindingResult result) {
+        LOG.error("BindException at request " + req.getRequestURL());
+        StringBuilder sb = new StringBuilder();
+        result.getFieldErrors().forEach(fe -> sb.append(fe.getField()).append(" ").append(fe.getDefaultMessage()).append("<br>"));
+        return logAndGetErrorInfo(req, new ValidationException(sb.toString()), false);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
