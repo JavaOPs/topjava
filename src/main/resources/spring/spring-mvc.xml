@@ -15,10 +15,6 @@
 
     <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
-    <mvc:interceptors>
-        <bean class="ru.javawebinar.topjava.web.interceptor.ModelInterceptor"/>
-    </mvc:interceptors>
-
     <mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -72,5 +68,18 @@
           p:cacheSeconds="60"
           p:defaultEncoding="UTF-8">
         <property name="basenames" value="file:///#{systemEnvironment['TOPJAVA_ROOT']}/config/messages/app"/>
+        <property name="fallbackToSystemLocale" value="false"/>
     </bean>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="ru"/>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class="ru.javawebinar.topjava.web.interceptor.ModelInterceptor"/>
+
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+    </mvc:interceptors>
 </beans>
