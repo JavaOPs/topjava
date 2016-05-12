@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
-import ru.javawebinar.topjava.web.ExceptionInfoHandler;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -18,7 +17,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/ajax/admin/users")
-public class AdminAjaxController extends AbstractUserController implements ExceptionInfoHandler {
+public class AdminAjaxController extends AbstractUserController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {

@@ -15,6 +15,8 @@ import static java.util.Objects.requireNonNull;
  * Mock implementation
  */
 public class LoggedUser extends org.springframework.security.core.userdetails.User {
+    private static final long serialVersionUID = 1L;
+
     private UserTo userTo;
 
     public LoggedUser(User user) {
