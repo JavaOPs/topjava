@@ -19,7 +19,7 @@ import javax.validation.ValidationException;
  * User: gkislin
  * Date: 23.09.2014
  */
-@ControllerAdvice(annotations = RestController.class)
+@ControllerAdvice(annotations = {RestController.class})
 public class ExceptionInfoHandler {
     Logger LOG = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
