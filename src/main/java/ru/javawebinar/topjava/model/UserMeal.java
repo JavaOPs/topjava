@@ -1,5 +1,8 @@
 package ru.javawebinar.topjava.model;
 
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.time.LocalDateTime;
 
 /**
