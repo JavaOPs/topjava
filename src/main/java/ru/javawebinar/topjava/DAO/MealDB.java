@@ -13,16 +13,17 @@ import java.util.List;
 /**
  * Created by skorpion on 11.09.16.
  */
-public class MealDAO implements DAO{
+public class MealDB implements DAO {
 
-    private static MealDAO ourInstance = new MealDAO();
+    private static MealDB ourInstance = new MealDB();
 
-    public static MealDAO getInstance() {
+    public static MealDB getInstance() {
         return ourInstance;
     }
 
-    private MealDAO() {
+    private MealDB() {
     }
+
 
     private static List<Meal> meals = Arrays.asList(
             new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
@@ -43,7 +44,29 @@ public class MealDAO implements DAO{
 
     public List<MealWithExceed> getAllMealsWithExceed() {
 
-        return MealsUtil.getFilteredWithExceeded(getMeals(), LocalTime.of(0,0),LocalTime.of(23,59),2000);
+        return MealsUtil.getFilteredWithExceeded(getMeals(), LocalTime.of(0, 0), LocalTime.of(23, 59), 2000);
+    }
+
+
+    @Override
+    public void delete(Object object) {
+
+        Meal meal = (Meal) object;
+
+
+        // meals.remove(getMealOverId(meal.getId()));
+        meals.remove(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000));
+
+    }
+
+    public Meal getMealOverId(int id) {
+        for (Meal meal : meals) {
+            if (meal.getId() == id) {
+                return meal;
+            }
+        }
+
+        return null;
     }
 
 }

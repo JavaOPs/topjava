@@ -16,26 +16,35 @@
         <td>Date</td>
         <td>Description</td>
         <td>Calories</td>
-        <td>Action</td>
+        <td></td>
+        <td></td>
     </tr>
     </thead>
 
     <c:forEach items="${mealList}" var="meal">
 
-     <%--   <c:otherwise><tr></c:otherwise>&ndash;%&gt;--%>
-        <tr <c:if test="${meal.isExceed}">class = "red" </c:if> <c:if test="${!meal.isExceed}">class = "green" </c:if>>
+        <tr
+                <c:if test="${meal.isExceed}">class="red" </c:if> >
             <td>${meal.id}</td>
             <td>${meal.dateTime.format(formatter)}</td>
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
             <td>
-                <form method="get">
+                <form action="meals" method="get">
+                    <input type="submit" value="Править" class="editButton">
 
-                    <a href="<c:url value ="/edit?id=${user.id}"/>">Редактировать</a> <br>
                 </form>
 
+            </td>
+            <td>
+                <form method="get">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="id" value="${meal.id}">
+                    <input type="submit" value="Удалить" class="deleteButton">
 
-                <a href="<c:url value="/delete?id=${user.id}"/>">Удалить пользователя</a></td>
+                </form>
+
+            </td>
         </tr>
 
 
