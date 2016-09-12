@@ -1,0 +1,39 @@
+
+
+table {
+    width: 800px;
+    /*position: absolute;
+    left: 100px;
+    top: 50px;*/
+    margin: auto;
+    border-spacing: 0px 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+}
+
+th {
+
+    background: #56433D;
+    color: #F9C941;
+    border-right: 1px solid;
+    font-size: 0.9em;
+}
+
+td {
+    vertical-align: middle;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #56433D;
+    border-left:none;
+    border-right:none;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
