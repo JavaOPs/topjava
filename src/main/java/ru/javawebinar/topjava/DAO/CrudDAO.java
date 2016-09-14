@@ -1,12 +1,9 @@
 package ru.javawebinar.topjava.DAO;
 
-import ru.javawebinar.topjava.model.Meal;
-
-
 /**
  * Created by skorpion on 12.09.16.
  */
-public class CrudDAO implements DAO {
+public class CrudDAO<T> implements DAO<T> {
 
 
     private static CrudDAO ourInstance = new CrudDAO();
@@ -18,13 +15,9 @@ public class CrudDAO implements DAO {
     private CrudDAO() {
     }
 
-
     @Override
-    public void delete(Object object) {
-        if (object instanceof Meal) {
-            MealDB.getInstance().delete(object);
-        }
-
+    public void delete (T param) {
 
     }
+
 }
