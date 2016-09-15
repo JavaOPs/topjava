@@ -31,10 +31,10 @@ public class InMemoryUserMealRepositoryImpl implements UserMealRepository {
     private AtomicInteger counter = new AtomicInteger(0);
 
     {
-        UserMealsUtil.MEAL_LIST.forEach(um -> save(um, UserTestData.USER_ID));
+        UserMealsUtil.MEAL_LIST.forEach(um -> save(um, USER_ID));
 
-        save(new UserMeal(LocalDateTime.of(2015, Month.JUNE, 1, 14, 0), "Админ ланч", 510), UserTestData.ADMIN_ID);
-        save(new UserMeal(LocalDateTime.of(2015, Month.JUNE, 1, 21, 0), "Админ ужин", 1500), UserTestData.ADMIN_ID);
+        save(new UserMeal(LocalDateTime.of(2015, Month.JUNE, 1, 14, 0), "Админ ланч", 510), ADMIN_ID);
+        save(new UserMeal(LocalDateTime.of(2015, Month.JUNE, 1, 21, 0), "Админ ужин", 1500), ADMIN_ID);
     }
 
     @Override
