@@ -104,8 +104,11 @@ Optional
 - <a href="http://www.skipy.ru/technics/synchronization.html">Синхронизация потоков</a>
 - <a href="http://java67.blogspot.ru/2014/08/difference-between-string-literal-and-new-String-object-Java.html">String literal pool</a>
 - <a href="https://habrahabr.ru/post/132241/">Маленькие хитрости Java</a>
--  <a href="http://devcolibri.com/4284">Как создать Servlet? Полное руководство.</a>
 -  <a href="https://github.com/winterbe/java8-tutorial">A Guide to Java 8</a>
+
+#### Сервлеты
+-  <a href="http://devcolibri.com/4284">Как создать Servlet? Полное руководство.</a>
+-  <a href="https://danielniko.wordpress.com/2012/04/17/simple-crud-using-jsp-servlet-and-mysql/">Простое CRUD приложение на JSP и сервлетах</a>
 
 #### JDBC, SQL
 -  <a href="https://www.youtube.com/playlist?list=PLIU76b8Cjem5qdMQLXiIwGLTLyUHkTqi2">Уроки по JDBC</a>
