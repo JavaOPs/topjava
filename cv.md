@@ -30,6 +30,7 @@
 - <a href="https://www.youtube.com/watch?v=qKsc8PoHJwM">Михаил Портнов. Какие вопросы мы задаем на собеседовании?</a>
 - <a href="https://www.youtube.com/playlist?list=PL7XXjge0nKZczMtQbNk9c2cplvuLZomTh">Канал: Резюме, поиск работы, интервью</a>
 -  <a href="https://www.youtube.com/watch?v=ft0Nj8Cm9kk">Яков Файн: Как стать профессиональным Java разработчиком</a>
+-  <a href="https://jsehelper.blogspot.ru/p/blog-page.html">Ответы на вопросы на собеседовании Junior Java Developer</a>
 -  <a href="http://javastudy.ru/interview/list-of-question-java-interview/">Список вопросов с ответами для собеседования по Java</a>
 -  <a href="https://github.com/MaximAbramchuck/awesome-interviews#java">Сборка по вопросам на интервью</a>
 -  <a href="http://javastudy.ru/category/interview/">Сборка вопросов-ответов от JavaStudy</a>
