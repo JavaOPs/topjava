@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.model.Meal;
+import ru.javawebinar.topjava.util.TimeUtil;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 
 import javax.servlet.ServletConfig;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 /**
@@ -41,21 +44,36 @@ public class MealServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
+        String action = request.getParameter("action");
+        if (action == null) {
+            final Meal meal = new Meal(
+                    LocalDateTime.parse(request.getParameter("dateTime")),
+                    request.getParameter("description"),
+                    Integer.valueOf(request.getParameter("calories")));
 
-        final Meal meal = new Meal(id.isEmpty() ? null : Integer.valueOf(id),
-                LocalDateTime.parse(request.getParameter("dateTime")),
-                request.getParameter("description"),
-                Integer.valueOf(request.getParameter("calories")));
+            if (request.getParameter("id").isEmpty()) {
+                LOG.info("Create {}", meal);
+                mealController.create(meal);
+            } else {
+                LOG.info("Update {}", meal);
+                mealController.update(meal, getId(request));
+            }
+            response.sendRedirect("meals");
 
-        if (request.getParameter("id").isEmpty()) {
-            LOG.info("Create {}", meal);
-            mealController.create(meal);
-        } else {
-            LOG.info("Update {}", meal);
-            mealController.update(meal, getId(request));
+        } else if ("filter".equals(action)) {
+            LocalDate startDate = TimeUtil.parseLocalDate(resetParam("startDate", request));
+            LocalDate endDate = TimeUtil.parseLocalDate(resetParam("endDate", request));
+            LocalTime startTime = TimeUtil.parseLocalTime(resetParam("startTime", request));
+            LocalTime endTime = TimeUtil.parseLocalTime(resetParam("endTime", request));
+            request.setAttribute("mealList", mealController.getBetween(startDate, startTime, endDate, endTime));
+            request.getRequestDispatcher("/mealList.jsp").forward(request, response);
         }
-        response.sendRedirect("meals");
+    }
+
+    private String resetParam(String param, HttpServletRequest request) {
+        String value = request.getParameter(param);
+        request.setAttribute(param, value);
+        return value;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
