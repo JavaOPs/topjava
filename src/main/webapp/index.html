@@ -7,9 +7,13 @@
 <body>
 <h2>Проект "<a href="https://github.com/JavaWebinar/topjava08" target="_blank">Java Enterprise (Topjava)"</a></h2>
 <hr>
-<ul>
-    <li><a href="users">User List</a></li>
-    <li><a href="meals">Meal List</a></li>
-</ul>
+<form method="post" action="users">
+    <b>Meal list of&nbsp;</b>
+    <select name="userId">
+        <option value="1">User</option>
+        <option value="2">Admin</option>
+    </select>
+    <button type="submit">Select</button>
+</form>
 </body>
 </html>
