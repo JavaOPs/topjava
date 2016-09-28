@@ -1,0 +1,47 @@
+
+table {
+    width: 800px;
+
+    margin: auto;
+    border-spacing: 0px 0px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+}
+
+tr {
+    color: green;
+}
+
+thead tr {
+    color: black;
+    font-weight: bold;
+}
+
+td {
+    vertical-align: middle;
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #56433D;
+    border-left: none;
+    border-right: none;
+}
+
+.red {
+    color: red;
+}
+
+.deleteButton {
+    color: white;
+    background: red;
+
+}
+
+.editButton {
+    color: white;
+    background: blue;
+
+}
+
+
+
