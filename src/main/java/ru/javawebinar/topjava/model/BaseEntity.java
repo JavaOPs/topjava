@@ -1,12 +1,19 @@
 package ru.javawebinar.topjava.model;
 
+import javax.persistence.*;
+
 /**
  * User: gkislin
  * Date: 22.08.2014
  */
+@MappedSuperclass
+@Access(AccessType.FIELD)
 public class BaseEntity {
     public static final int START_SEQ = 100000;
 
+    @Id
+    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     protected Integer id;
 
     public BaseEntity() {

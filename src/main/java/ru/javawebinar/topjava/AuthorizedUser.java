@@ -8,7 +8,7 @@ import ru.javawebinar.topjava.model.BaseEntity;
  * GKislin
  * 06.03.2015.
  */
-public class LoggedUser {
+public class AuthorizedUser {
     public static int id = BaseEntity.START_SEQ;
 
     public static int id() {
@@ -16,7 +16,7 @@ public class LoggedUser {
     }
 
     public static void setId(int id) {
-        LoggedUser.id = id;
+        AuthorizedUser.id = id;
     }
 
     public static int getCaloriesPerDay() {
