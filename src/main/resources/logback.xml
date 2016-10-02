@@ -26,6 +26,9 @@
 
     <logger name="ru.javawebinar.topjava" level="debug"/>
 
+    <!--log hibernate showSql-->
+    <logger name="org.hibernate.SQL" level="debug"/>
+
     <root level="info">
         <appender-ref ref="file"/>
         <appender-ref ref="console"/>
