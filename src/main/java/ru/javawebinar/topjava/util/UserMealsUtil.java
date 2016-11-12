@@ -48,9 +48,9 @@ public class UserMealsUtil {
                 );
 
         return mealList.stream()
-                .filter(meal -> map.get(meal.getDateTime().toLocalDate())>caloriesPerDay)
-                .filter(meal -> meal.getDateTime().toLocalTime().isAfter(startTime))
-                .filter(meal -> meal.getDateTime().toLocalTime().isBefore(endTime))
+                .filter(meal -> map.get(meal.getDate())>caloriesPerDay)
+                .filter(meal -> meal.getTime().isAfter(startTime))
+                .filter(meal -> meal.getTime().isBefore(endTime))
                 .map(meal->new UserMealWithExceed(meal, true))
                 .collect(Collectors.toList())
         ;
