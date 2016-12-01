@@ -30,7 +30,7 @@ public class UserMealsUtil {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        mealExceedList.forEach((meal)-> System.out.println(
+        mealExceedList.forEach(meal-> System.out.println(
                 String.format("%s %s %d %b",
                 meal.getDateTime().format(formatter),
                 meal.getDescription(),
@@ -39,7 +39,7 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExceed>  getFilteredWithExceeded2(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        Map<LocalDate, Integer>map = mealList
+        Map<LocalDate, Integer>caloriesByDate = mealList
                 .stream()
                 .collect(Collectors
                         .groupingBy(UserMeal::getDate,
@@ -48,10 +48,11 @@ public class UserMealsUtil {
                 );
 
         return mealList.stream()
-                .filter(meal -> map.get(meal.getDate())>caloriesPerDay)
-                .filter(meal -> meal.getTime().isAfter(startTime))
-                .filter(meal -> meal.getTime().isBefore(endTime))
-                .map(meal->new UserMealWithExceed(meal, true))
+                .filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
+//                .filter(meal -> caloriesByDate.get(meal.getDate())>caloriesPerDay)
+//                .filter(meal -> meal.getTime().isAfter(startTime))
+//                .filter(meal -> meal.getTime().isBefore(endTime))
+                .map(meal->new UserMealWithExceed(meal, (caloriesByDate.get(meal.getDate())>caloriesPerDay)))
                 .collect(Collectors.toList())
         ;
     }
