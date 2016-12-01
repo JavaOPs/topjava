@@ -21,4 +21,18 @@ public class UserMealWithExceed {
         this.calories = calories;
         this.exceed = exceed;
     }
+
+//delete
+    public String getDescription(){
+        return description;
+    }
+    public int getCalories(){
+        return calories;
+    }
+    public LocalDateTime getDateTime(){
+        return dateTime;
+    }
+    public boolean getExceeded(){
+        return exceed;
+    }
 }
