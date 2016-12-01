@@ -144,10 +144,8 @@ public class UserMealsUtil {
             //System.out.println(userMealWithExceedList.get(i)); //объекты
         }
         //итоговый вывод массива объектов
-        userMealWithExceedList.stream()
-                .forEach(s -> System.out.println(s.getDateTime()+" "+s.getCalories()+
-                        " "+s.getDescription()+" "+s.getExceeded()));
-
+        userMealWithExceedList.forEach((u) -> System.out.println(u.getDateTime()+" "+u.getDescription()+
+                               " "+u.getCalories()+" "+u.getExceeded()));
         /*for (UserMeal ul  : mealList) {
             //randDate = LocalDateTime.of(ul.getDateTime());
 
