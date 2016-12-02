@@ -48,27 +48,23 @@ public class UserMealsUtil {
         //List для отфильтрованых данных
         List<UserMeal> mealList1 = new ArrayList<>();
         mealList.stream()
-                //.filter(meal -> meal.getDescription().contains("Завтрак"))
                 .filter(meal -> timeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
                 .sorted(Comparator.comparing(UserMeal::getDate))
                 .forEach(i -> mealList1.add(new UserMeal(i.getDateTime(), i.getDescription(), i.getCalories())));
         //вывод отфильтрованых данных
-        mealList1.forEach((u)-> System.out.println(u.getDateTime()+" "+ u.getDescription()+" "+u.getCalories()));
+        //mealList1.forEach((u)-> System.out.println(u.getDateTime()+" "+ u.getDescription()+" "+u.getCalories()));
 
         //заполнение объектами класса UserMealWithExceed с установкой флага превышения калорий
         int calor = 0;
-        boolean exceed = false;
+        boolean exceed;
         ArrayList<UserMealWithExceed> userMealWithExceedList = new ArrayList<>();
-        for (int i = 0; i < mealList1.size(); i++) {
-            calor = mealByCloriesSum2.get(mealList1.get(i).getDate());
-            exceed = calor > caloriesPerDay ? true : false;
-            /*userMealWithExceedList =  Arrays.asList(
-                    new UserMealWithExceed(mealList1.get(i).getDateTime(),
-                            mealList1.get(i).getDescription(), mealList1.get(i).getCalories(), exceed));*/
-            userMealWithExceedList.add(new UserMealWithExceed(mealList1.get(i).getDateTime(),
-                    mealList1.get(i).getDescription(), mealList1.get(i).getCalories(), exceed));
-            //System.out.println(userMealWithExceedList.get(i)); //объекты
+        for (UserMeal ml : mealList1) {
+            calor = mealByCloriesSum2.get(ml.getDate());
+            exceed = calor > caloriesPerDay;
+            userMealWithExceedList.add(new UserMealWithExceed(ml.getDateTime(), ml.getDescription(),
+                                                              ml.getCalories(), exceed));
         }
+
         //итоговый вывод массива объектов
         userMealWithExceedList.forEach((u) -> System.out.println(u.getDateTime() + " " + u.getDescription() +
                 " " + u.getCalories() + " " + u.getExceeded()));
