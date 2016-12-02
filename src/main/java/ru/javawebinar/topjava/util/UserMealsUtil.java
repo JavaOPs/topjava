@@ -19,13 +19,13 @@ import java.util.stream.Stream;
 public class UserMealsUtil {
     public static void main(String[] args) {
         List<UserMeal> mealList = Arrays.asList(
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,10,0), "Завтрак", 500),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,13,0), "Обед", 1000),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,20,0), "Ужин", 500),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,10,0), "Завтрак", 1000),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,13,0), "Обед", 500),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510),
-                new UserMeal(LocalDateTime.of(2015, Month.MAY, 29,20,0), "Ужин", 510)
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510),
+                new UserMeal(LocalDateTime.of(2015, Month.MAY, 29, 20, 0), "Ужин", 510)
         );
 
         UserMeal[] myArray = (UserMeal[]) mealList.toArray();
@@ -64,20 +64,20 @@ public class UserMealsUtil {
         List<UserMeal> mealList1 = new ArrayList<>();
 
         mealList.stream()
-        //.filter(meal -> meal.getDescription().contains("Завтрак"))
-        .filter(meal -> timeUtil.isBetween(meal.getDateTime().toLocalTime(), LocalTime.of(7, 0),
-                LocalTime.of(12,0)))
-        .forEach(i -> mealList1.add(new UserMeal(i.getDateTime(), i.getDescription(), i.getCalories())));
+                //.filter(meal -> meal.getDescription().contains("Завтрак"))
+                .filter(meal -> timeUtil.isBetween(meal.getDateTime().toLocalTime(), LocalTime.of(7, 0),
+                        LocalTime.of(12, 0)))
+                .forEach(i -> mealList1.add(new UserMeal(i.getDateTime(), i.getDescription(), i.getCalories())));
 
         /*mealList1.forEach((meal)-> System.out.println(meal.getDateTime()+" "+
                 meal.getDescription()+" "+meal.getCalories()));*/
 
-        int calor=0;
-        boolean exceed=false;
+        int calor = 0;
+        boolean exceed = false;
         ArrayList<UserMealWithExceed> userMealWithExceedList = new ArrayList<>();
         for (int i = 0; i < mealList1.size(); i++) {
             calor = mealByCloriesSum2.get(mealList1.get(i).getDate());
-            exceed = calor > 2000 ? true : false ;
+            exceed = calor > 2000 ? true : false;
             /*userMealWithExceedList =  Arrays.asList(
                     new UserMealWithExceed(mealList1.get(i).getDateTime(),
                             mealList1.get(i).getDescription(), mealList1.get(i).getCalories(), exceed));*/
@@ -102,13 +102,13 @@ public class UserMealsUtil {
         }
         System.out.println(tmpCalories.size());
 */
-        getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12,0), 2000);
+        getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
 //        .toLocalDate();
 //        .toLocalTime();
     }
 
-    public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime,
-                                                                    LocalTime endTime, int caloriesPerDay) {
+    public static List<UserMealWithExceed> getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime,
+                                                                   LocalTime endTime, int caloriesPerDay) {
         TimeUtil timeUtil = new TimeUtil();
 
         //Проеобразование List к многократно используемому стриму
@@ -130,12 +130,12 @@ public class UserMealsUtil {
                 meal.getDescription()+" "+meal.getCalories()));*/
 
         //заполнение объектами класса UserMealWithExceed с установкой флага превышения калорий
-        int calor=0;
-        boolean exceed=false;
+        int calor = 0;
+        boolean exceed = false;
         ArrayList<UserMealWithExceed> userMealWithExceedList = new ArrayList<>();
         for (int i = 0; i < mealList1.size(); i++) {
             calor = mealByCloriesSum2.get(mealList1.get(i).getDate());
-            exceed = calor > caloriesPerDay ? true : false ;
+            exceed = calor > caloriesPerDay ? true : false;
             /*userMealWithExceedList =  Arrays.asList(
                     new UserMealWithExceed(mealList1.get(i).getDateTime(),
                             mealList1.get(i).getDescription(), mealList1.get(i).getCalories(), exceed));*/
@@ -144,8 +144,8 @@ public class UserMealsUtil {
             //System.out.println(userMealWithExceedList.get(i)); //объекты
         }
         //итоговый вывод массива объектов
-        userMealWithExceedList.forEach((u) -> System.out.println(u.getDateTime()+" "+u.getDescription()+
-                               " "+u.getCalories()+" "+u.getExceeded()));
+        userMealWithExceedList.forEach((u) -> System.out.println(u.getDateTime() + " " + u.getDescription() +
+                " " + u.getCalories() + " " + u.getExceeded()));
         /*for (UserMeal ul  : mealList) {
             //randDate = LocalDateTime.of(ul.getDateTime());
 
