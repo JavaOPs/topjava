@@ -50,10 +50,10 @@ public class UserMealsUtil {
         mealList.stream()
                 //.filter(meal -> meal.getDescription().contains("Завтрак"))
                 .filter(meal -> timeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
+                .sorted(Comparator.comparing(UserMeal::getDate))
                 .forEach(i -> mealList1.add(new UserMeal(i.getDateTime(), i.getDescription(), i.getCalories())));
         //вывод отфильтрованых данных
-        /*mealList1.forEach((meal)-> System.out.println(meal.getDateTime()+" "+
-                meal.getDescription()+" "+meal.getCalories()));*/
+        mealList1.forEach((u)-> System.out.println(u.getDateTime()+" "+ u.getDescription()+" "+u.getCalories()));
 
         //заполнение объектами класса UserMealWithExceed с установкой флага превышения калорий
         int calor = 0;
@@ -72,42 +72,6 @@ public class UserMealsUtil {
         //итоговый вывод массива объектов
         userMealWithExceedList.forEach((u) -> System.out.println(u.getDateTime() + " " + u.getDescription() +
                 " " + u.getCalories() + " " + u.getExceeded()));
-        /*for (UserMeal ul  : mealList) {
-            //randDate = LocalDateTime.of(ul.getDateTime());
-
-            if (timeUtil.isBetween(ul.getDateTime().toLocalTime(), startTime, endTime)) {
-                System.out.println(ul.getDescription() + "    " + ul.getDateTime());
-            }
-        }
-
-        for(Map.Entry<String, List<UserMeal>> item : mealByClories.entrySet()){
-            for(UserMeal userMeal : item.getValue()){
-                System.out.println(userMeal.getDescription());
-            }
-            System.out.println("");
-        }
-
-        //mealList.forEach((meal)-> System.out.println(meal.getDescription()));
-        mealList.stream()
-                //.filter(meal -> meal.getDescription().contains("Завтрак"))
-                .filter(meal -> timeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
-                .forEach(System.out::println);
-
-        List<UserMealWithExceed> userMealWithExceedList = null;
-        for (int i = 0; i < mealList.size(); i++) {
-            userMealWithExceedList =  Arrays.asList(
-                    new UserMealWithExceed(mealList.get(i).getDateTime(),
-                            mealList.get(i).getDescription(), mealList.get(i).getCalories(), false));
-
-            userMealWithExceedList.stream()
-                    .forEach(s -> System.out.println(s.toString()));
-        }
-
-        List<UserMealWithExceed> filtered = userMealWithExceedList
-                .stream()
-                .collect(Collectors.toList());
-        System.out.println(filtered.toString());*/
-
 
         // TODO return filtered list with correctly exceeded field
         return userMealWithExceedList;
