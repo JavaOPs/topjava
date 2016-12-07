@@ -16,10 +16,6 @@ public class MealWithExceedDAOImpl implements MealWithExceedDAO {
     private MealWithExceedDAOImpl() {
     }
 
-    public void addMeal(MealWithExceed meal){
-        meals.add(meal);
-    }
-
     @Override
     public void updateMeal(MealWithExceed meal) {
 
@@ -42,5 +38,9 @@ public class MealWithExceedDAOImpl implements MealWithExceedDAO {
 
     public static List<MealWithExceed> getAllMeals() {
         return meals;
+    }
+
+    public static void addMeal(MealWithExceed meal){
+        meals.add(meal);
     }
 }

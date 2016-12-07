@@ -10,12 +10,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <h2>Meal Edit</h2>
-<form method="post" action='meals' name="mealEdit">
+<form method="post" action='meals' name="mealEdit" accept-charset="utf-8">
     Meal ID: <input
         type="text" readonly name="mealId"
         value="<c:out value="${meal.id}" />"

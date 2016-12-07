@@ -18,7 +18,7 @@ public class Meal {
 
     private final int id;
 
-    private static AtomicInteger iCounter = new AtomicInteger();
+    private final static AtomicInteger iCounter = new AtomicInteger();
 
     public Meal(LocalDateTime dateTime, String description, int calories) {
         this.dateTime = dateTime;
