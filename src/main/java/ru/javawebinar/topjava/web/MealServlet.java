@@ -28,7 +28,9 @@ public class MealServlet extends HttpServlet {
         LOG.debug("forward to meals");
 
         List<MealWithExceed> mealsWithExceeded = MealsUtil.getAllWithExceeded(MealsUtil.meals, 2000);
-        mealsWithExceeded.forEach(e-> LOG.debug(e.toString()));
+        //mealsWithExceeded.forEach(e-> LOG.debug(e.toString()));
+
+        request.setAttribute("mealsList", mealsWithExceeded);
         request.getRequestDispatcher("/meals.jsp").forward(request, response);
         //response.sendRedirect("meals.jsp");
     }
