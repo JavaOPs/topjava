@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class MealWithExceed {
 
-    private volatile int id;
+    private final int id;
 
     private final LocalDateTime dateTime;
 

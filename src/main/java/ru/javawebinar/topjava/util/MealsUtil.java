@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 /**
@@ -16,15 +17,16 @@ import java.util.stream.Collectors;
  */
 public class MealsUtil {
 
-    public final static List<Meal> meals = Arrays.asList(
-            new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
-            new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
-            new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
-            new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
-            new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
-            new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510),
-            new Meal(LocalDateTime.of(2015, Month.MAY, 31, 22, 0), "Поздний ужин", 300)
-    );
+    public final static ConcurrentMap<Integer, Meal> meals = Arrays.stream(new Object[][]{
+            {1, new Meal(1, LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500)},
+            {2, new Meal(2, LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000)},
+            {3, new Meal(3, LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500)},
+            {4, new Meal(4, LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000)},
+            {5, new Meal(5, LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500)},
+            {6, new Meal(6, LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)},
+            {7, new Meal(7, LocalDateTime.of(2015, Month.MAY, 31, 22, 0), "Поздний жин", 300)},
+    }).collect(Collectors.toConcurrentMap(kv->(Integer) kv[0],kv -> (Meal) kv[1]));
+
     /*
     public static void main(String[] args) {
         List<Meal> meals = Arrays.asList(
@@ -54,13 +56,18 @@ public class MealsUtil {
                 .collect(Collectors.toList());
     }
 
-    public static List<MealWithExceed> getAllWithExceeded(List<Meal> meals, int caloriesPerDay) {
-        Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
+    public static List<MealWithExceed> getAllWithExceeded(ConcurrentMap<Integer, Meal> meals, int caloriesPerDay) {
+
+        List<Meal> result = meals.entrySet().stream()
+                .map(x -> x.getValue())
+                .collect(Collectors.toList());
+
+        Map<LocalDate, Integer> caloriesSumByDate = result.stream()
                 .collect(
                         Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories))
                 );
 
-        return meals.stream()
+        return result.stream()
                 .map(meal -> createWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
     }
@@ -80,6 +87,11 @@ public class MealsUtil {
     }
 
     public static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
-        return new MealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
+        return new MealWithExceed(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
+    }
+
+    public static void deleteMeal(int id) {
+        if(meals.containsKey(id))
+            meals.remove(id);
     }
 }

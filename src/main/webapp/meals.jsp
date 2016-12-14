@@ -21,6 +21,7 @@
                 <td style="color:#ff6c36">${meal.getFormatedDateTime()}</td>
                 <td style="color:#ff6c36">${meal.getDescription()}</td>
                 <td style="color:#ff6c36">${meal.getCalories()}</td>
+                <td><a href="<c:url value='/remove/${meal.getId()}' />" >Delete</a></td>
             </tr>
         </c:if>
         <c:if test="${meal.isExceed()==false}">
@@ -28,8 +29,10 @@
                 <td style="color:#3fff38">${meal.getFormatedDateTime()}</td>
                 <td style="color:#3fff38">${meal.getDescription()}</td>
                 <td style="color:#3fff38">${meal.getCalories()}</td>
+                <td><a href="<c:url value='/remove/${meal.getId()}' />" >Delete</a></td>
             </tr>
         </c:if>
+
     </c:forEach>
 </table>
 
