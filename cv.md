@@ -28,6 +28,7 @@
 ### Интервью:
 - <a href="https://www.youtube.com/watch?v=Deb5wMHjBHY">Михаил Портнов. Собеседование на работу: как продать себя грамотно</a>
 - <a href="https://www.youtube.com/watch?v=qKsc8PoHJwM">Михаил Портнов. Какие вопросы мы задаем на собеседовании?</a>
+- <a href="https://www.youtube.com/watch?v=hry2CNuOxBg">Михаил Портнов. Собеседование на работу: жизненный путь</a>
 - <a href="https://www.youtube.com/playlist?list=PL7XXjge0nKZczMtQbNk9c2cplvuLZomTh">Канал: Резюме, поиск работы, интервью</a>
 -  <a href="https://www.youtube.com/watch?v=ft0Nj8Cm9kk">Яков Файн: Как стать профессиональным Java разработчиком</a>
 -  <a href="https://jsehelper.blogspot.ru/p/blog-page.html">Ответы на вопросы на собеседовании Junior Java Developer</a>
