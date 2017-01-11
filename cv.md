@@ -17,6 +17,7 @@
 ### <a href="http://javaops.ru/story.html">Наши истории (делимся опытом и успехом)</a>
 
 ### Тесты/задачи онлайн:
+- <a href="http://www.javadeathmatch.com/">game: test Java skills</a>
 - <a href="https://codility.com/programmers/lessons">Codility lesson tests</a>
 - <a href="http://www.quizful.net/test">Quizful- тесты онлайн</a>
 - <a href="https://www.tracy.k12.ca.us/sites/clunetta/Java/practice/practice.htm">Multiple-Choice Questions in Java</a>
