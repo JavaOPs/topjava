@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.repository.mock;
 
+import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.DateTimeUtil;
@@ -23,6 +24,7 @@ import static ru.javawebinar.topjava.repository.mock.InMemoryUserRepositoryImpl.
  * GKislin
  * 15.09.2015.
  */
+@Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
 
     private static final Comparator<Meal> MEAL_COMPARATOR = Comparator.comparing(Meal::getDateTime).reversed();
