@@ -44,12 +44,12 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     public Meal save(Meal meal, int userId) {
         Objects.requireNonNull(meal);
 
-        Map<Integer, Meal> meals = repository.computeIfAbsent(userId, ConcurrentHashMap::new);
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
         } else if (get(meal.getId(), userId) == null) {
             return null;
         }
+        Map<Integer, Meal> meals = repository.computeIfAbsent(userId, ConcurrentHashMap::new);
         meals.put(meal.getId(), meal);
         return meal;
     }
