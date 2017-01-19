@@ -9,6 +9,9 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
  * Date: 14.05.2014
  */
 public class ValidationUtil {
+    private ValidationUtil() {
+    }
+
     public static void checkNotFoundWithId(boolean found, int id) {
         checkNotFound(found, "id=" + id);
     }
@@ -23,7 +26,9 @@ public class ValidationUtil {
     }
 
     public static void checkNotFound(boolean found, String msg) {
-        if (!found) throw new NotFoundException("Not found entity with " + msg);
+        if (!found) {
+            throw new NotFoundException("Not found entity with " + msg);
+        }
     }
 
     public static void checkNew(BaseEntity entity) {

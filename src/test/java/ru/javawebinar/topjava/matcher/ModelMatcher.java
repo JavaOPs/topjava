@@ -16,14 +16,14 @@ import java.util.stream.Collectors;
  * @param <T> : Entity
  */
 public class ModelMatcher<T> {
-    public interface Comparator<T> {
-        boolean compare(T expected, T actual);
-    }
-
     private static final Comparator DEFAULT_COMPARATOR =
             (Object expected, Object actual) -> expected == actual || String.valueOf(expected).equals(String.valueOf(actual));
 
     private Comparator<T> comparator;
+
+    public interface Comparator<T> {
+        boolean compare(T expected, T actual);
+    }
 
     public ModelMatcher() {
         this((Comparator<T>) DEFAULT_COMPARATOR);
