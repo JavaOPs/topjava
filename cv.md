@@ -6,7 +6,6 @@
 
 ### Составление резюме:
 -  <a href="http://resumup.com/">Выбрать шаблон для резюме</a>
--  <a href="http://ain.ua/2015/01/14/558261">Идеальное резюме Junior’а</a>
 -  <a href="http://lifehacker.ru/2015/04/07/33-lajfhaka-dlya-rezyume/">Как продать свое резюме в 2 раза дороже</a>
 -  <a href="http://enjoy-job.ru/trudoustroistvo/kak-pravilno-sostavit-rezume/">Как правильно составить резюме</a>
 -  <a href="http://habrahabr.ru/post/184332/">Резюме программистов. Часть 1 (плохие)</a>
