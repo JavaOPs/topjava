@@ -16,6 +16,7 @@
 ### <a href="http://javaops.ru/story.html">Наши истории (делимся опытом и успехом)</a>
 
 ### Тесты/задачи онлайн:
+- [Java Programming Test](https://tests4geeks.com/java)
 - <a href="http://www.javadeathmatch.com/">game: test Java skills</a>
 - <a href="https://codility.com/programmers/lessons">Codility lesson tests</a>
 - <a href="http://www.quizful.net/test">Quizful- тесты онлайн</a>
