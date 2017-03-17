@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
  * 11.01.2015.
  */
 public class UserMeal {
-    public static int x = 1;
     private final LocalDateTime dateTime;
 
     private final String description;
