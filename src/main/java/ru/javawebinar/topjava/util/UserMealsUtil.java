@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * GKislin
@@ -29,20 +31,20 @@ public class UserMealsUtil {
     public static List<UserMealWithExceed> getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         // TODO return filtered list with correctly exceeded field
 
-        Map<LocalDate, Integer> sumMap = new HashMap<>();
-        for (UserMeal meal : mealList) {
-            LocalDate date = meal.getDateTime().toLocalDate();
-//            sumMap.put(date, sumMap.getOrDefault(date, 0) + meal.getCalories());
-            sumMap.merge(date, meal.getCalories(), Integer::sum);
-        }
-        List<UserMealWithExceed> result = new ArrayList<>();
-        for (UserMeal meal : mealList) {
-            LocalTime time = meal.getDateTime().toLocalTime();
-            LocalDate date = meal.getDateTime().toLocalDate();
-            if (TimeUtil.isBetween(time, startTime, endTime)) {
-                result.add(new UserMealWithExceed(meal, sumMap.get(date) > caloriesPerDay));
-            }
-        }
-        return result;
+        Map<LocalDate, Integer> sumMap = mealList.stream()
+                .collect(Collectors.groupingBy(meal -> meal.getDateTime().toLocalDate(),
+                        Collectors.summingInt(UserMeal::getCalories)));
+
+        Collector<UserMeal, ArrayList<UserMealWithExceed>, ArrayList<UserMealWithExceed>> mealWithExceedCollector =
+                Collector.of(
+                    ArrayList<UserMealWithExceed>::new,
+                    (list, meal) -> list.add(new UserMealWithExceed(meal, sumMap.get(meal.getDateTime().toLocalDate()) > caloriesPerDay)),
+                    (list, mealWithExceed) -> {list.addAll(mealWithExceed); return list;}
+        );
+
+        return mealList.stream()
+                .filter(meal -> TimeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
+                .collect(mealWithExceedCollector);
+
     }
 }
