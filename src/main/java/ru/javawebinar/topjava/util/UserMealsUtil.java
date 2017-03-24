@@ -24,11 +24,11 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
         );
-        List<UserMealWithExceed> list1 = getFilteredWithExceededOpt1(mealList, LocalTime.of(7, 0), LocalTime.of(13, 0), 2000);
-        list1.forEach(System.out::println);
+        List<UserMealWithExceed> opt1 = getFilteredWithExceededOpt1(mealList, LocalTime.of(7, 0), LocalTime.of(13, 0), 2000);
+        opt1.forEach(System.out::println);
         System.out.println();
-        list1 = getFilteredWithExceededOpt2(mealList, LocalTime.of(7, 0), LocalTime.of(13, 0), 2000);
-        list1.forEach(System.out::println);
+        opt1 = getFilteredWithExceededOpt2(mealList, LocalTime.of(7, 0), LocalTime.of(13, 0), 2000);
+        opt1.forEach(System.out::println);
     }
 
     public static List<UserMealWithExceed> getFilteredWithExceededOpt1(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
