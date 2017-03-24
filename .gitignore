@@ -3,7 +3,5 @@ out
 target
 *.iml
 log
-
-
-
+*.patch
 *.patch
