@@ -22,7 +22,7 @@ public class MealServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOG.debug("forward to meals.jsp");
 
-        request.setAttribute("abc", MealsUtil.getWithExceeded(MealsUtil.meals, MealsUtil.caloriesPerDay));
+        request.setAttribute("meals", MealsUtil.getWithExceeded(MealsUtil.meals, MealsUtil.caloriesPerDay));
         request.getRequestDispatcher("/meals.jsp").forward(request, response);
     }
 

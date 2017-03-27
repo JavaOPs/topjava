@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 public class MealsUtil {
     public static List<Meal> meals;
     public static int caloriesPerDay = 2000;
+    public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     static {
         meals = Arrays.asList(
@@ -25,7 +27,10 @@ public class MealsUtil {
                 new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
                 new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
                 new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
+                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510),
+                new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 10, 0), "Завтрак", 450),
+                new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 13, 0), "Обед", 1000),
+                new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 20, 0), "Ужин", 1000)
         );
     }
     public static void main(String[] args) {
@@ -68,6 +73,6 @@ public class MealsUtil {
     }
 
     public static List<MealWithExceed> getWithExceeded(List<Meal> meals, int caloriesPerDay){
-        return getFilteredWithExceeded(meals, LocalTime.of(0, 0), LocalTime.of(23, 59), caloriesPerDay);
+        return getFilteredWithExceeded(meals, LocalTime.MIN, LocalTime.MAX, caloriesPerDay);
     }
 }
