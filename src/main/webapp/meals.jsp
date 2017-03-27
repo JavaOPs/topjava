@@ -26,25 +26,35 @@
         }
     </style>
 
-    <title>Meals</title>
+    <title>Моя еда</title>
 </head>
 <body>
 
     <table border="1">
         <tr>
-            <th>Description</th>
-            <th>Time</th>
-            <th>Calories</th>
+            <th>id</th>
+            <th>Описание</th>
+            <th>Время</th>
+            <th>Калории</th>
+            <th></th>
+            <th></th>
         </tr>
         <jsp:useBean id="meals" scope="request" type="java.util.List<ru.javawebinar.topjava.model.MealWithExceed>"/>
         <c:forEach items="${meals}" var="meal">
-        <tr class="${meal.exceed == true ? 'exceed' : 'notExceed'}">
+        <tr class="${meal.exceed ? 'exceed' : 'notExceed'}">
+            <td><c:out value="${meal.id}"/></td>
             <td><c:out value="${meal.description}"/></td>
             <td><c:out value="${meal.dateTime}"/></td>
             <td><c:out value="${meal.calories}"/></td>
+            <td><a href="meals?action=edit&userId=<c:out value="${meal.id}"/>">Редактировать</a></td>
+            <td><a href="meals?action=delete&userId=<c:out value="${meal.id}"/>">Удалить</a></td>
         </tr>
         </c:forEach>
     </table>
+
+    <br>
+    <br>
+    <a href="meals?action=add">Добавить</a>
 
 </body>
 </html>
