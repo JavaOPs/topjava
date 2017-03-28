@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.util;
 
-import ru.javawebinar.topjava.dao.MealDao;
+import ru.javawebinar.topjava.dao.DaoInterface;
+import ru.javawebinar.topjava.dao.DaoMealMap;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealWithExceed;
 
@@ -18,23 +19,22 @@ import java.util.stream.Collectors;
  * 31.05.2015.
  */
 public class MealsUtil {
-    public static Map<Integer, Meal> meals;
+    public static Map<Integer, Meal> meals = new ConcurrentHashMap<>();
     public static int caloriesPerDay = 2000;
     public static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    public static int currentId = 0;
+
 
     static {
-        meals = new ConcurrentHashMap<>();
-        MealDao dao = new MealDao();
-        dao.editOrAdd(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500));
-        dao.editOrAdd(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000));
-        dao.editOrAdd(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500));
-        dao.editOrAdd(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000));
-        dao.editOrAdd(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500));
-        dao.editOrAdd(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510));
-        dao.editOrAdd(new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 10, 0), "Завтрак", 450));
-        dao.editOrAdd(new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 13, 0), "Обед", 1000));
-        dao.editOrAdd(new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 20, 0), "Ужин", 450));
+        DaoInterface<Meal> dao = new DaoMealMap(meals);
+        dao.add(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500));
+        dao.add(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000));
+        dao.add(new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500));
+        dao.add(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000));
+        dao.add(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500));
+        dao.add(new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510));
+        dao.add(new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 10, 0), "Завтрак", 450));
+        dao.add(new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 13, 0), "Обед", 1000));
+        dao.add(new Meal(LocalDateTime.of(2016, Month.AUGUST, 5, 20, 0), "Ужин", 450));
     }
     public static void main(String[] args) {
 
@@ -44,7 +44,7 @@ public class MealsUtil {
         System.out.println(getFilteredWithExceededByCycle(new ArrayList<>(meals.values()), LocalTime.of(7, 0), LocalTime.of(12, 0), caloriesPerDay));
     }
 
-    public static List<MealWithExceed> getFilteredWithExceeded(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    private static List<MealWithExceed> getFilteredWithExceeded(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
                 .collect(
                         Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories))
@@ -57,7 +57,7 @@ public class MealsUtil {
                 .collect(Collectors.toList());
     }
 
-    public static List<MealWithExceed> getFilteredWithExceededByCycle(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    private static List<MealWithExceed> getFilteredWithExceededByCycle(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
 
         final Map<LocalDate, Integer> caloriesSumByDate = new HashMap<>();
         meals.forEach(meal -> caloriesSumByDate.merge(meal.getDate(), meal.getCalories(), Integer::sum));
@@ -71,7 +71,7 @@ public class MealsUtil {
         return mealsWithExceeded;
     }
 
-    public static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
+    private static MealWithExceed createWithExceed(Meal meal, boolean exceeded) {
         return new MealWithExceed(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
     }
 
