@@ -79,11 +79,6 @@ public class MealServlet extends HttpServlet {
         }
 
         LOG.debug("forward to meals from edit/add.jsp");
-        List<MealWithExceed> meals = MealsUtil.getWithExceeded(mealDao.getAll(), MealsUtil.caloriesPerDay);
-        List<MealWithExceed> sortedMeals = meals.stream()
-                .sorted(Comparator.comparing(MealWithExceed::getDateTime))
-                .collect(Collectors.toList());
-        request.setAttribute("meals", sortedMeals);
-        request.getRequestDispatcher("/meals.jsp").forward(request, response);
+        response.sendRedirect("/topjava/meals");
     }
 }
