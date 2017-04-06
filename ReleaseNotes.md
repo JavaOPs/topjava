@@ -3,6 +3,7 @@
 - добавил
   - [логирование от Postgres Driver](http://stackoverflow.com/a/43242620/548473)
 - рефакторинг
+  - сделал выбор в сервлете через switch
   - [все логгирование сделал через {} форматирование](http://stackoverflow.com/questions/10555409/logger-slf4j-advantages-of-formatting-with-instead-of-string-concatenation)
   - [перешел на конструктор DI](http://stackoverflow.com/questions/39890849/what-exactly-is-field-injection-and-how-to-avoid-it)
 ### Topjava 9
