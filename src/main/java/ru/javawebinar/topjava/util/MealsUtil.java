@@ -1,7 +1,7 @@
 package ru.javawebinar.topjava.util;
 
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.model.MealWithExceed;
+import ru.javawebinar.topjava.to.MealWithExceed;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,10 +10,6 @@ import java.time.Month;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * GKislin
- * 31.05.2015.
- */
 public class MealsUtil {
     public static final List<Meal> MEALS = Arrays.asList(
             new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
