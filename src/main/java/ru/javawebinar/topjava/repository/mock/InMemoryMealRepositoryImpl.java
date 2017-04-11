@@ -1,11 +1,15 @@
 package ru.javawebinar.topjava.repository.mock;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Comparator;
@@ -22,6 +26,7 @@ import static ru.javawebinar.topjava.repository.mock.InMemoryUserRepositoryImpl.
 
 @Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
+    private static final Logger LOG = LoggerFactory.getLogger(InMemoryUserRepositoryImpl.class);
 
     private static final Comparator<Meal> MEAL_COMPARATOR = Comparator.comparing(Meal::getDateTime).reversed();
 
@@ -48,6 +53,16 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
         Map<Integer, Meal> meals = repository.computeIfAbsent(userId, ConcurrentHashMap::new);
         meals.put(meal.getId(), meal);
         return meal;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        LOG.info("+++ PostConstruct");
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        LOG.info("+++ PreDestroy");
     }
 
     @Override
