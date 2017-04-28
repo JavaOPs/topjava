@@ -14,7 +14,7 @@ import ru.javawebinar.topjava.repository.UserRepository;
 import javax.sql.DataSource;
 import java.util.List;
 
-//@Repository
+@Repository
 public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
@@ -25,7 +25,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     private final SimpleJdbcInsert insertUser;
 
-   // @Autowired
+    @Autowired
     public JdbcUserRepositoryImpl(DataSource dataSource, JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.insertUser = new SimpleJdbcInsert(dataSource)
                 .withTableName("users")
