@@ -4,11 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
+import ru.javawebinar.topjava.util.ValidationUtil;
 
 import java.util.List;
-
-import static ru.javawebinar.topjava.util.ValidationUtil.checkIdConsistent;
-import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
 
 public abstract class AbstractUserController {
     protected final Logger LOG = LoggerFactory.getLogger(getClass());
@@ -31,7 +29,7 @@ public abstract class AbstractUserController {
 
     public User create(User user) {
         LOG.info("create {}", user);
-        checkNew(user);
+        ValidationUtil.checkNew(user);
         return service.save(user);
     }
 
@@ -42,7 +40,7 @@ public abstract class AbstractUserController {
 
     public void update(User user, int id) {
         LOG.info("update {}", user);
-        checkIdConsistent(user, id);
+        ValidationUtil.checkIdConsistent(user, id);
         service.update(user);
     }
 

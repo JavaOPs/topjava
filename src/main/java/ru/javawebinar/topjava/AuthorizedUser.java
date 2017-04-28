@@ -1,6 +1,6 @@
 package ru.javawebinar.topjava;
 
-import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
+import ru.javawebinar.topjava.util.MealsUtil;
 
 public class AuthorizedUser {
     public static int id = 1;
@@ -14,6 +14,6 @@ public class AuthorizedUser {
     }
 
     public static int getCaloriesPerDay() {
-        return DEFAULT_CALORIES_PER_DAY;
+        return MealsUtil.DEFAULT_CALORIES_PER_DAY;
     }
 }
