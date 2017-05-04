@@ -10,6 +10,7 @@
   - в `ModelMatcher` переименовал `Comparator` -> `Equality`
   - [заинлайнил все лямбды](http://stackoverflow.com/questions/19718353/is-repeatedly-instantiating-an-anonymous-class-wasteful) (компараторы, ModelMatcher.equality)
 - удалил зависимость `javax.transaction.jta` (уже не нужна)
+- удалил в `pom.xml` зависимостях  `${spring.version}` (уже есть в `spring-framework-bom`)
   
 ### Topjava 9
 - добавил
