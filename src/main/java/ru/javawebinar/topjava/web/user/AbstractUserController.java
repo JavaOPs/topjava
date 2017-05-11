@@ -9,7 +9,7 @@ import ru.javawebinar.topjava.util.ValidationUtil;
 import java.util.List;
 
 public abstract class AbstractUserController {
-    protected final Logger LOG = LoggerFactory.getLogger(getClass());
+    protected final Logger log = LoggerFactory.getLogger(getClass());
 
     private final UserService service;
 
@@ -18,34 +18,34 @@ public abstract class AbstractUserController {
     }
 
     public List<User> getAll() {
-        LOG.info("getAll");
+        log.info("getAll");
         return service.getAll();
     }
 
     public User get(int id) {
-        LOG.info("get {}", id);
+        log.info("get {}", id);
         return service.get(id);
     }
 
     public User create(User user) {
-        LOG.info("create {}", user);
+        log.info("create {}", user);
         ValidationUtil.checkNew(user);
         return service.save(user);
     }
 
     public void delete(int id) {
-        LOG.info("delete {}", id);
+        log.info("delete {}", id);
         service.delete(id);
     }
 
     public void update(User user, int id) {
-        LOG.info("update {}", user);
+        log.info("update {}", user);
         ValidationUtil.checkIdConsistent(user, id);
         service.update(user);
     }
 
     public User getByMail(String email) {
-        LOG.info("getByEmail {}", email);
+        log.info("getByEmail {}", email);
         return service.getByEmail(email);
     }
 }
