@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 @Repository
 public class InMemoryUserRepositoryImpl implements UserRepository {
 
-    private static final Comparator<User> USER_COMPARATOR = Comparator.comparing(User::getName).thenComparing(User::getEmail);
-
     private Map<Integer, User> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
 
@@ -41,7 +39,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     @Override
     public List<User> getAll() {
         return repository.values().stream()
-                .sorted(USER_COMPARATOR)
+                .sorted(Comparator.comparing(User::getName).thenComparing(User::getEmail))
                 .collect(Collectors.toList());
     }
 

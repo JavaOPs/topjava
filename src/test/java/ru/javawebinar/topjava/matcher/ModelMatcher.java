@@ -8,29 +8,29 @@ import java.util.stream.Collectors;
 
 /**
  * This test Matcher assert equality of beans and collections
- *
- * It wrap every entity by Wrapper before apply to Assert.assertEquals
- * in order to compare them by custom comparator.
- * Default comparator is String.valueOf(entity)
+ * <p>
+ * It wraps every entity by Wrapper before apply to Assert.assertEquals
+ * and every element of collection before call Collection equals
+ * in order to compare them by custom Equality.
+ * <p>
+ * Default equality is String.valueOf(entity)
  *
  * @param <T> : Entity
  */
 public class ModelMatcher<T> {
-    private static final Comparator DEFAULT_COMPARATOR =
-            (Object expected, Object actual) -> expected == actual || String.valueOf(expected).equals(String.valueOf(actual));
 
-    private Comparator<T> comparator;
+    private Equality<T> equality;
 
-    public interface Comparator<T> {
-        boolean compare(T expected, T actual);
+    public interface Equality<T> {
+        boolean areEqual(T expected, T actual);
     }
 
     public ModelMatcher() {
-        this((Comparator<T>) DEFAULT_COMPARATOR);
+        this((T expected, T actual) -> expected == actual || String.valueOf(expected).equals(String.valueOf(actual)));
     }
 
-    public ModelMatcher(Comparator<T> comparator) {
-        this.comparator = comparator;
+    public ModelMatcher(Equality<T> equality) {
+        this.equality = equality;
     }
 
     private class Wrapper {
@@ -45,7 +45,7 @@ public class ModelMatcher<T> {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             Wrapper that = (Wrapper) o;
-            return entity != null ? comparator.compare(entity, that.entity) : that.entity == null;
+            return entity != null ? equality.areEqual(entity, that.entity) : that.entity == null;
         }
 
         @Override
