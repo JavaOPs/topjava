@@ -39,7 +39,7 @@ Java Enterprise Online Project
     -  <a href="https://www.youtube.com/playlist?list=PLIU76b8Cjem5B3sufBJ_KFTpKkMEvaTQR">Видео по обучению Git</a>
     -  <a href="https://blog.interlinked.org/tutorials/git.html">Git Overview</a>
     -  <a href="http://geekbrains.ru/gitstart">Видеокурс по Git</a>
-    -  [https://www.youtube.com/watch?v=JfpCicDUMKc](Изучение GitHub в одном видео уроке за 15 минут)
+    -  [Изучение GitHub в одном видео уроке за 15 минут](https://www.youtube.com/watch?v=JfpCicDUMKc)
 
 ##  ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZDdaaU5fZEo4X3c">Работа с проектом (выполнять инструкции)</a>
 - **<a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFRXM4WVdTTGN3Q28">Prepare_ to_ HW0.patch (скачать и положить в каталог вашего проекта)</a>**
