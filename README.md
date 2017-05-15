@@ -141,6 +141,9 @@ Java Enterprise Online Project
 - <a href="https://habrahabr.ru/post/132241/">Маленькие хитрости Java</a>
 -  <a href="https://github.com/winterbe/java8-tutorial">A Guide to Java 8</a>
 
+### Туториалы
+[Туториалы: Spring Framework, Hibernate, Java Core, JDBC](http://proselyte.net/tutorials/)
+
 #### Сервлеты
 -  <a href="http://devcolibri.com/4284">Как создать Servlet? Полное руководство.</a>
 -  <a href="https://danielniko.wordpress.com/2012/04/17/simple-crud-using-jsp-servlet-and-mysql/">Простое CRUD приложение на JSP и сервлетах</a>
