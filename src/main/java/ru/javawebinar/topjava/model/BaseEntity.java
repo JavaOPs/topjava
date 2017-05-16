@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.model;
 
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Persistable;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
  */
 @MappedSuperclass
 @Access(AccessType.FIELD)
-public class BaseEntity {
+public class BaseEntity implements Persistable<Integer> {
     public static final int START_SEQ = 100000;
 
     @Id
@@ -31,10 +32,12 @@ public class BaseEntity {
         this.id = id;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public boolean isNew() {
         return (getId() == null);
     }
