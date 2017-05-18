@@ -36,38 +36,8 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ActiveProfiles(Profiles.ACTIVE_DB)
-public class MealServiceTest {
-    private static final Logger LOG = LoggerFactory.getLogger(MealServiceTest.class);
-    private static StringBuilder results = new StringBuilder();
+public abstract class AbstractMealServiceTest extends AbstractServiceTest {
 
-    static {
-        // needed only for java.util.logging (postgres driver)
-        SLF4JBridgeHandler.install();
-    }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Rule
-    // http://stackoverflow.com/questions/14892125/what-is-the-best-practice-to-determine-the-execution-time-of-the-bussiness-relev
-    public Stopwatch stopwatch = new Stopwatch() {
-        @Override
-        protected void finished(long nanos, Description description) {
-            String result = String.format("%-25s %7d", description.getMethodName(), TimeUnit.NANOSECONDS.toMillis(nanos));
-            results.append(result).append('\n');
-            LOG.info(result + " ms\n");
-            System.out.println("stopwa________________________________________________");
-        }
-    };
-
-    @AfterClass
-    public static void printResult() {
-        LOG.info("\n---------------------------------" +
-                "\nTest                 Duration, ms" +
-                "\n---------------------------------\n" +
-                results +
-                "---------------------------------\n");
-    }
 
     @Autowired
     private MealService service;

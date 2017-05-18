@@ -11,8 +11,8 @@
         </encoder>
     </appender>
 
-    <logger name="org.postgresql" level="debug"/>
-    <logger name="org.springframework.jdbc" level="debug"/>
+    <!--<logger name="org.postgresql" level="debug"/>-->
+    <!--<logger name="org.springframework.jdbc" level="debug"/>-->
     <logger name="ru.javawebinar.topjava" level="debug"/>
 
     <root level="WARN">
