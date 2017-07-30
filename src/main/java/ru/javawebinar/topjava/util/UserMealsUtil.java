@@ -9,6 +9,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * GKislin
@@ -25,22 +26,15 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
         );
         getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
-//        .toLocalDate();
-//        .toLocalTime();
+
     }
 
     public static List<UserMealWithExceed> getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         // TODO return filtered list with correctly exceeded field
-        List<UserMealWithExceed> filterList = new ArrayList<>();
-        for (UserMeal userMeal : mealList) {
-            if (TimeUtil.isBetween(LocalTime.from(userMeal.getDateTime()), startTime, endTime)) {
-                LocalDateTime dateTime = userMeal.getDateTime();
-                int calories = userMeal.getCalories();
-                String desc = userMeal.getDescription();
-                UserMealWithExceed userMealWithExceed = new UserMealWithExceed(dateTime,desc,calories,true);
-                filterList.add(userMealWithExceed);
-            }
-        }
-        return filterList;
+        return mealList.stream()
+                .filter(p -> TimeUtil.isBetween(LocalTime.from(p.getDateTime()), startTime, endTime))
+                .map(p ->
+                        new UserMealWithExceed(p.getDateTime(), p.getDescription(), p.getCalories(), true))
+                .collect(Collectors.toList());
     }
 }
