@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.repository.mock;
 
+import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.DateTimeUtil;
@@ -18,6 +19,7 @@ import java.util.stream.Stream;
 import static ru.javawebinar.topjava.repository.mock.InMemoryUserRepositoryImpl.ADMIN_ID;
 import static ru.javawebinar.topjava.repository.mock.InMemoryUserRepositoryImpl.USER_ID;
 
+@Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
 
     // Map  userId -> (mealId-> meal)
