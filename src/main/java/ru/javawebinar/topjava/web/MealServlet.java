@@ -46,7 +46,7 @@ public class MealServlet extends HttpServlet {
             Meal meal = new Meal(
                     LocalDateTime.parse(request.getParameter("dateTime")),
                     request.getParameter("description"),
-                    Integer.valueOf(request.getParameter("calories")));
+                    Integer.parseInt(request.getParameter("calories")));
 
             if (request.getParameter("id").isEmpty()) {
                 mealController.create(meal);
@@ -93,6 +93,6 @@ public class MealServlet extends HttpServlet {
 
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
-        return Integer.valueOf(paramId);
+        return Integer.parseInt(paramId);
     }
 }

@@ -23,5 +23,5 @@ public interface MealService {
 
     Meal update(Meal meal, int userId) throws NotFoundException;
 
-    Meal save(Meal meal, int userId);
+    Meal create(Meal meal, int userId);
 }

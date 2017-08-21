@@ -27,6 +27,8 @@ import static ru.javawebinar.topjava.UserTestData.*;
 public class UserServiceTest {
 
     static {
+        // Only for postgres driver logging
+        // It uses java.util.logging and logged via jul-to-slf4j bridge
         SLF4JBridgeHandler.install();
     }
 
@@ -44,14 +46,14 @@ public class UserServiceTest {
     @Test
     public void testSave() throws Exception {
         User newUser = new User(null, "New", "new@gmail.com", "newPass", 1555, false, Collections.singleton(Role.ROLE_USER));
-        User created = service.save(newUser);
+        User created = service.create(newUser);
         newUser.setId(created.getId());
         MATCHER.assertCollectionEquals(Arrays.asList(ADMIN, newUser, USER), service.getAll());
     }
 
     @Test(expected = DataAccessException.class)
     public void testDuplicateMailSave() throws Exception {
-        service.save(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
+        service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
     }
 
     @Test

@@ -14,6 +14,7 @@ public class DbPopulator extends ResourceDatabasePopulator {
     public DbPopulator(String scriptLocation, DataSource dataSource) {
         super(RESOURCE_LOADER.getResource(scriptLocation));
         this.dataSource = dataSource;
+        setSqlScriptEncoding("UTF-8");
     }
 
     public void execute() {
