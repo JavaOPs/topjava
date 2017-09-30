@@ -17,7 +17,7 @@
   - поменял Deprecated валидаторы `org.hibernate.validator.constraints` на `javax.validation.constraints`
   - убрал пароль из результатов REST через [@JsonProperty READ_ONLY / WRITE_ONLY](https://stackoverflow.com/questions/12505141/only-using-jsonignore-during-serialization-but-not-deserialization/12505165#12505165). Тесты на REST пришлось починить добавлением добавлением в JSON пароля как дополнительного параметра (`JsonUtil.writeWithExtraProps`)
   - **убрал JSON View и сделал преобразование времени на UI с помощью [jQuery converters](http://api.jquery.com/jQuery.ajax/#using-converters)**
-  - **[поменял группу валидации при сохранении через JPA](https://stackoverflow.com/questions/16930623/16930663#16930663).** Теперь 
+  - **поменял [группу валидации по умолчанию при сохранении через JPA](https://stackoverflow.com/questions/16930623/16930663#16930663).** Теперь 
   все валидаторы в модели работаю по умолчанию (`groups` не требуется).
   - Добавил в `ErrorInfo` тип ошибки `ErrorType` + i18n.
   
