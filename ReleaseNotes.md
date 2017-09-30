@@ -14,7 +14,17 @@
   - переименовал и cделал классы `BaseEntity` и `NamedEntity` абстрактными
   - обновил Noty и API с ним до 3.1.0. Добавил glyphicon в сообщения Noty
   - заменил `MATCHER_WITH_EXCEED` на валидацию через [JSONassert](https://github.com/skyscreamer/JSONassert).
-
+  - поменял Deprecated валидаторы `org.hibernate.validator.constraints` на `javax.validation.constraints`
+  - убрал пароль из результатов REST через [@JsonProperty READ_ONLY / WRITE_ONLY](https://stackoverflow.com/questions/12505141/only-using-jsonignore-during-serialization-but-not-deserialization/12505165#12505165). Тесты на REST пришлось починить добавлением добавлением в JSON пароля как дополнительного параметра (`JsonUtil.writeWithExtraProps`)
+  - **убрал JSON View и сделал преобразование времени на UI с помощью [jQuery converters](http://api.jquery.com/jQuery.ajax/#using-converters)**
+  - **[поменял группу валидации при сохранении через JPA](https://stackoverflow.com/questions/16930623/16930663#16930663).** Теперь 
+  все валидаторы в модели работаю по умолчанию (`groups` не требуется).
+  - Добавил в `ErrorInfo` тип ошибки `ErrorType` + i18n.
+  
+- правки
+  - переименовал `ModelMatcher` в `BeanMatcher` и починил: можно сравнивать только упорядоченные коллекции (List)
+  - поменял зависимость `org.hibernate:hibernate-validator`  на `org.hibernate.validator:hibernate-validator` (warning при сборке)
+  
 ### Topjava 10
 - добавил
   -  доступ к AuthorizedUser через [`@AuthenticationPrincipal`](http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#mvc-authentication-principal) и [authentication Tag](http://docs.spring.io/spring-security/site/docs/current/reference/html/taglibs.html#the-authentication-tag)
