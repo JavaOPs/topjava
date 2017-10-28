@@ -86,8 +86,8 @@ Java Enterprise Online Project
 Сделать реализация через Java 8 Stream API.
 ```
 -  <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Видео: Доступно о Java 8 Lambda</a>
--  <a href="https://web.archive.org/web/20170606044544/http://devcolibri.com/4137#t2">Java 8: Lambda выражения</a>
--  <a href="https://web.archive.org/web/20170606044544/http://devcolibri.com/4274#t7">Java 8: Потоки</a>
+-  <a href="http://devcolibri.com/4137#t2">Java 8: Lambda выражения</a>
+-  <a href="http://devcolibri.com/4274#t7">Java 8: Потоки</a>
 -  <a href="http://prologistic.com.ua/polnoe-rukovodstvo-po-java-8-stream.html">Pуководство по Java 8 Stream</a>
 -  <a href="http://habrahabr.ru/post/224593/">Лямбда-выражения в Java 8</a>
 -  <a href="https://github.com/winterbe/java8-tutorial">A Guide to Java 8</a>
@@ -163,8 +163,7 @@ Java Enterprise Online Project
 [Туториалы: Spring Framework, Hibernate, Java Core, JDBC](http://proselyte.net/tutorials/)
 
 #### Сервлеты
--  <a href="https://web.archive.org/web/20170606044544/http://devcolibri.com/4284">Как создать Servlet? Полное руководство.</a>
--  <a href="https://danielniko.wordpress.com/2012/04/17/simple-crud-using-jsp-servlet-and-mysql/">Простое CRUD приложение на JSP и сервлетах</a>
+-  <a href="http://devcolibri.com/4284">Как создать Servlet? Полное руководство.</a>
 
 #### JDBC, SQL
 - <a href="https://habrahabr.ru/post/123636/">Основы SQL на примере задачи</a>
