@@ -2,13 +2,13 @@ package ru.javawebinar.topjava.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.to.MealWithExceed;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
 
 import static ru.javawebinar.topjava.util.MealsUtil.getFilteredWithExceeded;
@@ -31,7 +31,7 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public void delete(int id, int userID) throws NotFoundException {
-        if (repository.delete(id, userID)) {
+        if (!repository.delete(id, userID)) {
             throw new NotFoundException(
                     String.format("Meal with id=%s belongs to user with id=%s not found!", id, userID));
         }
@@ -48,15 +48,17 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public Collection<MealWithExceed> getAll(int userID) {
-        return getWithExceeded(repository.getAll(userID), AuthorizedUser.getCaloriesPerDay());
+    public Collection<MealWithExceed> getAll(int userID, int caloriesPerDay) {
+        return getWithExceeded(repository.getAll(userID), caloriesPerDay);
     }
 
     @Override
-    public Collection<MealWithExceed> getTimeDataFiltered(LocalDateTime beginDate, LocalDateTime endDate, int userID) {
+    public Collection<MealWithExceed> getTimeDataFiltered(LocalDate beginDate, LocalDate endDate,
+                                                          LocalTime beginTime, LocalTime endTime,
+                                                          int userID, int caloriesPerDay) {
         return getFilteredWithExceeded(
-                repository.getDataFiltered(beginDate.toLocalDate(), endDate.toLocalDate(), userID),
-                beginDate.toLocalTime(), endDate.toLocalTime(), AuthorizedUser.getCaloriesPerDay()
+                repository.getDataFiltered(beginDate, endDate, userID),
+                beginTime, endTime, caloriesPerDay
         );
     }
 }

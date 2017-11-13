@@ -26,4 +26,14 @@
         <url-pattern>/meals</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>filterServlet</servlet-name>
+        <servlet-class>ru.javawebinar.topjava.web.SetFilerServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>filterServlet</servlet-name>
+        <url-pattern>/meals/filter</url-pattern>
+    </servlet-mapping>
+
 </web-app>

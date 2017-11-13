@@ -22,6 +22,19 @@
     <h2>Meals</h2>
     <a href="meals?action=create">Add Meal</a>
     <hr/>
+        <form id="Filter" method="post" action="meals/filter?action=setFilter">
+            <jsp:useBean id="timeFilter" scope="request" type="ru.javawebinar.topjava.util.FilterHolder"/>
+            <label>Начальное время: </label><input type="time" value="${timeFilter.beginTime}" name="beginTime"/>
+            <label>Финишное время: </label><input type="time" value="${timeFilter.endTime}" name="endTime"/>
+            <br>
+            <br>
+            <label>Начальная дата: </label><input type="date" value="${timeFilter.beginDate}" name="beginDate"/>
+            <label>Финишная дата: </label><input type="date" value="${timeFilter.endDate}" name="endDate"/>
+            <br>
+            <br>
+            <input type="submit" value="Задать фильтр"/>  <input type="button" value="Сбросить фильтры" onclick="location.href='meals/filter?action=clrFilter'"/>
+        </form>
+    <hr/>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
