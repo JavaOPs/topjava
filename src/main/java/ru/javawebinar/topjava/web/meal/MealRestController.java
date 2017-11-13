@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.web.meal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.Meal;
@@ -11,6 +12,8 @@ import ru.javawebinar.topjava.util.FilterHolder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
+
+import static org.springframework.format.annotation.DateTimeFormat.*;
 
 @Controller
 public class MealRestController {
@@ -37,8 +40,10 @@ public class MealRestController {
         return service.getAll(AuthorizedUser.id(), AuthorizedUser.getCaloriesPerDay());
     }
 
-    public Collection<MealWithExceed> getTimeDataFiltered(LocalDate beginDate, LocalDate endDate,
-                                                   LocalTime beginTime, LocalTime endTime) {
+    public Collection<MealWithExceed> getTimeDataFiltered(@DateTimeFormat(iso = ISO.DATE) LocalDate beginDate,
+                                                          @DateTimeFormat(iso = ISO.DATE) LocalDate endDate,
+                                                          @DateTimeFormat(iso = ISO.TIME) LocalTime beginTime,
+                                                          @DateTimeFormat(iso = ISO.TIME) LocalTime endTime) {
         AuthorizedUser.getFilter().setBeginDate(beginDate);
         AuthorizedUser.getFilter().setEndDate(endDate);
         AuthorizedUser.getFilter().setBeginTime(beginTime);
