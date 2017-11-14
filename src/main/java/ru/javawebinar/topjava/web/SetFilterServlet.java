@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 import static ru.javawebinar.topjava.AuthorizedUser.getFilter;
 
-public class SetFilerServlet extends HttpServlet {
+public class SetFilterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -22,7 +22,6 @@ public class SetFilerServlet extends HttpServlet {
                 null : LocalDate.parse(req.getParameter("beginDate")));
         getFilter().setEndDate(req.getParameter("endDate") == null || req.getParameter("endDate").equals("") ?
                 null : LocalDate.parse(req.getParameter("endDate")));
-
         resp.sendRedirect(req.getContextPath() + "/meals");
     }
 

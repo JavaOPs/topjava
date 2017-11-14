@@ -44,10 +44,6 @@ public class MealRestController {
                                                           @DateTimeFormat(iso = ISO.DATE) LocalDate endDate,
                                                           @DateTimeFormat(iso = ISO.TIME) LocalTime beginTime,
                                                           @DateTimeFormat(iso = ISO.TIME) LocalTime endTime) {
-        AuthorizedUser.getFilter().setBeginDate(beginDate);
-        AuthorizedUser.getFilter().setEndDate(endDate);
-        AuthorizedUser.getFilter().setBeginTime(beginTime);
-        AuthorizedUser.getFilter().setEndTime(endTime);
         if (beginTime == null) {beginTime = LocalTime.MIN;}
         if (endTime == null) {endTime = LocalTime.MAX;}
         if (beginDate == null) {beginDate = LocalDate.MIN;}

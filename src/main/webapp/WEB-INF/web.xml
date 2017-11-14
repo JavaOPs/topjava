@@ -28,7 +28,7 @@
 
     <servlet>
         <servlet-name>filterServlet</servlet-name>
-        <servlet-class>ru.javawebinar.topjava.web.SetFilerServlet</servlet-class>
+        <servlet-class>ru.javawebinar.topjava.web.SetFilterServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
     <servlet-mapping>
