@@ -1,9 +1,11 @@
 # TopJava Release Notes
 ### Topjava 11
+
 - добавилось [видео решений HW0 с одним проходом](https://drive.google.com/open?id=0B9Ye2auQ_NsFcUVfU1hmYUx3Rzg)
 - поправил видео [Обзор Spring Framework. Spring Context](https://drive.google.com/file/d/1fBSLGEbc7YXBbmr_EwEHltCWNW_pUmIH). Дописал про Constructor injection.
 
 ### Topjava 11
+
 - добавил
   - доп. решение HW1 через одним return и O(N)
   - раскрасил лог ([Logback layouts coloring](https://logback.qos.ch/manual/layouts.html#coloring))

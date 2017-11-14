@@ -27,6 +27,7 @@ Java Enterprise Online Project
 
 #### Spring Pet-Clinic
 - <a href="https://github.com/spring-projects/spring-petclinic">Spring PetClinic Sample Application </a>
+
 - <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">Presentation</a>
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFSUNrdVc0bDZuX2s">Системы управления версиями. Git.</a>
@@ -41,6 +42,7 @@ Java Enterprise Online Project
     -  <a href="https://blog.interlinked.org/tutorials/git.html">Git Overview</a>
     -  <a href="http://geekbrains.ru/gitstart">Видеокурс по Git</a>
     -  [Основы Git за 20 минут](https://www.youtube.com/watch?v=TMeZGvtQnT8)
+
     -  [Git - для новичков](https://www.youtube.com/watch?list=PLY4rE9dstrJyTdVJpv7FibSaXB4BHPInb&v=PEKN8NtBDQ0)
 
 ##  ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZDdaaU5fZEo4X3c">Работа с проектом (выполнять инструкции)</a>
@@ -51,6 +53,7 @@ Java Enterprise Online Project
 -  <a href="http://javaops.ru/view/soft">Установить ПО (git, JDK8, IntelliJ IDEA, Maven)</a>
 -  Создать аккаунт на <a href="https://github.com">GitHub</a>
 -  Сделать Fork **ЭТОГО** проекта (https://github.com/JavaOPs/topjava) </a>
+
 -  Сделать локальный репозиторий проекта:
             <pre>git clone https://github.com/[Ваш аккаунт]/topjava.git</pre>
 -  Открыть и настроить проект в IDEA
@@ -83,7 +86,9 @@ Java Enterprise Online Project
 
 #### Optional (Java 8 Stream API)
 ```
+
 Сделать реализация через Java 8 Stream API.
+
 ```
 -  <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Видео: Доступно о Java 8 Lambda</a>
 -  <a href="http://devcolibri.com/4137#t2">Java 8: Lambda выражения</a>
@@ -98,6 +103,7 @@ Java Enterprise Online Project
 -  Дополнительно
    - [Сергей Куксенко — Stream API, часть 1](https://www.youtube.com/watch?v=O8oN4KSZEXE)
    - [Сергей Куксенко — Stream API, часть 2](https://www.youtube.com/watch?v=i0Jr2l3jrDA)
+
 
 #### Optional 2 (+5 бонусов)
 ```
@@ -130,6 +136,7 @@ Java Enterprise Online Project
 - 11: Результаты, возвращаемые `UserMealsUtil.getFilteredWithExceeded` мы будем использовать [в нашем приложении](http://topjava.herokuapp.com/) для фильтрации по времени и отображения еды правильным цветом.
 - 12: Обращайте внимание на комментарии к вашим коммитам в git. Они должны быть короткие и информативные (лучше на english)
 - 13: Не полагайтесь в решениии на то, что список будет подаваться отсортированным. Такого условия нет.
+
 -----
 
 ### Полезные ресурсы
@@ -171,6 +178,7 @@ Java Enterprise Online Project
 
 #### Сервлеты
 -  <a href="http://devcolibri.com/4284">Как создать Servlet? Полное руководство.</a>
+
 
 #### JDBC, SQL
 - <a href="https://habrahabr.ru/post/123636/">Основы SQL на примере задачи</a>
