@@ -51,7 +51,7 @@ _Антуан де Сент-Экзюпери_
 - 7: по возможности сделать JUnit тесты
 - 8: уделяйте внимание обработке ошибок
 - 9: далаем REST API в соответствии с концепцией REST, **с учетом иерархии принадлежности объектов**
-    - [15 тривиальных фактов о правильной работе с протоколом HTTP](https://github.com/JavaOPs/topjava/blob/master/graduation.md)
+    - [15 тривиальных фактов о правильной работе с протоколом HTTP](https://habrahabr.ru/company/yandex/blog/265569/)
     - <a href="http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/">10 Best Practices for Better RESTful API</a>
 - 10: не смешивайте TO и Entity вместе. Лучше всего, если они будут независимыми друг от друга.
 - 11: если приложению в объекте требуется только его id, используйте reference (как мы при сохранении еды вставляем туда юзера)
