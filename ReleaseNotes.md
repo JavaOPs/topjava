@@ -1,9 +1,15 @@
 # TopJava Release Notes
 ### Topjava 12
-- обновили версии: Spring 5.x, Spring Data 2.x, Ehcache 3.x
-- добавилось [видео решений HW0 с одним проходом](https://drive.google.com/open?id=0B9Ye2auQ_NsFcUVfU1hmYUx3Rzg)
+- обновил версии: Spring 5.x, Spring Data 2.x, Ehcache 3.x, datatables, datetimepicker
+- добавил [видео решений HW0 с одним проходом](https://drive.google.com/open?id=0B9Ye2auQ_NsFcUVfU1hmYUx3Rzg)
 - поправил видео [Обзор Spring Framework. Spring Context](https://drive.google.com/file/d/1fBSLGEbc7YXBbmr_EwEHltCWNW_pUmIH). Дописал про Constructor injection.
 - заменил видео про тетсирование сервисов. Вместо самодельных матчеров стали использовать [AssertJ](http://joel-costigliola.github.io/assertj/index.html). Видео [Тестирование UserService через AssertJ](https://drive.google.com/open?id=1SPMkWMYPvpk9i0TA7ioa-9Sn1EGBtClD), время 1:53
+- сделал [видео с jQuery конвертерами и дефолтными группами валидации при сохранении в базу](https://drive.google.com/open?id=1tOMOdmaP5OQ7iynwC77bdXSs-13Ommax)
+- сделал [видео с новым `DelegatingPasswordEncoder` и Json READ/WRITE access](https://drive.google.com/file/d/1XZXvOThinzPw4EhigAUdo8-MWT_g8wOt/view?usp=sharing)
+- убрал `AccessType.PROPERTY` для `AbstractBaseEntity.id` (см. [fixed HHH-3718](https://hibernate.atlassian.net/browse/HHH-3718))
+- удалил `PasswordUtil`, возвращаю статус `NO_CONTENT` для REST delete, убрал группы валидации в `UserTo`
+- заменил в jQuery [success на done](https://stackoverflow.com/a/22213543/548473)
+- вместо `lang.jsp` сделал общий `bodyHeader.jsp`
 
 ### Topjava 11
 - добавил
