@@ -171,7 +171,7 @@ Java Enterprise Online Project
 [Туториалы: Spring Framework, Hibernate, Java Core, JDBC](http://proselyte.net/tutorials/)
 
 #### Сервлеты
--  <a href="http://devcolibri.com/4284">Как создать Servlet? Полное руководство.</a>
+-  <a href="https://devcolibri.com/как-создать-servlet-полное-руководство/">Как создать Servlet? Полное руководство.</a>
 
 #### JDBC, SQL
 - <a href="https://habrahabr.ru/post/123636/">Основы SQL на примере задачи</a>
