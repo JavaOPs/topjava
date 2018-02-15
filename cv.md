@@ -41,6 +41,8 @@
 -  <a href="http://javastudy.ru/interview/list-of-question-java-interview/">Список вопросов с ответами для собеседования по Java</a>
 -  <a href="https://github.com/MaximAbramchuck/awesome-interviews#java">Сборка по вопросам на интервью</a>
 -  <a href="http://javastudy.ru/category/interview/">Сборка вопросов-ответов от JavaStudy</a>
+- [Вопросы по классам коллекциям от JavaRush-1](http://info.javarush.ru/translation/2013/10/08/Часто-задаваемые-на-собеседованиях-вопросы-по-классам-коллекциям-в-Java-Часть-1-.html)
+- [Вопросы по классам коллекциям от JavaRush-2](http://info.javarush.ru/translation/2013/10/08/Часто-задаваемые-на-собеседованиях-вопросы-по-классам-коллекциям-в-Java-Часть-2-.html)
 -  <a href="http://habrahabr.ru/post/181033/">Тест на знание SQL</a>
 -  <a href="http://jsehelper.blogspot.ru/p/blog-page.html">Вопросы на собеседовании Java Junior Developer</a>
 -  <a href="https://play.google.com/store/apps/details?id=com.ab.jiq">Java вопросы с собеседований на Android</a>
