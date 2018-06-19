@@ -54,4 +54,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void init() {
+    }
 }
