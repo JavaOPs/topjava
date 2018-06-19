@@ -77,9 +77,9 @@
 
         <!--DataBase-->
         <dependency>
-            <groupId>org.postgresql</groupId>
+            <groupId>postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
+            <version>9.1-901-1.jdbc4</version>
         </dependency>
 
         <!--Web-->
