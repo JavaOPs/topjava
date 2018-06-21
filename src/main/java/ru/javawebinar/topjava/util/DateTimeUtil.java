@@ -14,8 +14,7 @@ public class DateTimeUtil {
     public static final LocalDate MIN_DATE = LocalDate.of(1, 1, 1);
     public static final LocalDate MAX_DATE = LocalDate.of(3000, 1, 1);
 
-    public static <T extends Comparable<? super T>> boolean isBetween(T value, T start, T end) {
-        return value.compareTo(start) >= 0 && value.compareTo(end) <= 0;
+    private DateTimeUtil() {
     }
 
     public static String toString(LocalDateTime ldt) {
