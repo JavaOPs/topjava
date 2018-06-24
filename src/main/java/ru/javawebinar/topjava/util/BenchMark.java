@@ -19,7 +19,7 @@ public class BenchMark {
 
         List<UserMeal> mealList;
 
-        @Param({"5", "15", "30"})
+        @Param({"5", "30"})
         public int iterations;
 
         @Setup(Level.Invocation)
@@ -27,7 +27,7 @@ public class BenchMark {
 
             Random random = new Random();
             mealList = new ArrayList<>();
-            for (int i = 0; i < 120; i++) {
+            for (int i = 0; i < 500; i++) {
                 int month = random.nextInt(12) + 1;
                 int day = random.nextInt(28) + 1;
                 int hour = random.nextInt(18) + 5;
@@ -54,7 +54,7 @@ public class BenchMark {
     @Warmup(iterations = 5)
     public void benchGetFilteredWithExceededByStream(ExecutionPlan plan) {
 
-        UserMealsUtil.getFilteredWithExceeded(plan.mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        UserMealsUtil.getFilteredWithExceededSimple(plan.mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
 
     }
 
