@@ -3,6 +3,9 @@ out
 target
 *.iml
 log
+\src\main\java\ru\javawebinar\topjava\util\TestUserMealsUtil.java
+\src\main\java\ru\javawebinar\topjava\util\LambdaExamples.java
+\src\main\java\ru\javawebinar\topjava\util\BenchMark.java
 
 
 
