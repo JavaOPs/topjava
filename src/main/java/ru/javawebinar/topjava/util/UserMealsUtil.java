@@ -46,7 +46,7 @@ public class UserMealsUtil {
         for (UserMealWithExceed umwe : list) {
             System.out.println(umwe);
         }
-        TestUserMealsUtil.testGetFilteredWithExceeded(mealList, caloriesPerDay, startTime, endTime, list);
+        //TestUserMealsUtil.testGetFilteredWithExceeded(mealList, caloriesPerDay, startTime, endTime, list);
 
         //benchmark
         //org.openjdk.jmh.Main.main(args);
