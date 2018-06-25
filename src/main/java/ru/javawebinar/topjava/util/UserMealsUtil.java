@@ -46,32 +46,8 @@ public class UserMealsUtil {
         for (UserMealWithExceed umwe : list) {
             System.out.println(umwe);
         }
+        TestUserMealsUtil.testGetFilteredWithExceeded(mealList, caloriesPerDay, startTime, endTime, list);
 
-        //test
-        System.out.println("--------------");
-        for (UserMealWithExceed u : list) {
-            if (u.getDateTime().toLocalTime().isBefore(startTime) || u.getDateTime().toLocalTime().isAfter(endTime)) {
-                System.out.println("Error Time" + u.getDateTime());
-            }
-        }
-        Map<LocalDate, Integer> map = new HashMap<>();
-        for (UserMeal userMeal : mealList) {
-            LocalDate localDate = userMeal.getDateTime().toLocalDate();
-            if (map.containsKey(localDate)) {
-                map.put(localDate, (map.get(localDate) + userMeal.getCalories()));
-            } else {
-                map.put(localDate, userMeal.getCalories());
-            }
-        }
-        System.out.println("--------------");
-        for (UserMealWithExceed u : list) {
-            LocalDate localDate = u.getDateTime().toLocalDate();
-            if (map.get(localDate) > caloriesPerDay && u.isExceed() || map.get(localDate) <= caloriesPerDay && !u.isExceed()) {
-                //ok
-            } else {
-                System.out.println("Error Calories " + u.getDateTime());
-            }
-        }
         //benchmark
         //org.openjdk.jmh.Main.main(args);
     }
