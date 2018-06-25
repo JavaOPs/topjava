@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class UserMealsUtil {
     public static void main(String[] args) throws Exception {
@@ -53,76 +52,6 @@ public class UserMealsUtil {
     }
 
     /**
-     * get filtered using streams, don't work yet :)
-     *
-     * @param mealList
-     * @param startTime
-     * @param endTime
-     * @param caloriesPerDay
-     * @return
-     */
-    public static List<UserMealWithExceed> getFilteredWithExceededStream(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        List<UserMealWithExceed> mealWithExceeds;
-        //trying to map with additional temporal Class
-        Stream<TempDataWithCalories> stream = mealList
-                .stream()
-                .map(a -> new TempDataWithCalories(a.getDateTime().toLocalDate()));
-
-        //trying to sort and collect
-        mealWithExceeds = mealList
-                .stream()
-                .sorted((o1, o2) -> {
-                    if (o1.getDateTime().isEqual(o2.getDateTime())) {
-                        return 0;
-                    }
-                    return o1.getDateTime().isBefore(o2.getDateTime()) ? -1 : 1;
-                })
-                .collect(ArrayList::new, // создаем ArrayList
-                        (list, item) -> list.add(new UserMealWithExceed(item.getDateTime(), item.getDescription(), item.getCalories(), false)), // добавляем в список элемент
-                        (list1, list2) -> list1.addAll(list2));
-        return mealWithExceeds;
-    }
-
-    public static class TempDataWithCalories {
-        LocalDate data;
-        List<UserMeal> list = new ArrayList<>();
-        int calories;
-
-        public TempDataWithCalories(LocalDate data) {
-            this.data = data;
-        }
-
-        public TempDataWithCalories(LocalDate data, int totalCalories) {
-            this.data = data;
-            this.calories = totalCalories;
-        }
-
-        public void setData(LocalDate data) {
-            this.data = data;
-        }
-
-        public void setCalories(int calories) {
-            this.calories = calories;
-        }
-
-        public LocalDate getData() {
-            return data;
-        }
-
-        public int getCalories() {
-            return calories;
-        }
-
-        public List<UserMeal> getList() {
-            return list;
-        }
-
-        public void addUserMeal(UserMeal userMeal) {
-            this.list.add(userMeal);
-        }
-    }
-
-    /**
      * get filtered, list is sorted before handling.
      *
      * @param mealList
@@ -140,11 +69,11 @@ public class UserMealsUtil {
             return o1.getDateTime().isBefore(o2.getDateTime()) ? -1 : 1;
         });
         //collection for return
-        List<UserMealWithExceed> mealWithExceeds = new ArrayList<>();
+        List<UserMealWithExceed> userMealWithExceedList = new ArrayList<>();
         UserMeal userMeal;
         UserMeal userMealPrevious;
-        List<UserMeal> tempMealWithExceeds = new ArrayList<>();
-        tempMealWithExceeds.add(mealList.get(0));
+        List<UserMeal> tempUserMealList = new ArrayList<>();
+        tempUserMealList.add(mealList.get(0));
         int caloriesCounter = mealList.get(0).getCalories();
         //iterate every except first
         for (int i = 1; i < mealList.size(); i++) {
@@ -152,25 +81,25 @@ public class UserMealsUtil {
             userMealPrevious = mealList.get(i - 1);
             // add to temp list if the same day and summarize calories
             if (!userMeal.getDateTime().toLocalDate().isAfter(userMealPrevious.getDateTime().toLocalDate())) {
-                tempMealWithExceeds.add(userMeal);
+                tempUserMealList.add(userMeal);
                 caloriesCounter += userMeal.getCalories();
             } else {
                 //else check all from temp list and add to result list by filter
-                for (UserMeal userMealFromTemp : tempMealWithExceeds) {
+                for (UserMeal userMealFromTemp : tempUserMealList) {
                     LocalTime userMealTime = userMealFromTemp.getDateTime().toLocalTime();
                     Boolean isExceeded = caloriesCounter > caloriesPerDay;
                     if (TimeUtil.isBetween(userMealTime, startTime, endTime)) {
-                        mealWithExceeds.add(new UserMealWithExceed(userMealFromTemp.getDateTime(),
+                        userMealWithExceedList.add(new UserMealWithExceed(userMealFromTemp.getDateTime(),
                                 userMealFromTemp.getDescription(), userMealFromTemp.getCalories(),
                                 isExceeded));
                     }
                 }
                 caloriesCounter = userMeal.getCalories();
-                tempMealWithExceeds.clear();
-                tempMealWithExceeds.add(userMeal);
+                tempUserMealList.clear();
+                tempUserMealList.add(userMeal);
             }
         }
-        return mealWithExceeds;
+        return userMealWithExceedList;
     }
 
     /**
