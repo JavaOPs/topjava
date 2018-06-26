@@ -10,42 +10,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserMealsUtil {
+    public static final int START_HOUR = 12;
+    public static final int START_MINUTE = 0;
+    public static final int END_HOUR = 15;
+    public static final int END_MINUTE = 59;
+    public static final int INITIAL_CAPACITY = 150;
+    public static final int CALORIES_PER_DAY = 8000;
+
+
     public static void main(String[] args) throws Exception {
-        Random random = new Random();
-
-        List<UserMeal> mealList = new ArrayList<>();
-        for (int i = 0; i < 130; i++) {
-            int month = random.nextInt(2) + 1;
-            int day = random.nextInt(28) + 1;
-            int hour = random.nextInt(23) + 1;
-            int minute = random.nextInt(59) + 1;
-            int calories = random.nextInt(4100) + 100;
-            UserMeal userMeal = new UserMeal(LocalDateTime.of(2015, month, day, hour, minute), "Завтрак", calories);
-            mealList.add(userMeal);
-        }
-        int startHour = 12;
-        int startMinute = 0;
-        int endHour = 18;
-        int endMinute = 30;
-        int caloriesPerDay = 8000;
-
-        LocalTime startTime = LocalTime.of(startHour, startMinute);
-        LocalTime endTime = LocalTime.of(endHour, endMinute);
-
-        List<UserMealWithExceed> list = getFilteredWithExceededSimple(mealList, startTime, endTime, caloriesPerDay);
-//        List<UserMealWithExceed> list = getFilteredWithExceededMap(mealList, startTime, endTime, caloriesPerDay);
-        // sort
-        Collections.sort(list, (o1, o2) -> {
-            if (o1.getDateTime().isEqual(o2.getDateTime())) {
-                return 0;
-            }
-            return o1.getDateTime().isBefore(o2.getDateTime()) ? -1 : 1;
-        });
-
-        // to print
-        for (UserMealWithExceed umwe : list) {
-            System.out.println(umwe);
-        }
+//        List<UserMealWithExceed> list = getFilteredWithExceededSimple(prepareMealList(), getStartTime(), getEndTime(), CALORIES_PER_DAY);
+        List<UserMealWithExceed> list = getFilteredWithExceededMap(prepareMealList(), getStartTime(), getEndTime(), CALORIES_PER_DAY);
+        UserMealWithExceedUtil.sortListByDateTime(list);
+        UserMealWithExceedUtil.printList(list);
     }
 
     /**
@@ -59,12 +36,7 @@ public class UserMealsUtil {
      */
     public static List<UserMealWithExceed> getFilteredWithExceededSimple(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         //sort collection
-        Collections.sort(mealList, (o1, o2) -> {
-            if (o1.getDateTime().isEqual(o2.getDateTime())) {
-                return 0;
-            }
-            return o1.getDateTime().isBefore(o2.getDateTime()) ? -1 : 1;
-        });
+        Collections.sort(mealList, UserMealsUtil::compareByDateASC);
         //collection for return
         List<UserMealWithExceed> userMealWithExceedList = new ArrayList<>();
         List<UserMeal> tempUserMealList = new ArrayList<>();
@@ -100,26 +72,73 @@ public class UserMealsUtil {
 
     /**
      * get filtered using Map without sorting.     *
+     *
      * @param mealList
      * @param startTime
      * @param endTime
      * @param caloriesPerDay
-     * @return
-     *
-     * ----->>>> can this method be considered as completed "Optional (Java 8 Stream API)"???
+     * @return ----->>>> can this method be considered as completed "Optional (Java 8 Stream API)"???
      */
-    public static List<UserMealWithExceed> getFilteredWithExceededMap(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    public static List<UserMealWithExceed> getFilteredWithExceededMap(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) throws Exception {
+        if (hasaNull(mealList, startTime, endTime)) {
+            return Collections.emptyList();
+        }
         Map<LocalDate, Integer> map = new HashMap<>();
-        // map userMeal to group by date, value is summarized calories of same day
         mealList.forEach(userMeal -> {
             LocalDate localDate = userMeal.getDateTime().toLocalDate();
-            map.merge(localDate,userMeal.getCalories(),Integer::sum);
+            map.merge(localDate, userMeal.getCalories(), Integer::sum);
         });
-        //stream and add to result list by filter
-        List<UserMealWithExceed> mealWithExceeds = mealList.stream()
-                .filter(userMeal -> userMeal.getDateTime().toLocalTime().isAfter(startTime) && userMeal.getDateTime().toLocalTime().isBefore(endTime))
-                .map(a -> new UserMealWithExceed(a.getDateTime(), a.getDescription(), a.getCalories(), map.get(a.getDateTime().toLocalDate()) > caloriesPerDay))
+        return mealList.stream()
+                .filter(userMeal -> filterByTime(userMeal, startTime, endTime))
+                .map(a -> UserMealWithExceedUtil.createUserMealWithExceed(a, map, caloriesPerDay))
                 .collect(Collectors.toList());
-        return mealWithExceeds;
     }
+
+    public static List<UserMeal> prepareMealList() {
+        Random random = new Random();
+        List<UserMeal> mealList = new ArrayList<>(INITIAL_CAPACITY);
+        for (int i = 0; i < INITIAL_CAPACITY; i++) {
+            int month = random.nextInt(2) + 1;//for two month
+            int day = random.nextInt(28) + 1;
+            int hour = random.nextInt(23) + 1;
+            int minute = random.nextInt(59) + 1;
+            int calories = random.nextInt(4100) + 100;
+            UserMeal userMeal = new UserMeal(LocalDateTime.of(2015, month, day, hour, minute), "Завтрак", calories);
+            mealList.add(userMeal);
+        }
+        return mealList;
+    }
+
+    public static LocalTime getStartTime() {
+        int startHour = START_HOUR;
+        int startMinute = START_MINUTE;
+
+        return LocalTime.of(startHour, startMinute);
+    }
+
+    public static LocalTime getEndTime() {
+        int endHour = END_HOUR;
+        int endMinute = END_MINUTE;
+        return LocalTime.of(endHour, endMinute);
+    }
+
+    public static int compareByDateASC(UserMeal o1, UserMeal o2) {
+        if (o1.getDateTime().isEqual(o2.getDateTime())) {
+            return 0;
+        }
+        return o1.getDateTime().isBefore(o2.getDateTime()) ? -1 : 1;
+    }
+
+    public static boolean filterByTime(UserMeal userMeal, LocalTime startTime, LocalTime endTime) {
+        return userMeal.getDateTime().toLocalTime().isAfter(startTime) && userMeal.getDateTime().toLocalTime().isBefore(endTime);
+    }
+
+    public static boolean hasaNull(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime) {
+        return !isPresent(mealList) || !TimeUtil.isPresent(startTime) || !TimeUtil.isPresent(endTime);
+    }
+
+    public static boolean isPresent(List<UserMeal> mealList) {
+        return mealList != null;
+    }
+
 }
