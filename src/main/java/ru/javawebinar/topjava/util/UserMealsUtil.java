@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class UserMealsUtil {
     public static final int START_HOUR = 12;
@@ -95,18 +96,20 @@ public class UserMealsUtil {
     }
 
     public static List<UserMeal> prepareMealList() {
-        Random random = new Random();
         List<UserMeal> mealList = new ArrayList<>(INITIAL_CAPACITY);
-        for (int i = 0; i < INITIAL_CAPACITY; i++) {
-            int month = random.nextInt(2) + 1;//for two month
-            int day = random.nextInt(28) + 1;
-            int hour = random.nextInt(23) + 1;
-            int minute = random.nextInt(59) + 1;
-            int calories = random.nextInt(4100) + 100;
-            UserMeal userMeal = new UserMeal(LocalDateTime.of(2015, month, day, hour, minute), "Завтрак", calories);
-            mealList.add(userMeal);
-        }
+        IntStream.range(1, INITIAL_CAPACITY).forEach(i -> UserMealsUtil.addNewUserMeal(i, mealList));
         return mealList;
+    }
+
+    private static void addNewUserMeal(int i, List<UserMeal> mealList) {
+        Random random = new Random();
+        int month = random.nextInt(2) + 1;//for two month
+        int day = random.nextInt(28) + 1;
+        int hour = random.nextInt(23) + 1;
+        int minute = random.nextInt(59) + 1;
+        int calories = random.nextInt(4100) + 100;
+        UserMeal userMeal = new UserMeal(LocalDateTime.of(2015, month, day, hour, minute), "ОпятьКушать номер " + i, calories);
+        mealList.add(userMeal);
     }
 
     public static LocalTime getStartTime() {
@@ -130,7 +133,7 @@ public class UserMealsUtil {
     }
 
     public static boolean filterByTime(UserMeal userMeal, LocalTime startTime, LocalTime endTime) {
-        return userMeal.getDateTime().toLocalTime().isAfter(startTime) && userMeal.getDateTime().toLocalTime().isBefore(endTime);
+        return TimeUtil.isBetween(userMeal.getDateTime().toLocalTime(), startTime, endTime);
     }
 
     public static boolean hasaNull(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime) {
@@ -140,5 +143,4 @@ public class UserMealsUtil {
     public static boolean isPresent(List<UserMeal> mealList) {
         return mealList != null;
     }
-
 }
