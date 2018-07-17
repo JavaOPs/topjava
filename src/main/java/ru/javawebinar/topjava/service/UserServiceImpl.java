@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        return repository.save(user);
+        return checkNotFound(repository.save(user), "Incorrect Data");
     }
 
     @Override

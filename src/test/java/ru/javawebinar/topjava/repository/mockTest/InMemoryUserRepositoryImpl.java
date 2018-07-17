@@ -1,7 +1,7 @@
-package ru.javawebinar.topjava.repository.mock;
+package ru.javawebinar.topjava.repository.mockTest;
 
 import org.springframework.stereotype.Repository;
-import ru.javawebinar.topjava.UserTestData;
+import ru.javawebinar.topjava.TestData.UserTestData;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-import static ru.javawebinar.topjava.UserTestData.ADMIN;
-import static ru.javawebinar.topjava.UserTestData.USER;
+import static ru.javawebinar.topjava.TestData.UserTestData.ADMIN;
+import static ru.javawebinar.topjava.TestData.UserTestData.USER;
 
 @Repository
 public class InMemoryUserRepositoryImpl implements UserRepository {
@@ -30,6 +30,7 @@ public class InMemoryUserRepositoryImpl implements UserRepository {
     @Override
     public User save(User user) {
         if (user.isNew()) {
+            if (getByEmail(user.getEmail()) != null) return null;
             user.setId(counter.incrementAndGet());
             repository.put(user.getId(), user);
             return user;
