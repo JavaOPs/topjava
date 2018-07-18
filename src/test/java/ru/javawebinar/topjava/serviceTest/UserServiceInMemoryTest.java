@@ -24,7 +24,7 @@ import static ru.javawebinar.topjava.TestData.UserTestData.*;
         "classpath:spring/mock.xml"
 })
 @RunWith(SpringRunner.class)
-public class UserServiceTest {
+public class UserServiceInMemoryTest {
 
     static {
         // Only for postgres driver logging

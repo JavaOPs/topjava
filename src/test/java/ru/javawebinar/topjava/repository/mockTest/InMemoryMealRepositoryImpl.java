@@ -2,7 +2,6 @@ package ru.javawebinar.topjava.repository.mockTest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 import ru.javawebinar.topjava.model.Meal;
@@ -18,13 +17,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static ru.javawebinar.topjava.TestData.MealTestData.MEALS_ADMIN;
-import static ru.javawebinar.topjava.TestData.MealTestData.MEALS_USER;
+import static ru.javawebinar.topjava.TestData.MealTestData.*;
 import static ru.javawebinar.topjava.TestData.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.TestData.UserTestData.USER_ID;
 
 @Repository
-@Qualifier("InMemoryMealRepositoryImpl")
 public class InMemoryMealRepositoryImpl implements MealRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryMealRepositoryImpl.class);
 
@@ -40,16 +37,16 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     public void init() {
         repository.clear();
         Map<Integer, Meal> mapUser = new HashMap<>();
-        for(Meal meal: MEALS_USER)
-        {
-            mapUser.put(meal.getId(),meal);
-        }
+        mapUser.put(MEAL1.getId(),MEAL1);
+        mapUser.put(MEAL2.getId(),MEAL2);
+        mapUser.put(MEAL3.getId(),MEAL3);
+        mapUser.put(MEAL4.getId(),MEAL4);
+        mapUser.put(MEAL5.getId(),MEAL5);
+        mapUser.put(MEAL6.getId(),MEAL6);
         repository.put(USER_ID, mapUser);
         Map<Integer, Meal> mapAdmin = new HashMap<>();
-        for(Meal meal: MEALS_ADMIN)
-        {
-            mapAdmin.put(meal.getId(),meal);
-        }
+        mapAdmin.put(MEAL7.getId(),MEAL7);
+        mapAdmin.put(MEAL8.getId(),MEAL8);
         repository.put(ADMIN_ID, mapAdmin);
     }
 
