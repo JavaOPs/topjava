@@ -1,19 +1,45 @@
 package ru.javawebinar.topjava.model;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@NamedQueries({
+        @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id and m.user=:user"),
+        @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m left JOIN FETCH m.user where m.user=:user ORDER BY m.dateTime desc"),
+        @NamedQuery(name = Meal.BY_ID, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user where m.user=:user and m.id =:id ORDER BY m.dateTime desc"),
+        @NamedQuery(name = Meal.FILTERED_BETWEEN, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user where m.user=:user and m.dateTime between :fd and :td ORDER BY m.dateTime desc")
+})
+@Entity
+@Table(name = "meals")
 public class Meal extends AbstractBaseEntity {
+
+    public static final String ALL_SORTED = "MeaFFl.getAllSorted";
+    public static final String DELETE = "Meal.delete";
+    public static final String BY_ID = "Meal.getById";
+    public static final String FILTERED_BETWEEN = "Meal.getFilteredByDate";
+
+
+    @NotNull
+    @Column(name = "date_time", nullable = false)
     private LocalDateTime dateTime;
 
+    @NotBlank
+    @Column(name = "description", nullable = false)
     private String description;
 
+    @NotNull
+    @Column(name = "calories", nullable = false)
+    @Range(min = 10, max = 10000)
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Meal() {
@@ -73,10 +99,9 @@ public class Meal extends AbstractBaseEntity {
     @Override
     public String toString() {
         return "Meal{" +
-                "id=" + id +
-                ", dateTime=" + dateTime +
+                "dateTime=" + dateTime +
                 ", description='" + description + '\'' +
                 ", calories=" + calories +
-                '}';
+                "} " + super.toString();
     }
 }

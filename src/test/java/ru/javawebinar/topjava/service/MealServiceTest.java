@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.service;
 
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +10,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.StopWatch;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
+import static org.hamcrest.core.StringStartsWith.startsWith;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
@@ -30,14 +35,47 @@ public class MealServiceTest {
         SLF4JBridgeHandler.install();
     }
 
+
     @Autowired
     private MealService service;
+
+    private static StringBuffer stringBuffer = new StringBuffer("\n");
+
+    private StopWatch stopWatch = new StopWatch();
+
+    @Rule
+    public TestName watcher = new TestName();
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+
+    @After
+    public void finishTest() {
+        stopWatch.stop();
+        stringBuffer.append(stopWatch.prettyPrint()).append("\n");
+
+    }
+
+
+    @Before
+    public void startTest() {
+        stopWatch.start(watcher.getMethodName());
+    }
+
+
+    @AfterClass
+    public static void finishClassSout() {
+        System.out.println(stringBuffer.toString());
+    }
+
 
     @Test
     public void delete() {
         service.delete(MEAL1_ID, USER_ID);
         assertMatch(service.getAll(USER_ID), MEAL6, MEAL5, MEAL4, MEAL3, MEAL2);
     }
+
 
     @Test(expected = NotFoundException.class)
     public void deleteNotFound() {
@@ -57,9 +95,12 @@ public class MealServiceTest {
         assertMatch(actual, ADMIN_MEAL1);
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test//(expected = NotFoundException.class)
     public void getNotFound() {
+        thrown.expect(NotFoundException.class);
+        thrown.expectMessage(startsWith("Not"));
         service.get(MEAL1_ID, ADMIN_ID);
+
     }
 
     @Test
@@ -69,14 +110,17 @@ public class MealServiceTest {
         assertMatch(service.get(MEAL1_ID, USER_ID), updated);
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test//(expected = NotFoundException.class)
     public void updateNotFound() {
+        thrown.expect(NotFoundException.class);
+        thrown.expectMessage(startsWith("Not"));
         service.update(MEAL1, ADMIN_ID);
     }
 
     @Test
     public void getAll() {
-        assertMatch(service.getAll(USER_ID), MEALS);
+        List<Meal> mealList = service.getAll(USER_ID);
+        assertMatch(mealList, MEALS);
     }
 
     @Test
