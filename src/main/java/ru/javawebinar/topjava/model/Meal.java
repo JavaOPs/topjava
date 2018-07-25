@@ -12,16 +12,14 @@ import java.time.LocalTime;
 @NamedQueries({
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id and m.user=:user"),
         @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m left JOIN FETCH m.user where m.user=:user ORDER BY m.dateTime desc"),
-        @NamedQuery(name = Meal.BY_ID, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user where m.user=:user and m.id =:id ORDER BY m.dateTime desc"),
         @NamedQuery(name = Meal.FILTERED_BETWEEN, query = "SELECT m FROM Meal m LEFT JOIN FETCH m.user where m.user=:user and m.dateTime between :fd and :td ORDER BY m.dateTime desc")
 })
 @Entity
-@Table(name = "meals")
+@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"date_time","user_id"}, name = "meal_unique_date_time_user")})
 public class Meal extends AbstractBaseEntity {
 
     public static final String ALL_SORTED = "MeaFFl.getAllSorted";
     public static final String DELETE = "Meal.delete";
-    public static final String BY_ID = "Meal.getById";
     public static final String FILTERED_BETWEEN = "Meal.getFilteredByDate";
 
 
@@ -33,11 +31,12 @@ public class Meal extends AbstractBaseEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @NotNull
+
     @Column(name = "calories", nullable = false)
     @Range(min = 10, max = 10000)
     private int calories;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

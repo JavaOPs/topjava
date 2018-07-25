@@ -10,7 +10,6 @@ import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,7 +41,10 @@ public class JpaMealRepositoryImpl implements MealRepository {
             return meal;
         }
 
-        get(meal.getId(), userId);//check existing
+        Meal mealCheck = em.find(Meal.class, meal.getId());
+
+        if (mealCheck.getUser().getId() != userId)
+            throw new NotFoundException("Not found");
 
         return em.merge(meal);
     }
@@ -50,21 +52,27 @@ public class JpaMealRepositoryImpl implements MealRepository {
     @Transactional
     @Override
     public boolean delete(int id, int userId) {
-        return em.createNamedQuery(Meal.DELETE).setParameter("id", id).setParameter("user", em.getReference(User.class, userId)).executeUpdate() != 0;
+        return em.createNamedQuery(Meal.DELETE).
+                setParameter("id", id).
+                setParameter("user", em.getReference(User.class, userId)).
+                executeUpdate() != 0;
     }
 
     @Override
     public Meal get(int id, int userId) {
-        try {
-            return em.createNamedQuery(Meal.BY_ID, Meal.class).setParameter("id", id).setParameter("user", em.getReference(User.class, userId)).getSingleResult();
-        } catch (NoResultException e) {
+        Meal meal = em.find(Meal.class, id);
+
+        if (meal.getUser().getId() != userId)
             throw new NotFoundException("Not found");
-        }
+
+        return meal;
     }
 
     @Override
     public List<Meal> getAll(int userId) {
-        return em.createNamedQuery(Meal.ALL_SORTED, Meal.class).setParameter("user", userRepository.get(userId)).getResultList();
+        return em.createNamedQuery(Meal.ALL_SORTED, Meal.class).
+                setParameter("user", userRepository.get(userId)).
+                getResultList();
     }
 
     @Override

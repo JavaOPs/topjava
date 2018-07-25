@@ -2,23 +2,24 @@ package ru.javawebinar.topjava.service;
 
 import org.junit.*;
 import org.junit.rules.ExpectedException;
+import org.junit.rules.Stopwatch;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.StopWatch;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import static org.hamcrest.core.StringStartsWith.startsWith;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
 import static ru.javawebinar.topjava.UserTestData.USER_ID;
@@ -35,13 +36,17 @@ public class MealServiceTest {
         SLF4JBridgeHandler.install();
     }
 
+    private static final Logger log = LoggerFactory.getLogger(MealServiceTest.class);
+
 
     @Autowired
     private MealService service;
 
     private static StringBuffer stringBuffer = new StringBuffer("\n");
 
-    private StopWatch stopWatch = new StopWatch();
+    @Rule
+    public Stopwatch stopWatch = new Stopwatch() {
+    };
 
     @Rule
     public TestName watcher = new TestName();
@@ -49,24 +54,29 @@ public class MealServiceTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private long time;
+
 
     @After
     public void finishTest() {
-        stopWatch.stop();
-        stringBuffer.append(stopWatch.prettyPrint()).append("\n");
-
+        long timeForTest = stopWatch.runtime(TimeUnit.MILLISECONDS) - time;
+        stringBuffer.append("\n").
+                append(watcher.getMethodName()).
+                append(" - ").
+                append(timeForTest).append(" ms");
+        log.info("\n" + "TEST RESULT" + "\n" + watcher.getMethodName() + " - " + timeForTest + " ms");
     }
 
 
     @Before
     public void startTest() {
-        stopWatch.start(watcher.getMethodName());
+        time = stopWatch.runtime(TimeUnit.MILLISECONDS);
     }
 
 
     @AfterClass
     public static void finishClassSout() {
-        System.out.println(stringBuffer.toString());
+        log.info(stringBuffer.toString());
     }
 
 
@@ -77,8 +87,9 @@ public class MealServiceTest {
     }
 
 
-    @Test(expected = NotFoundException.class)
+    @Test//(expected = NotFoundException.class)
     public void deleteNotFound() {
+        thrown.expect(NotFoundException.class);
         service.delete(MEAL1_ID, 1);
     }
 
@@ -98,7 +109,6 @@ public class MealServiceTest {
     @Test//(expected = NotFoundException.class)
     public void getNotFound() {
         thrown.expect(NotFoundException.class);
-        thrown.expectMessage(startsWith("Not"));
         service.get(MEAL1_ID, ADMIN_ID);
 
     }
@@ -108,19 +118,18 @@ public class MealServiceTest {
         Meal updated = getUpdated();
         service.update(updated, USER_ID);
         assertMatch(service.get(MEAL1_ID, USER_ID), updated);
+
     }
 
     @Test//(expected = NotFoundException.class)
     public void updateNotFound() {
         thrown.expect(NotFoundException.class);
-        thrown.expectMessage(startsWith("Not"));
         service.update(MEAL1, ADMIN_ID);
     }
 
     @Test
     public void getAll() {
-        List<Meal> mealList = service.getAll(USER_ID);
-        assertMatch(mealList, MEALS);
+        assertMatch(service.getAll(USER_ID), MEALS);
     }
 
     @Test
