@@ -17,7 +17,7 @@ import java.util.Collection;
 
 import static ru.javawebinar.topjava.UserTestData.ADMIN;
 
-@ContextConfiguration("classpath:spring/spring-app.xml")
+@ContextConfiguration({"classpath:spring/spring-app.xml", "classpath:spring/mock.xml"})
 @RunWith(SpringRunner.class)
 public class InMemoryAdminRestControllerSpringTest {
 
@@ -33,7 +33,7 @@ public class InMemoryAdminRestControllerSpringTest {
     }
 
     @Test
-    public void testDelete() throws Exception {
+    public void delete() throws Exception {
         controller.delete(UserTestData.USER_ID);
         Collection<User> users = controller.getAll();
         Assert.assertEquals(users.size(), 1);
@@ -41,7 +41,7 @@ public class InMemoryAdminRestControllerSpringTest {
     }
 
     @Test(expected = NotFoundException.class)
-    public void testDeleteNotFound() throws Exception {
+    public void deleteNotFound() throws Exception {
         controller.delete(10);
     }
 }
