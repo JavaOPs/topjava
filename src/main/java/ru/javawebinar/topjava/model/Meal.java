@@ -1,7 +1,11 @@
 package ru.javawebinar.topjava.model;
 
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import org.hibernate.validator.constraints.Range;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -11,13 +15,26 @@ import java.time.LocalTime;
  * 11.01.2015.
  */
 public class Meal extends AbstractBaseEntity {
+    public static final String ALL_SORTED = "Meal.getAll";
+    public static final String DELETE = "Meal.delete";
+    public static final String GET_BETWEEN = "Meal.getBetween";
+
+    @Column(name = "date_time", nullable = false)
+    @NotNull
     private LocalDateTime dateTime;
 
+    @Column(name = "description", nullable = false)
+    @NotBlank
+    @Size(min = 2, max = 120)
     private String description;
 
+    @Column(name = "calories", nullable = false)
+    @Range(min = 10, max = 5000)
     private int calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @NotNull
     private User user;
 
     public Meal() {
