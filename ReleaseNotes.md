@@ -1,4 +1,9 @@
 # TopJava Release Notes
+### Topjava 14
+- [Миграция на JUnit 5](https://www.youtube.com/watch?v=YmLzT-j1hU4)
+- `SimpleJdbcInsert` и `NamedParameterJdbcTemplate` конструируются (и берут настройки) из `jdbcTemplate`
+- `AuthorizedUser` зарефакторился в `SecurityUtil`
+
 ### Topjava 13
 - [Миграция на Botstrap 4](https://getbootstrap.com/docs/4.1/migration/)
 - Добавил [Responsive behaviors](https://getbootstrap.com/docs/4.1/components/navbar/#responsive-behaviors) - при уменшении ширины экрана навигация сворачивается в кнопку
