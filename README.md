@@ -142,6 +142,7 @@ Java Enterprise Online Project
 Все остальное - опционально.
 
 #### HTML, JavaScript, CSS 
+- [Basic HTML and HTML5](https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5/say-hello-to-html-elements/)
 - [Справочник по WEB](https://developer.mozilla.org/ru/)
 - [Видео по WEB технологиям](https://www.youtube.com/user/WebMagistersRu/playlists)
 - [Изучение JavaScript в одном видео уроке за час](https://www.youtube.com/watch?v=QBWWplFkdzw)
