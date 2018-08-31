@@ -3,6 +3,8 @@
 - [Миграция на JUnit 5](https://www.youtube.com/watch?v=YmLzT-j1hU4)
 - `SimpleJdbcInsert` и `NamedParameterJdbcTemplate` конструируются (и берут настройки) из `jdbcTemplate`
 - `AuthorizedUser` зарефакторился в `SecurityUtil`
+- В javascript [заменил `var` на `let/const`](https://learn.javascript.ru/let-const). [Поддержка 95% браузеров](https://caniuse.com/#feat=const)
+- Подправил UI фильтрации и заголовка страниц
 
 ### Topjava 13
 - [Миграция на Botstrap 4](https://getbootstrap.com/docs/4.1/migration/)
