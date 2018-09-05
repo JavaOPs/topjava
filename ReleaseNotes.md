@@ -1,10 +1,13 @@
 # TopJava Release Notes
 ### Topjava 14
 - [Миграция на JUnit 5](https://www.youtube.com/watch?v=YmLzT-j1hU4)
+- Для измерения времени в тестах использую [Spring StopWatch](https://www.logicbig.com/how-to/code-snippets/jcode-spring-framework-stopwatch.html)
 - `SimpleJdbcInsert` и `NamedParameterJdbcTemplate` конструируются (и берут настройки) из `jdbcTemplate`
 - `AuthorizedUser` зарефакторился в `SecurityUtil`
 - В javascript [заменил `var` на `let/const`](https://learn.javascript.ru/let-const). [Поддержка 95% браузеров](https://caniuse.com/#feat=const)
 - Подправил UI фильтрации и заголовка страниц
+- Починил [баг в FireFox](https://bugzilla.mozilla.org/show_bug.cgi?id=884693): пустой ответ по ajax
+- Сделал вход в приложение при нажании кнопок `Зайти как ...`
 
 ### Topjava 13
 - [Миграция на Botstrap 4](https://getbootstrap.com/docs/4.1/migration/)
