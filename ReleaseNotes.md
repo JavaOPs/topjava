@@ -5,9 +5,11 @@
 - `SimpleJdbcInsert` и `NamedParameterJdbcTemplate` конструируются (и берут настройки) из `jdbcTemplate`
 - `AuthorizedUser` зарефакторился в `SecurityUtil`
 - В javascript [заменил `var` на `let/const`](https://learn.javascript.ru/let-const). [Поддержка 95% браузеров](https://caniuse.com/#feat=const)
-- Подправил UI фильтрации и заголовка страниц
+- Подправил UI фильтрации и заголовка страниц, добавилась кнопка `Cancel` в профиль
 - Починил [баг в FireFox](https://bugzilla.mozilla.org/show_bug.cgi?id=884693): пустой ответ по ajax
 - Сделал вход в приложение при нажании кнопок `Зайти как ...`
+- Добавил регистрацию пользователя по REST
+- Преименовал js файлы согласно [javascript filename naming convention](https://stackoverflow.com/questions/7273316/what-is-the-javascript-filename-naming-convention)
 
 ### Topjava 13
 - [Миграция на Botstrap 4](https://getbootstrap.com/docs/4.1/migration/)
