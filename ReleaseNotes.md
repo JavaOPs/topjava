@@ -10,6 +10,7 @@
 - Сделал вход в приложение при нажании кнопок `Зайти как ...`
 - Добавил регистрацию пользователя по REST
 - Преименовал js файлы согласно [javascript filename naming convention](https://stackoverflow.com/questions/7273316/what-is-the-javascript-filename-naming-convention)
+- Сделал проверку startTime/endTime на фильтре времени (после обновления datetimepicker до 2.5.20)
 
 ### Topjava 13
 - [Миграция на Botstrap 4](https://getbootstrap.com/docs/4.1/migration/)
