@@ -60,7 +60,7 @@
 -  удобно иметь резюме где то в инете (hh, linkedin, google doc, чтобы им было удобно делиться).
 
 ### Позиционирование <a href="https://github.com/JavaOPs/topjava/blob/master/description.md">проекта Topjava</a>:
-- Обязательно убери из резюме **любое упоминание Junior**. Количество обращений возрастет на порядок. Ссылку на стажировку можно поставить: http://javaops.ru (в linkedin: https://www.linkedin.com/company/java-online-projects).
+- Обязательно убери из резюме **любое упоминание Junior**. Количество обращений возрастет на порядок. Ссылку на стажировку можно поставить: http://javaops.ru/view/topjava (в linkedin: https://www.linkedin.com/company/java-online-projects).
 -  После завершения проекта ты освошь все заявленные в нем технологии - вставь их в квалификацию (включая java 8 Stream and Time API). 
 - В разделе опыт работы (если нет коммерческого опыта) вставь:
 
