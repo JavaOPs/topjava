@@ -2,7 +2,7 @@ package ru.javawebinar.topjava.util;
 
 import java.time.LocalTime;
 
-public final class TimeUtil {
+public class TimeUtil {
 
     private TimeUtil() {}
 

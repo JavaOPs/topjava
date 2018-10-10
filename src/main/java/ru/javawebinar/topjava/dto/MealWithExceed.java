@@ -11,4 +11,5 @@ public class MealWithExceed {
     private LocalDateTime dateTime;
     private String description;
     private int calories;
+    private boolean exceed;
 }
