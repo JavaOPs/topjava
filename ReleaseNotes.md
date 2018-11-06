@@ -1,4 +1,8 @@
 # TopJava Release Notes
+### Topjava 15
+- Миграция на Servlet API 4.0 / Tomcat 9.x
+- Миграция на [JDK11](http://javaops.ru/view/resources/jdk8_11)
+
 ### Topjava 14
 - [Миграция на JUnit 5](https://www.youtube.com/watch?v=YmLzT-j1hU4)
 - Для измерения времени в тестах использую [Spring StopWatch](https://www.logicbig.com/how-to/code-snippets/jcode-spring-framework-stopwatch.html)
