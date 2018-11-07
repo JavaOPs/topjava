@@ -4,7 +4,7 @@
 - Миграция на [JDK11](http://javaops.ru/view/resources/jdk8_11)
 
 ### Topjava 14
-- [Миграция на JUnit 5](https://www.youtube.com/watch?v=YmLzT-j1hU4)
+- [Миграция на JUnit 5](http://javaops.ru/view/resources/junit5)
 - Для измерения времени в тестах использую [Spring StopWatch](https://www.logicbig.com/how-to/code-snippets/jcode-spring-framework-stopwatch.html)
 - `SimpleJdbcInsert` и `NamedParameterJdbcTemplate` конструируются (и берут настройки) из `jdbcTemplate`
 - `AuthorizedUser` зарефакторился в `SecurityUtil`
@@ -23,7 +23,8 @@
 - В `inputField.tag` передаю как параметр код для локализации label, а в `i18n.jsp` передаю как параметр `page`. См. [JSP include action with parameter example](https://beginnersbook.com/2013/12/jsp-include-with-parameter-example)
 
 ### Topjava 12
-- обновил версии: Spring 5.x, Spring Data 2.x, Ehcache 3.x, datatables, datetimepicker
+- [Миграция на Spring 5](http://javaops.ru/view/resources/spring5)
+- обновил версии: Ehcache 3.x, datatables, datetimepicker
 - добавил видео решений HW0 с одним проходом
 - поправил видео [Обзор Spring Framework. Spring Context](https://drive.google.com/file/d/1fBSLGEbc7YXBbmr_EwEHltCWNW_pUmIH). Дописал про Constructor injection.
 - заменил видео про тетсирование сервисов. Вместо самодельных матчеров стали использовать [AssertJ](http://joel-costigliola.github.io/assertj/index.html). Видео [Тестирование UserService через AssertJ](https://drive.google.com/open?id=1SPMkWMYPvpk9i0TA7ioa-9Sn1EGBtClD), время 1:53
