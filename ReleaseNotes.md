@@ -1,7 +1,9 @@
 # TopJava Release Notes
 ### Topjava 15
 - Миграция на Servlet API 4.0 / Tomcat 9.x
-- Миграция на [JDK11](http://javaops.ru/view/resources/jdk8_11)
+- [Миграция на JDK11](http://javaops.ru/view/resources/jdk8_11)
+- JUnit5 fix: <a href="https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven">junit-platform-surefire-provider не нужен</a></h4>
+- `RootControllerTest.testUsers`: для проверки используем assertj `AssertionMatcher` адаптер.
 
 ### Topjava 14
 - [Миграция на JUnit 5](http://javaops.ru/view/resources/junit5)
