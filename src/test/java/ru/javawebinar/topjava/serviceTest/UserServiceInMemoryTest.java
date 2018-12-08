@@ -1,0 +1,101 @@
+package ru.javawebinar.topjava.serviceTest;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.bridge.SLF4JBridgeHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import ru.javawebinar.topjava.model.Role;
+import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.repository.mockTest.InMemoryUserRepositoryImpl;
+import ru.javawebinar.topjava.service.UserService;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import static ru.javawebinar.topjava.TestData.UserTestData.*;
+
+@ContextConfiguration({
+        "classpath:spring/spring-app.xml",
+        "classpath:spring/mock.xml"
+})
+@RunWith(SpringRunner.class)
+public class UserServiceInMemoryTest {
+
+    static {
+        // Only for postgres driver logging
+        // It uses java.util.logging and logged via jul-to-slf4j bridge
+        SLF4JBridgeHandler.install();
+    }
+
+    @Autowired
+    private UserService service;
+
+    @Autowired
+    private InMemoryUserRepositoryImpl repository;
+
+    @Before
+    public void setUp() {
+        repository.init();
+    }
+
+    @Test
+    public void create() {
+        User newUser = new User(null, "New", "new@gmail.com", "newPass", 1555, false, new Date(), Collections.singleton(Role.ROLE_USER));
+        User created = service.create(newUser);
+        newUser.setId(created.getId());
+        assertMatch(service.getAll(), ADMIN, newUser, USER);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void duplicateMailCreate() {
+        service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.ROLE_USER));
+    }
+
+    @Test
+    public void delete() {
+        service.delete(USER_ID);
+        assertMatch(service.getAll(), ADMIN);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void notFoundDelete() {
+        service.delete(1);
+    }
+
+    @Test
+    public void get() {
+        User user = service.get(USER_ID);
+        assertMatch(user, USER);
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getNotFound() {
+        service.get(1);
+    }
+
+    @Test
+    public void getByEmail() {
+        User user = service.getByEmail("user@yandex.ru");
+        assertMatch(user, USER);
+    }
+
+    @Test
+    public void update() {
+        User updated = new User(USER);
+        updated.setName("UpdatedName");
+        updated.setCaloriesPerDay(330);
+        service.update(updated);
+        assertMatch(service.get(USER_ID), updated);
+    }
+
+    @Test
+    public void getAll() {
+        List<User> all = service.getAll();
+        assertMatch(all, ADMIN, USER);
+    }
+}
