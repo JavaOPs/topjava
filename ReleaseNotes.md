@@ -6,6 +6,7 @@
 - Рефакторинг тестов: 
   - в `RootControllerTest.testUsers` для проверки используем `AssertionMatcher` адаптер
   - вместо `content().json()` от `jsonassert` десериализуем json и используем сравнения через `AssertJ`
+- В javascript место глабальных переменных и одинаковой функции обновления таблицы задаю их в объекте контекст, который передаю в `makeEditable()` как параметр
 
 ### Topjava 14
 - [Миграция на JUnit 5](http://javaops.ru/view/resources/junit5)
