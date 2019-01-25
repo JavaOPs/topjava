@@ -44,7 +44,6 @@ public class UserMealsUtil {
                 filteredWithExceeded.add(userMealWithExceed);
             }
         }
-
         // TODO return filtered list with correctly exceeded field
         return filteredWithExceeded;
 
