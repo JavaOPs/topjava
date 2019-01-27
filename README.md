@@ -65,7 +65,7 @@ Java Enterprise Online Project
 
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание HW0
 ```
-Реализовать метод UserMealsUtil.getFilteredWithExceeded:
+Реализовать метод UserMealsUtil.getFilteredWithExceeded через циклы (`forEach`):
 -  должны возвращаться только записи между startTime и endTime 
 -  поле UserMealWithExceed.exceed должно показывать, 
                                      превышает ли сумма калорий за весь день параметра метода caloriesPerDay  
