@@ -73,7 +73,7 @@ Java Enterprise Online Project
 Т.е UserMealWithExceed - это запись одной еды, но поле exceeded будет одинаково для всех записей за этот день.
     
 - Проверьте результат выполнения ДЗ (можно проверить логику в http://topjava.herokuapp.com , список еды)
-- Оцените Time complexity вашего алгоритма, если он O(N*N)- попробуйте сделать O(N).
+- Оцените Time complexity вашего алгоритма. Если она больше O(N), например O(N*N) или N*log(N), попробуйте сделать O(N).
 ```
 -  <a href="http://www.mscharhag.com/2014/02/java-8-datetime-api.html">Java 8 Date and Time API</a>
 -  <a href="https://tproger.ru/translations/algorithms-and-data-structures">Алгоритмы и структуры данных для начинающих: сложность алгоритмов</a>
