@@ -81,6 +81,8 @@ Java Enterprise Online Project
 -  <a href="https://ru.wikipedia.org/wiki/Временная_сложность_алгоритма">Временная сложность алгоритма</a>
 -  <a href="https://ru.wikipedia.org/wiki/Вычислительная_сложность">Вычислительная сложность</a>
 
+#### ВНИМАНИЕ: варианты Optional делайте в `UserMealsUtil` в одной ветке в разных методах. Проще делать, проще проверять
+
 #### Optional (Java 8 Stream API)
 ```
 Сделать реализацию через Java 8 Stream API.
