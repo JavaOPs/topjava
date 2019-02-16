@@ -14,8 +14,12 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final UserRepository repository;
+
     @Autowired
-    private UserRepository repository;
+    public UserServiceImpl(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public User create(User user) {
