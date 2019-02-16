@@ -42,4 +42,3 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
         return repository.values();
     }
 }
-
