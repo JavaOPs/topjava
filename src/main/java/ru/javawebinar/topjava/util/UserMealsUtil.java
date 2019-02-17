@@ -30,6 +30,9 @@ public class UserMealsUtil {
         System.out.println();
         filteredWithExceeded = getFilteredWithExceededLambda(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
         filteredWithExceeded.forEach(System.out::println);
+        System.out.println();
+        filteredWithExceeded = getFilteredWithExceededLambda2(mealList, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        filteredWithExceeded.forEach(System.out::println);
 //        .toLocalDate();
 //        .toLocalTime();
 
@@ -81,6 +84,16 @@ public class UserMealsUtil {
         });
         return mealsWithExceed.stream()
                 .filter(meal -> TimeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
+                .collect(Collectors.toList());
+    }
+
+    private static List<UserMealWithExceed> getFilteredWithExceededLambda2(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+        Map<LocalDate, Integer> caloriesSumByDate = mealList.stream().collect(
+                Collectors.groupingBy(meal -> meal.getDateTime().toLocalDate(), Collectors.summingInt(UserMeal::getCalories)));
+        return mealList.stream()
+                .filter(meal -> TimeUtil.isBetween(meal.getDateTime().toLocalTime(), startTime, endTime))
+                .map(meal -> new UserMealWithExceed(meal.getDateTime(), meal.getDescription(),
+                        meal.getCalories(), caloriesSumByDate.get(meal.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
     }
 }
