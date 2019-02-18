@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Meal {
+public class Meal extends AbstractBaseEntity{
     private Integer id;
 
     private final LocalDateTime dateTime;

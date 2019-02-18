@@ -10,12 +10,10 @@
             margin: 8px 0;
             padding: 0;
         }
-
         dt {
             display: inline-block;
             width: 170px;
         }
-
         dd {
             display: inline-block;
             margin-left: 8px;
