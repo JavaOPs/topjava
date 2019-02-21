@@ -71,13 +71,11 @@ public class MealServlet extends HttpServlet {
                 break;
             case "all":
             default:
-        log.info("getAll");
-                request.setAttribute("meals",
-                        MealsUtil.getWithExcess(repository.getAll(SecurityUtil.authUserId()), MealsUtil.DEFAULT_CALORIES_PER_DAY));
-        request.getRequestDispatcher("/meals.jsp").forward(request, response);
+                request.setAttribute("meals", mealController.getAll());
+                request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
+        }
     }
-}
 
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
