@@ -1,11 +1,15 @@
 package ru.javawebinar.topjava.repository.inmemory;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.util.Util;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Collections;
@@ -21,6 +25,7 @@ import static ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepositoryI
 
 @Repository
 public class InMemoryMealRepositoryImpl implements MealRepository {
+    private static final Logger log = LoggerFactory.getLogger(InMemoryMealRepositoryImpl.class);
 
     // Map  userId -> (mealId-> meal)
     private Map<Integer, InMemoryBaseRepositoryImpl<Meal>> usersMealsMap = new ConcurrentHashMap<>();
@@ -37,6 +42,16 @@ public class InMemoryMealRepositoryImpl implements MealRepository {
     public Meal save(Meal meal, int userId) {
         InMemoryBaseRepositoryImpl<Meal> meals = usersMealsMap.computeIfAbsent(userId, uid -> new InMemoryBaseRepositoryImpl<>());
         return meals.save(meal);
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        log.info("+++ PostConstruct");
+    }
+
+    @PreDestroy
+    public void preDestroy() {
+        log.info("+++ PreDestroy");
     }
 
     @Override
