@@ -15,6 +15,9 @@ public class DateTimeUtil {
     private static final LocalDate MIN_DATE = LocalDate.of(1, 1, 1);
     private static final LocalDate MAX_DATE = LocalDate.of(3000, 1, 1);
 
+    private DateTimeUtil() {
+    }
+
     public static LocalDateTime adjustStartDateTime(LocalDate localDate) {
         return adjustDateTime(localDate, MIN_DATE, LocalTime.MIN);
     }

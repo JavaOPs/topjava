@@ -29,6 +29,9 @@ public class MealsUtil {
 
     public static final int DEFAULT_CALORIES_PER_DAY = 2000;
 
+    private MealsUtil() {
+    }
+
     public static List<MealTo> getWithExcess(Collection<Meal> meals, int caloriesPerDay) {
         return getFilteredWithExcess(meals, caloriesPerDay, meal -> true);
     }
