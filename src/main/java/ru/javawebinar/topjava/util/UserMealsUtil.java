@@ -61,7 +61,7 @@ public class UserMealsUtil {
                 );
 
         return mealList.stream()
-                .filter(meal -> isDateBetween(meal.getTime(), startTime, endTime))
+                .filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
                 .map(meal -> createWithExceed(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(toList());
     }
@@ -70,7 +70,4 @@ public class UserMealsUtil {
         return new UserMealWithExceed(meal.getDateTime(), meal.getDescription(), meal.getCalories(), exceeded);
     }
 
-    public static  boolean isDateBetween(LocalTime time, LocalTime startTime, LocalTime endTime) {
-        return time.isAfter(startTime) && time.isBefore(endTime);
-    }
 }
