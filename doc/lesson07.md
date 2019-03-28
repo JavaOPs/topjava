@@ -1,4 +1,6 @@
 # [Онлайн стажировка Spring 5/JPA Enterprise (Topjava)](http://javaops.ru/view/topjava)
+# REST, REST контроллеры, тестирование Spring MVC контроллеров
+## Седьмое занятие, несколько видео открыто. [Формат обучения на стажировке](http://javaops.ru/#format)
 
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Разбор домашнего задания HW6
 
