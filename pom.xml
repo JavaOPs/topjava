@@ -30,6 +30,7 @@
         <!--    Tests  -->
         <junit.jupiter.version>5.4.1</junit.jupiter.version>
         <hamcrest.version>1.3</hamcrest.version>
+        <jsonassert.version>1.5.0</jsonassert.version>
 
         <!-- Hibernate -->
         <hibernate.version>5.4.1.Final</hibernate.version>
@@ -240,6 +241,12 @@
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
             <version>${hamcrest.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${jsonassert.version}</version>
             <scope>test</scope>
         </dependency>
 
