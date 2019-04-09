@@ -155,6 +155,18 @@
             <version>${spring-data-jpa.version}</version>
         </dependency>
 
+        <!--security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <!--- ORM -->
         <dependency>
             <groupId>org.hibernate</groupId>

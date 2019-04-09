@@ -11,6 +11,7 @@
         </bean>
 -->
     <import resource="spring-tools.xml"/>
+    <import resource="spring-security.xml"/>
 
       <!-- Not necessary, already included with component-scan -->
     <!--<context:annotation-config/>-->
