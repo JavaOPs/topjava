@@ -33,7 +33,7 @@ abstract public class AbstractControllerTest {
         CHARACTER_ENCODING_FILTER.setEncoding("UTF-8");
         CHARACTER_ENCODING_FILTER.setForceEncoding(true);
     }
-
+    @Autowired
     protected MockMvc mockMvc;
 
     @Autowired
