@@ -1,4 +1,9 @@
 # TopJava Release Notes
+### Topjava 16
+- Выделил общий код реализации хранения в памяти в `InMemoryBaseRepositoryImpl`
+- Сделал подтверждение для удаления записей
+- Валидации дублирования записей сделал через `WebDataBinder` и `Validator`
+
 ### Topjava 15
 - Миграция на Servlet API 4.0 / Tomcat 9.x
 - [Миграция на JDK11](http://javaops.ru/view/resources/jdk8_11)
