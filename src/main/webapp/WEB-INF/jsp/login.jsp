@@ -16,17 +16,19 @@
         <c:if test="${not empty param.message}">
             <div class="message"><spring:message code="${param.message}"/></div>
         </c:if>
-        <br/>
-        <p>
-            <button type="submit" class="btn btn-lg btn-primary" onclick="login('user@yandex.ru', 'password')">
-                <spring:message code="app.login"/> User
-            </button>
-            <button type="submit" class="btn btn-lg btn-primary" onclick="login('admin@gmail.com', 'admin')">
-                <spring:message code="app.login"/> Admin
-            </button>
-        </p>
-        <br/>
-        <p>Стек технологий: <a href="http://projects.spring.io/spring-security/">Spring Security</a>,
+        <sec:authorize access="isAnonymous()">
+            <div class="pt-4">
+                <a class="btn btn-lg btn-success" href="register"><spring:message code="app.register"/> &raquo;</a>
+                <button type="submit" class="btn btn-lg btn-primary" onclick="login('user@yandex.ru', 'password')">
+                    <spring:message code="app.login"/> User
+                </button>
+                <button type="submit" class="btn btn-lg btn-primary" onclick="login('admin@gmail.com', 'admin')">
+                    <spring:message code="app.login"/> Admin
+                </button>
+            </div>
+        </sec:authorize>
+        <div class="lead py-4">Стек технологий: <br>
+            <a href="http://projects.spring.io/spring-security/">Spring Security</a>,
             <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html">Spring MVC</a>,
             <a href="http://projects.spring.io/spring-data-jpa/">Spring Data JPA</a>,
             <a href="http://spring.io/blog/2014/05/07/preview-spring-security-test-method-security">Spring Security
@@ -62,10 +64,17 @@
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 <script type="text/javascript">
+    <c:if test="${not empty param.username}">
+    setCredentials("${param.username}", "");
+    </c:if>
+
     function login(username, password) {
+        setCredentials(username, password);
+        $("#login_form").submit();
+    }
+    function setCredentials(username, password) {
         $('input[name="username"]').val(username);
         $('input[name="password"]').val(password);
-        $("#login_form").submit();
     }
 </script>
 </body>
