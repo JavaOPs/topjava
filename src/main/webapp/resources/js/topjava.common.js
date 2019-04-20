@@ -2,6 +2,19 @@ let context, form;
 
 function makeEditable(ctx) {
     context = ctx;
+    context.datatableApi = $("#datatable").DataTable(
+        // https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
+        $.extend(true, ctx.datatableOpts,
+            {
+                "ajax": {
+                    "url": context.ajaxUrl,
+                    "dataSrc": ""
+                },
+                "paging": false,
+                "info": true,
+            }
+        ));
+
     form = $('#detailsForm');
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
