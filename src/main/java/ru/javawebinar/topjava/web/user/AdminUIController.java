@@ -25,14 +25,14 @@ public class AdminUIController extends AbstractUserController {
 
     @Override
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public User get(@PathVariable("id") int id) {
+    public User get(@PathVariable int id) {
         return super.get(id);
     }
 
     @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable("id") int id) {
+    public void delete(@PathVariable int id) {
         super.delete(id);
     }
 
@@ -53,7 +53,7 @@ public class AdminUIController extends AbstractUserController {
     @Override
     @PostMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void enable(@PathVariable("id") int id, @RequestParam("enabled") boolean enabled) {
+    public void enable(@PathVariable int id, @RequestParam boolean enabled) {
         super.enable(id, enabled);
     }
 }

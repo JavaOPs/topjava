@@ -61,10 +61,10 @@ public class MealUIController extends AbstractMealController {
     @GetMapping(value = "/filter", produces = MediaType.APPLICATION_JSON_VALUE)
     @JsonView(View.JsonUI.class)
     public List<MealTo> getBetween(
-            @RequestParam(value = "startDate", required = false) LocalDate startDate,
-            @RequestParam(value = "startTime", required = false) LocalTime startTime,
-            @RequestParam(value = "endDate", required = false) LocalDate endDate,
-            @RequestParam(value = "endTime", required = false) LocalTime endTime) {
+            @RequestParam(required = false) LocalDate startDate,
+            @RequestParam(required = false) LocalTime startTime,
+            @RequestParam(required = false) LocalDate endDate,
+            @RequestParam(required = false) LocalTime endTime) {
         return super.getBetween(startDate, startTime, endDate, endTime);
     }
 }
