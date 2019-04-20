@@ -1,22 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
-<nav class="navbar navbar-dark bg-dark py-0">
-    <div class="container">
-        <div class="navbar-brand"><img src="resources/images/icon-meal.png"> <spring:message code="app.title"/></div>
-        <form class="form-inline my-2" id="login_form" action="spring_security_check" method="post">
-            <input class="form-control mr-1" type="text" placeholder="Email" name="username">
-            <input class="form-control mr-1" type="password" placeholder="Password" name="password">
-            <button class="btn btn-success" type="submit">
-                <span class="fa fa-sign-in"></span>
-            </button>
-        </form>
-    </div>
-</nav>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron py-0">
     <div class="container">
@@ -56,7 +46,8 @@
             <a href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a>,
             <a href="http://jquery.com/">jQuery</a>,
             <a href="http://ned.im/noty/">jQuery notification</a>,
-            <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
+            <a href="http://getbootstrap.com/">Bootstrap</a>.
+        </div>
     </div>
 </div>
 <div class="container lead">
