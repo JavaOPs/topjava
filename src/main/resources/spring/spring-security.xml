@@ -15,7 +15,7 @@
         <csrf disabled="true"/>
     </http>
 
-    <beans:bean name="noopEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
+    <beans:bean class="org.springframework.security.crypto.factory.PasswordEncoderFactories" id="passwordEncoder" factory-method="createDelegatingPasswordEncoder"/>
 
     <http>
         <intercept-url pattern="/login" access="permitAll()"/>
@@ -33,7 +33,7 @@
 
     <authentication-manager>
         <authentication-provider user-service-ref="userService">
-            <password-encoder ref="noopEncoder"/>
+            <password-encoder ref="passwordEncoder"/>
 <!--
             <jdbc-user-service data-source-ref="dataSource"
                                users-by-username-query="SELECT email, password, enabled FROM users WHERE email = ?"
