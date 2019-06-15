@@ -179,9 +179,10 @@ Java Enterprise Online Project
 
 #### Сервлеты
 -  <a href="https://devcolibri.com/как-создать-servlet-полное-руководство/">Как создать Servlet? Полное руководство.</a>
+-  [Сервлеты](https://metanit.com/java/javaee/4.1.php)
 
 #### JDBC, SQL
-- <a href="https://habrahabr.ru/post/123636/">Основы SQL на примере задачи</a>
+-  <a href="https://habrahabr.ru/post/123636/">Основы SQL на примере задачи</a>
 -  <a href="https://www.youtube.com/playlist?list=PLIU76b8Cjem5qdMQLXiIwGLTLyUHkTqi2">Уроки по JDBC</a>
 -  <a href="https://www.codecademy.com/learn/learn-sql">Learn SQL</a>
 -  <a href="http://www.intuit.ru/studies/courses/5/5/info">Интуит. Основы SQL</a>
