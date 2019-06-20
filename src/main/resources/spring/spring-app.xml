@@ -15,7 +15,7 @@
     <!-- Not necessary, already included with component-scan -->
     <!--<context:annotation-config/>-->
 
-    <context:component-scan base-package="ru.javawebinar.**.repository"/>
+    <context:component-scan base-package="ru.javawebinar.**.repository.jdbc"/>
 
     <context:component-scan base-package="ru.javawebinar.**.service"/>
 
