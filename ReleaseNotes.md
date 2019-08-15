@@ -1,4 +1,10 @@
 # TopJava Release Notes
+### Topjava 17
+- Удалил `Impl` из названий репозиториев
+- Удалил интерфейсы к сервисам, использую классы
+- Добавил `AdminRestController.enable`, вызов через PATCH метод
+- Добавил валидацию для jdbc через Bean Validation API
+
 ### Topjava 16
 - Выделил общий код реализации хранения в памяти в `InMemoryBaseRepositoryImpl`
 - Сделал подтверждение для удаления записей
