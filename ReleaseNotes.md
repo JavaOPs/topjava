@@ -4,6 +4,8 @@
 - Удалил интерфейсы к сервисам, использую классы
 - Добавил `AdminRestController.enable`, вызов через PATCH метод
 - Добавил валидацию для jdbc через Bean Validation API
+- Перенес работу в UI с профилем из `RootController` в `ProfileUIController`
+- `SLF4JBridgeHandler` инициализирую только в профиле `postgres`
 
 ### Topjava 16
 - Выделил общий код реализации хранения в памяти в `InMemoryBaseRepositoryImpl`
