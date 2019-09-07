@@ -51,7 +51,7 @@ _Антуан де Сент-Экзюпери_
 - 9: далаем REST API в соответствии с концепцией REST
     - [15 тривиальных фактов о правильной работе с протоколом HTTP](https://habrahabr.ru/company/yandex/blog/265569/)
     - <a href="http://blog.mwaysolutions.com/2014/06/05/10-best-practices-for-better-restful-api/">10 Best Practices for Better RESTful API</a>
-    - [REST resource hierarchy (если кратко: не рекомендуется)](https://stackoverflow.com/questions/15259843/how-to-structure-rest-resource-hierarchy)
+    - [REST resource hierarchy](https://stackoverflow.com/questions/20951419/what-are-best-practices-for-rest-nested-resources)
 - 10: не смешивайте TO и Entity вместе. Лучше всего, если они будут независимыми друг от друга.
 - 11: если приложению в объекте требуется только его id, используйте reference (как мы при сохранении еды вставляем туда юзера)
 - 12: [Use for money in java app](http://stackoverflow.com/a/43051227/548473)
