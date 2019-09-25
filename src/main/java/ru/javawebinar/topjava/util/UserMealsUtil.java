@@ -9,6 +9,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -21,13 +22,12 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510)
         );
         System.out.println(getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12,0), 2000));
-//        .toLocalDate();
-//        .toLocalTime();
+        System.out.println("======");
+        System.out.println(getFilteredWithExceededByStream(mealList, LocalTime.of(7, 0), LocalTime.of(12,0), 2000));
     }
 
+    /** Method return filtered list with correctly exceeded field*/
     public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO return filtered list with correctly exceeded field
-        //
         List<UserMealWithExceed> userMealWithExceedsList = new ArrayList<>();
         for (UserMeal userMeal : mealList) {
             LocalTime mealLocalTime = userMeal.getDateTime().toLocalTime();
@@ -38,13 +38,12 @@ public class UserMealsUtil {
         }
         return userMealWithExceedsList;
     }
+
+    /** Method return filtered list with correctly exceeded field with streams*/
+    public static List<UserMealWithExceed>  getFilteredWithExceededByStream(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+        return mealList.stream()
+                .filter(userMeal -> TimeUtil.isBetween(userMeal.getDateTime().toLocalTime(), startTime, endTime))
+                .map(userMeal -> new UserMealWithExceed(userMeal, userMeal.getCalories() > caloriesPerDay))
+                .collect(Collectors.toList());
+    }
 }
-//Реализовать метод UserMealsUtil.getFilteredWithExceeded через циклы (`forEach`):
-//-  должны возвращаться только записи между startTime и endTime
-//-  поле UserMealWithExceed.exceed должно показывать,
-//                                     превышает ли сумма калорий за весь день параметра метода caloriesPerDay
-//
-//Т.е UserMealWithExceed - это запись одной еды, но поле exceeded будет одинаково для всех записей за этот день.
-//
-//- Проверьте результат выполнения ДЗ (можно проверить логику в http://topjava.herokuapp.com , список еды)
-//- Оцените Time complexity алгоритма. Если она больше O(N), например O(N*N) или N*log(N), сделайте O(N).
