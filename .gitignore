@@ -3,6 +3,10 @@ out
 target
 *.iml
 log
+.gitignore
+*.md
+*.patch
+patch
 
 
 
