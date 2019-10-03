@@ -1,0 +1,158 @@
+Index: src/main/java/ru/javawebinar/topjava/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/Main.java	(date 1518688470000)
++++ src/main/java/ru/javawebinar/topjava/Main.java	(date 1524952636638)
+@@ -1,11 +1,8 @@
+ package ru.javawebinar.topjava;
+ 
+ /**
+- * User: gkislin
+- * Date: 05.08.2015
+- *
+- * @link http://caloriesmng.herokuapp.com/
+- * @link https://github.com/JavaOPs/topjava
++ * @see <a href="http://topjava.herokuapp.com">Demo</a>
++ * @see <a href="https://github.com/JavaOPs/topjava">Initial project</a>
+  */
+ public class Main {
+     public static void main(String[] args) {
+Index: src/main/java/ru/javawebinar/topjava/model/UserMeal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/UserMeal.java	(date 1524952566910)
++++ src/main/java/ru/javawebinar/topjava/model/UserMeal.java	(date 1524952566910)
+@@ -0,0 +1,29 @@
++package ru.javawebinar.topjava.model;
++
++import java.time.LocalDateTime;
++
++public class UserMeal {
++    private final LocalDateTime dateTime;
++
++    private final String description;
++
++    private final int calories;
++
++    public UserMeal(LocalDateTime dateTime, String description, int calories) {
++        this.dateTime = dateTime;
++        this.description = description;
++        this.calories = calories;
++    }
++
++    public LocalDateTime getDateTime() {
++        return dateTime;
++    }
++
++    public String getDescription() {
++        return description;
++    }
++
++    public int getCalories() {
++        return calories;
++    }
++}
+Index: src/main/java/ru/javawebinar/topjava/util/TimeUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/TimeUtil.java	(date 1524952581843)
++++ src/main/java/ru/javawebinar/topjava/util/TimeUtil.java	(date 1524952581843)
+@@ -0,0 +1,9 @@
++package ru.javawebinar.topjava.util;
++
++import java.time.LocalTime;
++
++public class TimeUtil {
++    public static boolean isBetween(LocalTime lt, LocalTime startTime, LocalTime endTime) {
++        return lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) <= 0;
++    }
++}
+Index: src/main/java/ru/javawebinar/topjava/util/UserMealsUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/UserMealsUtil.java	(date 1524952589076)
++++ src/main/java/ru/javawebinar/topjava/util/UserMealsUtil.java	(date 1524952589076)
+@@ -0,0 +1,31 @@
++package ru.javawebinar.topjava.util;
++
++import ru.javawebinar.topjava.model.UserMeal;
++import ru.javawebinar.topjava.model.UserMealWithExceed;
++
++import java.time.LocalDateTime;
++import java.time.LocalTime;
++import java.time.Month;
++import java.util.Arrays;
++import java.util.List;
++
++public class UserMealsUtil {
++    public static void main(String[] args) {
++        List<UserMeal> mealList = Arrays.asList(
++                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,10,0), "Завтрак", 500),
++                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,13,0), "Обед", 1000),
++                new UserMeal(LocalDateTime.of(2015, Month.MAY, 30,20,0), "Ужин", 500),
++                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,10,0), "Завтрак", 1000),
++                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,13,0), "Обед", 500),
++                new UserMeal(LocalDateTime.of(2015, Month.MAY, 31,20,0), "Ужин", 510)
++        );
++        getFilteredWithExceeded(mealList, LocalTime.of(7, 0), LocalTime.of(12,0), 2000);
++//        .toLocalDate();
++//        .toLocalTime();
++    }
++
++    public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
++        // TODO return filtered list with correctly exceeded field
++        return null;
++    }
++}
+Index: src/main/java/ru/javawebinar/topjava/model/UserMealWithExceed.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/UserMealWithExceed.java	(date 1524952574889)
++++ src/main/java/ru/javawebinar/topjava/model/UserMealWithExceed.java	(date 1524952574889)
+@@ -0,0 +1,20 @@
++package ru.javawebinar.topjava.model;
++
++import java.time.LocalDateTime;
++
++public class UserMealWithExceed {
++    private final LocalDateTime dateTime;
++
++    private final String description;
++
++    private final int calories;
++
++    private final boolean exceed;
++
++    public UserMealWithExceed(LocalDateTime dateTime, String description, int calories, boolean exceed) {
++        this.dateTime = dateTime;
++        this.description = description;
++        this.calories = calories;
++        this.exceed = exceed;
++    }
++}
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(date 1518688470000)
++++ pom.xml	(date 1524952636647)
+@@ -24,7 +24,7 @@
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-compiler-plugin</artifactId>
+-                <version>3.1</version>
++                <version>3.7.0</version>
+                 <configuration>
+                     <source>${java.version}</source>
+                     <target>${java.version}</target>
