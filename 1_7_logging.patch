@@ -1,0 +1,114 @@
+Index: src/main/resources/logback.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/logback.xml	(date 1570051831036)
++++ src/main/resources/logback.xml	(date 1570051831036)
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<configuration scan="true" scanPeriod="30 seconds">
++
++    <!-- To enable JMX Management -->
++    <jmxConfigurator/>
++
++    <appender name="file" class="ch.qos.logback.core.FileAppender">
++        <file>${TOPJAVA_ROOT}/log/topjava.log</file>
++
++        <encoder>
++            <charset>UTF-8</charset>
++            <pattern>%date %-5level %logger{0} [%file:%line] %msg%n</pattern>
++        </encoder>
++    </appender>
++
++    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
++        <encoder>
++            <charset>UTF-8</charset>
++            <pattern>%-5level %logger{0} [%file:%line] %msg%n</pattern>
++        </encoder>
++    </appender>
++
++    <logger name="ru.javawebinar.topjava" level="debug"/>
++
++    <root level="info">
++        <appender-ref ref="file"/>
++        <appender-ref ref="console"/>
++    </root>
++</configuration>
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(date 1570051814000)
++++ pom.xml	(date 1570052255207)
+@@ -15,6 +15,10 @@
+         <java.version>1.8</java.version>
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
++
++        <!-- Logging -->
++        <logback.version>1.2.3</logback.version>
++        <slf4j.version>1.7.28</slf4j.version>
+     </properties>
+ 
+     <build>
+@@ -34,6 +38,28 @@
+     </build>
+ 
+     <dependencies>
++        <!-- Logging with SLF4J & LogBack -->
++        <dependency>
++            <groupId>org.slf4j</groupId>
++            <artifactId>slf4j-api</artifactId>
++            <version>${slf4j.version}</version>
++            <scope>compile</scope>
++        </dependency>
++
++        <dependency>
++            <groupId>org.slf4j</groupId>
++            <artifactId>jcl-over-slf4j</artifactId>
++            <version>${slf4j.version}</version>
++            <scope>runtime</scope>
++        </dependency>
++
++        <dependency>
++            <groupId>ch.qos.logback</groupId>
++            <artifactId>logback-classic</artifactId>
++            <version>${logback.version}</version>
++            <scope>runtime</scope>
++        </dependency>
++
+         <!--Web-->
+         <dependency>
+             <groupId>javax.servlet</groupId>
+Index: src/main/java/ru/javawebinar/topjava/web/UserServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/UserServlet.java	(date 1570051814000)
++++ src/main/java/ru/javawebinar/topjava/web/UserServlet.java	(date 1570051831027)
+@@ -1,15 +1,22 @@
+ package ru.javawebinar.topjava.web;
+ 
++import org.slf4j.Logger;
++
+ import javax.servlet.ServletException;
+ import javax.servlet.http.HttpServlet;
+ import javax.servlet.http.HttpServletRequest;
+ import javax.servlet.http.HttpServletResponse;
+ import java.io.IOException;
+ 
++import static org.slf4j.LoggerFactory.getLogger;
++
+ public class UserServlet extends HttpServlet {
++    private static final Logger log = getLogger(UserServlet.class);
+ 
+     @Override
+     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++        log.debug("redirect to users");
++
+ //        request.getRequestDispatcher("/users.jsp").forward(request, response);
+         response.sendRedirect("users.jsp");
+     }
