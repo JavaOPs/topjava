@@ -9,5 +9,5 @@ public interface DBManager {
 
     void delete(Meal meal);
 
-    void get (Integer id);
+
 }
