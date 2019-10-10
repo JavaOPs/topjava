@@ -1,0 +1,191 @@
+Index: src/main/resources/spring/spring-app.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/spring/spring-app.xml	(date 1570661607000)
++++ src/main/resources/spring/spring-app.xml	(date 1570662304173)
+@@ -1,10 +1,24 @@
+ <beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
++       xmlns:context="http://www.springframework.org/schema/context"
++       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
++       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+ 
+-    <bean class="ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository" id="inmemoryUserRepository"/>
++    <!--
++        <bean class="ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository" id="inmemoryUserRepository"/>
+ 
+-    <bean class="ru.javawebinar.topjava.service.UserService">
+-        <property name="repository" ref="inmemoryUserRepository"/>
+-    </bean>
++        <bean class="ru.javawebinar.topjava.service.UserService">
++            <property name="repository" ref="inmemoryUserRepository"/>
++        </bean>
++    -->
++
++    <!-- Not necessary, already included with component-scan -->
++    <!--<context:annotation-config/>-->
++
++    <context:component-scan base-package="ru.javawebinar.**.repository"/>
++
++    <context:component-scan base-package="ru.javawebinar.**.service"/>
++
++    <context:component-scan base-package="ru.javawebinar.**.web"/>
++
+ </beans>
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java	(date 1570661607000)
++++ src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java	(date 1570661729839)
+@@ -2,12 +2,14 @@
+ 
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
++import org.springframework.stereotype.Repository;
+ import ru.javawebinar.topjava.model.User;
+ import ru.javawebinar.topjava.repository.UserRepository;
+ 
+ import java.util.Collections;
+ import java.util.List;
+ 
++@Repository
+ public class InMemoryUserRepository implements UserRepository {
+     private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepository.class);
+ 
+Index: src/main/java/ru/javawebinar/topjava/SpringMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/SpringMain.java	(date 1570661607000)
++++ src/main/java/ru/javawebinar/topjava/SpringMain.java	(date 1570661697400)
+@@ -4,23 +4,17 @@
+ import org.springframework.context.support.ClassPathXmlApplicationContext;
+ import ru.javawebinar.topjava.model.Role;
+ import ru.javawebinar.topjava.model.User;
+-import ru.javawebinar.topjava.repository.UserRepository;
+-import ru.javawebinar.topjava.service.UserService;
++import ru.javawebinar.topjava.web.user.AdminRestController;
+ 
+ import java.util.Arrays;
+ 
+ public class SpringMain {
+     public static void main(String[] args) {
+-        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+-        System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
+-
+-//        UserRepository userRepository = (UserRepository) appCtx.getBean("inmemoryUserRepository");
+-        UserRepository userRepository = appCtx.getBean(UserRepository.class);
+-        userRepository.getAll();
+-
+-        UserService userService = appCtx.getBean(UserService.class);
+-        userService.create(new User(null, "userName", "email@mail.ru", "password", Role.ROLE_ADMIN));
+-
+-        appCtx.close();
++        // java 7 automatic resource management
++        try (ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml")) {
++            System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
++            AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
++            adminUserController.create(new User(null, "userName", "email@mail.ru", "password", Role.ROLE_ADMIN));
++        }
+     }
+ }
+Index: src/main/java/ru/javawebinar/topjava/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/service/UserService.java	(date 1570661607000)
++++ src/main/java/ru/javawebinar/topjava/service/UserService.java	(date 1570662329221)
+@@ -1,5 +1,7 @@
+ package ru.javawebinar.topjava.service;
+ 
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Service;
+ import ru.javawebinar.topjava.model.User;
+ import ru.javawebinar.topjava.repository.UserRepository;
+ import ru.javawebinar.topjava.util.exception.NotFoundException;
+@@ -9,14 +11,12 @@
+ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
+ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
+ 
++@Service
+ public class UserService {
+ 
++    @Autowired
+     private UserRepository repository;
+ 
+-    public void setRepository(UserRepository repository) {
+-        this.repository = repository;
+-    }
+-
+     public User create(User user) {
+         return repository.save(user);
+     }
+Index: src/main/java/ru/javawebinar/topjava/web/user/AbstractUserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/user/AbstractUserController.java	(date 1570661607000)
++++ src/main/java/ru/javawebinar/topjava/web/user/AbstractUserController.java	(date 1570661697381)
+@@ -2,6 +2,7 @@
+ 
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
++import org.springframework.beans.factory.annotation.Autowired;
+ import ru.javawebinar.topjava.model.User;
+ import ru.javawebinar.topjava.service.UserService;
+ 
+@@ -13,6 +14,7 @@
+ public abstract class AbstractUserController {
+     protected final Logger log = LoggerFactory.getLogger(getClass());
+ 
++    @Autowired
+     private UserService service;
+ 
+     public List<User> getAll() {
+Index: src/main/java/ru/javawebinar/topjava/web/user/ProfileRestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/user/ProfileRestController.java	(date 1570661607000)
++++ src/main/java/ru/javawebinar/topjava/web/user/ProfileRestController.java	(date 1570661697393)
+@@ -1,9 +1,11 @@
+ package ru.javawebinar.topjava.web.user;
+ 
++import org.springframework.stereotype.Controller;
+ import ru.javawebinar.topjava.model.User;
+ 
+ import static ru.javawebinar.topjava.web.SecurityUtil.authUserId;
+ 
++@Controller
+ public class ProfileRestController extends AbstractUserController {
+ 
+     public User get() {
+Index: src/main/java/ru/javawebinar/topjava/web/user/AdminRestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/user/AdminRestController.java	(date 1570661607000)
++++ src/main/java/ru/javawebinar/topjava/web/user/AdminRestController.java	(date 1570661697387)
+@@ -1,9 +1,11 @@
+ package ru.javawebinar.topjava.web.user;
+ 
++import org.springframework.stereotype.Controller;
+ import ru.javawebinar.topjava.model.User;
+ 
+ import java.util.List;
+ 
++@Controller
+ public class AdminRestController extends AbstractUserController {
+ 
+     @Override

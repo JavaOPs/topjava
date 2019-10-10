@@ -1,0 +1,520 @@
+Index: src/main/java/ru/javawebinar/topjava/repository/UserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/repository/UserRepository.java	(date 1570660057185)
++++ src/main/java/ru/javawebinar/topjava/repository/UserRepository.java	(date 1570660057185)
+@@ -0,0 +1,21 @@
++package ru.javawebinar.topjava.repository;
++
++import ru.javawebinar.topjava.model.User;
++
++import java.util.List;
++
++public interface UserRepository {
++    // null if not found, when updated
++    User save(User user);
++
++    // false if not found
++    boolean delete(int id);
++
++    // null if not found
++    User get(int id);
++
++    // null if not found
++    User getByEmail(String email);
++
++    List<User> getAll();
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/model/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/User.java	(date 1570659942122)
++++ src/main/java/ru/javawebinar/topjava/model/User.java	(date 1570659942122)
+@@ -0,0 +1,91 @@
++package ru.javawebinar.topjava.model;
++
++import java.util.Date;
++import java.util.EnumSet;
++import java.util.Set;
++
++import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
++
++public class User extends AbstractNamedEntity {
++
++    private String email;
++
++    private String password;
++
++    private boolean enabled = true;
++
++    private Date registered = new Date();
++
++    private Set<Role> roles;
++
++    private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;
++
++    public User(Integer id, String name, String email, String password, Role role, Role... roles) {
++        this(id, name, email, password, DEFAULT_CALORIES_PER_DAY, true, EnumSet.of(role, roles));
++    }
++
++    public User(Integer id, String name, String email, String password, int caloriesPerDay, boolean enabled, Set<Role> roles) {
++        super(id, name);
++        this.email = email;
++        this.password = password;
++        this.caloriesPerDay = caloriesPerDay;
++        this.enabled = enabled;
++        this.roles = roles;
++    }
++
++    public String getEmail() {
++        return email;
++    }
++
++    public void setEmail(String email) {
++        this.email = email;
++    }
++
++    public void setPassword(String password) {
++        this.password = password;
++    }
++
++    public Date getRegistered() {
++        return registered;
++    }
++
++    public void setRegistered(Date registered) {
++        this.registered = registered;
++    }
++
++    public void setEnabled(boolean enabled) {
++        this.enabled = enabled;
++    }
++
++    public int getCaloriesPerDay() {
++        return caloriesPerDay;
++    }
++
++    public void setCaloriesPerDay(int caloriesPerDay) {
++        this.caloriesPerDay = caloriesPerDay;
++    }
++
++    public boolean isEnabled() {
++        return enabled;
++    }
++
++    public Set<Role> getRoles() {
++        return roles;
++    }
++
++    public String getPassword() {
++        return password;
++    }
++
++    @Override
++    public String toString() {
++        return "User (" +
++                "id=" + id +
++                ", email=" + email +
++                ", name=" + name +
++                ", enabled=" + enabled +
++                ", roles=" + roles +
++                ", caloriesPerDay=" + caloriesPerDay +
++                ')';
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/model/AbstractBaseEntity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/AbstractBaseEntity.java	(date 1570659942093)
++++ src/main/java/ru/javawebinar/topjava/model/AbstractBaseEntity.java	(date 1570659942093)
+@@ -0,0 +1,26 @@
++package ru.javawebinar.topjava.model;
++
++public abstract class AbstractBaseEntity {
++    protected Integer id;
++
++    protected AbstractBaseEntity(Integer id) {
++        this.id = id;
++    }
++
++    public void setId(Integer id) {
++        this.id = id;
++    }
++
++    public Integer getId() {
++        return id;
++    }
++
++    public boolean isNew() {
++        return this.id == null;
++    }
++
++    @Override
++    public String toString() {
++        return getClass().getSimpleName() + ":" + id;
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/model/Role.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/Role.java	(date 1570659942107)
++++ src/main/java/ru/javawebinar/topjava/model/Role.java	(date 1570659942107)
+@@ -0,0 +1,6 @@
++package ru.javawebinar.topjava.model;
++
++public enum Role {
++    ROLE_USER,
++    ROLE_ADMIN
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/model/AbstractNamedEntity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/AbstractNamedEntity.java	(date 1570659942101)
++++ src/main/java/ru/javawebinar/topjava/model/AbstractNamedEntity.java	(date 1570659942101)
+@@ -0,0 +1,24 @@
++package ru.javawebinar.topjava.model;
++
++public abstract class AbstractNamedEntity extends AbstractBaseEntity {
++
++    protected String name;
++
++    protected AbstractNamedEntity(Integer id, String name) {
++        super(id);
++        this.name = name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    public String getName() {
++        return this.name;
++    }
++
++    @Override
++    public String toString() {
++        return super.toString() + '(' + name + ')';
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/util/ValidationUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/ValidationUtil.java	(date 1570659942178)
++++ src/main/java/ru/javawebinar/topjava/util/ValidationUtil.java	(date 1570659942178)
+@@ -0,0 +1,42 @@
++package ru.javawebinar.topjava.util;
++
++
++import ru.javawebinar.topjava.model.AbstractBaseEntity;
++import ru.javawebinar.topjava.util.exception.NotFoundException;
++
++public class ValidationUtil {
++
++    public static <T> T checkNotFoundWithId(T object, int id) {
++        return checkNotFound(object, "id=" + id);
++    }
++
++    public static void checkNotFoundWithId(boolean found, int id) {
++        checkNotFound(found, "id=" + id);
++    }
++
++    public static <T> T checkNotFound(T object, String msg) {
++        checkNotFound(object != null, msg);
++        return object;
++    }
++
++    public static void checkNotFound(boolean found, String msg) {
++        if (!found) {
++            throw new NotFoundException("Not found entity with " + msg);
++        }
++    }
++
++    public static void checkNew(AbstractBaseEntity entity) {
++        if (!entity.isNew()) {
++            throw new IllegalArgumentException(entity + " must be new (id=null)");
++        }
++    }
++
++    public static void assureIdConsistent(AbstractBaseEntity entity, int id) {
++//      conservative when you reply, but accept liberally (http://stackoverflow.com/a/32728226/548473)
++        if (entity.isNew()) {
++            entity.setId(id);
++        } else if (entity.getId() != id) {
++            throw new IllegalArgumentException(entity + " must be with id=" + id);
++        }
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/util/exception/NotFoundException.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/exception/NotFoundException.java	(date 1570659942162)
++++ src/main/java/ru/javawebinar/topjava/util/exception/NotFoundException.java	(date 1570659942162)
+@@ -0,0 +1,7 @@
++package ru.javawebinar.topjava.util.exception;
++
++public class NotFoundException extends RuntimeException {
++    public NotFoundException(String message) {
++        super(message);
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/web/meal/MealRestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/meal/MealRestController.java	(date 1570659942183)
++++ src/main/java/ru/javawebinar/topjava/web/meal/MealRestController.java	(date 1570659942183)
+@@ -0,0 +1,8 @@
++package ru.javawebinar.topjava.web.meal;
++
++import ru.javawebinar.topjava.service.MealService;
++
++public class MealRestController {
++    private MealService service;
++
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/service/MealService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/service/MealService.java	(date 1570660057194)
++++ src/main/java/ru/javawebinar/topjava/service/MealService.java	(date 1570660057194)
+@@ -0,0 +1,9 @@
++package ru.javawebinar.topjava.service;
++
++import ru.javawebinar.topjava.repository.MealRepository;
++
++public class MealService {
++
++    private MealRepository repository;
++
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/service/UserService.java	(date 1570660601523)
++++ src/main/java/ru/javawebinar/topjava/service/UserService.java	(date 1570660601523)
+@@ -0,0 +1,39 @@
++package ru.javawebinar.topjava.service;
++
++import ru.javawebinar.topjava.model.User;
++import ru.javawebinar.topjava.repository.UserRepository;
++import ru.javawebinar.topjava.util.exception.NotFoundException;
++
++import java.util.List;
++
++import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
++import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
++
++public class UserService {
++
++    private UserRepository repository;
++
++    public User create(User user) {
++        return repository.save(user);
++    }
++
++    public void delete(int id) throws NotFoundException {
++        checkNotFoundWithId(repository.delete(id), id);
++    }
++
++    public User get(int id) throws NotFoundException {
++        return checkNotFoundWithId(repository.get(id), id);
++    }
++
++    public User getByEmail(String email) throws NotFoundException {
++        return checkNotFound(repository.getByEmail(email), "email=" + email);
++    }
++
++    public List<User> getAll() {
++        return repository.getAll();
++    }
++
++    public void update(User user) throws NotFoundException {
++        checkNotFoundWithId(repository.save(user), user.getId());
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java	(date 1570659942208)
++++ src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java	(date 1570659942208)
+@@ -0,0 +1,14 @@
++package ru.javawebinar.topjava.web;
++
++import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
++
++public class SecurityUtil {
++
++    public static int authUserId() {
++        return 1;
++    }
++
++    public static int authUserCaloriesPerDay() {
++        return DEFAULT_CALORIES_PER_DAY;
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/web/user/AbstractUserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/user/AbstractUserController.java	(date 1570659942189)
++++ src/main/java/ru/javawebinar/topjava/web/user/AbstractUserController.java	(date 1570659942189)
+@@ -0,0 +1,49 @@
++package ru.javawebinar.topjava.web.user;
++
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import ru.javawebinar.topjava.model.User;
++import ru.javawebinar.topjava.service.UserService;
++
++import java.util.List;
++
++import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
++import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
++
++public abstract class AbstractUserController {
++    protected final Logger log = LoggerFactory.getLogger(getClass());
++
++    private UserService service;
++
++    public List<User> getAll() {
++        log.info("getAll");
++        return service.getAll();
++    }
++
++    public User get(int id) {
++        log.info("get {}", id);
++        return service.get(id);
++    }
++
++    public User create(User user) {
++        log.info("create {}", user);
++        checkNew(user);
++        return service.create(user);
++    }
++
++    public void delete(int id) {
++        log.info("delete {}", id);
++        service.delete(id);
++    }
++
++    public void update(User user, int id) {
++        log.info("update {} with id={}", user, id);
++        assureIdConsistent(user, id);
++        service.update(user);
++    }
++
++    public User getByMail(String email) {
++        log.info("getByEmail {}", email);
++        return service.getByEmail(email);
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/web/user/ProfileRestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/user/ProfileRestController.java	(date 1570659942202)
++++ src/main/java/ru/javawebinar/topjava/web/user/ProfileRestController.java	(date 1570659942202)
+@@ -0,0 +1,20 @@
++package ru.javawebinar.topjava.web.user;
++
++import ru.javawebinar.topjava.model.User;
++
++import static ru.javawebinar.topjava.web.SecurityUtil.authUserId;
++
++public class ProfileRestController extends AbstractUserController {
++
++    public User get() {
++        return super.get(authUserId());
++    }
++
++    public void delete() {
++        super.delete(authUserId());
++    }
++
++    public void update(User user) {
++        super.update(user, authUserId());
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/web/user/AdminRestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/user/AdminRestController.java	(date 1570659942196)
++++ src/main/java/ru/javawebinar/topjava/web/user/AdminRestController.java	(date 1570659942196)
+@@ -0,0 +1,38 @@
++package ru.javawebinar.topjava.web.user;
++
++import ru.javawebinar.topjava.model.User;
++
++import java.util.List;
++
++public class AdminRestController extends AbstractUserController {
++
++    @Override
++    public List<User> getAll() {
++        return super.getAll();
++    }
++
++    @Override
++    public User get(int id) {
++        return super.get(id);
++    }
++
++    @Override
++    public User create(User user) {
++        return super.create(user);
++    }
++
++    @Override
++    public void delete(int id) {
++        super.delete(id);
++    }
++
++    @Override
++    public void update(User user, int id) {
++        super.update(user, id);
++    }
++
++    @Override
++    public User getByMail(String email) {
++        return super.getByMail(email);
++    }
++}
+\ No newline at end of file

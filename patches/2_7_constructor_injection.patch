@@ -1,0 +1,37 @@
+Index: src/main/resources/spring/spring-app.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/spring/spring-app.xml	(date 1570662369000)
++++ src/main/resources/spring/spring-app.xml	(date 1570662388506)
+@@ -8,7 +8,7 @@
+         <bean class="ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository" id="inmemoryUserRepository"/>
+ 
+         <bean class="ru.javawebinar.topjava.service.UserService">
+-            <property name="repository" ref="inmemoryUserRepository"/>
++            <constructor-arg name="repository" ref="inmemoryUserRepository"/>
+         </bean>
+     -->
+ 
+Index: src/main/java/ru/javawebinar/topjava/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/service/UserService.java	(date 1570662369000)
++++ src/main/java/ru/javawebinar/topjava/service/UserService.java	(date 1570662388499)
+@@ -14,8 +14,12 @@
+ @Service
+ public class UserService {
+ 
++    private final UserRepository repository;
++
+     @Autowired
+-    private UserRepository repository;
++    public UserService(UserRepository repository) {
++        this.repository = repository;
++    }
+ 
+     public User create(User user) {
+         return repository.save(user);

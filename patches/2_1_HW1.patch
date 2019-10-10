@@ -1,0 +1,496 @@
+Index: src/main/java/ru/javawebinar/topjava/util/TimeUtil.java
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/TimeUtil.java	(revision a11c15f340384beac37030317e82dbfcab0fc391)
++++ src/main/java/ru/javawebinar/topjava/util/TimeUtil.java	(revision a11c15f340384beac37030317e82dbfcab0fc391)
+@@ -1,9 +0,0 @@
+-package ru.javawebinar.topjava.util;
+-
+-import java.time.LocalTime;
+-
+-public class TimeUtil {
+-    public static boolean isBetween(LocalTime lt, LocalTime startTime, LocalTime endTime) {
+-        return lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) <= 0;
+-    }
+-}
+Index: src/main/java/ru/javawebinar/topjava/Main.java
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/Main.java	(revision a11c15f340384beac37030317e82dbfcab0fc391)
++++ src/main/java/ru/javawebinar/topjava/Main.java	(revision a11c15f340384beac37030317e82dbfcab0fc391)
+@@ -1,11 +0,0 @@
+-package ru.javawebinar.topjava;
+-
+-/**
+- * @see <a href="http://topjava.herokuapp.com">Demo</a>
+- * @see <a href="https://github.com/JavaOPs/topjava">Initial project</a>
+- */
+-public class Main {
+-    public static void main(String[] args) {
+-        System.out.format("Hello Topjava Enterprise!");
+-    }
+-}
+Index: src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java	(date 1570657416953)
++++ src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java	(date 1570657416953)
+@@ -0,0 +1,18 @@
++package ru.javawebinar.topjava.util;
++
++import java.time.LocalDateTime;
++import java.time.LocalTime;
++import java.time.format.DateTimeFormatter;
++
++public class DateTimeUtil {
++    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
++
++    public static boolean isBetween(LocalTime lt, LocalTime startTime, LocalTime endTime) {
++        return lt.compareTo(startTime) >= 0 && lt.compareTo(endTime) <= 0;
++    }
++
++    public static String toString(LocalDateTime ldt) {
++        return ldt == null ? "" : ldt.format(DATE_TIME_FORMATTER);
++    }
++}
++
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(revision a11c15f340384beac37030317e82dbfcab0fc391)
++++ pom.xml	(date 1570656694048)
+@@ -67,6 +67,12 @@
+             <version>4.0.1</version>
+             <scope>provided</scope>
+         </dependency>
++
++        <dependency>
++            <groupId>javax.servlet</groupId>
++            <artifactId>jstl</artifactId>
++            <version>1.2</version>
++        </dependency>
+     </dependencies>
+ 
+     <profiles>
+Index: src/main/java/ru/javawebinar/topjava/web/MealServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/MealServlet.java	(date 1570657166567)
++++ src/main/java/ru/javawebinar/topjava/web/MealServlet.java	(date 1570657166567)
+@@ -0,0 +1,22 @@
++package ru.javawebinar.topjava.web;
++
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import ru.javawebinar.topjava.util.MealsUtil;
++
++import javax.servlet.ServletException;
++import javax.servlet.http.HttpServlet;
++import javax.servlet.http.HttpServletRequest;
++import javax.servlet.http.HttpServletResponse;
++import java.io.IOException;
++
++public class MealServlet extends HttpServlet {
++    private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
++
++    @Override
++    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++        log.info("getAll");
++        request.setAttribute("meals", MealsUtil.getTos(MealsUtil.MEALS, MealsUtil.DEFAULT_CALORIES_PER_DAY));
++        request.getRequestDispatcher("/meals.jsp").forward(request, response);
++    }
++}
+Index: src/main/webapp/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/index.html	(revision a11c15f340384beac37030317e82dbfcab0fc391)
++++ src/main/webapp/index.html	(date 1570656694033)
+@@ -8,6 +8,7 @@
+ <hr>
+ <ul>
+     <li><a href="users">Users</a></li>
++    <li><a href="meals">Meals</a></li>
+ </ul>
+ </body>
+ </html>
+Index: src/main/webapp/WEB-INF/web.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/web.xml	(revision a11c15f340384beac37030317e82dbfcab0fc391)
++++ src/main/webapp/WEB-INF/web.xml	(date 1570656694025)
+@@ -16,4 +16,14 @@
+         <url-pattern>/users</url-pattern>
+     </servlet-mapping>
+ 
++    <servlet>
++        <servlet-name>mealServlet</servlet-name>
++        <servlet-class>ru.javawebinar.topjava.web.MealServlet</servlet-class>
++        <load-on-startup>0</load-on-startup>
++    </servlet>
++    <servlet-mapping>
++        <servlet-name>mealServlet</servlet-name>
++        <url-pattern>/meals</url-pattern>
++    </servlet-mapping>
++
+ </web-app>
+Index: src/main/java/ru/javawebinar/topjava/web/UserServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/UserServlet.java	(revision a11c15f340384beac37030317e82dbfcab0fc391)
++++ src/main/java/ru/javawebinar/topjava/web/UserServlet.java	(date 1570656694010)
+@@ -15,9 +15,7 @@
+ 
+     @Override
+     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+-        log.debug("redirect to users");
+-
+-//        request.getRequestDispatcher("/users.jsp").forward(request, response);
+-        response.sendRedirect("users.jsp");
++        log.debug("forward to users");
++        request.getRequestDispatcher("/users.jsp").forward(request, response);
+     }
+ }
+Index: src/main/java/ru/javawebinar/topjava/model/MealTo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/MealTo.java	(revision a11c15f340384beac37030317e82dbfcab0fc391)
++++ src/main/java/ru/javawebinar/topjava/model/MealTo.java	(date 1570657086205)
+@@ -9,8 +9,6 @@
+ 
+     private final int calories;
+ 
+-//    private final Supplier<Boolean> excess;
+-//    private final AtomicBoolean excess;
+     private final boolean excess;
+ 
+     public MealTo(LocalDateTime dateTime, String description, int calories, boolean excess) {
+@@ -20,9 +18,21 @@
+         this.excess = excess;
+     }
+ 
+-//    public Boolean getExcess() {
+-//        return excess.get();
+-//    }
++    public LocalDateTime getDateTime() {
++        return dateTime;
++    }
++
++    public String getDescription() {
++        return description;
++    }
++
++    public int getCalories() {
++        return calories;
++    }
++
++    public boolean isExcess() {
++        return excess;
++    }
+ 
+     @Override
+     public String toString() {
+Index: src/main/java/ru/javawebinar/topjava/util/MealsUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/MealsUtil.java	(revision a11c15f340384beac37030317e82dbfcab0fc391)
++++ src/main/java/ru/javawebinar/topjava/util/MealsUtil.java	(date 1570657086215)
+@@ -7,184 +7,44 @@
+ import java.time.LocalDateTime;
+ import java.time.LocalTime;
+ import java.time.Month;
+-import java.util.*;
+-import java.util.concurrent.*;
+-import java.util.stream.Collector;
++import java.util.Arrays;
++import java.util.List;
++import java.util.Map;
++import java.util.function.Predicate;
+ import java.util.stream.Collectors;
+-import java.util.stream.Stream;
+-
+-import static java.util.function.Function.identity;
+-import static java.util.stream.Collectors.toList;
+ 
+ public class MealsUtil {
+-    private static final int DEFAULT_CALORIES_PER_DAY = 2000;
++    public static final int DEFAULT_CALORIES_PER_DAY = 2000;
+ 
+-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+-        List<Meal> meals = Arrays.asList(
+-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
+-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
+-                new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
+-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
+-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
+-                new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
+-        );
+-        LocalTime startTime = LocalTime.of(7, 0);
+-        LocalTime endTime = LocalTime.of(12, 0);
++    public static final List<Meal> MEALS = Arrays.asList(
++            new Meal(LocalDateTime.of(2015, Month.MAY, 30, 10, 0), "Завтрак", 500),
++            new Meal(LocalDateTime.of(2015, Month.MAY, 30, 13, 0), "Обед", 1000),
++            new Meal(LocalDateTime.of(2015, Month.MAY, 30, 20, 0), "Ужин", 500),
++            new Meal(LocalDateTime.of(2015, Month.MAY, 31, 10, 0), "Завтрак", 1000),
++            new Meal(LocalDateTime.of(2015, Month.MAY, 31, 13, 0), "Обед", 500),
++            new Meal(LocalDateTime.of(2015, Month.MAY, 31, 20, 0), "Ужин", 510)
++    );
+ 
+-        List<MealTo> mealsTo = getFiltered(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY);
+-        mealsTo.forEach(System.out::println);
++    public static List<MealTo> getTos(List<Meal> meals, int caloriesPerDay) {
++        return getFiltered(meals, caloriesPerDay, meal -> true);
++    }
+ 
+-        System.out.println(getFilteredByCycle(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY));
+-        System.out.println(getFilteredByRecursion(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY));
+-//        System.out.println(getFilteredByAtomic(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY));
+-//        System.out.println(getFilteredByClosure(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY));
+-        System.out.println(getFilteredByExecutor(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY));
+-        System.out.println(getFilteredByFlatMap(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY));
+-        System.out.println(getFilteredByCollector(meals, startTime, endTime, DEFAULT_CALORIES_PER_DAY));
++    public static List<MealTo> getFilteredTos(List<Meal> meals, int caloriesPerDay, LocalTime startTime, LocalTime endTime) {
++        return getFiltered(meals, caloriesPerDay, meal -> DateTimeUtil.isBetween(meal.getTime(), startTime, endTime));
+     }
+ 
+-    public static List<MealTo> getFiltered(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
++    private static List<MealTo> getFiltered(List<Meal> meals, int caloriesPerDay, Predicate<Meal> filter) {
+         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
+                 .collect(
+                         Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories))
+ //                      Collectors.toMap(Meal::getDate, Meal::getCalories, Integer::sum)
+                 );
+         return meals.stream()
+-                .filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
++                .filter(filter)
+                 .map(meal -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
+                 .collect(Collectors.toList());
+     }
+ 
+-    private static List<MealTo> getFilteredByCycle(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+-        final Map<LocalDate, Integer> caloriesSumByDate = new HashMap<>();
+-        meals.forEach(meal -> caloriesSumByDate.merge(meal.getDate(), meal.getCalories(), Integer::sum));
+-
+-        final List<MealTo> mealsTo = new ArrayList<>();
+-        meals.forEach(meal -> {
+-            if (TimeUtil.isBetween(meal.getTime(), startTime, endTime)) {
+-                mealsTo.add(createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay));
+-            }
+-        });
+-        return mealsTo;
+-    }
+-
+-    private static List<MealTo> getFilteredByRecursion(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+-        ArrayList<MealTo> result = new ArrayList<>();
+-        filterWithRecursion(new LinkedList<>(meals), startTime, endTime, caloriesPerDay, new HashMap<>(), result);
+-        return result;
+-    }
+-
+-    private static void filterWithRecursion(LinkedList<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay,
+-                                            Map<LocalDate, Integer> dailyCaloriesMap, List<MealTo> result) {
+-        if (meals.isEmpty()) return;
+-
+-        Meal meal = meals.pop();
+-        dailyCaloriesMap.merge(meal.getDate(), meal.getCalories(), Integer::sum);
+-        filterWithRecursion(meals, startTime, endTime, caloriesPerDay, dailyCaloriesMap, result);
+-        if (TimeUtil.isBetween(meal.getTime(), startTime, endTime)) {
+-            result.add(createTo(meal, dailyCaloriesMap.get(meal.getDate()) > caloriesPerDay));
+-        }
+-    }
+-
+-/*
+-        private static List<MealTo> getFilteredByAtomic(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+-            Map<LocalDate, Integer> caloriesSumByDate = new HashMap<>();
+-            Map<LocalDate, AtomicBoolean> exceededMap = new HashMap<>();
+-
+-            List<MealTo> mealsTo = new ArrayList<>();
+-            meals.forEach(meal -> {
+-                AtomicBoolean wrapBoolean = exceededMap.computeIfAbsent(meal.getDate(), date -> new AtomicBoolean());
+-                Integer dailyCalories = caloriesSumByDate.merge(meal.getDate(), meal.getCalories(), Integer::sum);
+-                if (dailyCalories > caloriesPerDay) {
+-                    wrapBoolean.set(true);
+-                }
+-                if (TimeUtil.isBetween(meal.getTime(), startTime, endTime)) {
+-                  mealsTo.add(createTo(meal, wrapBoolean));  // also change createWithExcess and MealTo.excess
+-                }
+-            });
+-            return mealsTo;
+-        }
+-
+-    private static List<MealTo> getFilteredByClosure(List<Meal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+-        final Map<LocalDate, Integer> caloriesSumByDate = new HashMap<>();
+-        List<MealTo> mealsTo = new ArrayList<>();
+-        mealList.forEach(meal -> {
+-                    caloriesSumByDate.merge(meal.getDate(), meal.getCalories(), Integer::sum);
+-                    if (TimeUtil.isBetween(meal.getTime(), startTime, endTime)) {
+-                        mealsTo.add(createTo(meal, () -> (caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))); // also change createWithExcess and MealTo.excess
+-                    }
+-                }
+-        );
+-        return mealsTo;
+-    }
+-*/
+-
+-    private static List<MealTo> getFilteredByExecutor(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) throws InterruptedException, ExecutionException {
+-        Map<LocalDate, Integer> caloriesSumByDate = new HashMap<>();
+-        List<Callable<MealTo>> tasks = new ArrayList<>();
+-
+-        meals.forEach(meal -> {
+-            caloriesSumByDate.merge(meal.getDate(), meal.getCalories(), Integer::sum);
+-            if (TimeUtil.isBetween(meal.getTime(), startTime, endTime)) {
+-                tasks.add(() -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay));
+-            }
+-        });
+-        ExecutorService executorService = Executors.newFixedThreadPool(4);
+-        List<Future<MealTo>> futures = executorService.invokeAll(tasks);
+-        executorService.shutdown();
+-        final List<MealTo> mealsTo = new ArrayList<>();
+-        for (Future<MealTo> future : futures) {
+-            mealsTo.add(future.get());
+-        }
+-        return mealsTo;
+-    }
+-
+-    private static List<MealTo> getFilteredByFlatMap(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+-        Collection<List<Meal>> list = meals.stream()
+-                .collect(Collectors.groupingBy(Meal::getDate)).values();
+-
+-        return list.stream()
+-                .flatMap(dayMeals -> {
+-                    boolean excess = dayMeals.stream().mapToInt(Meal::getCalories).sum() > caloriesPerDay;
+-                    return dayMeals.stream().filter(meal ->
+-                            TimeUtil.isBetween(meal.getTime(), startTime, endTime))
+-                            .map(meal -> createTo(meal, excess));
+-                }).collect(toList());
+-    }
+-
+-    private static List<MealTo> getFilteredByCollector(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+-        final class Aggregate {
+-            private final List<Meal> dailyMeals = new ArrayList<>();
+-            private int dailySumOfCalories;
+-
+-            private void accumulate(Meal meal) {
+-                dailySumOfCalories += meal.getCalories();
+-                if (TimeUtil.isBetween(meal.getTime(), startTime, endTime)) {
+-                    dailyMeals.add(meal);
+-                }
+-            }
+-
+-            // never invoked if the upstream is sequential
+-            private Aggregate combine(Aggregate that) {
+-                this.dailySumOfCalories += that.dailySumOfCalories;
+-                this.dailyMeals.addAll(that.dailyMeals);
+-                return this;
+-            }
+-
+-            private Stream<MealTo> finisher() {
+-                final boolean excess = dailySumOfCalories > caloriesPerDay;
+-                return dailyMeals.stream().map(meal -> createTo(meal, excess));
+-            }
+-        }
+-
+-        Collection<Stream<MealTo>> values = meals.stream()
+-                .collect(Collectors.groupingBy(Meal::getDate,
+-                        Collector.of(Aggregate::new, Aggregate::accumulate, Aggregate::combine, Aggregate::finisher))
+-                ).values();
+-
+-        return values.stream().flatMap(identity()).collect(toList());
+-    }
+-
+     private static MealTo createTo(Meal meal, boolean excess) {
+         return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+     }
+Index: src/main/webapp/meals.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/meals.jsp	(date 1570656694042)
++++ src/main/webapp/meals.jsp	(date 1570656694042)
+@@ -0,0 +1,48 @@
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
++<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
++<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
++<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>--%>
++<html>
++<head>
++    <title>Meal list</title>
++    <style>
++        .normal {
++            color: green;
++        }
++
++        .excess {
++            color: red;
++        }
++    </style>
++</head>
++<body>
++<section>
++    <h3><a href="index.html">Home</a></h3>
++    <hr/>
++    <h2>Meals</h2>
++    <table border="1" cellpadding="8" cellspacing="0">
++        <thead>
++        <tr>
++            <th>Date</th>
++            <th>Description</th>
++            <th>Calories</th>
++        </tr>
++        </thead>
++        <c:forEach items="${meals}" var="meal">
++            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
++            <tr class="${meal.excess ? 'excess' : 'normal'}">
++                <td>
++                        <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
++                        <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
++                        <%--${fn:replace(meal.dateTime, 'T', ' ')}--%>
++                        ${fn:formatDateTime(meal.dateTime)}
++                </td>
++                <td>${meal.description}</td>
++                <td>${meal.calories}</td>
++            </tr>
++        </c:forEach>
++    </table>
++</section>
++</body>
++</html>
+\ No newline at end of file
+Index: src/main/webapp/WEB-INF/tld/functions.tld
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/tld/functions.tld	(date 1570656694018)
++++ src/main/webapp/WEB-INF/tld/functions.tld	(date 1570656694018)
+@@ -0,0 +1,16 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<taglib version="2.1"
++        xmlns="http://java.sun.com/xml/ns/javaee"
++        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
++
++    <tlib-version>1.0</tlib-version>
++    <short-name>functions</short-name>
++    <uri>http://topjava.javawebinar.ru/functions</uri>
++
++    <function>
++        <name>formatDateTime</name>
++        <function-class>ru.javawebinar.topjava.util.DateTimeUtil</function-class>
++        <function-signature>java.lang.String toString(java.time.LocalDateTime)</function-signature>
++    </function>
++</taglib>
