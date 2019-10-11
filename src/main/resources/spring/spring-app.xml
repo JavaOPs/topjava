@@ -8,7 +8,7 @@
         <bean class="ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository" id="inmemoryUserRepository"/>
 
         <bean class="ru.javawebinar.topjava.service.UserService">
-            <property name="repository" ref="inmemoryUserRepository"/>
+            <constructor-arg name="repository" ref="inmemoryUserRepository"/>
         </bean>
     -->
 
