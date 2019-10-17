@@ -1,0 +1,195 @@
+Index: src/main/resources/spring/spring-db.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/spring/spring-db.xml	(date 1571272235103)
++++ src/main/resources/spring/spring-db.xml	(date 1571272235103)
+@@ -0,0 +1,25 @@
++<beans xmlns="http://www.springframework.org/schema/beans"
++       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++       xmlns:context="http://www.springframework.org/schema/context"
++       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
++       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
++
++    <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
++
++    <!--no pooling-->
++    <bean id="dataSource"
++          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
++        <property name="driverClassName" value="org.postgresql.Driver"/>
++        <property name="url" value="${database.url}"/>
++        <property name="username" value="${database.username}"/>
++        <property name="password" value="${database.password}"/>
++    </bean>
++
++    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
++        <constructor-arg ref="dataSource"/>
++    </bean>
++
++    <bean id="namedJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
++        <constructor-arg ref="jdbcTemplate"/>
++    </bean>
++</beans>
+\ No newline at end of file
+Index: src/main/resources/db/initDB.sql
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/db/initDB.sql	(date 1571272235089)
++++ src/main/resources/db/initDB.sql	(date 1571272235089)
+@@ -0,0 +1,25 @@
++DROP TABLE IF EXISTS user_roles;
++DROP TABLE IF EXISTS users;
++DROP SEQUENCE IF EXISTS global_seq;
++
++CREATE SEQUENCE global_seq START WITH 100000;
++
++CREATE TABLE users
++(
++  id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
++  name             VARCHAR                 NOT NULL,
++  email            VARCHAR                 NOT NULL,
++  password         VARCHAR                 NOT NULL,
++  registered       TIMESTAMP DEFAULT now() NOT NULL,
++  enabled          BOOL DEFAULT TRUE       NOT NULL,
++  calories_per_day INTEGER DEFAULT 2000    NOT NULL
++);
++CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
++
++CREATE TABLE user_roles
++(
++  user_id INTEGER NOT NULL,
++  role    VARCHAR,
++  CONSTRAINT user_roles_idx UNIQUE (user_id, role),
++  FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
++);
+\ No newline at end of file
+Index: src/main/resources/db/populateDB.sql
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/db/populateDB.sql	(date 1571272235095)
++++ src/main/resources/db/populateDB.sql	(date 1571272235095)
+@@ -0,0 +1,11 @@
++DELETE FROM user_roles;
++DELETE FROM users;
++ALTER SEQUENCE global_seq RESTART WITH 100000;
++
++INSERT INTO users (name, email, password) VALUES
++  ('User', 'user@yandex.ru', 'password'),
++  ('Admin', 'admin@gmail.com', 'admin');
++
++INSERT INTO user_roles (role, user_id) VALUES
++  ('ROLE_USER', 100000),
++  ('ROLE_ADMIN', 100001);
+Index: src/main/java/ru/javawebinar/topjava/repository/jdbc/JdbcUserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/repository/jdbc/JdbcUserRepository.java	(date 1571272235081)
++++ src/main/java/ru/javawebinar/topjava/repository/jdbc/JdbcUserRepository.java	(date 1571272235081)
+@@ -0,0 +1,81 @@
++package ru.javawebinar.topjava.repository.jdbc;
++
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.dao.support.DataAccessUtils;
++import org.springframework.jdbc.core.BeanPropertyRowMapper;
++import org.springframework.jdbc.core.JdbcTemplate;
++import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
++import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
++import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
++import org.springframework.stereotype.Repository;
++import ru.javawebinar.topjava.model.User;
++import ru.javawebinar.topjava.repository.UserRepository;
++
++import java.util.List;
++
++@Repository
++public class JdbcUserRepository implements UserRepository {
++
++    private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
++
++    private final JdbcTemplate jdbcTemplate;
++
++    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
++
++    private final SimpleJdbcInsert insertUser;
++
++    @Autowired
++    public JdbcUserRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
++        this.insertUser = new SimpleJdbcInsert(jdbcTemplate)
++                .withTableName("users")
++                .usingGeneratedKeyColumns("id");
++
++        this.jdbcTemplate = jdbcTemplate;
++        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
++    }
++
++    @Override
++    public User save(User user) {
++        MapSqlParameterSource map = new MapSqlParameterSource()
++                .addValue("id", user.getId())
++                .addValue("name", user.getName())
++                .addValue("email", user.getEmail())
++                .addValue("password", user.getPassword())
++                .addValue("registered", user.getRegistered())
++                .addValue("enabled", user.isEnabled())
++                .addValue("caloriesPerDay", user.getCaloriesPerDay());
++
++        if (user.isNew()) {
++            Number newKey = insertUser.executeAndReturnKey(map);
++            user.setId(newKey.intValue());
++        } else if (namedParameterJdbcTemplate.update(
++                "UPDATE users SET name=:name, email=:email, password=:password, " +
++                        "registered=:registered, enabled=:enabled, calories_per_day=:caloriesPerDay WHERE id=:id", map) == 0) {
++            return null;
++        }
++        return user;
++    }
++
++    @Override
++    public boolean delete(int id) {
++        return jdbcTemplate.update("DELETE FROM users WHERE id=?", id) != 0;
++    }
++
++    @Override
++    public User get(int id) {
++        List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE id=?", ROW_MAPPER, id);
++        return DataAccessUtils.singleResult(users);
++    }
++
++    @Override
++    public User getByEmail(String email) {
++//        return jdbcTemplate.queryForObject("SELECT * FROM users WHERE email=?", ROW_MAPPER, email);
++        List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE email=?", ROW_MAPPER, email);
++        return DataAccessUtils.singleResult(users);
++    }
++
++    @Override
++    public List<User> getAll() {
++        return jdbcTemplate.query("SELECT * FROM users ORDER BY name, email", ROW_MAPPER);
++    }
++}
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(date 1571272160000)
++++ pom.xml	(date 1571272235113)
+@@ -74,6 +74,11 @@
+             <artifactId>spring-context</artifactId>
+             <version>${spring.version}</version>
+         </dependency>
++        <dependency>
++            <groupId>org.springframework</groupId>
++            <artifactId>spring-jdbc</artifactId>
++            <version>${spring.version}</version>
++        </dependency>
+ 
+         <!--DataBase-->
+         <dependency>

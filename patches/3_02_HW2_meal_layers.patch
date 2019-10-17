@@ -1,0 +1,525 @@
+Index: src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java	(date 1571267640327)
++++ src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java	(date 1571267640327)
+@@ -0,0 +1,38 @@
++package ru.javawebinar.topjava.repository.inmemory;
++
++import org.springframework.stereotype.Repository;
++import ru.javawebinar.topjava.model.AbstractBaseEntity;
++
++import java.util.Collection;
++import java.util.Map;
++import java.util.concurrent.ConcurrentHashMap;
++import java.util.concurrent.atomic.AtomicInteger;
++
++@Repository
++public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
++
++    private static AtomicInteger counter = new AtomicInteger(0);
++
++    private Map<Integer, T> map = new ConcurrentHashMap<>();
++
++    public T save(T entry) {
++        if (entry.isNew()) {
++            entry.setId(counter.incrementAndGet());
++            map.put(entry.getId(), entry);
++            return entry;
++        }
++        return map.computeIfPresent(entry.getId(), (id, oldT) -> entry);
++    }
++
++    public boolean delete(int id) {
++        return map.remove(id) != null;
++    }
++
++    public T get(int id) {
++        return map.get(id);
++    }
++
++    Collection<T> getCollection() {
++        return map.values();
++    }
++}
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/util/MealsUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/MealsUtil.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/util/MealsUtil.java	(date 1571268668178)
+@@ -1,7 +1,8 @@
+ package ru.javawebinar.topjava.util;
+ 
++import org.springframework.lang.Nullable;
+ import ru.javawebinar.topjava.model.Meal;
+-import ru.javawebinar.topjava.model.MealTo;
++import ru.javawebinar.topjava.to.MealTo;
+ 
+ import java.time.LocalDate;
+ import java.time.LocalDateTime;
+@@ -30,7 +31,7 @@
+         return getFiltered(meals, caloriesPerDay, meal -> true);
+     }
+ 
+-    public static List<MealTo> getFilteredTos(Collection<Meal> meals, int caloriesPerDay, LocalTime startTime, LocalTime endTime) {
++    public static List<MealTo> getFilteredTos(Collection<Meal> meals, int caloriesPerDay, @Nullable LocalTime startTime, @Nullable LocalTime endTime) {
+         return getFiltered(meals, caloriesPerDay, meal -> Util.isBetweenInclusive(meal.getTime(), startTime, endTime));
+     }
+ 
+Index: src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java	(date 1571267106558)
+@@ -6,50 +6,24 @@
+ 
+ import java.util.Comparator;
+ import java.util.List;
+-import java.util.Map;
+-import java.util.concurrent.ConcurrentHashMap;
+-import java.util.concurrent.atomic.AtomicInteger;
+ import java.util.stream.Collectors;
+ 
+ @Repository
+-public class InMemoryUserRepository implements UserRepository {
+-
+-    public static final int USER_ID = 1;
+-    public static final int ADMIN_ID = 2;
++public class InMemoryUserRepository extends InMemoryBaseRepository<User> implements UserRepository {
+ 
+-    private Map<Integer, User> usersMap = new ConcurrentHashMap<>();
+-    private AtomicInteger counter = new AtomicInteger(0);
+-
+-    @Override
+-    public User save(User user) {
+-        if (user.isNew()) {
+-            user.setId(counter.incrementAndGet());
+-            usersMap.put(user.getId(), user);
+-            return user;
+-        }
+-        return usersMap.computeIfPresent(user.getId(), (id, oldUser) -> user);
+-    }
+-
+-    @Override
+-    public boolean delete(int id) {
+-        return usersMap.remove(id) != null;
+-    }
+-
+-    @Override
+-    public User get(int id) {
+-        return usersMap.get(id);
+-    }
++    static final int USER_ID = 1;
++    static final int ADMIN_ID = 2;
+ 
+     @Override
+     public List<User> getAll() {
+-        return usersMap.values().stream()
++        return getCollection().stream()
+                 .sorted(Comparator.comparing(User::getName).thenComparing(User::getEmail))
+                 .collect(Collectors.toList());
+     }
+ 
+     @Override
+     public User getByEmail(String email) {
+-        return usersMap.values().stream()
++        return getCollection().stream()
+                 .filter(u -> email.equals(u.getEmail()))
+                 .findFirst()
+                 .orElse(null);
+Index: src/main/java/ru/javawebinar/topjava/web/meal/MealRestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/meal/MealRestController.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/web/meal/MealRestController.java	(date 1571269024367)
+@@ -1,8 +1,78 @@
+ package ru.javawebinar.topjava.web.meal;
+ 
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.lang.Nullable;
++import org.springframework.stereotype.Controller;
++import ru.javawebinar.topjava.model.Meal;
+ import ru.javawebinar.topjava.service.MealService;
++import ru.javawebinar.topjava.to.MealTo;
++import ru.javawebinar.topjava.util.MealsUtil;
++import ru.javawebinar.topjava.web.SecurityUtil;
++
++import java.time.LocalDate;
++import java.time.LocalTime;
++import java.util.List;
+ 
++import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
++import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
++
++@Controller
+ public class MealRestController {
+-    private MealService service;
++    private static final Logger log = LoggerFactory.getLogger(MealRestController.class);
++
++    private final MealService service;
++
++    @Autowired
++    public MealRestController(MealService service) {
++        this.service = service;
++    }
++
++    public Meal get(int id) {
++        int userId = SecurityUtil.authUserId();
++        log.info("get meal {} for user {}", id, userId);
++        return service.get(id, userId);
++    }
++
++    public void delete(int id) {
++        int userId = SecurityUtil.authUserId();
++        log.info("delete meal {} for user {}", id, userId);
++        service.delete(id, userId);
++    }
++
++    public List<MealTo> getAll() {
++        int userId = SecurityUtil.authUserId();
++        log.info("getAll for user {}", userId);
++        return MealsUtil.getTos(service.getAll(userId), SecurityUtil.authUserCaloriesPerDay());
++    }
++
++    public Meal create(Meal meal) {
++        int userId = SecurityUtil.authUserId();
++        checkNew(meal);
++        log.info("create {} for user {}", meal, userId);
++        return service.create(meal, userId);
++    }
++
++    public void update(Meal meal, int id) {
++        int userId = SecurityUtil.authUserId();
++        assureIdConsistent(meal, id);
++        log.info("update {} for user {}", meal, userId);
++        service.update(meal, userId);
++    }
+ 
++    /**
++     * <ol>Filter separately
++     * <li>by date</li>
++     * <li>by time for every date</li>
++     * </ol>
++     */
++    public List<MealTo> getBetween(@Nullable LocalDate startDate, @Nullable LocalTime startTime,
++                                   @Nullable LocalDate endDate, @Nullable LocalTime endTime) {
++        int userId = SecurityUtil.authUserId();
++        log.info("getBetween dates({} - {}) time({} - {}) for user {}", startDate, endDate, startTime, endTime, userId);
++
++        List<Meal> mealsDateFiltered = service.getBetweenDates(startDate, endDate, userId);
++        return MealsUtil.getFilteredTos(mealsDateFiltered, SecurityUtil.authUserCaloriesPerDay(), startTime, endTime);
++    }
+ }
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/service/MealService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/service/MealService.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/service/MealService.java	(date 1571269144996)
+@@ -1,9 +1,49 @@
+ package ru.javawebinar.topjava.service;
+ 
++import org.springframework.lang.Nullable;
++import org.springframework.stereotype.Service;
++import ru.javawebinar.topjava.model.Meal;
+ import ru.javawebinar.topjava.repository.MealRepository;
++import ru.javawebinar.topjava.util.DateTimeUtil;
++
++import java.time.LocalDate;
++import java.time.LocalTime;
++import java.util.List;
+ 
++import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
++
++@Service
+ public class MealService {
+ 
+-    private MealRepository repository;
++    private final MealRepository repository;
++
++    public MealService(MealRepository repository) {
++        this.repository = repository;
++    }
++
++    public Meal get(int id, int userId) {
++        return checkNotFoundWithId(repository.get(id, userId), id);
++    }
++
++    public void delete(int id, int userId) {
++        checkNotFoundWithId(repository.delete(id, userId), id);
++    }
++
++    public List<Meal> getBetweenDates(@Nullable LocalDate startDate, @Nullable LocalDate endDate, int userId) {
++        return repository.getBetween(
++                DateTimeUtil.createDateTime(startDate, LocalDate.MIN, LocalTime.MIN),
++                DateTimeUtil.createDateTime(endDate, LocalDate.MAX, LocalTime.MAX), userId);
++    }
+ 
++    public List<Meal> getAll(int userId) {
++        return repository.getAll(userId);
++    }
++
++    public void update(Meal meal, int userId) {
++        checkNotFoundWithId(repository.save(meal, userId), meal.getId());
++    }
++
++    public Meal create(Meal meal, int userId) {
++        return repository.save(meal, userId);
++    }
+ }
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/util/Util.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/Util.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/util/Util.java	(date 1571268638197)
+@@ -1,7 +1,9 @@
+ package ru.javawebinar.topjava.util;
+ 
++import org.springframework.lang.Nullable;
++
+ public class Util {
+-    public static <T extends Comparable<? super T>> boolean isBetweenInclusive(T value, T start, T end) {
+-        return value.compareTo(start) >= 0 && value.compareTo(end) <= 0;
++    public static <T extends Comparable<? super T>> boolean isBetweenInclusive(T value, @Nullable T start, @Nullable T end) {
++        return (start == null || value.compareTo(start) >= 0) && (end == null || value.compareTo(end) <= 0);
+     }
+ }
+Index: src/main/webapp/meals.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/meals.jsp	(date 1571267085000)
++++ src/main/webapp/meals.jsp	(date 1571267278310)
+@@ -34,7 +34,7 @@
+         </tr>
+         </thead>
+         <c:forEach items="${meals}" var="meal">
+-            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
++            <jsp:useBean id="meal" type="ru.javawebinar.topjava.to.MealTo"/>
+             <tr class="${meal.excess ? 'excess' : 'normal'}">
+                 <td>
+                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
+Index: src/main/java/ru/javawebinar/topjava/model/Meal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/Meal.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/model/Meal.java	(date 1571267106525)
+@@ -4,9 +4,7 @@
+ import java.time.LocalDateTime;
+ import java.time.LocalTime;
+ 
+-public class Meal {
+-    private Integer id;
+-
++public class Meal extends AbstractBaseEntity {
+     private final LocalDateTime dateTime;
+ 
+     private final String description;
+@@ -18,20 +16,12 @@
+     }
+ 
+     public Meal(Integer id, LocalDateTime dateTime, String description, int calories) {
+-        this.id = id;
++        super(id);
+         this.dateTime = dateTime;
+         this.description = description;
+         this.calories = calories;
+     }
+ 
+-    public Integer getId() {
+-        return id;
+-    }
+-
+-    public void setId(Integer id) {
+-        this.id = id;
+-    }
+-
+     public LocalDateTime getDateTime() {
+         return dateTime;
+     }
+@@ -52,10 +42,6 @@
+         return dateTime.toLocalTime();
+     }
+ 
+-    public boolean isNew() {
+-        return id == null;
+-    }
+-
+     @Override
+     public String toString() {
+         return "Meal{" +
+Index: src/main/java/ru/javawebinar/topjava/model/MealTo.java
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/model/MealTo.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/to/MealTo.java	(date 1571267106573)
+@@ -1,4 +1,4 @@
+-package ru.javawebinar.topjava.model;
++package ru.javawebinar.topjava.to;
+ 
+ import java.time.LocalDateTime;
+ 
+Index: src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java	(date 1571268486424)
+@@ -1,6 +1,10 @@
+ package ru.javawebinar.topjava.util;
+ 
++import org.springframework.lang.Nullable;
++
++import java.time.LocalDate;
+ import java.time.LocalDateTime;
++import java.time.LocalTime;
+ import java.time.format.DateTimeFormatter;
+ 
+ public class DateTimeUtil {
+@@ -9,5 +13,9 @@
+     public static String toString(LocalDateTime ldt) {
+         return ldt == null ? "" : ldt.format(DATE_TIME_FORMATTER);
+     }
++
++    public static LocalDateTime createDateTime(@Nullable LocalDate date, LocalDate defaultDate, LocalTime time) {
++        return LocalDateTime.of(date != null ? date : defaultDate, time);
++    }
+ }
+ 
+Index: src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryMealRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryMealRepository.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/repository/inmemory/InMemoryMealRepository.java	(date 1571267640321)
+@@ -1,6 +1,6 @@
+ package ru.javawebinar.topjava.repository.inmemory;
+ 
+-import org.springframework.util.CollectionUtils;
++import org.springframework.stereotype.Repository;
+ import ru.javawebinar.topjava.model.Meal;
+ import ru.javawebinar.topjava.repository.MealRepository;
+ import ru.javawebinar.topjava.util.MealsUtil;
+@@ -13,18 +13,17 @@
+ import java.util.List;
+ import java.util.Map;
+ import java.util.concurrent.ConcurrentHashMap;
+-import java.util.concurrent.atomic.AtomicInteger;
+ import java.util.function.Predicate;
+ import java.util.stream.Collectors;
+ 
+ import static ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository.ADMIN_ID;
+ import static ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository.USER_ID;
+ 
++@Repository
+ public class InMemoryMealRepository implements MealRepository {
+ 
+-    // Map  userId -> (mealId-> meal)
+-    private Map<Integer, Map<Integer, Meal>> usersMealsMap = new ConcurrentHashMap<>();
+-    private AtomicInteger counter = new AtomicInteger(0);
++    // Map  userId -> mealRepository
++    private Map<Integer, InMemoryBaseRepository<Meal>> usersMealsMap = new ConcurrentHashMap<>();
+ 
+     {
+         MealsUtil.MEALS.forEach(meal -> save(meal, USER_ID));
+@@ -36,24 +35,19 @@
+ 
+     @Override
+     public Meal save(Meal meal, int userId) {
+-        Map<Integer, Meal> meals = usersMealsMap.computeIfAbsent(userId, ConcurrentHashMap::new);
+-        if (meal.isNew()) {
+-            meal.setId(counter.incrementAndGet());
+-            meals.put(meal.getId(), meal);
+-            return meal;
+-        }
+-        return meals.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
++        InMemoryBaseRepository<Meal> meals = usersMealsMap.computeIfAbsent(userId, uid -> new InMemoryBaseRepository<>());
++        return meals.save(meal);
+     }
+ 
+     @Override
+     public boolean delete(int id, int userId) {
+-        Map<Integer, Meal> meals = usersMealsMap.get(userId);
+-        return meals != null && meals.remove(id) != null;
++        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
++        return meals != null && meals.delete(id);
+     }
+ 
+     @Override
+     public Meal get(int id, int userId) {
+-        Map<Integer, Meal> meals = usersMealsMap.get(userId);
++        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
+         return meals == null ? null : meals.get(id);
+     }
+ 
+@@ -68,9 +62,9 @@
+     }
+ 
+     private List<Meal> getAllFiltered(int userId, Predicate<Meal> filter) {
+-        Map<Integer, Meal> meals = usersMealsMap.get(userId);
+-        return CollectionUtils.isEmpty(meals) ? Collections.emptyList() :
+-                meals.values().stream()
++        InMemoryBaseRepository<Meal> meals = usersMealsMap.get(userId);
++        return meals == null ? Collections.emptyList() :
++                meals.getCollection().stream()
+                         .filter(filter)
+                         .sorted(Comparator.comparing(Meal::getDateTime).reversed())
+                         .collect(Collectors.toList());
+Index: src/main/java/ru/javawebinar/topjava/SpringMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/SpringMain.java	(date 1571267085000)
++++ src/main/java/ru/javawebinar/topjava/SpringMain.java	(date 1571269024357)
+@@ -4,9 +4,15 @@
+ import org.springframework.context.support.ClassPathXmlApplicationContext;
+ import ru.javawebinar.topjava.model.Role;
+ import ru.javawebinar.topjava.model.User;
++import ru.javawebinar.topjava.to.MealTo;
++import ru.javawebinar.topjava.web.meal.MealRestController;
+ import ru.javawebinar.topjava.web.user.AdminRestController;
+ 
++import java.time.LocalDate;
++import java.time.LocalTime;
++import java.time.Month;
+ import java.util.Arrays;
++import java.util.List;
+ 
+ public class SpringMain {
+     public static void main(String[] args) {
+@@ -15,6 +21,14 @@
+             System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
+             AdminRestController adminUserController = appCtx.getBean(AdminRestController.class);
+             adminUserController.create(new User(null, "userName", "email@mail.ru", "password", Role.ROLE_ADMIN));
++            System.out.println();
++
++            MealRestController mealController = appCtx.getBean(MealRestController.class);
++            List<MealTo> filteredMealsWithExcess =
++                    mealController.getBetween(
++                            LocalDate.of(2015, Month.MAY, 30), LocalTime.of(7, 0),
++                            LocalDate.of(2015, Month.MAY, 31), LocalTime.of(11, 0));
++            filteredMealsWithExcess.forEach(System.out::println);
+         }
+     }
+ }

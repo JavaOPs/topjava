@@ -1,0 +1,104 @@
+Index: src/test/resources/logback-test.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/resources/logback-test.xml	(date 1571273056534)
++++ src/test/resources/logback-test.xml	(date 1571273056534)
+@@ -0,0 +1,22 @@
++<configuration>
++
++    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
++        <resetJUL>true</resetJUL>
++    </contextListener>
++
++    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
++        <encoder>
++            <charset>UTF-8</charset>
++            <pattern>%d{HH:mm:ss.SSS} %-5level %class{50}.%M:%L - %msg%n</pattern>
++        </encoder>
++    </appender>
++
++    <logger name="org.postgresql" level="debug"/>
++    <logger name="org.springframework.jdbc" level="debug"/>
++    <logger name="ru.javawebinar.topjava" level="debug"/>
++
++    <root level="INFO">
++        <appender-ref ref="console"/>
++    </root>
++
++</configuration>
+\ No newline at end of file
+Index: src/main/resources/logback.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/logback.xml	(date 1571273026000)
++++ src/main/resources/logback.xml	(date 1571273056510)
+@@ -9,14 +9,14 @@
+ 
+         <encoder>
+             <charset>UTF-8</charset>
+-            <pattern>%date %-5level %logger{0} [%file:%line] %msg%n</pattern>
++            <pattern>%date %-5level %logger{50}.%M:%L - %msg%n</pattern>
+         </encoder>
+     </appender>
+ 
+     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+         <encoder>
+             <charset>UTF-8</charset>
+-            <pattern>%-5level %logger{0} [%file:%line] %msg%n</pattern>
++            <pattern>%d{HH:mm:ss.SSS} %-5level %class{50}.%M:%L - %msg%n</pattern>
+         </encoder>
+     </appender>
+ 
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(date 1571273026000)
++++ pom.xml	(date 1571273056541)
+@@ -61,6 +61,13 @@
+             <scope>compile</scope>
+         </dependency>
+ 
++        <dependency>
++            <groupId>org.slf4j</groupId>
++            <artifactId>jul-to-slf4j</artifactId>
++            <version>${slf4j.version}</version>
++            <scope>runtime</scope>
++        </dependency>
++
+         <dependency>
+             <groupId>ch.qos.logback</groupId>
+             <artifactId>logback-classic</artifactId>
+Index: src/test/java/ru/javawebinar/topjava/service/UserServiceTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/service/UserServiceTest.java	(date 1571273026000)
++++ src/test/java/ru/javawebinar/topjava/service/UserServiceTest.java	(date 1571273056526)
+@@ -2,6 +2,7 @@
+ 
+ import org.junit.Test;
+ import org.junit.runner.RunWith;
++import org.slf4j.bridge.SLF4JBridgeHandler;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.dao.DataAccessException;
+ import org.springframework.test.context.ContextConfiguration;
+@@ -26,6 +27,12 @@
+ @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+ public class UserServiceTest {
+ 
++    static {
++        // Only for postgres driver logging
++        // It uses java.util.logging and logged via jul-to-slf4j bridge
++        SLF4JBridgeHandler.install();
++    }
++
+     @Autowired
+     private UserService service;
+ 

@@ -1,0 +1,69 @@
+Index: src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java	(date 1571270445000)
++++ src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java	(date 1571270460275)
+@@ -4,8 +4,14 @@
+ 
+ public class SecurityUtil {
+ 
++    private static int id = 1;
++
+     public static int authUserId() {
+-        return 1;
++        return id;
++    }
++
++    public static void setAuthUserId(int id) {
++        SecurityUtil.id = id;
+     }
+ 
+     public static int authUserCaloriesPerDay() {
+Index: src/main/java/ru/javawebinar/topjava/web/UserServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/UserServlet.java	(date 1571270445000)
++++ src/main/java/ru/javawebinar/topjava/web/UserServlet.java	(date 1571270460289)
+@@ -13,6 +13,13 @@
+ public class UserServlet extends HttpServlet {
+     private static final Logger log = getLogger(UserServlet.class);
+ 
++    @Override
++    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++        int userId = Integer.parseInt(request.getParameter("userId"));
++        SecurityUtil.setAuthUserId(userId);
++        response.sendRedirect("meals");
++    }
++
+     @Override
+     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         log.debug("forward to users");
+Index: src/main/webapp/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/index.html	(date 1571270445000)
++++ src/main/webapp/index.html	(date 1571270460302)
+@@ -6,9 +6,13 @@
+ <body>
+ <h3>Проект <a href="https://github.com/JavaWebinar/topjava" target="_blank">Java Enterprise (Topjava)</a></h3>
+ <hr>
+-<ul>
+-    <li><a href="users">Users</a></li>
+-    <li><a href="meals">Meals</a></li>
+-</ul>
++<form method="post" action="users">
++    <b>Meals of&nbsp;</b>
++    <select name="userId">
++        <option value="1">User</option>
++        <option value="2">Admin</option>
++    </select>
++    <button type="submit">Select</button>
++</form>
+ </body>
+ </html>

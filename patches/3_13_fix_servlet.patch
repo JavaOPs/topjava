@@ -1,0 +1,55 @@
+Index: src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java	(date 1550661241000)
++++ src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java	(date 1550661251697)
+@@ -1,10 +1,12 @@
+ package ru.javawebinar.topjava.web;
+ 
++import ru.javawebinar.topjava.model.AbstractBaseEntity;
++
+ import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
+ 
+ public class SecurityUtil {
+ 
+-    private static int id = 1;
++    private static int id = AbstractBaseEntity.START_SEQ;
+ 
+     public static int authUserId() {
+         return id;
+Index: src/main/webapp/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/index.html	(date 1550661241000)
++++ src/main/webapp/index.html	(date 1550661251710)
+@@ -9,8 +9,8 @@
+ <form method="post" action="users">
+     <b>Meals of&nbsp;</b>
+     <select name="userId">
+-        <option value="1">User</option>
+-        <option value="2">Admin</option>
++        <option value="100000">User</option>
++        <option value="100001">Admin</option>
+     </select>
+     <button type="submit">Select</button>
+ </form>
+Index: src/main/java/ru/javawebinar/topjava/web/MealServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/MealServlet.java	(date 1550661241000)
++++ src/main/java/ru/javawebinar/topjava/web/MealServlet.java	(date 1550661251688)
+@@ -29,7 +29,7 @@
+     @Override
+     public void init(ServletConfig config) throws ServletException {
+         super.init(config);
+-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
++        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
+         mealController = springContext.getBean(MealRestController.class);
+     }
+ 
