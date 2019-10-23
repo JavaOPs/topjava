@@ -1,0 +1,84 @@
+Index: src/main/webapp/WEB-INF/web.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/web.xml	(date 1559793192979)
++++ src/main/webapp/WEB-INF/web.xml	(date 1559793192979)
+@@ -0,0 +1,19 @@
++<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
++		 http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
++         version="4.0">
++
++    <display-name>Topjava</display-name>
++
++    <servlet>
++        <servlet-name>userServlet</servlet-name>
++        <servlet-class>ru.javawebinar.topjava.web.UserServlet</servlet-class>
++        <load-on-startup>0</load-on-startup>
++    </servlet>
++    <servlet-mapping>
++        <servlet-name>userServlet</servlet-name>
++        <url-pattern>/users</url-pattern>
++    </servlet-mapping>
++
++</web-app>
+Index: src/main/webapp/users.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/users.jsp	(date 1559793298022)
++++ src/main/webapp/users.jsp	(date 1559793298022)
+@@ -0,0 +1,11 @@
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Users</title>
++</head>
++<body>
++<h3><a href="index.html">Home</a></h3>
++<hr>
++<h2>Users</h2>
++</body>
++</html>
+\ No newline at end of file
+Index: src/main/webapp/index.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/index.html	(date 1559793192985)
++++ src/main/webapp/index.html	(date 1559793192985)
+@@ -0,0 +1,13 @@
++<html>
++<head>
++    <meta charset="UTF-8">
++    <title>Java Enterprise (Topjava)</title>
++</head>
++<body>
++<h3>Проект <a href="https://github.com/JavaWebinar/topjava" target="_blank">Java Enterprise (Topjava)</a></h3>
++<hr>
++<ul>
++    <li><a href="users">Users</a></li>
++</ul>
++</body>
++</html>
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(date 1559793186000)
++++ pom.xml	(date 1559793278070)
+@@ -4,7 +4,7 @@
+ 
+     <groupId>ru.javawebinar</groupId>
+     <artifactId>topjava</artifactId>
+-    <packaging>jar</packaging>
++    <packaging>war</packaging>
+ 
+     <version>1.0-SNAPSHOT</version>
+ 
