@@ -1,0 +1,301 @@
+Index: .travis.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .travis.yml	(date 1571847116971)
++++ .travis.yml	(date 1571847116971)
+@@ -0,0 +1,26 @@
++# https://docs.travis-ci.com/user/languages/java/
++language: java
++jdk: openjdk8
++
++#https://dzone.com/articles/travis-ci-tutorial-java-projects
++cache:
++  directories:
++  - $HOME/.m2
++
++# https://docs.travis-ci.com/user/database-setup/#PostgreSQL
++before_script:
++- psql -c 'create database topjava' -U postgres
++- psql -c 'create user "user"; grant all privileges on database topjava to "user"' -U postgres
++
++# https://docs.travis-ci.com/user/customizing-the-build#Building-Specific-Branches
++branches:
++  only:
++  - master
++
++# https://stackoverflow.com/a/49852690/548473:
++services:
++  - postgresql
++
++# https://docs.travis-ci.com/user/notifications#Configuring-email-notifications
++#notifications:
++#  email: false
+\ No newline at end of file
+Index: .codacy.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .codacy.yml	(date 1571847354877)
++++ .codacy.yml	(date 1571847354877)
+@@ -0,0 +1,5 @@
++---
++exclude_paths:
++  - 'src/main/webapp/**'
++  - 'README.md'
++  - '**.sql'
+\ No newline at end of file
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(date 1571846678000)
++++ .gitignore	(date 1571847354868)
+@@ -3,6 +3,4 @@
+ target
+ *.iml
+ log
+-
+-
+-
++*.patch
+\ No newline at end of file
+Index: src/main/java/ru/javawebinar/topjava/util/Util.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/Util.java	(date 1571846678000)
++++ src/main/java/ru/javawebinar/topjava/util/Util.java	(date 1571846800550)
+@@ -3,6 +3,9 @@
+ import org.springframework.lang.Nullable;
+ 
+ public class Util {
++    private Util() {
++    }
++
+     public static <T extends Comparable<? super T>> boolean isBetweenInclusive(T value, @Nullable T start, @Nullable T end) {
+         return (start == null || value.compareTo(start) >= 0) && (end == null || value.compareTo(end) <= 0);
+     }
+Index: src/main/java/ru/javawebinar/topjava/util/ValidationUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/ValidationUtil.java	(date 1571846678000)
++++ src/main/java/ru/javawebinar/topjava/util/ValidationUtil.java	(date 1571846800593)
+@@ -6,6 +6,9 @@
+ 
+ public class ValidationUtil {
+ 
++    private ValidationUtil() {
++    }
++
+     public static <T> T checkNotFoundWithId(T object, int id) {
+         return checkNotFound(object, "id=" + id);
+     }
+Index: src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java	(date 1571846678000)
++++ src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryUserRepository.java	(date 1571846838469)
+@@ -7,6 +7,7 @@
+ 
+ import java.util.Comparator;
+ import java.util.List;
++import java.util.Objects;
+ import java.util.stream.Collectors;
+ 
+ import static ru.javawebinar.topjava.UserTestData.ADMIN;
+@@ -31,6 +32,7 @@
+ 
+     @Override
+     public User getByEmail(String email) {
++        Objects.requireNonNull(email, "email must not be null");
+         return getCollection().stream()
+                 .filter(u -> email.equals(u.getEmail()))
+                 .findFirst()
+Index: src/main/java/ru/javawebinar/topjava/util/MealsUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/MealsUtil.java	(date 1571846678000)
++++ src/main/java/ru/javawebinar/topjava/util/MealsUtil.java	(date 1571846785752)
+@@ -15,6 +15,9 @@
+ public class MealsUtil {
+     public static final int DEFAULT_CALORIES_PER_DAY = 2000;
+ 
++    private MealsUtil() {
++    }
++
+     public static List<MealTo> getTos(Collection<Meal> meals, int caloriesPerDay) {
+         return getFiltered(meals, caloriesPerDay, meal -> true);
+     }
+Index: src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java	(date 1571846678000)
++++ src/main/java/ru/javawebinar/topjava/web/SecurityUtil.java	(date 1571846800605)
+@@ -8,6 +8,9 @@
+ 
+     private static int id = AbstractBaseEntity.START_SEQ;
+ 
++    private SecurityUtil() {
++    }
++
+     public static int authUserId() {
+         return id;
+     }
+Index: src/main/java/ru/javawebinar/topjava/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/service/UserService.java	(date 1571846678000)
++++ src/main/java/ru/javawebinar/topjava/service/UserService.java	(date 1571846758192)
+@@ -2,6 +2,7 @@
+ 
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Service;
++import org.springframework.util.Assert;
+ import ru.javawebinar.topjava.model.User;
+ import ru.javawebinar.topjava.repository.UserRepository;
+ import ru.javawebinar.topjava.util.exception.NotFoundException;
+@@ -22,6 +23,7 @@
+     }
+ 
+     public User create(User user) {
++        Assert.notNull(user, "user must not be null");
+         return repository.save(user);
+     }
+ 
+@@ -34,6 +36,7 @@
+     }
+ 
+     public User getByEmail(String email) throws NotFoundException {
++        Assert.notNull(email, "email must not be null");
+         return checkNotFound(repository.getByEmail(email), "email=" + email);
+     }
+ 
+@@ -42,6 +45,7 @@
+     }
+ 
+     public void update(User user) throws NotFoundException {
++        Assert.notNull(user, "user must not be null");
+         checkNotFoundWithId(repository.save(user), user.getId());
+     }
+ }
+\ No newline at end of file
+Index: src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java	(date 1571846678000)
++++ src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java	(date 1571846800616)
+@@ -5,6 +5,7 @@
+ 
+ import java.util.Collection;
+ import java.util.Map;
++import java.util.Objects;
+ import java.util.concurrent.ConcurrentHashMap;
+ import java.util.concurrent.atomic.AtomicInteger;
+ 
+@@ -18,6 +19,7 @@
+     Map<Integer, T> map = new ConcurrentHashMap<>();
+ 
+     public T save(T entry) {
++        Objects.requireNonNull(entry, "Entry must not be null");
+         if (entry.isNew()) {
+             entry.setId(counter.incrementAndGet());
+             map.put(entry.getId(), entry);
+Index: src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java	(date 1571846678000)
++++ src/main/java/ru/javawebinar/topjava/util/DateTimeUtil.java	(date 1571846774940)
+@@ -11,6 +11,9 @@
+ public class DateTimeUtil {
+     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+ 
++    private DateTimeUtil() {
++    }
++
+     public static String toString(LocalDateTime ldt) {
+         return ldt == null ? "" : ldt.format(DATE_TIME_FORMATTER);
+     }
+Index: src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryMealRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryMealRepository.java	(date 1571846678000)
++++ src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryMealRepository.java	(date 1571846838442)
+@@ -10,10 +10,7 @@
+ import javax.annotation.PostConstruct;
+ import javax.annotation.PreDestroy;
+ import java.time.LocalDateTime;
+-import java.util.Collections;
+-import java.util.Comparator;
+-import java.util.List;
+-import java.util.Map;
++import java.util.*;
+ import java.util.concurrent.ConcurrentHashMap;
+ import java.util.function.Predicate;
+ import java.util.stream.Collectors;
+@@ -27,6 +24,7 @@
+ 
+     @Override
+     public Meal save(Meal meal, int userId) {
++        Objects.requireNonNull(meal, "meal must not be null");
+         InMemoryBaseRepository<Meal> meals = usersMealsMap.computeIfAbsent(userId, uid -> new InMemoryBaseRepository<>());
+         return meals.save(meal);
+     }
+@@ -60,6 +58,8 @@
+ 
+     @Override
+     public List<Meal> getBetween(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
++        Objects.requireNonNull(startDateTime, "startDateTime must not be null");
++        Objects.requireNonNull(endDateTime, "endDateTime must not be null");
+         return getAllFiltered(userId, meal -> Util.isBetweenInclusive(meal.getDateTime(), startDateTime, endDateTime));
+     }
+ 
+Index: src/main/java/ru/javawebinar/topjava/service/MealService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/service/MealService.java	(date 1571846678000)
++++ src/main/java/ru/javawebinar/topjava/service/MealService.java	(date 1571846758161)
+@@ -2,6 +2,7 @@
+ 
+ import org.springframework.lang.Nullable;
+ import org.springframework.stereotype.Service;
++import org.springframework.util.Assert;
+ import ru.javawebinar.topjava.model.Meal;
+ import ru.javawebinar.topjava.repository.MealRepository;
+ import ru.javawebinar.topjava.util.DateTimeUtil;
+@@ -41,10 +42,12 @@
+     }
+ 
+     public void update(Meal meal, int userId) {
++        Assert.notNull(meal, "meal must not be null");
+         checkNotFoundWithId(repository.save(meal, userId), meal.getId());
+     }
+ 
+     public Meal create(Meal meal, int userId) {
++        Assert.notNull(meal, "meal must not be null");
+         return repository.save(meal, userId);
+     }
+ }
+\ No newline at end of file

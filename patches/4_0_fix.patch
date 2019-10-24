@@ -1,0 +1,100 @@
+Index: src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java	(revision aeba16154c608d5eff20cf092f82e4deee94cbb7)
++++ src/test/java/ru/javawebinar/topjava/repository/inmemory/InMemoryBaseRepository.java	(date 1571595344342)
+@@ -8,10 +8,12 @@
+ import java.util.concurrent.ConcurrentHashMap;
+ import java.util.concurrent.atomic.AtomicInteger;
+ 
++import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
++
+ @Repository
+ public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
+ 
+-    private static AtomicInteger counter = new AtomicInteger(0);
++    private static AtomicInteger counter = new AtomicInteger(START_SEQ);
+ 
+     Map<Integer, T> map = new ConcurrentHashMap<>();
+ 
+Index: src/test/java/ru/javawebinar/topjava/web/user/InMemoryAdminRestControllerSpringTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/web/user/InMemoryAdminRestControllerSpringTest.java	(revision aeba16154c608d5eff20cf092f82e4deee94cbb7)
++++ src/test/java/ru/javawebinar/topjava/web/user/InMemoryAdminRestControllerSpringTest.java	(date 1571595360810)
+@@ -35,8 +35,8 @@
+     public void delete() throws Exception {
+         controller.delete(UserTestData.USER_ID);
+         Collection<User> users = controller.getAll();
+-        Assert.assertEquals(users.size(), 1);
+-        Assert.assertEquals(users.iterator().next(), ADMIN);
++        Assert.assertEquals(1, users.size());
++        Assert.assertEquals(ADMIN, users.iterator().next());
+     }
+ 
+     @Test(expected = NotFoundException.class)
+Index: src/main/java/ru/javawebinar/topjava/service/MealService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/ru/javawebinar/topjava/service/MealService.java	(revision aeba16154c608d5eff20cf092f82e4deee94cbb7)
++++ src/main/java/ru/javawebinar/topjava/service/MealService.java	(date 1571595344334)
+@@ -32,7 +32,8 @@
+     public List<Meal> getBetweenDates(@Nullable LocalDate startDate, @Nullable LocalDate endDate, int userId) {
+         return repository.getBetween(
+                 DateTimeUtil.createDateTime(startDate, LocalDate.MIN, LocalTime.MIN),
+-                DateTimeUtil.createDateTime(endDate, LocalDate.MAX, LocalTime.MAX), userId);
++                DateTimeUtil.createDateTime(endDate, LocalDate.MAX, LocalTime.MAX),
++                userId);
+     }
+ 
+     public List<Meal> getAll(int userId) {
+Index: src/test/java/ru/javawebinar/topjava/web/user/InMemoryAdminRestControllerTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/web/user/InMemoryAdminRestControllerTest.java	(revision aeba16154c608d5eff20cf092f82e4deee94cbb7)
++++ src/test/java/ru/javawebinar/topjava/web/user/InMemoryAdminRestControllerTest.java	(date 1571595360820)
+@@ -1,6 +1,8 @@
+ package ru.javawebinar.topjava.web.user;
+ 
+ import org.junit.*;
++import org.slf4j.Logger;
++import org.slf4j.LoggerFactory;
+ import org.springframework.context.ConfigurableApplicationContext;
+ import org.springframework.context.support.ClassPathXmlApplicationContext;
+ import ru.javawebinar.topjava.UserTestData;
+@@ -14,13 +16,15 @@
+ import static ru.javawebinar.topjava.UserTestData.ADMIN;
+ 
+ public class InMemoryAdminRestControllerTest {
++    private static final Logger log = LoggerFactory.getLogger(InMemoryAdminRestControllerTest.class);
++
+     private static ConfigurableApplicationContext appCtx;
+     private static AdminRestController controller;
+ 
+     @BeforeClass
+     public static void beforeClass() {
+         appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+-        System.out.println("\n" + Arrays.toString(appCtx.getBeanDefinitionNames()) + "\n");
++        log.info("\n{}\n", Arrays.toString(appCtx.getBeanDefinitionNames()));
+         controller = appCtx.getBean(AdminRestController.class);
+     }
+ 
+@@ -40,8 +44,8 @@
+     public void delete() throws Exception {
+         controller.delete(UserTestData.USER_ID);
+         Collection<User> users = controller.getAll();
+-        Assert.assertEquals(users.size(), 1);
+-        Assert.assertEquals(users.iterator().next(), ADMIN);
++        Assert.assertEquals(1, users.size());
++        Assert.assertEquals(ADMIN, users.iterator().next());
+     }
+ 
+     @Test(expected = NotFoundException.class)

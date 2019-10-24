@@ -1,0 +1,77 @@
+Index: src/test/java/ru/javawebinar/topjava/service/MealServiceTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/service/MealServiceTest.java	(date 1571597718000)
++++ src/test/java/ru/javawebinar/topjava/service/MealServiceTest.java	(date 1571597893286)
+@@ -2,7 +2,6 @@
+ 
+ import org.junit.Test;
+ import org.junit.runner.RunWith;
+-import org.slf4j.bridge.SLF4JBridgeHandler;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.test.context.ContextConfiguration;
+ import org.springframework.test.context.jdbc.Sql;
+@@ -26,10 +25,6 @@
+ @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+ public class MealServiceTest {
+ 
+-    static {
+-        SLF4JBridgeHandler.install();
+-    }
+-
+     @Autowired
+     private MealService service;
+ 
+Index: src/main/resources/spring/spring-db.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/resources/spring/spring-db.xml	(date 1571597718000)
++++ src/main/resources/spring/spring-db.xml	(date 1571597739677)
+@@ -6,6 +6,15 @@
+ 
+     <context:property-placeholder location="classpath:db/postgres.properties" system-properties-mode="OVERRIDE"/>
+ 
++<!--
++    For postgres driver logging
++    It uses java.util.logging and logged via jul-to-slf4j bridge
++    https://stackoverflow.com/a/27296470/548473
++-->
++    <bean class="org.springframework.beans.factory.config.MethodInvokingBean">
++        <property name="staticMethod" value="org.slf4j.bridge.SLF4JBridgeHandler.install" />
++    </bean>
++
+     <!--no pooling-->
+     <bean id="dataSource"
+           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+Index: src/test/java/ru/javawebinar/topjava/service/UserServiceTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/ru/javawebinar/topjava/service/UserServiceTest.java	(date 1571597718000)
++++ src/test/java/ru/javawebinar/topjava/service/UserServiceTest.java	(date 1571597893280)
+@@ -2,7 +2,6 @@
+ 
+ import org.junit.Test;
+ import org.junit.runner.RunWith;
+-import org.slf4j.bridge.SLF4JBridgeHandler;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.dao.DataAccessException;
+ import org.springframework.test.context.ContextConfiguration;
+@@ -27,12 +26,6 @@
+ @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+ public class UserServiceTest {
+ 
+-    static {
+-        // Only for postgres driver logging
+-        // It uses java.util.logging and logged via jul-to-slf4j bridge
+-        SLF4JBridgeHandler.install();
+-    }
+-
+     @Autowired
+     private UserService service;
+ 
