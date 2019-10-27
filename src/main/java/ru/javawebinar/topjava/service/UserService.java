@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
@@ -22,6 +23,7 @@ public class UserService {
     }
 
     public User create(User user) {
+        Assert.notNull(user, "user must not be null");
         return repository.save(user);
     }
 
@@ -34,6 +36,7 @@ public class UserService {
     }
 
     public User getByEmail(String email) throws NotFoundException {
+        Assert.notNull(email, "email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
 
@@ -42,6 +45,7 @@ public class UserService {
     }
 
     public void update(User user) throws NotFoundException {
+        Assert.notNull(user, "user must not be null");
         checkNotFoundWithId(repository.save(user), user.getId());
     }
 }
