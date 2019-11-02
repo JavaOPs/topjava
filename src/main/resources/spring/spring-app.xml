@@ -11,6 +11,7 @@
             <constructor-arg name="repository" ref="inmemoryUserRepository"/>
         </bean>
     -->
+    <import resource="spring-tools.xml"/>
 
     <!-- Not necessary, already included with component-scan -->
     <!--<context:annotation-config/>-->
