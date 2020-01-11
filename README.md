@@ -47,6 +47,7 @@ Java Enterprise Online Project
 ### Патч <a href="https://drive.google.com/file/d/1QGFdLlBFqUA_lXMKaGaFPq8qn4SEvPeE">prepare_to_HW0.patch</a> (скачать и положить в каталог вашего проекта)
 
 > Проект постоянно улучшается, поэтому видео иногда отличается от кода проекта. Изменения указываю после видео: 
+> - переименовал класс `UserMealWithExceed` и его поле `exceed` в `UserMealWithExcess.excess`
 > - в `UserMeals/UserMealWithExcess` поля изменились на `private`
 > - обновил данные `UserMealsUtil.meals` и переименовал некоторые пременные, поля и методы
 > - добавил `UserMealWithExcess.toString()` и метод для выполнения _Optional домашнего задания_
@@ -70,12 +71,12 @@ Java Enterprise Online Project
 
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание HW0
 ```
-Реализовать метод UserMealsUtil.getFilteredWithExceeded через циклы (`forEach`):
--  должны возвращаться только записи между startTime и endTime 
--  поле UserMealWithExceed.exceed должно показывать, 
-                                     превышает ли сумма калорий за весь день параметра метода caloriesPerDay  
+Реализовать метод `UserMealsUtil.filteredByCycles` через циклы (`forEach`):
+-  должны возвращаться только записи между `startTime` и `endTime`
+-  поле `UserMealWithExcess.excess` должно показывать, 
+                                     превышает ли сумма калорий за весь день значение `caloriesPerDay`
         
-Т.е UserMealWithExceed - это запись одной еды, но поле exceeded будет одинаково для всех записей за этот день.
+Т.е `UserMealWithExcess` - это запись одной еды, но поле `excess` будет одинаково для всех записей за этот день.
     
 - Проверьте результат выполнения ДЗ (можно проверить логику в http://topjava.herokuapp.com , список еды)
 - Оцените Time complexity алгоритма. Если она больше O(N), например O(N*N) или N*log(N), сделайте O(N).
@@ -91,7 +92,7 @@ Java Enterprise Online Project
 
 ### Optional (Java 8 Stream API)
 ```
-Сделать реализацию через Java 8 Stream API.
+Реализовать метод `UserMealsUtil.filteredByStreams` через Java 8 Stream API.
 ```
 -  <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Видео: Доступно о Java 8 Lambda</a>
 -  <a href="https://devcolibri.com/java-8-killer-features-%D1%87%D0%B0%D1%81%D1%82%D1%8C-1/">Java 8: Lambda выражения</a>
@@ -131,7 +132,7 @@ Java Enterprise Online Project
   
 ## ![error](https://cloud.githubusercontent.com/assets/13649199/13672935/ef09ec1e-e6e7-11e5-9f79-d1641c05cbe6.png) Замечания к HW0
 - 1: Код проекта менять можно! Одна из распространенных ошибок как в тестовых заданиях на собеседовании, так и при работе на проекте, что ничего нельзя менять. Конечно при правках в рабочем проекте обязательно нужно проконсультироваться/проревьюироваться у авторов кода (находится по истории VCS)
-- 2: Наследовать `UserMealWithExceed` от `UserMeal` я не буду, т.к. это разные сущности: Transfer Object и Entity. Мы будет их проходить на 2м уроке.
+- 2: Наследовать `UserMealWithExcess` от `UserMeal` я не буду, т.к. это разные сущности: Transfer Object и Entity. Мы будет их проходить на 2м уроке.
 - 3: Правильная реализация должна быть простой и красивой, можно сделать 2-мя способами: через стримы и через циклы. Сложность должна быть O(N), т.е. без вложенных стримов и циклов.
 - 4: При реализации через циклы посмотрите в `Map` на методы `getOrDefault` или `merge`
 - 5: **При реализации через `Stream` заменяйте `forEach` оператором `stream.map(..)`**
@@ -140,7 +141,7 @@ Java Enterprise Online Project
 - 8: Пользуйтесь форматированием кода в IDEA: `Alt+Ctrl+L`
 - 9: Перед check-in проверяйте чендж-лист (курсор на файл и Ctrl+D): не оставляйте в коде ничего лишнего (закомментированный код, TODO и пр.). Если файл не меняется (например только пробелы или переводы строк), не надо его чекинить, делайте ему `revert` (Git -> Revert / `Ctrl+Alt+Z`).
 - 10: `System.out.println` нельзя делать нигде, кроме как в `main`. Позже введем логирование.
-- 11: Результаты, возвращаемые `UserMealsUtil.getFilteredWithExceeded` мы будем использовать [в нашем приложении](http://topjava.herokuapp.com/) для фильтрации по времени и отображения еды правильным цветом.
+- 11: Результаты, возвращаемые `UserMealsUtil.filteredByStreams` мы будем использовать [в нашем приложении](http://topjava.herokuapp.com/) для фильтрации по времени и отображения еды правильным цветом.
 - 12: Обращайте внимание на комментарии к вашим коммитам в git. Они должны быть короткие и информативные (лучше на english)
 - 13: Не полагайтесь в решении на то, что список будет подаваться отсортированным. Такого условия нет.
 -----
