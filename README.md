@@ -69,6 +69,9 @@ Java Enterprise Online Project
 -  Выполнить задание и залить на GitHub (commit + push)
 -  Переключиться в основную ветку проекта master.
 
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 4. [Тех.задание: библия или допускаются изменения. Полуоткрытый интервал.](https://drive.google.com/file/d/123XyBYVeKLC3ZcRr_dUkwyvO9NC6WLkY/view?usp=sharing)
+- [Типы промежутков](https://ru.wikipedia.org/wiki/Промежуток_(математика))
+
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание HW0
 ```
 Реализовать метод `UserMealsUtil.filteredByCycles` через циклы (`forEach`):
