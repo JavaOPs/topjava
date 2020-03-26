@@ -106,6 +106,8 @@
 - Выдели самое главное путем опроса босса и важных коллег. Не распыляйся на мелочи.</li>
 - [**5 вещей, которые разработчик должен сделать прежде чем попросить о помощи**](https://techrocks.ru/2018/07/16/5-things-a-developer-should-do-before-asking-for-help/)
 - [**Советы новичкам**](http://blog.csssr.ru/2016/09/19/how-to-be-a-beginner-developer)
+- [ТОП-13 ошибок начинающего программиста](https://proglib.io/p/beginners-fails/)
+- [25 ошибок начинающего программиста](https://habr.com/ru/post/413129/)
 - [Нетехнические навыки](https://tproger.ru/experts/softskills-for-job)
 
 ## [Отзывы по стажировке Topjava](https://vk.com/topic-74381644_30447246)
