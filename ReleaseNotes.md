@@ -1,4 +1,20 @@
 # TopJava Release Notes
+### Topjava 19
+- Изменилась логика для интервалов времени (исключаем `endTime`)
+- Заменил собственный `MessageUtil` велосипед на спринговый `MessageSourceAccessor`
+- В ролях убрал префиксы `ROLE_` ([Role and GrantedAuthority](https://stackoverflow.com/a/19542316/548473)) 
+- Добавился удобный метод `int AbstractBaseEntity.id()`
+- Фикс `Location` в `ProfileRestController.register`
+- Фикс валидации `UniqueMailValidator` для REST update без `user.id`
+- Заменил `jdbc.initLocation` на полный путь - IDEA не ругается
+- В конфигурации `cargo-maven2-plugin` сделал [индивидуальный контекст приложения](https://stackoverflow.com/a/60797999/548473)
+- Тесты
+  - Обновил даты еды на 2020г.
+  - Зарефакторил тесты сервисов на удаление - `NotFoundException` может бросаться при `delete()`
+  - В тестах контроллеров вернулся к реализации без обертки над `MockMvcRequestBuilders`
+  - Для `InMemory` тестов подключаю только `inmemory.xml` (добавил туда необходимую конфигурацию из `spring-app.xml`)
+  
+
 ### Topjava 18
 
 - В `ErrorType` добавил `HttpStatus status`
