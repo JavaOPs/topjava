@@ -20,7 +20,7 @@
 ### <a href="http://javaops.ru/story.html">Наши истории (делимся опытом и успехом)</a>
 
 ### Тесты/задачи онлайн:
-- [Interviewing: the most profitable skill you can learn](https://www.pramp.com)
+- [Interviewing: the most profitable skill you can learn (pramp.com)](https://www.pramp.com/)
 - [Java Programming Test](https://tests4geeks.com/java)
 - <a href="http://www.javadeathmatch.com/">game: test Java skills</a>
 - <a href="https://codility.com/programmers/lessons">Codility lesson tests</a>
@@ -29,7 +29,6 @@
 - <a href="http://www.spoj.com/">Sphere online judge</a>
 - <a href="https://codility.com/programmers/lessons/">Codility programmers lessons</a>
 - <a href="https://www.hackerrank.com/">Hackerrank practice coding</a>
-- [Interviewing: the most profitable skill you can learn (pramp.com)](https://www.pramp.com/)
 - [start.interviewing.io](https://start.interviewing.io/)
 
 ## [Тестовое собеседование, самые спрашиваемые темы](http://javaops.ru/interview/test.html)
