@@ -124,7 +124,7 @@ Java Enterprise Online Project
     Т.е. в решении не должно быть 2 раза `meal.stream()` (в том числе неявно, в составных коллекторах)
   - возможно дополнительные проходы по частям списка
 
-- [Полное руководство по Java 8 Stream API в картинках и примерах](https://easyjava.ru/java/language/java-8-stream-api-chast-shestaya-sobstvennyj-kollektor/)
+- [Java 8 Stream API, часть шестая: собственный коллектор](https://easyjava.ru/java/language/java-8-stream-api-chast-shestaya-sobstvennyj-kollektor)
 - [Руководство по Java 8 Stream API: Collector](https://annimon.com/article/2778#collector)
 
 ### Замечания по использованию Stream API:
