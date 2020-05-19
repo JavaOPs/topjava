@@ -123,7 +123,6 @@ Java Enterprise Online Project
   - нельзя использовать внешние коллекции, не являющиеся частью коллектора или 2 раза проходить по исходному списку (в том числе модифицированному, например отфильтрованному).
     Т.е. в решении не должно быть 2 раза `meal.stream()` (в том числе неявно, в составных коллекторах)
   - возможно дополнительные проходы по частям списка
-
 - [Java 8 Stream API, часть шестая: собственный коллектор](https://easyjava.ru/java/language/java-8-stream-api-chast-shestaya-sobstvennyj-kollektor)
 - [Руководство по Java 8 Stream API: Collector](https://annimon.com/article/2778#collector)
 
