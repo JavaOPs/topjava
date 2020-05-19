@@ -108,7 +108,8 @@ Java Enterprise Online Project
 -  <a href="http://habrahabr.ru/company/luxoft/blog/270383/">Шпаргалка Java Stream API</a>
 -  <a href="https://www.youtube.com/watch?v=hEyCK4ueBlc">Алексея Владыкин: Элементы функционального программирования в Java</a>
 -  <a href="https://www.youtube.com/watch?v=iD8H7cmxw_w">Yakov Fain о новом в Java 8</a>
--  <a href="http://stackoverflow.com/questions/28319064/java-8-best-way-to-transform-a-list-map-or-foreach">stream.map vs forEach</a>
+-  <a href="http://stackoverflow.com/questions/28319064/java-8-best-way-to-transform-a-list-map-or-foreach">stream.map vs forEach</a
+-  [Полное руководство по Java 8 Stream API в картинках и примерах](https://annimon.com/article/2778)    
 -  Дополнительно
    - [Сергей Куксенко — Stream API, часть 1](https://www.youtube.com/watch?v=O8oN4KSZEXE)
    - [Сергей Куксенко — Stream API, часть 2](https://www.youtube.com/watch?v=i0Jr2l3jrDA)
@@ -122,6 +123,9 @@ Java Enterprise Online Project
   - нельзя использовать внешние коллекции, не являющиеся частью коллектора или 2 раза проходить по исходному списку (в том числе модифицированному, например отфильтрованному).
     Т.е. в решении не должно быть 2 раза `meal.stream()` (в том числе неявно, в составных коллекторах)
   - возможно дополнительные проходы по частям списка
+
+- [Полное руководство по Java 8 Stream API в картинках и примерах](https://easyjava.ru/java/language/java-8-stream-api-chast-shestaya-sobstvennyj-kollektor/)
+- [Руководство по Java 8 Stream API: Collector](https://annimon.com/article/2778#collector)
 
 ### Замечания по использованию Stream API:
 - Когда встречаешь что-то непривычное, приходится перестраивать мозги. Например, переход с процедурного на ООП программирование дается непросто. Те, кто не знает шаблонов (и не хотят учить) также их встречают плохо. Хорошая новость в том, что если это принять и начать использовать, то начинаешь получать от этого удовольствие. И тут главное не впасть в другую крайность:
