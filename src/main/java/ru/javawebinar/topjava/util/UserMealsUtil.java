@@ -3,11 +3,11 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExcess;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -28,8 +28,36 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO return filtered list with excess. Implement by cycles
-        return null;
+
+        final int _minOfDayStartTime    = startTime.getHour() * 60 + startTime.getMinute();
+        final int _minOfDayEndTime      = endTime.getHour() * 60 + endTime.getMinute();
+        List<UserMealWithExcess> _retUserMealExcess = new ArrayList<UserMealWithExcess>();
+        Map<LocalDate, Integer> _caloriesOfDay = new HashMap<LocalDate, Integer>();
+
+        for(UserMeal um: meals){
+            if( ( (um.getDateTime().getHour() * 60 + um.getDateTime().getMinute()) >= _minOfDayStartTime ) &&
+                    ((um.getDateTime().getHour() * 60 + um.getDateTime().getMinute()) <= _minOfDayEndTime) )
+                _retUserMealExcess.add( new UserMealWithExcess(um.getDateTime(), um.getDescription(), um.getCalories(), false ) );
+
+            LocalDate _dt = LocalDate.of(um.getDateTime().getYear(), um.getDateTime().getMonth(), um.getDateTime().getDayOfMonth());
+            if(_caloriesOfDay.containsKey(_dt)) _caloriesOfDay.put(_dt, _caloriesOfDay.get(_dt).intValue() + um.getCalories());
+            else _caloriesOfDay.put(_dt, um.getCalories());
+        };
+
+        _retUserMealExcess.forEach( ume -> {
+            _caloriesOfDay.forEach((dt, val) -> {
+                if((dt.getYear() == ume.getDateTime().getYear()) &&
+                        (dt.getMonth() == ume.getDateTime().getMonth()) &&
+                        (dt.getDayOfMonth() == ume.getDateTime().getDayOfMonth()) &&
+                        val > caloriesPerDay) {
+
+                    ume.setExcess(true);
+                }
+            });
+        });
+
+
+        return _retUserMealExcess;
     }
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
