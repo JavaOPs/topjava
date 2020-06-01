@@ -22,33 +22,28 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
         );
 
-        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(23, 0), 2000);
         mealsTo.forEach(System.out::println);
 
 //        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        List<UserMealWithExcess> list = new ArrayList<>();
+        List<UserMealWithExcess> usersMealWithExcesses = new ArrayList<>();
+        int[] listDaysWithCaloriesPerDay = new int[366];
+
+        for (UserMeal userMeal : meals) {
+            listDaysWithCaloriesPerDay[userMeal.getDateTime().getDayOfYear()] += userMeal.getCalories();
+        }
 
         for (UserMeal userMeal : meals) {
             if (TimeUtil.isBetweenHalfOpen(userMeal.getDateTime().toLocalTime(), startTime, endTime)) {
-                boolean excess = caloriesPerDay(meals, userMeal.getDateTime()) > caloriesPerDay ? false : true;
-                list.add(new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), excess));
+                boolean excess = listDaysWithCaloriesPerDay[userMeal.getDateTime().getDayOfYear()] > caloriesPerDay;
+                usersMealWithExcesses.add(new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), excess));
             }
         }
-        // TODO return filtered list with excess. Implement by cycles
-        return list;
-    }
 
-    public static int caloriesPerDay(List<UserMeal> meals, LocalDateTime localDateTime) {
-        int caloriesPerDay = 0;
-        for (UserMeal user : meals) {
-            if (user.getDateTime().getDayOfYear() == localDateTime.getDayOfYear()) {
-                caloriesPerDay +=user.getCalories();
-            }
-        }
-        return caloriesPerDay;
+        return usersMealWithExcesses;
     }
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
