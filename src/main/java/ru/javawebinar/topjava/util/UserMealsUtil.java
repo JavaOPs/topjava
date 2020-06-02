@@ -3,12 +3,13 @@ package ru.javawebinar.topjava.util;
 import ru.javawebinar.topjava.model.UserMeal;
 import ru.javawebinar.topjava.model.UserMealWithExcess;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -22,32 +23,51 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
         );
 
-        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(23, 0), 2000);
-        mealsTo.forEach(System.out::println);
+        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
+//        mealsTo.forEach(System.out::println);
 
-//        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
+        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         List<UserMealWithExcess> usersMealWithExcesses = new ArrayList<>();
-        int[] listDaysWithCaloriesPerDay = new int[366];
+        List<UserMeal> userMeals = new ArrayList<>();
+        Map<LocalDate, Integer> dateTimeMapWithCalories = new HashMap<>();
+        Date dateStart = new Date();
 
         for (UserMeal userMeal : meals) {
-            listDaysWithCaloriesPerDay[userMeal.getDateTime().getDayOfYear()] += userMeal.getCalories();
-        }
-
-        for (UserMeal userMeal : meals) {
-            if (TimeUtil.isBetweenHalfOpen(userMeal.getDateTime().toLocalTime(), startTime, endTime)) {
-                boolean excess = listDaysWithCaloriesPerDay[userMeal.getDateTime().getDayOfYear()] > caloriesPerDay;
-                usersMealWithExcesses.add(new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), excess));
+            dateTimeMapWithCalories.merge(userMeal.getDateTime().toLocalDate(), userMeal.getCalories(), (a, b) -> b + a);
+            if (userMeal.getDateTime().toLocalTime().isAfter(startTime) && userMeal.getDateTime().toLocalTime().isBefore(endTime)) {
+                userMeals.add(userMeal);
             }
         }
+
+        for (UserMeal userMeal : userMeals) {
+            boolean excess = dateTimeMapWithCalories.get(userMeal.getDateTime().toLocalDate()) > caloriesPerDay;
+            usersMealWithExcesses.add(new UserMealWithExcess(userMeal.getDateTime(),userMeal.getDescription(), userMeal.getCalories(), excess));
+        }
+
+        Date dateFinish = new Date();
+        System.out.println(dateFinish.getTime() - dateStart.getTime());
 
         return usersMealWithExcesses;
     }
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO Implement by streams
-        return null;
+        Date dateStart = new Date();
+        List<UserMealWithExcess> userMealWithExcessList = new ArrayList<>();
+        List<UserMeal> userMeals = new ArrayList<>();
+        Map<LocalDate, Integer> dateTimeMapWithCalories = new HashMap<>();
+
+        List<UserMeal> result = meals.stream()
+                .filter((time) -> time.getDateTime().toLocalTime().isAfter(startTime) && time.getDateTime().toLocalTime().isBefore(endTime)).collect(Collectors.toList());
+
+        for (UserMeal userMeal : result) {
+            userMealWithExcessList.add(new UserMealWithExcess(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), false));
+        }
+
+        Date dateEnd = new Date();
+        System.out.println(dateEnd.getTime() - dateStart.getTime());
+        return userMealWithExcessList;
     }
 }
