@@ -53,7 +53,7 @@ Java Enterprise Online Project
 > - в `UserMeals/UserMealWithExcess` поля изменились на `private`
 > - обновил данные `UserMealsUtil.meals` и переименовал некоторые пременные, поля и методы
 > - добавил `UserMealWithExcess.toString()` и метод для выполнения _Optional домашнего задания_
-
+> - метод фильтрации в `TimeUtil` переименовали в `isBetweenHalfOpen` (также изменилась логика сравнения - `startTime` включается в интервал) 
 
 ##  Инструкция по шагам (из видео):</h3>
 -  <a href="http://javaops.ru/view/soft">Установить ПО (git, JDK8, IntelliJ IDEA, Maven)</a>
