@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.web;
 
 import org.slf4j.Logger;
+import ru.javawebinar.topjava.dao.MealDao;
+import ru.javawebinar.topjava.dao.MealInMemoryDao;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.MealsUtil;
 
@@ -11,32 +13,80 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
 public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(MealServlet.class);
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter parser = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+    private final MealDao mealDao;
+
+    public MealServlet() {
+        mealDao = new MealInMemoryDao();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+
+        String template = "/meals.jsp";
+        switch (action.toLowerCase()) {
+            case "create": {
+                template = "/meals/manage.jsp";
+                request.setAttribute("meal", null);
+                break;
+            }
+            case "edit": {
+                template = "/meals/manage.jsp";
+                request.setAttribute("meal", mealDao.getById(Integer.parseInt(request.getParameter("id"))));
+                break;
+            }
+            case "delete": {
+                mealDao.delete(Integer.parseInt(request.getParameter("id")));
+                response.sendRedirect("meals");
+                return;
+            }
+            default: {
+                request.setAttribute(
+                        "meals",
+                        MealsUtil.filteredByStreams(mealDao.getAll(), LocalTime.MIN, LocalTime.MAX, 2000)
+                );
+                break;
+            }
+        }
+
         log.debug("redirect to meals");
         request.setAttribute("dateTimeFormatter", formatter);
+        request.getRequestDispatcher(template).forward(request, response);
+    }
 
-        List<Meal> meals = Arrays.asList(
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500),
-                new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
-        );
-        request.setAttribute("meals", MealsUtil.filteredByStreams(meals, LocalTime.MIN, LocalTime.MAX, 2000));
-        request.getRequestDispatcher("/meals.jsp").forward(request, response);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.debug("redirect to meals");
+        request.setCharacterEncoding("UTF-8");
+
+        String id = request.getParameter("id");
+        Meal meal;
+        if (id == null) {
+            meal = mealDao.add(
+                    LocalDateTime.parse(request.getParameter("dateTime"), parser),
+                    request.getParameter("description"),
+                    Integer.parseInt(request.getParameter("calories"))
+            );
+        } else {
+            meal = mealDao.update(
+                    Integer.parseInt(id),
+                    LocalDateTime.parse(request.getParameter("dateTime"), parser),
+                    request.getParameter("description"),
+                    Integer.parseInt(request.getParameter("calories"))
+            );
+        }
+
+        response.sendRedirect("meals?action=edit&id=" + meal.getId());
     }
 }
