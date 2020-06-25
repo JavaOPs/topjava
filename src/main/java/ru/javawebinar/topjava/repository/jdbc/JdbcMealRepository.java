@@ -31,7 +31,7 @@ public class JdbcMealRepository implements MealRepository {
     }
 
     @Override
-    public List<Meal> getBetweenHalfOpen(LocalDateTime startDate, LocalDateTime endDate, int userId) {
+    public List<Meal> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
         return null;
     }
 }
