@@ -1,11 +1,8 @@
 package ru.javawebinar.topjava.web;
 
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -17,13 +14,13 @@ import ru.javawebinar.topjava.AllActiveProfileResolver;
 
 import javax.annotation.PostConstruct;
 
-@ContextConfiguration({
+@SpringJUnitWebConfig(locations = {
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-mvc.xml",
         "classpath:spring/spring-db.xml"
 })
-@WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)
+//@WebAppConfiguration
+//@ExtendWith(SpringExtension.class)
 @Transactional
 @ActiveProfiles(resolver = AllActiveProfileResolver.class)
 abstract public class AbstractControllerTest {
