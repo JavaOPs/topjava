@@ -2,7 +2,12 @@ package ru.javawebinar.topjava.web;
 
 import org.assertj.core.matcher.AssertionMatcher;
 import org.junit.jupiter.api.Test;
+import ru.javawebinar.topjava.TestMatcher;
+import ru.javawebinar.topjava.UserTestData;
+import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.to.MealTo;
+import ru.javawebinar.topjava.util.MealsUtil;
 
 import java.util.List;
 
@@ -10,6 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static ru.javawebinar.topjava.UserTestData.*;
+import static ru.javawebinar.topjava.MealTestData.*;
 
 class RootControllerTest extends AbstractControllerTest {
 
@@ -28,5 +34,20 @@ class RootControllerTest extends AbstractControllerTest {
                             }
                         }
                 ));
+    }
+
+    @Test
+    void getMeals() throws Exception {
+        perform(get("/meals"))
+                .andDo(print())
+                .andExpect(view().name("meals"))
+                .andExpect(forwardedUrl("/WEB-INF/jsp/meals.jsp"))
+                .andExpect(model().attribute("meals", new AssertionMatcher<List<MealTo>>() {
+                    @Override
+                    public void assertion(List<MealTo> meals) throws AssertionError {
+                        TestMatcher<MealTo> matcher = TestMatcher.usingFieldsComparator(MealTo.class);
+                        matcher.assertMatch(meals, MealsUtil.getTos(MEALS, SecurityUtil.authUserCaloriesPerDay()));
+                    }
+                }));
     }
 }
