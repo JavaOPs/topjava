@@ -76,7 +76,7 @@ _Антуан де Сент-Экзюпери_
 - 24: Валидация
   - желательна
   - одних аннотаций недостаточно. Должны быть `@Valid/@Validation`
-  - проверяйте входные данные при `create/update` в контроллерах! В TopJava это `ValidationUtil.checkNew()/assureIdConsistent()`
+  - проверяйте входные данные при `create/update` **в контроллерах!** В TopJava это `ValidationUtil.checkNew()/assureIdConsistent()`
 - 25: `readme.md`: 
   - Если задание на English, описание пишите также на English (то же самое относится к языку резюме: вакансия на English предполагает ваше резюме на English)
   - Требуемые примеры `curl` не прячте- пишите здесь!
