@@ -1,4 +1,15 @@
 # TopJava Release Notes
+
+### Topjava 20
+- мигрировали на JDK 14
+- в `@SafeHtml` запрещаем весь html (`whitelistType = NONE`)
+- в API добавили `/users/{id}/with-meals` (см. [двунаправленные отношения](https://www.codeflow.site/ru/article/jackson-bidirectional-relationships-and-infinite-recursion))
+- в js убрал объект контекст,  передаю 3-мя параметрами
+- в UI контроллерах убрал префикс `ajax`
+- из тестов сервисов убрал `repository`. При проверке через `assertThrows` он не требуется
+- в `TestMatcher` сценарии сравнения сделал параметризируемыми (паттерн стратегия)
+- добавил `UserTestData.USER_WITH_MEALS_MATCHER` (проверки пользователя сразу с едой) и константу id `NOT_FOUND`
+
 ### Topjava 19
 - Изменилась логика для интервалов времени (исключаем `endTime`)
 - Заменил собственный `MessageUtil` велосипед на спринговый `MessageSourceAccessor`
