@@ -3,11 +3,11 @@
 ### Topjava 20
 - мигрировали на JDK 14
 - в `@SafeHtml` запрещаем весь html (`whitelistType = NONE`)
-- в API добавили `/users/{id}/with-meals` (см. [двунаправленные отношения](https://www.codeflow.site/ru/article/jackson-bidirectional-relationships-and-infinite-recursion))
-- в js убрал объект контекст,  передаю 3-мя параметрами
+- в `topjava.common.js` в `makeEditable()` вместо объекта контекст передаю 3 параметра
 - в UI контроллерах убрал префикс `ajax`
 - из тестов сервисов убрал `repository`. При проверке через `assertThrows` он не требуется
 - в `TestMatcher` сценарии сравнения сделал параметризируемыми (паттерн стратегия)
+- в API добавили `/users/{id}/with-meals` (см. [двунаправленные отношения](https://www.codeflow.site/ru/article/jackson-bidirectional-relationships-and-infinite-recursion))
 - добавил `UserTestData.USER_WITH_MEALS_MATCHER` (проверки пользователя сразу с едой) и константу id `NOT_FOUND`
 
 ### Topjava 19
