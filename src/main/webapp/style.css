@@ -1,0 +1,24 @@
+table {
+ border: 4px double black; /* Рамка вокруг таблицы */
+ border-collapse: collapse; /* Отображать только одинарные линии */
+}
+th {
+ text-align: left; /* Выравнивание по левому краю */
+ background: #00FF00; /* Цвет фона ячеек */
+ padding: 10px; /* Поля вокруг содержимого ячеек */
+ border: 2px solid black; /* Граница вокруг ячеек */
+ text-align: center;
+}
+td {
+ padding: 5px; /* Поля вокруг содержимого ячеек */
+ border: 2px solid black; /* Граница вокруг ячеек */
+
+}
+.colortextRed {
+ /* background-color: #ffe;  */
+ color: #FF0000; /* Цвет текста */
+}
+.colortextGreen {
+ /* background-color: #ffe; */
+ color: #008000; /* Цвет текста */
+}
