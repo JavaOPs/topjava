@@ -5,10 +5,7 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BooleanSupplier;
@@ -36,17 +33,18 @@ public class MealsUtil {
     }
 
     private static MealTo createTo(Meal meal, boolean excess) {
-        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+        return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess, meal.getId());
     }
 
     public static List<Meal> getTestListOfMeal() {
-        return SomeDB.instanceSomeDB().getAllDataFromDb();
+        return SomeDB.getConnectToDB().getAllDataFromDb();
     }
 
-    public static List<MealTo> getTestListOfMealTo() {
+    public static List<MealTo> getTestListOfMealTo(List<Meal> meals) {
         BooleanSupplier randomExcessSupplier = () -> (Math.random() > 0.5) ? true : false;
         return getTestListOfMeal().stream()
                 .map(meal -> createTo(meal, randomExcessSupplier.getAsBoolean()))
                 .collect(Collectors.toList());
     }
+
 }

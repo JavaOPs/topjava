@@ -1,24 +1,36 @@
+button {
+    outline: none;
+    border: 1px;
+    background: transparent;
+    color: blue;
+    font-size: 12pt;
+    vertical-align: center;
+    text-decoration: underline;
+}
 table {
  border: 4px double black; /* Рамка вокруг таблицы */
  border-collapse: collapse; /* Отображать только одинарные линии */
 }
 th {
- text-align: left; /* Выравнивание по левому краю */
- background: #00FF00; /* Цвет фона ячеек */
+ /*background: #00FF00; !* Цвет фона ячеек *!*/
  padding: 10px; /* Поля вокруг содержимого ячеек */
  border: 2px solid black; /* Граница вокруг ячеек */
- text-align: center;
 }
 td {
  padding: 5px; /* Поля вокруг содержимого ячеек */
  border: 2px solid black; /* Граница вокруг ячеек */
-
 }
-.colortextRed {
- /* background-color: #ffe;  */
+.coloredRed {
  color: #FF0000; /* Цвет текста */
 }
-.colortextGreen {
- /* background-color: #ffe; */
+.coloredGreen {
  color: #008000; /* Цвет текста */
 }
+/*.href-button {*/
+/* font: 14px Arial;*/
+/* border: none;*/
+/* padding: 0;*/
+/* background: #fff;*/
+/* color: #00f;*/
+/*}*/
+
