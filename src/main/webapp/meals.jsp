@@ -11,9 +11,7 @@
 <h3><a href="index.html">Home</a></h3>
 <hr>
 <h2>Meals</h2>
-<form action="meals" method="post">
-    <button type="submit">Add meal</button>
-</form>
+<a href="meals?action=add">Add meal</a>
 <table>
     <tr>
         <th>Date</th>
@@ -24,24 +22,19 @@
     <c:forEach items="#{requestScope.mealToList}" var="mealTo">
         <c:set var="excess" value="${mealTo.excess == false ? 'coloredGreen': 'coloredRed'}"/>
         <tr class=${excess}>
-            <javatime:format value="${mealTo.dateTime}" style="MS" var="parsedDateTime"/>
+            <javatime:format value="${mealTo.dateTime}" pattern="yyyy-MM-dd HH:mm" style="MS" var="parsedDateTime"/>
             <td> ${parsedDateTime}</td>
             <td> ${mealTo.description}</td>
             <td> ${mealTo.calories}</td>
             <td>
-                <form action="meals" method="post">
-                    <button type="submit" name="id" value=${mealTo.id}>Update</button>
-                </form>
+                <a href="meals?action=update&id=${mealTo.id}">Update</a>
             </td>
             <td>
-                <form action="meals" method="get">
-                    <button type="submit" name="id" value=${mealTo.id}>Delete</button>
-                </form>
+                <a href="meals?action=delete&id=${mealTo.id}">Delete</a>
             </td>
         </tr>
     </c:forEach>
 </table>
-
 </body>
 </html>
 

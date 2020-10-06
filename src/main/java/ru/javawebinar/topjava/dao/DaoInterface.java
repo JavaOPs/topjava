@@ -4,15 +4,14 @@ import java.util.List;
 
 public interface DaoInterface<T, ID> {
 
-    <S extends T> S save(S entity);
+    T save(T entity);
 
     T getOne(ID id);
 
     List<T> findAll();
 
-    <S extends T> S update(S entity);
+    T update(T entity);
 
     void deleteById(ID id);
 
-    void delete(T entity);
 }

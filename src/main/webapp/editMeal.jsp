@@ -12,12 +12,10 @@
 <hr>
 <h2>Edit meal</h2>
 <c:set var="someMeal" value="${requestScope.meal}"/>
-<form action="meals" method="post">
-    <p>
+<form action="meals?action=save" method="post">
     <table>
         <td><b>Date time:</b></td>
         <td><input type="datetime-local" name="dateTime" value="${someMeal.dateTime}"/></td>
-        </tr>
         <tr>
             <td><b>Description:</b></td>
             <td><input type="tetext" name="description" value="${someMeal.description}"/></td>
@@ -27,8 +25,10 @@
             <td><input type="number" name="calories" value="${someMeal.calories}"/></td>
         </tr>
     </table>
-    </p>
-    <button type="submit" name="id" value=${someMeal.id}>Save</button>
+    <%--    <button type="submit" name="id" value=${someMeal.id}>Save</button>--%>
+    <input type="submit" value="Save">
+    <input type="hidden" name="id" value="${someMeal.id}">
+    <input type="hidden" name="action" value="save">
     <input type="reset" value="Clear"/>
 </form>
 </body>

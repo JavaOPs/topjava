@@ -11,9 +11,9 @@ public class MealTo {
 
     private final boolean excess;
 
-    private Long id;
+    private final long id;
 
-    public MealTo(LocalDateTime dateTime, String description, int calories, boolean excess, Long id) {
+    public MealTo(long id, LocalDateTime dateTime, String description, int calories, boolean excess) {
         this.dateTime = dateTime;
         this.description = description;
         this.calories = calories;
@@ -21,12 +21,8 @@ public class MealTo {
         this.id = id;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDateTime getDateTime() {
