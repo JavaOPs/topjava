@@ -18,7 +18,7 @@ import static ru.javawebinar.topjava.util.MealsUtil.*;
 
 public class MealServlet extends HttpServlet {
     private static final Logger log = getLogger(MealServlet.class);
-    private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+    public final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
     private DaoInterface<Meal, Long> dao;
 
     @Override
@@ -29,14 +29,18 @@ public class MealServlet extends HttpServlet {
 
         switch (action) {
             case ("delete"):
+                log.info("doGet delete");
                 dao.deleteById(Long.parseLong(req.getParameter("id")));
                 resp.sendRedirect("meals");
                 break;
             case ("update"):
+                log.info("doGet update");
                 req.setAttribute("meal", dao.getOne(Long.parseLong(req.getParameter("id"))));
             case ("add"):
+                log.info("doGet add");
                 forward = "/editMeal.jsp";
             default:
+                log.info("doGet default");
                 req.setAttribute("mealToList", filteredByStreams(dao.findAll(), TIME_MIN, TIME_MAX, CALORIES_TEST));
                 req.getRequestDispatcher(forward).forward(req, resp);
         }
@@ -48,6 +52,7 @@ public class MealServlet extends HttpServlet {
         String idString = req.getParameter("id");
 
         if (idString != null && !idString.isEmpty()) {
+            log.info("doPost update");
             dao.update(new Meal(
                     Long.parseLong(req.getParameter("id")),
                     LocalDateTime.parse(req.getParameter("dateTime"), DATE_TIME_FORMATTER),
@@ -55,6 +60,7 @@ public class MealServlet extends HttpServlet {
                     Integer.parseInt(req.getParameter("calories"))
             ));
         } else {
+            log.info("doPost save");
             dao.save(new Meal(
                     LocalDateTime.parse(req.getParameter("dateTime"), DATE_TIME_FORMATTER),
                     req.getParameter("description"),

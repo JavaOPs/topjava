@@ -26,8 +26,8 @@ public class MealDaoInMemoryImpl implements DaoInterface<Meal, Long> {
     }
 
     @Override
-    public Meal getOne(Long aLong) {
-        return mealsData.get(aLong);
+    public Meal getOne(Long id) {
+        return mealsData.get(id);
     }
 
     @Override
@@ -38,26 +38,26 @@ public class MealDaoInMemoryImpl implements DaoInterface<Meal, Long> {
     @Override
     public Meal update(Meal entity) {
         Meal meal = mealsData.get(entity.getId());
-        meal.setDateTime(entity.getDateTime());
-        meal.setDescription(entity.getDescription());
-        meal.setCalories(entity.getCalories());
+        synchronized (meal){
+            meal.setDateTime(entity.getDateTime());
+            meal.setDescription(entity.getDescription());
+            meal.setCalories(entity.getCalories());
+        }
         return meal;
     }
 
     @Override
-    public void deleteById(Long aLong) {
-        if (getOne(aLong) != null) {
-            mealsData.remove(aLong);
-        }
+    public void deleteById(Long id) {
+        mealsData.remove(id);
     }
 
     private void addSomeDataToDb() {
-        mealsData.put(1L, new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500));
-        mealsData.put(2L, new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000));
-        mealsData.put(3L, new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500));
-        mealsData.put(4L, new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100));
-        mealsData.put(5L, new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000));
-        mealsData.put(6L, new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500));
-        mealsData.put(7L, new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410));
+        save(new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500));
+        save(new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000));
+        save(new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500));
+        save(new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100));
+        save(new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000));
+        save(new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500));
+        save(new Meal(id.incrementAndGet(), LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410));
     }
 }

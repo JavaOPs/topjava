@@ -16,7 +16,7 @@ public class MealsUtil {
     public static LocalTime TIME_MAX = LocalTime.of(23, 59, 59);
 
     public static void main(String[] args) {
-        List<Meal> meals = getTestListOfMeal();
+        List<Meal> meals = new MealDaoInMemoryImpl().findAll();
         List<MealTo> mealsTo = filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000);
         mealsTo.forEach(System.out::println);
     }
@@ -38,7 +38,4 @@ public class MealsUtil {
         return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
 
-    public static List<Meal> getTestListOfMeal() {
-        return new MealDaoInMemoryImpl().findAll();
-    }
 }
