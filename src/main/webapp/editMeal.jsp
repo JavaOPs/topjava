@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <title>Edit meal</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
 <h2>Edit meal</h2>
 <c:set var="someMeal" value="${requestScope.meal}"/>
 <form action="meals?action=save" method="post">
-    <table>
+    <table id="table_beauty">
         <td><b>Date time:</b></td>
         <td><input type="datetime-local" name="dateTime" value="${someMeal.dateTime}"/></td>
         <tr>
@@ -25,11 +26,10 @@
             <td><input type="number" name="calories" value="${someMeal.calories}"/></td>
         </tr>
     </table>
-    <%--    <button type="submit" name="id" value=${someMeal.id}>Save</button>--%>
-    <input type="submit" value="Save">
+    <input type="submit" value="Save" class="btn">
     <input type="hidden" name="id" value="${someMeal.id}">
     <input type="hidden" name="action" value="save">
-    <input type="reset" value="Clear"/>
+    <input type="reset" value="Clear" class="btn"/>
 </form>
 </body>
 </html>

@@ -1,18 +1,3 @@
-table {
-    border: 4px double black; /* Рамка вокруг таблицы */
-    border-collapse: collapse; /* Отображать только одинарные линии */
-}
-
-th {
-    background: #00FF00; /* Цвет фона ячеек */
-    padding: 10px; /* Поля вокруг содержимого ячеек */
-    border: 2px solid black; /* Граница вокруг ячеек */
-}
-
-td {
-    padding: 5px; /* Поля вокруг содержимого ячеек */
-    border: 2px solid black; /* Граница вокруг ячеек */
-}
 
 .coloredRed {
     color: #FF0000; /* Цвет текста */
@@ -21,5 +6,51 @@ td {
 .coloredGreen {
     color: #008000; /* Цвет текста */
 }
+
+#table_beauty {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+#table_beauty td, #table_beauty th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#table_beauty tr:nth-child(even){background-color: #f2f2f2;}
+
+#table_beauty tr:hover {background-color: #ddd;}
+
+#table_beauty th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+}
+.btn{
+    background:transparent;
+    border: 2px solid transparent;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 18px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display:inline-block;
+    outline:none;
+    position:relative;
+    top:0;
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    -moz-transition: all 0.2s ease-in-out 0s;
+    -ms-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+    background:#4CAF50;
+    color:#fff;
+}
+
 
 

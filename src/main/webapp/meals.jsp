@@ -12,7 +12,7 @@
 <hr>
 <h2>Meals</h2>
 <a href="meals?action=add">Add meal</a>
-<table>
+<table id="table_beauty">
     <tr>
         <th>Date</th>
         <th>Description</th>
