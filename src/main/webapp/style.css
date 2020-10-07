@@ -52,5 +52,10 @@
     color:#fff;
 }
 
+ul#menu li{
+    display:inline-block; /* расположить пункты горизонтально */
+    margin-right: 20px; /* Отступ слева */
+}
+
 
 

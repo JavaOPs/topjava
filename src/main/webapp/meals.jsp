@@ -20,7 +20,7 @@
         <th colspan="2">Action</th>
     </tr>
     <c:forEach items="#{requestScope.mealToList}" var="mealTo">
-        <c:set var="excess" value="${mealTo.excess == false ? 'coloredGreen': 'coloredRed'}"/>
+        <c:set var="excess" value="${!mealTo.excess ? 'coloredGreen': 'coloredRed'}"/>
         <tr class=${excess}>
             <javatime:format value="${mealTo.dateTime}" pattern="yyyy-MM-dd HH:mm" style="MS" var="parsedDateTime"/>
             <td> ${parsedDateTime}</td>
