@@ -23,7 +23,33 @@
     <h2>Meals</h2>
     <a href="meals?action=create">Add Meal</a>
     <br><br>
-
+    <div>
+        <div>
+            <form method="get" action="meals">
+                <div>
+                    <div>
+                        <label>From date (including)</label>
+                        <input name="startDate" type="date" autocomplete="off">
+                    </div>
+                    <div>
+                        <label>Up to date (including)</label>
+                        <input name="endDate" type="date" autocomplete="off">
+                    </div>
+                    <div>
+                        <label>From time to time (including)</label>
+                        <input name="startTime" type="time" autocomplete="off">
+                    </div>
+                    <div>
+                        <label>Until the time (excluding)</label>
+                        <input name="endTime" type="time" autocomplete="off">
+                    </div>
+                </div>
+                <input name="action" value="filter" type="hidden">
+                <button onclick="window.history.back()" type="button">Cancel</button>
+                <button type="submit">Filter</button>
+            </form>
+        </div>
+    </div>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>

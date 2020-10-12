@@ -26,13 +26,13 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.*;
 
 public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
+    private ConfigurableApplicationContext appCtx;
     private MealRestController controller;
 
     @Override
     public void init(ServletConfig config) {
-        ConfigurableApplicationContext appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         controller = appCtx.getBean(MealRestController.class);
-        System.out.println("Bean definition names: " + Arrays.toString(appCtx.getBeanDefinitionNames()));
     }
 
     @Override
@@ -71,11 +71,11 @@ public class MealServlet extends HttpServlet {
                 break;
             case "filter":
                 List<MealTo> filteredMeals = controller.getFiltered(
-                        parseOrReplaceIfNullWithDate(request.getParameter("startDate"), LocalDate.MIN),
-                        parseOrReplaceIfNullWithDate(request.getParameter("endDate"), LocalDate.MAX),
-                        parseOrReplaceIfNullWithTime(request.getParameter("startTime"), LocalTime.MIN),
-                        parseOrReplaceIfNullWithTime(request.getParameter("endTime"), LocalTime.MAX));
-                request.setAttribute("filtered", filteredMeals);
+                        parseToDateOrReplaceIfEmpty(request.getParameter("startDate"), LocalDate.MIN),
+                        parseToDateOrReplaceIfEmpty(request.getParameter("endDate"), LocalDate.MAX),
+                        parseToTimeOrReplaceIfEmpty(request.getParameter("startTime"), LocalTime.MIN),
+                        parseToTimeOrReplaceIfEmpty(request.getParameter("endTime"), LocalTime.MAX));
+                request.setAttribute("meals", filteredMeals);
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
             case "all":
@@ -90,5 +90,10 @@ public class MealServlet extends HttpServlet {
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
         return Integer.parseInt(paramId);
+    }
+
+    @Override
+    public void destroy() {
+        appCtx.close();
     }
 }

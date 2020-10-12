@@ -41,15 +41,16 @@ public class MealService {
     }
 
     public List<MealTo> getAll(int userId) {
-        return MealsUtil.getTos(getAllNotModify(userId),
-                MealsUtil.DEFAULT_CALORIES_PER_DAY);
+        return MealsUtil.getTos(getAllNotModify(userId), MealsUtil.DEFAULT_CALORIES_PER_DAY);
     }
 
     public List<MealTo> getFiltered(int userId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        return MealsUtil.getFilteredByDateTimeTos(getAllNotModify(userId),
+        return MealsUtil.getFilteredByDateTimeTos(
+                getAllNotModify(userId),
                 MealsUtil.DEFAULT_CALORIES_PER_DAY,
-                DateTimeUtil.replaceIfNull(startDateTime, LocalDate.MIN, LocalTime.MIN),
-                DateTimeUtil.replaceIfNull(endDateTime, LocalDate.MAX, LocalTime.MAX));
+                DateTimeUtil.replaceIfNull(startDateTime, LocalDateTime.of(LocalDate.MIN, LocalTime.MIN)),
+                DateTimeUtil.replaceIfNull(endDateTime, LocalDateTime.of(LocalDate.MAX, LocalTime.MAX))
+        );
     }
 
     private List<Meal> getAllNotModify(int userId) {

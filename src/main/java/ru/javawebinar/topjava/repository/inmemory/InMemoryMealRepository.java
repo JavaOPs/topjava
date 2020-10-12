@@ -21,8 +21,10 @@ public class InMemoryMealRepository implements MealRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepository.class);
 
     {
-        repository.put(1,new HashMap<Integer, Meal>());
-        MealsUtil.meals.forEach(meal -> save(1, meal));
+        repository.put(1, new HashMap<>());
+        repository.put(2, new HashMap<>());
+        MealsUtil.mealsUser1.forEach(meal -> save(1, meal));
+        MealsUtil.mealsUser2.forEach(meal -> save(2, meal));
     }
 
     @Override

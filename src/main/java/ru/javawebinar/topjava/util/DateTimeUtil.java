@@ -13,24 +13,24 @@ public class DateTimeUtil {
         return lt.compareTo(start) >= 0 && lt.compareTo(end) < 0;
     }
 
-    public static LocalDateTime replaceIfNull(LocalDateTime aim, LocalDate dateReplacement, LocalTime timeReplacement) {
+    public static LocalDateTime replaceIfNull(LocalDateTime aim, LocalDateTime replacement) {
         LocalDate date = aim.toLocalDate();
         LocalTime time = aim.toLocalTime();
         if (date == null || time == null) {
             aim = LocalDateTime.of(
-                    (date == null) ? dateReplacement : date,
-                    (time == null) ? timeReplacement : time
+                    (date == null) ? replacement.toLocalDate() : date,
+                    (time == null) ? replacement.toLocalTime() : time
             );
         }
         return aim;
     }
 
-    public static LocalDate parseOrReplaceIfNullWithDate(String aim, LocalDate dateReplacement) {
-        return (aim == null)? dateReplacement : LocalDate.parse(aim);
+    public static LocalDate parseToDateOrReplaceIfEmpty(String aim, LocalDate dateReplacement) {
+        return (aim.isEmpty()) ? dateReplacement : LocalDate.parse(aim);
     }
 
-    public static LocalTime parseOrReplaceIfNullWithTime(String aim, LocalTime dateReplacement) {
-        return (aim == null)? dateReplacement : LocalTime.parse(aim);
+    public static LocalTime parseToTimeOrReplaceIfEmpty(String aim, LocalTime timeReplacement) {
+        return (aim.isEmpty()) ? timeReplacement : LocalTime.parse(aim);
     }
 
     public static String toString(LocalDateTime ldt) {
