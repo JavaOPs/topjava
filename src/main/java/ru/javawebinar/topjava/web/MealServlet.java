@@ -45,8 +45,13 @@ public class MealServlet extends HttpServlet {
                 request.getParameter("description"),
                 Integer.parseInt(request.getParameter("calories")));
 
-        log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
-        controller.save(meal);
+        if (meal.isNew()) {
+            log.info("Create {}", meal);
+            controller.create(meal);
+        } else {
+            log.info("Update meal {} whith id:{}", meal, meal.getId());
+            controller.update(meal, meal.getId());
+        }
         response.sendRedirect("meals");
     }
 
@@ -71,10 +76,10 @@ public class MealServlet extends HttpServlet {
                 break;
             case "filter":
                 List<MealTo> filteredMeals = controller.getFiltered(
-                        parseToDateOrReplaceIfEmpty(request.getParameter("startDate"), LocalDate.MIN),
-                        parseToDateOrReplaceIfEmpty(request.getParameter("endDate"), LocalDate.MAX),
-                        parseToTimeOrReplaceIfEmpty(request.getParameter("startTime"), LocalTime.MIN),
-                        parseToTimeOrReplaceIfEmpty(request.getParameter("endTime"), LocalTime.MAX));
+                        parseToDateOrReturnNull(request.getParameter("startDate")),
+                        parseToDateOrReturnNull(request.getParameter("endDate")),
+                        parseToTimeOrReturnNull(request.getParameter("startTime")),
+                        parseToTimeOrReturnNull(request.getParameter("endTime")));
                 request.setAttribute("meals", filteredMeals);
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;

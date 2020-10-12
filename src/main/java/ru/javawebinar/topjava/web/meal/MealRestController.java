@@ -57,13 +57,4 @@ public class MealRestController {
         assureIdConsistent(meal, mealId);
         service.update(authUserId(), meal);
     }
-
-    public void save(Meal meal) {
-        log.info("update meal {}", meal);
-        if (meal.isNew()) {
-            create(meal);
-        } else {
-            update(meal, meal.getId());
-        }
-    }
 }

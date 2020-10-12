@@ -18,12 +18,12 @@ public class DateTimeUtil {
         return (aim == null) ? replacement : aim;
     }
 
-    public static LocalDate parseToDateOrReplaceIfEmpty(String aim, LocalDate dateReplacement) {
-        return (aim.isEmpty()) ? dateReplacement : LocalDate.parse(aim);
+    public static LocalDate parseToDateOrReturnNull(String aim) {
+        return (aim.isEmpty()) ? null : LocalDate.parse(aim);
     }
 
-    public static LocalTime parseToTimeOrReplaceIfEmpty(String aim, LocalTime timeReplacement) {
-        return (aim.isEmpty()) ? timeReplacement : LocalTime.parse(aim);
+    public static LocalTime parseToTimeOrReturnNull(String aim) {
+        return (aim.isEmpty()) ? null : LocalTime.parse(aim);
     }
 
     public static String toString(LocalDateTime ldt) {
