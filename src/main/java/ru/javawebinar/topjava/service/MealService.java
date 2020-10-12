@@ -5,15 +5,15 @@ import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.to.MealTo;
-import ru.javawebinar.topjava.util.DateTimeUtil;
 import ru.javawebinar.topjava.util.MealsUtil;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+
+import static ru.javawebinar.topjava.util.DateTimeUtil.*;
 
 @Service
 public class MealService {
@@ -40,20 +40,19 @@ public class MealService {
         return checkNotFoundWithId(repository.get(userId, mealId), mealId);
     }
 
-    public List<MealTo> getAll(int userId) {
-        return MealsUtil.getTos(getAllNotModify(userId), MealsUtil.DEFAULT_CALORIES_PER_DAY);
+    public List<MealTo> getAll(int userId, int caloriesPerDay) {
+        return MealsUtil.getTos(getAllEntity(userId), caloriesPerDay);
     }
 
-    public List<MealTo> getFiltered(int userId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        return MealsUtil.getFilteredByDateTimeTos(
-                getAllNotModify(userId),
-                MealsUtil.DEFAULT_CALORIES_PER_DAY,
-                DateTimeUtil.replaceIfNull(startDateTime, LocalDateTime.of(LocalDate.MIN, LocalTime.MIN)),
-                DateTimeUtil.replaceIfNull(endDateTime, LocalDateTime.of(LocalDate.MAX, LocalTime.MAX))
+    public List<MealTo> getFiltered(int userId, int caloriesPerDay, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
+        List<Meal> filteredMeals = repository.getFiltered(userId,
+                (meal -> isBetweenHalfOpen(meal.getTime(), replaceIfNull(startTime, LocalTime.MIN), replaceIfNull(endTime, LocalTime.MAX)) &&
+                        isBetweenHalfOpen(meal.getDate(), replaceIfNull(startDate, LocalDate.MAX), replaceIfNull(endDate, LocalDate.MAX)))
         );
+        return MealsUtil.getTos(filteredMeals, caloriesPerDay);
     }
 
-    private List<Meal> getAllNotModify(int userId) {
+    private List<Meal> getAllEntity(int userId) {
         return repository.getAll(userId);
     }
 }

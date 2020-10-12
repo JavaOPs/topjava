@@ -9,13 +9,12 @@ import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.to.MealTo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.assureIdConsistent;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNew;
-import static ru.javawebinar.topjava.web.SecurityUtil.authUserId;
+import static ru.javawebinar.topjava.web.SecurityUtil.*;
 
 @Controller
 public class MealRestController {
@@ -29,12 +28,12 @@ public class MealRestController {
 
     public List<MealTo> getAll() {
         log.info("getAll meals of user id={}", authUserId());
-        return service.getAll(authUserId());
+        return service.getAll(authUserId(), authUserCaloriesPerDay());
     }
 
     public List<MealTo> getFiltered(LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
         log.info("filter all meals by(start/end) date:{}/{} and time:{}/{}", startDate, endDate, startTime, endTime);
-        return service.getFiltered(authUserId(), LocalDateTime.of(startDate, startTime), LocalDateTime.of(endDate, endTime));
+        return service.getFiltered(authUserId(), authUserCaloriesPerDay(), startDate, endDate, startTime, endTime);
     }
 
     public Meal get(int mealId) {

@@ -6,6 +6,7 @@ import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.service.UserService;
+import ru.javawebinar.topjava.web.meal.MealRestController;
 
 import java.util.Arrays;
 
@@ -18,14 +19,8 @@ public class SpringMain {
         UserRepository userRepository = appCtx.getBean(UserRepository.class);
         userRepository.getAll();
 
-        MealRepository mealRepository = appCtx.getBean(MealRepository.class);
-        mealRepository.getAll(1);
-
-        UserService userService = appCtx.getBean(UserService.class);
-        userService.getAll();
-
-        MealService mealService = appCtx.getBean(MealService.class);
-        mealService.getAll(1);
+        MealRestController mealRestController = appCtx.getBean(MealRestController.class);
+        mealRestController.getAll();
 
         appCtx.close();
     }
