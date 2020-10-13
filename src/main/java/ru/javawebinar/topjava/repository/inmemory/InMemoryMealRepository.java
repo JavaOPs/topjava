@@ -25,14 +25,15 @@ public class InMemoryMealRepository implements MealRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryMealRepository.class);
 
     {
-        repository.put(1, new HashMap<>());
-        repository.put(2, new HashMap<>());
         MealsUtil.meals.forEach(meal -> save(1, meal));
     }
 
     @Override
     public Meal save(int userId, Meal meal) {
         log.info("save meal {} of userId={}", meal, userId);
+        if (!repository.containsKey(userId)) {
+            repository.put(userId, new HashMap<>());
+        }
         Map<Integer, Meal> userMeal = repository.get(userId);
         if (meal.isNew()) {
             meal.setId(counter.incrementAndGet());
