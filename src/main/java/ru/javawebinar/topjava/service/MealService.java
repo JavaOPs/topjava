@@ -12,8 +12,10 @@ import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static ru.javawebinar.topjava.util.DateTimeUtil.*;
+import static ru.javawebinar.topjava.util.MealsUtil.*;
 
 @Service
 public class MealService {
@@ -45,11 +47,17 @@ public class MealService {
     }
 
     public List<MealTo> getFiltered(int userId, int caloriesPerDay, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
-        List<Meal> filteredMeals = repository.getFiltered(userId,
-                (meal -> isBetweenHalfOpen(meal.getTime(), replaceIfNull(startTime, LocalTime.MIN), replaceIfNull(endTime, LocalTime.MAX)) &&
-                        isBetweenHalfOpen(meal.getDate(), replaceIfNull(startDate, LocalDate.MAX), replaceIfNull(endDate, LocalDate.MAX)))
+        List<Meal> filteredByDate = repository.getFilteredByDate(
+                userId,
+                (LocalDate) replaceIfNull(startDate, LocalDate.MIN),
+                (LocalDate) replaceIfNull(endDate, LocalDate.MAX)
         );
-        return MealsUtil.getTos(filteredMeals, caloriesPerDay);
+        return getTosFilteredByTime(
+                filteredByDate,
+                caloriesPerDay,
+                replaceIfNull(startTime, LocalTime.MIN),
+                replaceIfNull(endTime, LocalTime.MAX)
+        );
     }
 
     private List<Meal> getAllEntity(int userId) {
