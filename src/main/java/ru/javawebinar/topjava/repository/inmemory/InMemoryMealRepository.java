@@ -59,20 +59,23 @@ public class InMemoryMealRepository implements MealRepository {
     @Override
     public List<Meal> getAll(int userId) {
         log.info("getAll meals of userId={}", userId);
+        return getAllSortedByDate(userId);
+    }
+
+    @Override
+    public List<Meal> getFilteredByDate(int userId, LocalDate startDate, LocalDate endDate) {
+        log.info("getFiltered meals of userId={}", userId);
+        return getAllSortedByDate(userId).stream()
+                .filter(meal -> isBetweenDate(meal.getDate(), startDate, endDate))
+                .collect(Collectors.toList());
+    }
+
+    public List<Meal> getAllSortedByDate(int userId) {
         Map<Integer, Meal> userMeal = repository.get(userId);
         return userMeal.values().stream()
                 .sorted(Comparator.comparing(Meal::getDate, Comparator.reverseOrder()))
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Meal> getFilteredByDate(int userId, LocalDate startDate, LocalDate endDate) {
-        log.info("getFiltered meals of userId={}", userId);
-        Map<Integer, Meal> userMeal = repository.get(userId);
-        return userMeal.values().stream()
-                .filter(meal -> isBetweenDate(meal.getDate(), startDate, endDate))
-                .sorted(Comparator.comparing(Meal::getDate, Comparator.reverseOrder()))
-                .collect(Collectors.toList());
-    }
 }
 
