@@ -18,4 +18,6 @@ public interface MealRepository {
     List<Meal> getAll(int userId);
 
     List<Meal> getFilteredByDate(int userId, LocalDate startDate, LocalDate endDate);
+
+    void addNewMealBasket(int id);
 }

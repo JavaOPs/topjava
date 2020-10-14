@@ -42,14 +42,14 @@ public class MealService {
     }
 
     public List<MealTo> getAll(int userId, int caloriesPerDay) {
-        return MealsUtil.getTos(getAllEntity(userId), caloriesPerDay);
+        return MealsUtil.getTos(repository.getAll(userId), caloriesPerDay);
     }
 
     public List<MealTo> getFiltered(int userId, int caloriesPerDay, LocalDate startDate, LocalDate endDate, LocalTime startTime, LocalTime endTime) {
         List<Meal> filteredByDate = repository.getFilteredByDate(
                 userId,
-                (LocalDate) replaceIfNull(startDate, LocalDate.MIN),
-                (LocalDate) replaceIfNull(endDate, LocalDate.MAX)
+                replaceIfNull(startDate, LocalDate.MIN),
+                replaceIfNull(endDate, LocalDate.MAX)
         );
         return getTosFilteredByTime(
                 filteredByDate,
@@ -57,9 +57,5 @@ public class MealService {
                 replaceIfNull(startTime, LocalTime.MIN),
                 replaceIfNull(endTime, LocalTime.MAX)
         );
-    }
-
-    private List<Meal> getAllEntity(int userId) {
-        return repository.getAll(userId);
     }
 }

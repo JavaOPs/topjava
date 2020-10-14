@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static ru.javawebinar.topjava.util.DateTimeUtil.isBetweenDate;
@@ -58,23 +59,26 @@ public class InMemoryMealRepository implements MealRepository {
     @Override
     public List<Meal> getAll(int userId) {
         log.info("getAll meals of userId={}", userId);
-        return getAllSortedByDate(userId);
+        return filterByPredicate(userId, meal -> true);
     }
 
     @Override
     public List<Meal> getFilteredByDate(int userId, LocalDate startDate, LocalDate endDate) {
         log.info("getFiltered meals of userId={}", userId);
-        return getAllSortedByDate(userId).stream()
-                .filter(meal -> isBetweenDate(meal.getDate(), startDate, endDate))
-                .collect(Collectors.toList());
+        return filterByPredicate(userId, meal -> isBetweenDate(meal.getDate(), startDate, endDate));
     }
 
-    public List<Meal> getAllSortedByDate(int userId) {
-        Map<Integer, Meal> userMeal = repository.computeIfAbsent(userId, id -> new HashMap<>());
+    private List<Meal> filterByPredicate(int userId, Predicate<Meal> where) {
+        Map<Integer, Meal> userMeal = repository.get(userId);
         return userMeal.values().stream()
+                .filter(where)
                 .sorted(Comparator.comparing(Meal::getDate, Comparator.reverseOrder()))
                 .collect(Collectors.toList());
     }
 
+    public void addNewMealBasket(int userId) {
+        log.info("create new basket fo userId={}", userId);
+        repository.putIfAbsent(userId, new HashMap<>());
+    }
 }
 
