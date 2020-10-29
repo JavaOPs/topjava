@@ -32,7 +32,7 @@ public abstract class AbstractBaseEntity {
 
     // doesn't work for hibernate lazy proxy
     public int id() {
-        Assert.notNull(id, "Entity must has id");
+        Assert.notNull(id, "Entity must have id");
         return id;
     }
 
