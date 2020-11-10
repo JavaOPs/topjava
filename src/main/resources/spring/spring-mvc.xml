@@ -15,4 +15,22 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp"/>
+
+<!--
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+          p:cacheSeconds="60"
+          p:defaultEncoding="UTF-8">
+        <property name="basenames">
+            <list>
+                <value>messages/app</value>
+            </list>
+        </property>
+    </bean>
+-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:cacheSeconds="5"
+          p:defaultEncoding="UTF-8">
+        <property name="basenames" value="file:///#{systemEnvironment['TOPJAVA_ROOT']}/config/messages/app"/>
+        <property name="fallbackToSystemLocale" value="false"/>
+    </bean>
 </beans>
