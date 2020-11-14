@@ -82,6 +82,9 @@
                         </dependencies>
                     </container>
                     <configuration>
+                            <properties>
+                                <cargo.servlet.port>8088</cargo.servlet.port>
+                            </properties>
                         <configfiles>
                             <configfile>
                                 <file>src/main/resources/tomcat/context.xml</file>
