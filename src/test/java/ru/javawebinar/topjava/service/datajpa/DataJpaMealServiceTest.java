@@ -8,14 +8,9 @@ import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.service.AbstractMealServiceTest;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
-import javax.validation.ConstraintViolationException;
-import java.time.Month;
-
-import static java.time.LocalDateTime.of;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.Profiles.DATAJPA;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
-import static ru.javawebinar.topjava.UserTestData.USER_ID;
 
 @ActiveProfiles(DATAJPA)
 public class DataJpaMealServiceTest extends AbstractMealServiceTest {
