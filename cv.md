@@ -109,5 +109,7 @@
 - [ТОП-13 ошибок начинающего программиста](https://proglib.io/p/beginners-fails/)
 - [25 ошибок начинающего программиста](https://habr.com/ru/post/413129/)
 - [Нетехнические навыки](https://tproger.ru/experts/softskills-for-job)
-
+- Типичные ошибки начинающих программистов от JavaRush:
+  - [Часть 1](https://javarush.ru/groups/posts/3044-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-1)
+  - [Часть 2](https://javarush.ru/groups/posts/3055-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-2)
 ## [Отзывы по стажировке Topjava](https://vk.com/topic-74381644_30447246)
