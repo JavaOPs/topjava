@@ -89,7 +89,9 @@
 - <a href="hh.ru">HH</a>
 - <a href="https://www.linkedin.com/">LinkedIn</a>
 - <a href="https://career.habr.com/">ХабрКарьера</a>
+- [headz.io](https://app.headz.io/candidates/new)
 - <a href="http://djinni.co/">djinni.co (более актуально для Украины)</a>
+
 
 ## Как выжить на испытательном сроке
 - Учись грамотно формулировать проблему. Проблема "у меня не работает" может иметь тысячи причин. В
