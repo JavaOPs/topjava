@@ -26,4 +26,13 @@ public class UserMeal {
     public int getCalories() {
         return calories;
     }
+
+
+    public String toString() {
+        return "UserMealWithExcess{" +
+                "dateTime=" + dateTime +
+                ", description='" + description + '\'' +
+                ", calories=" + calories +
+                '}';
+    }
 }
