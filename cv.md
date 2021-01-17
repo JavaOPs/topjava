@@ -111,7 +111,7 @@
 - [**Советы новичкам**](http://blog.csssr.ru/2016/09/19/how-to-be-a-beginner-developer)
 - [ТОП-13 ошибок начинающего программиста](https://proglib.io/p/beginners-fails/)
 - [25 ошибок начинающего программиста](https://habr.com/ru/post/413129/)
-- [Путеводитель по синдрому самозванца](https://dou.ua/lenta/articles/impostor-syndrome-guide-part1/)
+- [Путеводитель по синдрому самозванца](https://vc.ru/hr/167443-eshche-odin-putevoditel-po-sindromu-samozvanca-korni-prichiny-simptomy-i-posledstviya-chast-1)
 - [Нетехнические навыки](https://tproger.ru/experts/softskills-for-job)
 - Типичные ошибки начинающих программистов от JavaRush:
   - [Часть 1](https://javarush.ru/groups/posts/3044-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-1)
