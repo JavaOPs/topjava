@@ -198,6 +198,7 @@ Java Enterprise Online Project
 -  <a href="https://github.com/winterbe/java8-tutorial">A Guide to Java 8</a>
 
 ### Туториалы, разное
+- [Открытый курс: Spring Boot + HATEOAS](https://javaops.ru/view/bootjava)
 - [Что нужно знать о бэкенде новичку в веб-разработке](https://tproger.ru/translations/backend-web-development)
 - [Туториалы: Spring Framework, Hibernate, Java Core, JDBC](http://proselyte.net/tutorials/)
 
