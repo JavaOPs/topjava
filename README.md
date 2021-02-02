@@ -192,7 +192,7 @@ Java Enterprise Online Project
 - <a href="http://www.quizful.net/post/java-reflection-api">Введение в Java Reflection API</a>
 - <a href="https://habrahabr.ru/users/tarzan82/topics/">Структуры данных в картинках</a>
 - <a href="https://habrahabr.ru/company/luxoft/blog/157273/">Обзор java.util.concurrent.*</a>
-- <a href="http://www.skipy.ru/technics/synchronization.html">Синхронизация потоков</a>
+- <a href="http://web.archive.org/web/20200808064416/http://www.skipy.ru/technics/synchronization.html">Синхронизация потоков</a>
 - <a href="http://java67.blogspot.ru/2014/08/difference-between-string-literal-and-new-String-object-Java.html">String literal pool</a>
 - <a href="https://habrahabr.ru/post/132241/">Маленькие хитрости Java</a>
 -  <a href="https://github.com/winterbe/java8-tutorial">A Guide to Java 8</a>
