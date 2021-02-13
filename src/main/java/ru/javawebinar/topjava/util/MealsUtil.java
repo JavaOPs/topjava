@@ -23,7 +23,7 @@ public class MealsUtil {
             new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
     );
     private static final LocalTime DAYTIME_MIN = LocalTime.of(7, 0);
-    private static final LocalTime DAYTIME_MAX = LocalTime.of(12, 0);
+    private static final LocalTime DAYTIME_MAX = LocalTime.of(22, 0);
 
     public static List<Meal> getMeals() {
         return meals;
