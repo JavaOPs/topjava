@@ -13,7 +13,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MealsUtil {
-    protected static List<Meal> meals = Arrays.asList(
+    public static final int DEFAULT_CALORIES_PER_DAY = 2000;
+    private static List<Meal> meals = Arrays.asList(
             new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500),
             new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000),
             new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500),
@@ -37,12 +38,12 @@ public class MealsUtil {
                 );
 
         return meals.stream()
-                .filter(meal -> TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
+                .filter(meal -> DateTimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
                 .map(meal -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
     }
 
-    public static List<MealTo> getFiltered(List<Meal> meals, int caloriesPerDay){
+    public static List<MealTo> getTos(List<Meal> meals, int caloriesPerDay){
             return MealsUtil.filteredByStreams(meals, DAYTIME_MIN, DAYTIME_MAX,  caloriesPerDay);
     }
 
