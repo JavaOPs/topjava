@@ -1,43 +1,46 @@
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="ru.javawebinar.topjava.model.Meal" %>
-<%@ page import="ru.javawebinar.topjava.model.MealTo" %>
-<%@ page import="java.util.List" %>
-<%@ page import="ru.javawebinar.topjava.util.TimeUtil" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://topjava.javawebinar.ru/functions" %>
+<%--<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>--%>
 <html>
-<style>
-    .normal{color: green}
-    .exceed{color: orangered}
-</style>
 <head>
-    <title>Meals</title>
+    <title>Meal list</title>
+    <style>
+        .normal {
+            color: green;
+        }
+
+        .excess {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-<h3><a href="index.html">Home</a></h3>
-<hr>
-<h2 align="center">Meals</h2>
 <section>
-    <a href="meals?action=create">Add meal</a>
-    <table border="5" width="900" align="center" bordercolor="black">
+    <h3><a href="index.html">Home</a></h3>
+    <hr/>
+    <h2>Meals</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
         <tr>
-            <th width="300">Date</th>
-            <th width="300">Desc</th>
-            <th width="300">Calories</th>
-            <th></th>
-            <th></th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Calories</th>
         </tr>
+        </thead>
         <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" scope="page" type="ru.javawebinar.topjava.model.MealTo"/>
-            <tr class="${meal.excess?"exceed":"normal"}">
-            <td><%= TimeUtil.toString(meal.getDateTime()) %></td>
-            <td>${meal.getDescription()}</td>
-            <td>${meal.getCalories()}</td>
-            <td><a href="meals?action=update&id=${meal.id}">Update meal</a></td>
-            <td><a href="meals?action=delete&id=${meal.id}">Delete meal</a></td>
+            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo"/>
+            <tr class="${meal.excess ? 'excess' : 'normal'}">
+                <td>
+                        <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
+                        <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
+                        <%--${fn:replace(meal.dateTime, 'T', ' ')}--%>
+                        ${fn:formatDateTime(meal.dateTime)}
+                </td>
+                <td>${meal.description}</td>
+                <td>${meal.calories}</td>
             </tr>
-
         </c:forEach>
     </table>
 </section>
