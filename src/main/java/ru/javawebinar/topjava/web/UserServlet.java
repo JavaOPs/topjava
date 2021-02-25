@@ -17,7 +17,12 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("redirect to users");
 
-//        request.getRequestDispatcher("/users.jsp").forward(request, response);
+        //А здесь слешь не влияет от хоста или нет. Странно?
+        //При форварде мы остаемся на сервере
+        //request.getRequestDispatcher("/users.jsp").forward(request, response);
+
+        //Слешь перед /users.jsp говорит нам что маршрутизация идет от хоста т.е. от localhost, а не от localhost/topjava
+        //Отправляется ответ браузеру что нужно пойти по другому пути.
         response.sendRedirect("users.jsp");
     }
 }
