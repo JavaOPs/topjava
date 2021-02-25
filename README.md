@@ -1,4 +1,5 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/a881095d63d945b2bb19e5f0ffd5c3c3)](https://www.codacy.com/gh/Nutopzhe/topjava/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nutopzhe/topjava&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.com/Nutopzhe/topjava.svg?branch=master)](https://travis-ci.com/github/Nutopzhe/topjava)
 
 Java Enterprise Online Project
 ===============================
