@@ -9,10 +9,7 @@ public class MealTo {
 
     private final int calories;
 
-//    private final AtomicBoolean excess;      // or Boolean[1],  filteredByAtomic
-//    private final Boolean excess;            // filteredByReflection
-//    private final Supplier<Boolean> excess;  // filteredByClosure
-    private boolean excess;
+    private final boolean excess;
 
     public MealTo(LocalDateTime dateTime, String description, int calories, boolean excess) {
         this.dateTime = dateTime;
@@ -21,13 +18,20 @@ public class MealTo {
         this.excess = excess;
     }
 
-//    public Boolean getExcess() {
-//        return excess.get();
-//    }
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
 
-    // for filteredBySetterRecursion
-    public void setExcess(boolean excess) {
-        this.excess = excess;
+    public String getDescription() {
+        return description;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public boolean isExcess() {
+        return excess;
     }
 
     @Override
