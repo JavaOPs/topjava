@@ -17,7 +17,7 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("redirect to users");
 
-        //А здесь слешь не влияет от хоста или нет. Странно?
+        //А здесь слэш не влияет от хоста или нет. Странно?
         //При форварде мы остаемся на сервере
         //request.getRequestDispatcher("/users.jsp").forward(request, response);
 
