@@ -1,5 +1,13 @@
 package ru.javawebinar.topjava.model;
 
+import org.springframework.util.Assert;
+
+import javax.persistence.Access;
+import javax.persistence.*;
+
+@MappedSuperclass
+// http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
+@Access(AccessType.FIELD)
 public abstract class AbstractBaseEntity {
     public static final int START_SEQ = 100000;
 
@@ -17,6 +25,11 @@ public abstract class AbstractBaseEntity {
     }
 
     public Integer getId() {
+        return id;
+    }
+
+    public int id() {
+        Assert.notNull(id, "Entity must have id");
         return id;
     }
 

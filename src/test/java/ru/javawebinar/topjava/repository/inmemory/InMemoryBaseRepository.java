@@ -4,6 +4,7 @@ import ru.javawebinar.topjava.model.AbstractBaseEntity;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -15,11 +16,12 @@ public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
 
     final Map<Integer, T> map = new ConcurrentHashMap<>();
 
-    public T save(T entry) {
-        if (entry.isNew()) {
-            entry.setId(counter.incrementAndGet());
-            map.put(entry.getId(), entry);
-            return entry;
+    public T save(T entity) {
+        Objects.requireNonNull(entity, "Entity must not be null");
+        if (entity.isNew()) {
+            entity.setId(counter.getAndIncrement());
+            map.put(entity.getId(), entity);
+            return entity;
         }
         return map.computeIfPresent(entity.getId(), (id, oldT) -> entity);
     }
@@ -34,5 +36,10 @@ public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
 
     Collection<T> getCollection() {
         return map.values();
+    }
+
+    void put(T entity) {
+        Objects.requireNonNull(entity, "Entity must not be null");
+        map.put(entity.id(), entity);
     }
 }
