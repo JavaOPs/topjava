@@ -27,8 +27,4 @@ public class UserMeal {
     public int getCalories() {
         return calories;
     }
-
-    public LocalDate getLocalDate() {
-        return dateTime.toLocalDate();
-    }
 }
