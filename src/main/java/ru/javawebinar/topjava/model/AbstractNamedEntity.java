@@ -2,9 +2,12 @@ package ru.javawebinar.topjava.model;
 
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
 
+    @NotBlank
+    @Size(min = 2, max = 100)
+    @Column(name = "name", nullable = false)
     protected String name;
 
-    public AbstractNamedEntity() {
+    protected AbstractNamedEntity() {
     }
 
     protected AbstractNamedEntity(Integer id, String name) {
