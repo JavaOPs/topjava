@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -46,6 +47,11 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        return null;
+        final List<Integer> daysExceeded = meals.stream().collect(Collectors.groupingBy(UserMeal::getDateTime, Collectors.summingInt(UserMeal::getCalories)))
+                .entrySet().stream().filter(um -> um.getValue() > caloriesPerDay).map(m -> m.getValue()).collect(Collectors.toList());
+        List resultList = meals.stream().filter(um -> TimeUtil.isBetweenHalfOpen(um.getDateTime().toLocalTime(),startTime,endTime)).map(um -> {
+            return new UserMealWithExcess(um.getDateTime(), um.getDescription(), um.getCalories(), daysExceeded.contains(um.getDateTime().toLocalDate()));
+        })
+        return resultList;
     }
 }
