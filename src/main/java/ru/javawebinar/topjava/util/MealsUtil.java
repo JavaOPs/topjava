@@ -37,9 +37,13 @@ public class MealsUtil {
                 );
 
         return meals.stream()
-                .filter(meal -> TimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
+                .filter(meal -> DateTimeUtil.isBetweenHalfOpen(meal.getTime(), startTime, endTime))
                 .map(meal -> createTo(meal, caloriesSumByDate.get(meal.getDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
+    }
+
+    public static List<MealTo> getTos(List<Meal> meals, int caloriesPerDay){
+        return filteredByStreams(meals,LocalTime.of(7,0,0), LocalTime.of(21,0,0), caloriesPerDay);
     }
 
     private static MealTo createTo(Meal meal, boolean excess) {
