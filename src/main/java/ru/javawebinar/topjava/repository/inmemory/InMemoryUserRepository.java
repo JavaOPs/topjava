@@ -20,6 +20,8 @@ public class InMemoryUserRepository implements UserRepository {
     private static final Logger log = LoggerFactory.getLogger(InMemoryUserRepository.class);
     private AtomicInteger counter = new AtomicInteger(0);
     private Map<Integer, User> userRepositoryMap = new ConcurrentHashMap<>();
+    public static final int USER_ID = 1;
+    public static final int ADMIN_ID = 1;
 
     @Override
     public boolean delete(int id) {
