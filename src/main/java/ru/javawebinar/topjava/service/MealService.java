@@ -38,7 +38,7 @@ public class MealService {
        return checkNotFoundWithId(repository.get(id, userId),id);
     }
 
-    public Collection<MealTo> getAll(int userId){
+    public Collection<Meal> getAll(int userId){
         return repository.getAll(userId);
     }
 
@@ -46,7 +46,7 @@ public class MealService {
         checkNotFoundWithId(repository.save(meal, userId), meal.getId());
     }
 
-    public List<MealTo> getBetweenHalfOpen(@Nullable LocalDate startDate,@Nullable LocalDate endDate, int userId) {
+    public List<Meal> getBetweenHalfOpen(@Nullable LocalDate startDate,@Nullable LocalDate endDate, int userId) {
       return repository.getBetweenHalfOpen(DateTimeUtil.atStartOfDayOrMin(startDate), DateTimeUtil.atStartOfNextDayOrMax(endDate), userId);
     }
 }

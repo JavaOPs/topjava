@@ -68,20 +68,21 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public List<MealTo> getAll(int userId) {
+    public List<Meal> getAll(int userId) {
         return getAllFiltered(userId,meal ->true);
     }
 
-    private List<MealTo> getAllFiltered(int userId, Predicate<Meal> filter){
+    private List<Meal> getAllFiltered(int userId, Predicate<Meal> filter){
         Map<Integer, Meal> mealMap = userMealsRepository.get(userId);
         return CollectionUtils.isEmpty(mealMap)? Collections.emptyList()
                 : mealMap.values().stream().filter(filter)
-                .sorted(Comparator.comparing(Meal::getDateTime).reversed()).map(meal -> new MealTo(meal.getId(),meal.getDateTime(),meal.getDescription(),meal.getCalories(),meal.getCalories()>2000))
+                //.sorted(Comparator.comparing(Meal::getDateTime).reversed()).map(meal -> new MealTo(meal.getId(),meal.getDateTime(),meal.getDescription(),meal.getCalories(),meal.getCalories()>2000))
+                .sorted(Comparator.comparing(Meal::getDateTime).reversed())
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<MealTo> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
+    public List<Meal> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId) {
         return getAllFiltered(userId, meal -> Util.isBetweenHalfOpen(meal.getDateTime(), startDateTime,endDateTime));
     }
 }

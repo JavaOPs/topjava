@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
-import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.service.MealService;
-import ru.javawebinar.topjava.util.MealsUtil;
 import ru.javawebinar.topjava.web.SecurityUtil;
 
 import java.time.LocalDate;
@@ -27,7 +25,7 @@ public class MealRestController {
         this.repository = repository;
     }
 
-    public Collection<MealTo> getAll(int userId){
+    public Collection<Meal> getAll(int userId){
         return repository.getAll(userId);
     }
 
@@ -48,7 +46,7 @@ public class MealRestController {
         service.delete(id, userId);
     }
 
-    public List<MealTo> getBetween(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
+    public List<Meal> getBetween(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
         return service.getBetweenHalfOpen(startDate,endDate, SecurityUtil.authUserId());
     }
 }
