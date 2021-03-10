@@ -28,6 +28,7 @@ public class InMemoryUserRepository implements UserRepository {
         userRepositoryMap.clear();
         userRepositoryMap.put(USER_ID, UserTestData.user);
         userRepositoryMap.put(ADMIN_ID, UserTestData.admin);
+        counter.getAndSet(UserTestData.ADMIN_ID + 1);
     }
 
     @Override
