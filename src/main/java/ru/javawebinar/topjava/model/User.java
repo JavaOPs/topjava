@@ -1,21 +1,48 @@
 package ru.javawebinar.topjava.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.util.CollectionUtils;
 
+import javax.persistence.*;
 import java.util.*;
 
 import static ru.javawebinar.topjava.util.MealsUtil.DEFAULT_CALORIES_PER_DAY;
 
+@NamedQueries({
+        @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
+        @NamedQuery(name = User.BY_EMAIL, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.email=?1"),
+        @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles ORDER BY u.name, u.email"),
+})
+@Entity
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email", name = "unique_email")})
 public class User extends AbstractNamedEntity {
 
+    public static final String DELETE = "User.delete";
+    public static final String BY_EMAIL = "User.getByEmail";
+    public static final String ALL_SORTED = "User.getAllSorted";
+
+    @Column(name = "email", nullable = false, unique = true)
+    @Email
+    @NotEmpty
     private String email;
 
+    @Column(name = "password", nullable = false)
+    @NotEmpty
+    @Length(min = 5)
     private String password;
 
+    @Column(name = "enabled", nullable = false)
     private boolean enabled = true;
 
+    @Column(name = "registered", columnDefinition = "timestamp dafault now()")
     private Date registered = new Date();
 
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "Role")
+    @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     private int caloriesPerDay = DEFAULT_CALORIES_PER_DAY;

@@ -46,8 +46,8 @@
         </tr>
         </thead>
         <c:forEach items="${meals}" var="meal">
-            <jsp:useBean id="meal" type="ru.javawebinar.topjava.to.MealTo"/>
-            <tr data-mealExcess="${meal.excess}">
+            <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal"/>
+            <tr data-mealExcess="${meal.calories>MEALSUTCALORIES_PER_DAY}">
                 <td>
                         <%--${meal.dateTime.toLocalDate()} ${meal.dateTime.toLocalTime()}--%>
                         <%--<%=TimeUtil.toString(meal.getDateTime())%>--%>
