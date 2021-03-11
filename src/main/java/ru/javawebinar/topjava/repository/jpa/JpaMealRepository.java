@@ -25,14 +25,19 @@ public class JpaMealRepository implements MealRepository {
         if (meal.isNew()){
             em.persist(meal);
             return meal;
-        } else if (get(meal.id(),userId) == null) return null;
+        } else if (get(meal.id(),userId) == null) {
+            return null;
+        }
         return em.merge(meal);
     }
 
     @Override
     @Transactional
     public boolean delete(int id, int userId) {
-        return em.createNamedQuery(Meal.DELETE).setParameter("id",id).setParameter("userId", userId).executeUpdate() != 0;
+        return em.createNamedQuery(Meal.DELETE)
+                .setParameter("id",id)
+                .setParameter("userId", userId)
+                .executeUpdate() != 0;
     }
 
     @Override
