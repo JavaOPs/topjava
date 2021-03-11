@@ -61,34 +61,32 @@ public class MealServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action == null ? "all" : action) {
-            case "delete":
+            case "delete" -> {
                 int id = getId(request);
                 log.info("Delete {}", id);
                 mealRestController.delete(id, SecurityUtil.authUserId());
                 response.sendRedirect("meals");
-                break;
-            case "create":
-            case "update":
+            }
+            case "create", "update" -> {
                 final Meal meal = "create".equals(action) ?
                         new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000) :
                         mealRestController.get(getId(request), SecurityUtil.authUserId());
                 request.setAttribute("meal", meal);
                 request.getRequestDispatcher("/mealForm.jsp").forward(request, response);
-                break;
-            case "filter":
+            }
+            case "filter" -> {
                 LocalDate startDate = parseLocalDate(request.getParameter("startDate"));
                 LocalDate endDate = parseLocalDate(request.getParameter("endDate"));
                 LocalTime startTime = parseLocalTime(request.getParameter("startTime"));
                 LocalTime endTime = parseLocalTime(request.getParameter("endTime"));
                 request.setAttribute("meals", mealRestController.getBetween(startDate, startTime, endDate, endTime));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
-                break;
-            case "all":
-            default:
+            }
+            default -> {
                 log.info("getAll");
                 request.setAttribute("meals", mealRestController.getAll(SecurityUtil.authUserId()));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
-                break;
+            }
         }
     }
     private int getId(HttpServletRequest request) {
