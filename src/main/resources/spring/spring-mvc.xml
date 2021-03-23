@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven/>
+
+    <context:component-scan base-package="ru.javawebinar.**.web"/>
+
+    <!--  all resources inside folder src/main/webapp/resources are mapped so they can be referred to inside JSP files -->
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp"/>
+
+<!--
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+          p:cacheSeconds="60"
+          p:defaultEncoding="UTF-8">
+        <property name="basenames">
+            <list>
+                <value>messages/app</value>
+            </list>
+        </property>
+    </bean>
+-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:cacheSeconds="5"
+          p:defaultEncoding="UTF-8">
+        <property name="basenames" value="file:///#{systemEnvironment['TOPJAVA_ROOT']}/config/messages/app"/>
+        <property name="fallbackToSystemLocale" value="false"/>
+    </bean>
+</beans>
