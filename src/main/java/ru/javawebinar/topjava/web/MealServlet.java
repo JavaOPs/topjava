@@ -31,12 +31,6 @@ public class MealServlet extends HttpServlet {
     }
 
     @Override
-    public void destroy() {
-        springContext.close();
-        super.destroy();
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         Meal meal = new Meal(
