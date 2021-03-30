@@ -29,6 +29,7 @@
         <!--    Tests  -->
         <junit.version>4.13.2</junit.version>
         <assertj.version>3.19.0</assertj.version>
+        <hamcrest.version>2.2</hamcrest.version>
 
         <!-- Hibernate -->
         <hibernate.version>5.4.28.Final</hibernate.version>
@@ -215,6 +216,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
