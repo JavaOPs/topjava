@@ -17,6 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <spring.version>5.3.3</spring.version>
+        <tomcat.version>9.0.43</tomcat.version>
 
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
@@ -68,13 +69,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
@@ -98,19 +92,6 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
-        <!--DataBase-->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.3.4</version>
-        </dependency>
-
 
         <!--- ORM -->
         <dependency>
@@ -168,6 +149,42 @@
     </dependencies>
 
     <profiles>
+        <profile>
+            <id>hsqldb</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.hsqldb</groupId>
+                    <artifactId>hsqldb</artifactId>
+                    <version>2.3.4</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>postgres</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>${postgresql.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                    <version>${tomcat.version}</version>
+                    <scope>provided</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>jul-to-slf4j</artifactId>
+                    <version>${slf4j.version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
     </profiles>
 
     <dependencyManagement>
