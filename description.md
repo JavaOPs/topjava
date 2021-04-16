@@ -70,3 +70,11 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 - Обработка ошибок 404 (NotFound)
 - Доступ к AuthorizedUser
 - <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFNUpzYW1nLUZTaXM">Собеседование. Разработка ПО</a>
+
+### Миграция на Spring Boot
+- Основы Spring Boot. Spring Boot maven plugin
+- Lombok, база H2, ApplicationRunner
+- Spring Data REST + HATEOAS
+- Swagger/ OpenAPI 3.0
+- Тестирование и кэширование в Spring Boot
+- Миграция приложения TopJava на Spring Boot
