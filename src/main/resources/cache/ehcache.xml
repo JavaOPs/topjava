@@ -1,0 +1,25 @@
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+    <!--http://www.ehcache.org/documentation/3.4/xml.html-->
+    <!--http://www.ehcache.org/documentation/3.1/107.html#supplement-jsr-107-configurations-->
+
+    <!--<persistence directory="${user.home}/cache-data"/>-->
+
+    <cache-template name="expiryCache">
+        <expiry>
+            <ttl unit="minutes">5</ttl>
+        </expiry>
+        <heap unit="entries">5000</heap>
+    </cache-template>
+
+    <cache-template name="singleNonExpiryCache">
+        <expiry>
+            <none/>
+        </expiry>
+        <heap>1</heap>
+    </cache-template>
+
+    <cache alias="users" uses-template="singleNonExpiryCache"/>
+</config>
