@@ -7,9 +7,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.javawebinar.topjava.MealTestData;
 import ru.javawebinar.topjava.TestMatcher;
-import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.util.DateTimeUtil;
@@ -18,8 +16,6 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 import ru.javawebinar.topjava.web.AbstractControllerTest;
 import ru.javawebinar.topjava.web.json.JsonUtil;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,7 +24,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.TestUtil.readFromJson;
-import static ru.javawebinar.topjava.UserTestData.*;
+import static ru.javawebinar.topjava.UserTestData.USER_ID;
+import static ru.javawebinar.topjava.UserTestData.user;
 
 public class MealRestControllerTest extends AbstractControllerTest {
     private static final String REST_URL = MealRestController.REST_URL + '/';
@@ -92,20 +89,25 @@ public class MealRestControllerTest extends AbstractControllerTest {
 
     @Test
     void getAllBetween() throws Exception {
-        LocalDate startDate = DateTimeUtil.parseLocalDate("2020-01-31T00:00:00".substring(0, 10));
-        LocalDate endDate = DateTimeUtil.parseLocalDate("2020-01-31T00:00:00".substring(0, 10));
-        LocalTime startTime = DateTimeUtil.parseLocalTime("2020-01-31T09:00:00".substring(11, 16));
-        LocalTime endTime = DateTimeUtil.parseLocalTime("2020-01-31T13:30:00".substring(11, 16));
-        List<MealTo> filteredTos = MealsUtil.
-                getFilteredTos(mealService.getBetweenInclusive(startDate, endDate, USER_ID)
-                        , user.getCaloriesPerDay(), startTime, endTime);
+        String startDate = "2020-01-31";
+        String endDate = "2020-01-31";
+        String startTime = "09:00:00";
+        String endTime = "13:30:00";
+
+        List<MealTo> expected = MealsUtil.
+                getFilteredTos(mealService.getBetweenInclusive(DateTimeUtil.parseLocalDate(startDate)
+                        , DateTimeUtil.parseLocalDate(endDate)
+                        , USER_ID)
+                        , user.getCaloriesPerDay()
+                        , DateTimeUtil.parseLocalTime(startTime)
+                        , DateTimeUtil.parseLocalTime(endTime));
         perform(MockMvcRequestBuilders.get(REST_URL
-                + "filter?startDate=2020-01-31T00:00:00" +
-                "&startTime=2020-01-31T09:00:00" +
-                "&endDate=2020-01-31T00:00:00" +
-                "&endTime=2020-01-31T13:30:00"))
+                + "filter?startDate=" + startDate
+                + "&startTime=" + startTime
+                + "&endDate=" + endDate
+                + "&endTime=" + endTime))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(MEAL_TO_MATCHER.contentJson(filteredTos));
+                .andExpect(MEAL_TO_MATCHER.contentJson(expected));
     }
 }
