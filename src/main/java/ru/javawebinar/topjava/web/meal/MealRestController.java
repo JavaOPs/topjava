@@ -1,14 +1,14 @@
 package ru.javawebinar.topjava.web.meal;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealTo;
+import ru.javawebinar.topjava.web.json.JsonUtil;
 
 import java.net.URI;
 import java.time.LocalDate;
@@ -20,13 +20,21 @@ import java.util.List;
 public class MealRestController extends AbstractMealController {
     static final String REST_URL = "/rest/meals";
 
-    @Autowired
-    ConversionService conversionService;
-
     @Override
     @GetMapping("/{id}")
     public Meal get(@PathVariable int id) {
-        return super.get(id);
+        //--------------------
+        Meal m = super.get(id);
+        System.out.println("+".repeat(3) + "Meal in contr" + "+".repeat(3));
+        System.out.println(m);
+        System.out.println("+".repeat(15));
+        String json = JsonUtil.writeValue(m);
+        System.out.println("+".repeat(3) + "Meal in contr" + "+".repeat(3));
+        System.out.println(m);
+        System.out.println("+".repeat(15));
+        //---------------------
+        return m;
+//        return super.get(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -58,16 +66,14 @@ public class MealRestController extends AbstractMealController {
         return super.getAll();
     }
 
+    @Override
     @GetMapping("/filter")
-    public List<MealTo> getBetweenWithConverter(@RequestParam("startDate") String startDate
-            , @RequestParam("startTime") String startTime
-            , @RequestParam("endDate") String endDate
-            , @RequestParam("endTime") String endTime) {
-        return super.getBetween(conversionService.convert(startDate, LocalDate.class)
-                , conversionService.convert(startTime, LocalTime.class)
-                , conversionService.convert(endDate, LocalDate.class)
-                , conversionService.convert(endTime, LocalTime.class));
-
+    public List<MealTo> getBetween(
+            @RequestParam("startDate") @Nullable LocalDate startDate,
+            @RequestParam("startTime") @Nullable LocalTime startTime,
+            @RequestParam("endDate") @Nullable LocalDate endDate,
+            @RequestParam("endTime") @Nullable LocalTime endTime) {
+        return super.getBetween(startDate, startTime, endDate, endTime);
     }
 
 }
