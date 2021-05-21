@@ -6,7 +6,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <bean class="ru.javawebinar.topjava.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
-    <mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper" ref="objectMapper"/>
@@ -22,10 +22,9 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 <!--    one magic on, top magic off -->
-    <mvc:annotation-driven conversion-service="conversionService"/>
 
     <context:component-scan base-package="ru.javawebinar.**.web"/>
-    <context:component-scan base-package="ru.javawebinar.topjava.util.converter"/>
+<!--    <context:component-scan base-package="ru.javawebinar.topjava.util.converter"/>-->
 
     <!--  all resources inside folder src/main/webapp/resources are mapped so they can be referred to inside JSP files -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>

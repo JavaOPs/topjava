@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealTo;
-import ru.javawebinar.topjava.web.json.JsonUtil;
 
 import java.net.URI;
 import java.time.LocalDate;
@@ -23,18 +22,7 @@ public class MealRestController extends AbstractMealController {
     @Override
     @GetMapping("/{id}")
     public Meal get(@PathVariable int id) {
-        //--------------------
-        Meal m = super.get(id);
-        System.out.println("+".repeat(3) + "Meal in contr" + "+".repeat(3));
-        System.out.println(m);
-        System.out.println("+".repeat(15));
-        String json = JsonUtil.writeValue(m);
-        System.out.println("+".repeat(3) + "Meal in contr" + "+".repeat(3));
-        System.out.println(m);
-        System.out.println("+".repeat(15));
-        //---------------------
-        return m;
-//        return super.get(id);
+        return super.get(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
