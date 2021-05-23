@@ -49,10 +49,11 @@ public class UserMealsUtil {
             }
              if (sumCurrent > caloriesPerDay) {
                  LocalDate finalDateCurrent = dateCurrent;
-                 listResult.forEach(elem -> {
+                 listResult.replaceAll(elem -> {
                      if (elem.getDateTime().toLocalDate().equals(finalDateCurrent)) {
                          elem.setExcess(true);
                      }
+                     return elem;
                  });
             }
         }
