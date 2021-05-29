@@ -35,30 +35,30 @@ public class UserMealsUtil {
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalDateTime startTime, LocalDateTime endTime, int caloriesPerDay) {
         List<UserMealWithExcess> list = new ArrayList<>();
-        List<UserMeal> mealsList = meals.stream()
-                .filter(s -> s.getDateTime().compareTo(startTime) > 0 && s.getDateTime().compareTo(endTime) <= 0)
-                .collect(Collectors.toList());
         int[] calories = {0};
-        mealsList.forEach(s -> {
-            calories[0] += s.getCalories();
-            list.add(new UserMealWithExcess(
-                    s.getDateTime(),
-                    s.getDescription(),
-                    s.getCalories(),
-                    calories[0] >= caloriesPerDay));
-        });
+        for (UserMeal meal : meals) {
+            if (meal.getDateTime().compareTo(startTime) > 0 && meal.getDateTime().compareTo(endTime) <= 0) {
+                calories[0] += meal.getCalories();
+                list.add(new UserMealWithExcess(
+                        meal.getDateTime(),
+                        meal.getDescription(),
+                        meal.getCalories(),
+                        calories[0] >= caloriesPerDay));
+            }
+        }
         return list;
     }
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalDateTime startTime, LocalDateTime endTime, int caloriesPerDay) {
-        List<UserMealWithExcess> list = new ArrayList<>();
         AtomicInteger acc = new AtomicInteger();
-        meals.stream()
+        return meals.stream()
                 .filter(s -> s.getDateTime().compareTo(startTime) > 0 && s.getDateTime().compareTo(endTime) <= 0)
-                .forEach(x -> {
+                .map(x -> {
                     acc.addAndGet(x.getCalories());
-                    list.add(new UserMealWithExcess(x.getDateTime(), x.getDescription(), x.getCalories(), acc.get() >= caloriesPerDay));
-                });
-        return list;
+                    return new UserMealWithExcess(x.getDateTime(), x.getDescription(), x.getCalories(), acc.get() >= caloriesPerDay);
+                })
+                .collect(Collectors.toList());
     }
+
+
 }
