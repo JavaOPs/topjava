@@ -63,11 +63,11 @@ _Антуан де Сент-Экзюпери_
 - 13: [Use for money in java app](http://stackoverflow.com/a/43051227/548473)
 - 14: Еще раз про [hashCode/equals в Entity](https://stackoverflow.com/questions/5031614/the-jpa-hashcode-equals-dilemma): не делайте сравнение по полям!
 - 15: Название пакетов, имен классов для `model/to/web` достаточно стандартные (например `model/domain`). НЕ надо придумывать своих собственных правил
-- 16: **Используйте DATA-JPA** (можно без лишней делегации, напрямую из сервиса/контроллера дергать Repository)
+- 16: **Используйте DATA-JPA** (без лишней делегации, напрямую из сервиса/контроллера дергать Repository)
 - 17: В DATA-JPA 2.x используются `Optional`. Попробуйте работать с ними, это безопасный способ работать с null значениями (используйте `orElseThrow`)
-- 18: На topjava мы смотрели разные варианты использования, тут делаем максимально просто. С TO многие вещи упрощаются
+- 18: На topjava мы смотрели разные варианты c использованием TO и без, критерий - делаем максимально просто.
 - 19: Проверьте, не торчат ли из кода учебные уши topjava, типа `ProfileRestController.testUTF()`, `AbstractServiceTest.printResult()` или закомментированные `JdbcTemplate`. Назначение этого проекта совсем другое
-- 20: ORM работает с объектами. [В простейших случаях fk_id как поля допустимы](https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities), но при этом JPA их уже никак не обрабатывает и не используйте их вместе с объектами.  Ссылка на stackoverflow в коде обязательна!
+- 20: ORM работает с объектами. [Иногда, для упрощения логики, fk_id как поля допустимы](https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities)
 - 21: Проверьте, станет ли код проще с `@AuthenticationPrincipal` (урок 11, Доступ к AuthorizedUser).
 - 22: Обновление в базе делается через `update`,  даже если `delete/insert` сократит java код на несколько строк
 - 23: Кэширование
