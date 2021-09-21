@@ -94,7 +94,7 @@
 - [headz.io](https://app.headz.io/candidates/new)
 - <a href="http://djinni.co/">djinni.co (более актуально для Украины)</a>
 
-
+[Как изучать Java. Подборка от JavaRush](https://javarush.ru/groups/posts/3538-v-zakladki-kak-izuchatjh-java-boljhshaja-podborka-po-planu-obuchenija-instrumentam-i-poiskam-mo)  
 <h2 id="probation">Как выжить на испытательном сроке</h2>
 
 - Учись грамотно формулировать проблему. Проблема "у меня не работает" может иметь тысячи причин. В
@@ -120,4 +120,5 @@
 - Типичные ошибки начинающих программистов от JavaRush:
   - [Часть 1](https://javarush.ru/groups/posts/3044-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-1)
   - [Часть 2](https://javarush.ru/groups/posts/3055-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-2)
+- [От джуна к миддлу: практические советы](https://tproger.ru/articles/ot-dzhuna-k-middlu-prakticheskie-sovety)
 ## [Отзывы по стажировке Topjava](https://vk.com/topic-74381644_30447246)
