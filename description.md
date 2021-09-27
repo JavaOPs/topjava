@@ -13,7 +13,7 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 
 ## План проекта (ссылки на некоторые темы открыты для просмотра)
 ### Архитектура проекта. Персистентность.
-- <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFSUNrdVc0bDZuX2s">Системы управления версиями</a>
+- <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFSUNrdVc0bDZuX2s/view?usp=sharing&resourcekey=0-6scb0PBj2A3Oqf6rsU2egQ">Системы управления версиями</a>
 - <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Java 8: Lambda</a>, Stream API
 - Обзор используемых в проекте технологий и инструментов.
 - Инструмент сборки Maven
@@ -56,7 +56,7 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 - Spring Binding/Validation
 - Работа с datatables через Ajax.
 - Spring Security Test
-- [Кастомизация JSON (@JsonView) и валидации (groups)](https://drive.google.com/open?id=0B9Ye2auQ_NsFRTFsTjVHR2dXczA)
+- [Кастомизация JSON (@JsonView) и валидации (groups)](https://drive.google.com/file/d/0B9Ye2auQ_NsFRTFsTjVHR2dXczA/view?usp=sharing&resourcekey=0-Ou4A_gRor5HaRho4Fciqdw)
 - Encoding password
 - <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFNDlPZGdUNThzNUU/view">CSRF (добавление в проект защиты от межсайтовой подделки запроса)</a>
 - form-login. Spring Security Taglib
@@ -65,11 +65,11 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 - Смена локали
 - Фильтрация JSON с помощью @JsonView
 - Защита от XSS (Cross Site Scripting)
-- <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFZkpVM19QWFBOQ2c">Деплой в Heroku</a>
+- <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFZkpVM19QWFBOQ2c/view?usp=sharing&resourcekey=0-vYSzcNBBM0BLS6dLerJ4rw">Деплой в Heroku</a>
 - Локализация datatables, ошибок валидации
 - Обработка ошибок 404 (NotFound)
 - Доступ к AuthorizedUser
-- <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFNUpzYW1nLUZTaXM">Собеседование. Разработка ПО</a>
+- <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFNUpzYW1nLUZTaXM/view?usp=sharing&resourcekey=0-SvoaLaP2ftukDwR4Shs8HQ">Собеседование. Разработка ПО</a>
 
 ### Миграция на Spring Boot
 - Основы Spring Boot. Spring Boot maven plugin
