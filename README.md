@@ -168,13 +168,10 @@ Java Enterprise Online Project
 -----
 ## [Пример 7-го занятия онлайн стажировки, несколько видео открыто](https://github.com/JavaOPs/topjava/blob/master/doc/lesson07.md)
 
+>  - ДЗ первого урока будет связано с созданием небольшого [CRUD](https://ru.wikipedia.org/wiki/CRUD) приложения (в памяти, без базы данных) на JSP и сервлетах
+>  - основы JavaSсript необходимы для понимания проекта, начиная с 8-го занятия
+
 ### Полезные ресурсы
-> ВНИМАНИЕ:
->  - **ДЗ первого урока будет связано с [созданием небольшого CRUD приложения (в памяти, без DB) на JSP и сервлетах](https://danielniko.wordpress.com/2012/04/17/simple-crud-using-jsp-servlet-and-mysql/)**. Введение будет, но предварительное знакомство не помешает.
->  - основы JavaSсript необходимы для понимания проекта, начиная с 8-го занятия!
-
-Все остальное - опционально.
-
 #### HTML, JavaScript, CSS 
 - [Basic HTML and HTML5](https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5/say-hello-to-html-elements/)
 - [Справочник по WEB](https://developer.mozilla.org/ru/)
