@@ -73,6 +73,7 @@ public class UserMealsUtil {
         return meals.stream().collect(Collector.of(
                 mealsWithDaysCalories::new,
                 (j, p) -> {
+                    //не могу понять, как в "accumulator" правильно просуммировать калории за день
                     j.daysCalories += p.getCalories();
                     if (isBetweenBeforeAndAfter(p.getDateTime().toLocalTime(), endTime, startTime)) {
                         j.daysMeals.add(p);
