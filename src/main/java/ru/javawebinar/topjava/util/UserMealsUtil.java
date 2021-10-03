@@ -29,10 +29,22 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-     //    for (UserMeal meal:meals) {
-     //        Map<LocalDate, Integer> map = new HashMap<>();
-     //       map.put(meal.getDateTime().toLocalDate(), meal.getCalories());
 
+//        for (UserMeal meal:meals) {
+//             Map<LocalDate, Integer> map = new HashMap<>();
+//             map.put(meal.getDateTime().toLocalDate(), meal.getCalories());
+//             List<LocalDate> keyList = new ArrayList<>(map.keySet());
+//             List<Integer> valueList = new ArrayList<>(map.values());
+//             for (LocalDate key:keyList){
+//                 for (LocalDate key2:keyList){
+//                     if (key==key2){
+//                         int call=map.get(key)+map.get(key2);
+//                         if (call>caloriesPerDay){
+//                         }
+//                     }
+//                 }
+//             }
+//        }
 
         for (UserMeal meal:meals){
             LocalTime time = meal.getDateTime().toLocalTime();
