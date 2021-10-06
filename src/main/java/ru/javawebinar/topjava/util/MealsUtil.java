@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.util;
 
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.model.MealTo;
+import ru.javawebinar.topjava.model.MealWithExcess;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,4 +45,18 @@ public class MealsUtil {
     private static MealTo createTo(Meal meal, boolean excess) {
         return new MealTo(meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
+
+    public static List<MealWithExcess> getFilteredMealsWithExceded(List<Meal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+        final Map<LocalDate, Integer> caloriesSumByDate = mealList.stream().collect(Collectors.groupingBy(m -> m.getDateTime().toLocalDate(),
+                Collectors.summingInt(Meal::getCalories)));
+
+        return mealList.stream()
+                .filter(m->TimeUtil.isBetweenHalfOpen(m.getDateTime().toLocalTime(), startTime, endTime))
+                .map(m->new MealWithExcess(m.getDateTime(), m.getDescription(), m.getCalories(),
+                        caloriesSumByDate.get(m.getDateTime().toLocalDate())>caloriesPerDay))
+                .collect(Collectors.toList());
+
+    }
 }
+
+
