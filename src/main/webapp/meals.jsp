@@ -31,8 +31,8 @@
     <tbody>
     <jsp:useBean id="meals" scope="request" type="java.util.List"/>
     <c:forEach var="meal" items="${meals}">
-        <tr style="color:${meal.excess ? 'green' : 'red'}">
-            <td>
+        <tr>
+            <td font color="${meal.excess ? 'yellowgreen': 'red'}">
                 <fmt:parseDate value="${meal.dateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime"
                                type="both"/>
                 <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${parsedDateTime}"/>
