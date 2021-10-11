@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public interface MealsUtil {
-    static List<MealTo> transformToMealTo(List<Meal> meals, int caloriesPerDay) {
+    static List<MealTo> transformFromMealList(List<Meal> meals, int caloriesPerDay) {
         Map<LocalDate, Integer> caloriesSumByDate = meals.stream()
                 .collect(Collectors.groupingBy(Meal::getDate, Collectors.summingInt(Meal::getCalories)));
 
