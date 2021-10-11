@@ -34,7 +34,7 @@ public class MealServlet extends HttpServlet implements MealsUtil{
                 new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
         );
 
-        request.setAttribute("meals", MealsUtil.transformToMealTo(meals, CALORIES_PER_DAY));
+        request.setAttribute("meals", MealsUtil.transformFromMealList(meals, CALORIES_PER_DAY));
         request.getRequestDispatcher("/meals.jsp").forward(request, response);
     }
 }
