@@ -9,9 +9,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
 
-    private static final AtomicInteger counter = new AtomicInteger(0);
+    protected static final AtomicInteger counter = new AtomicInteger(0);
 
-    private final Map<Integer, T> map = new ConcurrentHashMap<>();
+    protected final Map<Integer, T> map = new ConcurrentHashMap<>();
 
     public T save(T entity) {
         if (entity.isNew()) {
