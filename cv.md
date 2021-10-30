@@ -39,6 +39,7 @@
 - <a href="https://www.youtube.com/watch?v=hry2CNuOxBg">Михаил Портнов. Собеседование на работу: жизненный путь</a>
 - [Лёша Корепанов. Признаки плохих компаний для программиста](https://www.youtube.com/watch?v=Sj-WSWr-n7U)
 - [Лёша Корепанов. Как отвечать на вопросы, которые ты не знаешь. Техническое интервью для программиста](https://www.youtube.com/watch?v=Beoh3tfgPEk)
+- [Виталием Карнаух. Топ 7 ошибок на собеседование в it компанию](https://www.youtube.com/watch?v=IcFBsPN2U2g)
 - <a href="https://www.youtube.com/playlist?list=PL7XXjge0nKZczMtQbNk9c2cplvuLZomTh">Канал: Резюме, поиск работы, интервью</a>
 -  <a href="https://www.youtube.com/watch?v=ft0Nj8Cm9kk">Яков Файн: Как стать профессиональным Java разработчиком</a>
 -  <a href="https://jsehelper.blogspot.ru/p/blog-page.html">Ответы на вопросы на собеседовании Junior Java Developer</a>
@@ -121,4 +122,6 @@
   - [Часть 1](https://javarush.ru/groups/posts/3044-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-1)
   - [Часть 2](https://javarush.ru/groups/posts/3055-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-2)
 - [От джуна к миддлу: практические советы](https://tproger.ru/articles/ot-dzhuna-k-middlu-prakticheskie-sovety)
+- [Виталием Карнаух. Ошибки, которых лучше избежать начинающим](https://www.youtube.com/watch?v=GNeyP7lAHAY)
+- [Лёша Корепанов. 12 вещей о ПРОГРАММИРОВАНИИ, которые я хотел бы знать в 20 лет](https://www.youtube.com/watch?v=Z9FvlPpSS3U)
 ## [Отзывы по стажировке Topjava](https://vk.com/topic-74381644_30447246)
