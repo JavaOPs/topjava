@@ -22,11 +22,11 @@ Java Enterprise Online Project
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 1. <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFY1ZDNXRCd1NCTG8/view?resourcekey=0-NKNOHbTWXnsZtbe5_8B6Bg">Осваиваем Java Enterprise. Трудоустройство. Ответы на вопросы.</a>
 - <a href="https://goo.gl/XNVOj4">Слайды презентации</a>
 - [Как стать профессиональным Java разработчиком](https://www.youtube.com/watch?v=ft0Nj8Cm9kk)
-- [Популярность Java-технологий в 2019 году](https://topjava.ru/blog/sostoyanie-java-v-2019-godu)
 - [Java Technology Report 2021](https://www.jrebel.com/blog/2021-java-technology-report)
 - [The State of Developer Ecosystem 2020](https://www.jetbrains.com/lp/devecosystem-2020/java/)
 - [JVM Ecosystem Report 2021](https://snyk.io/jvm-ecosystem-report-2021/)
 - [Быть программистом: от детства к зрелости](https://www.youtube.com/watch?v=D5Hej0TyLaU)
+- <a href="http://javaops.ru/view/test">Ссылки по темам интервью, тестовое интервью</a>
 - [Литература](https://javaops.ru/view/books)
 
 #### Spring Pet-Clinic
