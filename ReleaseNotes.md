@@ -5,6 +5,7 @@
 - добавил логирование в `RootController`
 - в `AbstractServiceTest` популирование БД делаю после теста (`executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD`). Если последние тесты на сервисы портят БД, тесты на контроллеры могут упасть
 - в `ActiveDbProfileResolver` добавил парсинг `profiles`
+- добавил `@QueryHint HINT_PASS_DISTINCT_THROUGH` в реализацию Data JPA
 
 ### Topjava 23
 - migrate to JDK 16
