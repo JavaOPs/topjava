@@ -1,5 +1,11 @@
 # TopJava Release Notes
 
+### Topjava 24
+- migrate to JDK 17
+- добавил логирование в `RootController`
+- в `AbstractServiceTest` популирование БД делаю после теста (`executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD`). Если последние тесты на сервисы портят БД, тесты на контроллеры могут упасть
+- в `ActiveDbProfileResolver` добавил парсинг `profiles`
+
 ### Topjava 23
 - migrate to JDK 16
 - в новой spring-data-jpa `getOne` заменили на `getById`
