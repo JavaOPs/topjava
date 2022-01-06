@@ -82,7 +82,7 @@ _Антуан де Сент-Экзюпери_
 - 4.3: еще раз про [hashCode/equals в Entity](https://stackoverflow.com/questions/5031614/the-jpa-hashcode-equals-dilemma): не делайте в модели сравнение по полям!
 - 4.4: ORM работает с объектами. [Иногда, для упрощения логики, fk_id как поля допустимы](https://stackoverflow.com/questions/6311776/hibernate-foreign-keys-instead-of-entities)
 
-### 5: Архитектура
+### 5: Архитектура / pom
 - 5.1: Можно: 
     - или подключить DATA-REST (см.курс [Spring Boot 2.x + HATEOAS](https://javaops.ru/view/bootjava)). Контроллеры генерируются автоматически по репозиториям, требуется настройка ресурсов в кастомных контроллерах
     - или делать на основе миграции TopJava / кода [TopJava-2](https://github.com/JavaOPs/topjava2)
@@ -92,6 +92,7 @@ _Антуан де Сент-Экзюпери_
 - 5.3: Не смешивайте TO и Entity вместе. Они должны быть независимыми друг от друга. На TopJava мы смотрели разные варианты [c использованием TO и без](https://stackoverflow.com/a/21569720/548473).
   Делаем максимально просто.
 - 5.4: [Use for money in java app](http://stackoverflow.com/a/43051227/548473)
+- 5.5 Не надо явно указывать версии зависимостей в `pom`, если они наследуются от `spring-boot-starter-parent`
 
 ### 6: Доступ к БД
  
