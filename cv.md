@@ -41,6 +41,7 @@
 - [Лёша Корепанов. Признаки плохих компаний для программиста](https://www.youtube.com/watch?v=Sj-WSWr-n7U)
 - [Лёша Корепанов. Как отвечать на вопросы, которые ты не знаешь. Техническое интервью для программиста](https://www.youtube.com/watch?v=Beoh3tfgPEk)
 - [Виталием Карнаух. Топ 7 ошибок на собеседование в it компанию](https://www.youtube.com/watch?v=IcFBsPN2U2g)
+- [Почему молчит интервьюер: 11 неочевидных фактов о собеседованиях в IT](https://highload.today/pochemu-molchit-intervyuer-11-neochevidnyh-faktov-o-sobesedovaniyah-v-it/)
 - <a href="https://www.youtube.com/playlist?list=PL7XXjge0nKZczMtQbNk9c2cplvuLZomTh">Канал: Резюме, поиск работы, интервью</a>
 -  <a href="https://www.youtube.com/watch?v=ft0Nj8Cm9kk">Яков Файн: Как стать профессиональным Java разработчиком</a>
 -  <a href="https://jsehelper.blogspot.ru/p/blog-page.html">Ответы на вопросы на собеседовании Junior Java Developer</a>
