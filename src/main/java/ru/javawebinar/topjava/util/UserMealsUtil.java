@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -20,36 +21,31 @@ public class UserMealsUtil {
                 new UserMeal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
         );
 
-        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000); //default 7:00 to 12:00 cl 2000
+        List<UserMealWithExcess> mealsTo = filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(20, 0), 2000); //default 7:00 to 12:00 cl 2000
         mealsTo.forEach(System.out::println);
 
-//        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
+        System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(20, 0), 2000));
+
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-
-        // Sorted by data -> for good working. If the param "meals" always gets only sorted list by per day, next 2 line code can be hide or remote,
-        // with refactor name variable in "for:each" cycle [1*]
-
-        List<UserMeal> inputMeals = meals;                                  //1 line
-        inputMeals.sort(Comparator.comparing(UserMeal::getDateTime));       //2 line
-
         // Temp variables:
-
         List<UserMealWithExcess> resultMealList = new ArrayList<>();
         List<UserMeal> dayUserMeal = new ArrayList<>();
         int currentDay = 0;
         int dayCal = 0;
 
-        // Next code works if list meals sorted by per day
+        // Sorting by LocalTime
+        List<UserMeal> inputMeals = meals;
+        inputMeals.sort(Comparator.comparing(UserMeal::getDateTime));
 
-        for (UserMeal userMeal : inputMeals) { //[1*] refactor inputMeals to meals
+        for (UserMeal userMeal : inputMeals) {
             LocalDateTime lcDateTime = userMeal.getDateTime();
             int day = lcDateTime.getDayOfMonth();
             if (currentDay != day) {
                 currentDay = day;
                 if (!dayUserMeal.isEmpty()) {
-                    //filling from temp list dayUserMeal to resultMealList if next userMeal has next day
+                    //filling from temp list "dayUserMeal" to "resultMealList" if userMeal has next day
                     for (UserMeal dayMeal : dayUserMeal) {
                         resultMealList.add(new UserMealWithExcess(dayMeal.getDateTime(), dayMeal.getDescription(), dayMeal.getCalories(), dayCal > caloriesPerDay));
                     }
@@ -68,12 +64,24 @@ public class UserMealsUtil {
                 resultMealList.add(new UserMealWithExcess(dayMeal.getDateTime(), dayMeal.getDescription(), dayMeal.getCalories(), dayCal > caloriesPerDay));
             }
         }
-        // TODO return filtered list with excess. Implement by cycles
         return resultMealList;
     }
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO Implement by streams
-        return null;
+        //Temp variables:
+        List<UserMealWithExcess> resultMealList = new ArrayList<>();
+
+        // Creating map of calories per day
+        Map<Integer, Integer> calPerDayMap = meals.stream()
+                .collect(Collectors.toMap(m -> m.getDateTime().getYear() * 1000 + m.getDateTime().getDayOfYear(), UserMeal::getCalories, Integer::sum)); //getting date to <Integer> format "YYYYddd", where "ddd" (day of year)
+
+        // Filling resultMealList
+        meals.stream()
+                .sorted(Comparator.comparing(UserMeal::getDateTime))                                                                        //sorting by per day
+                .filter(s -> TimeUtil.isBetweenHalfOpen(s.getDateTime().toLocalTime(), startTime, endTime))                                 //filtering from "startTime" to "endTime"
+                .forEach(s -> resultMealList.add(new UserMealWithExcess(s.getDateTime(), s.getDescription(), s.getCalories()                //creating new record into "resultMealList"
+                        , calPerDayMap.get(s.getDateTime().getYear() * 1000 + s.getDateTime().getDayOfYear()) > caloriesPerDay)));
+
+        return resultMealList;
     }
 }
