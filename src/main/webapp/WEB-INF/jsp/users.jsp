@@ -21,14 +21,13 @@
             <th><spring:message code="user.registered"/></th>
         </tr>
         </thead>
-        <c:forEach items="${users}" var="user">
-            <jsp:useBean id="user" scope="page" type="ru.javawebinar.topjava.model.User"/>
+        <c:forEach items="${requestScope.users}" var="user">
+            <jsp:useBean id="user" type="ru.javawebinar.topjava.model.User"/>
             <tr>
                 <td><c:out value="${user.name}"/></td>
                 <td><a href="mailto:${user.email}">${user.email}</a></td>
                 <td>${user.roles}</td>
-                <td><%=user.isEnabled()%>
-                </td>
+                <td>${user.enabled}</td>
                 <td><fmt:formatDate value="${user.registered}" pattern="dd-MM-yyyy"/></td>
             </tr>
         </c:forEach>
