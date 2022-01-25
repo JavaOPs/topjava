@@ -35,7 +35,7 @@ public class UserMealsUtil {
         int currentDay = 0;
         int dayCal = 0;
 
-        // Sorting by LocalTime
+        // Sort by LocalTime
         List<UserMeal> inputMeals = meals;
         inputMeals.sort(Comparator.comparing(UserMeal::getDateTime));
 
@@ -71,15 +71,15 @@ public class UserMealsUtil {
         //Temp variables:
         List<UserMealWithExcess> resultMealList = new ArrayList<>();
 
-        // Creating map of calories per day
+        // Create map of calories per day
         Map<Integer, Integer> calPerDayMap = meals.stream()
                 .collect(Collectors.toMap(m -> m.getDateTime().getYear() * 1000 + m.getDateTime().getDayOfYear(), UserMeal::getCalories, Integer::sum)); //getting date to <Integer> format "YYYYddd", where "ddd" (day of year)
 
-        // Filling resultMealList
+        // Fill resultMealList
         meals.stream()
-                .sorted(Comparator.comparing(UserMeal::getDateTime))                                                                        //sorting by per day
-                .filter(s -> TimeUtil.isBetweenHalfOpen(s.getDateTime().toLocalTime(), startTime, endTime))                                 //filtering from "startTime" to "endTime"
-                .forEach(s -> resultMealList.add(new UserMealWithExcess(s.getDateTime(), s.getDescription(), s.getCalories()                //creating new record into "resultMealList"
+                .sorted(Comparator.comparing(UserMeal::getDateTime))                                                                        //sort by per day
+                .filter(s -> TimeUtil.isBetweenHalfOpen(s.getDateTime().toLocalTime(), startTime, endTime))                                 //filter from "startTime" to "endTime"
+                .forEach(s -> resultMealList.add(new UserMealWithExcess(s.getDateTime(), s.getDescription(), s.getCalories()                //create new record into "resultMealList"
                         , calPerDayMap.get(s.getDateTime().getYear() * 1000 + s.getDateTime().getDayOfYear()) > caloriesPerDay)));
 
         return resultMealList;
