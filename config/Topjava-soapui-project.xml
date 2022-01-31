@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <con:soapui-project activeEnvironment="Default" name="Topjava" resourceRoot="" soapui-version="5.7.0" abortOnError="false" runType="SEQUENTIAL" id="b6a174fe-9cda-4410-af25-bdf04e1fed39" xmlns:con="http://eviware.com/soapui/config">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:con="http://eviware.com/soapui/config"
+    xsi:schemaLocation="http://eviware.com/soapui/config https://raw.githubusercontent.com/SmartBear/soapui/next/soapui/src/main/xsd/soapui/soapui.xsd">
     <con:settings/>
-    <con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8080" type="rest" id="eebe6f3c-c045-444a-ae8f-c0f4bbb345b5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8080" type="rest" id="eebe6f3c-c045-444a-ae8f-c0f4bbb345b5">
         <con:settings/>
         
         <con:definitionCache type="TEXT" rootPart=""/><con:endpoints>
