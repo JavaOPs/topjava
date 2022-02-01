@@ -10,6 +10,7 @@
 -  [VisualCV: create resume in minutes](https://www.visualcv.com/)
 -  [Build a job-winning resume for free](https://flowcv.io/start-resume)
 -  <a href="http://resumup.com/">Выбрать шаблон для резюме</a>
+-  [Как разработчику составить резюме. Инструкция и примеры](https://highload.today/blogs/dazhe-tsveta-mogut-sygrat-protiv-vas-kak-razrabotchiku-sostavit-rezyume-kotoroe-ustroit-na-rabotu-mechty-instruktsiya-i-primery/)
 -  [GitHub Pages](https://pages.github.com/), <a href="https://github.com/jglovier/resume-template">Resume template</a>
 -  <a href="http://lifehacker.ru/2015/04/07/33-lajfhaka-dlya-rezyume/">Как продать свое резюме в 2 раза дороже</a>
 -  <a href="http://enjoy-job.ru/trudoustroistvo/kak-pravilno-sostavit-rezume/">Как правильно составить резюме</a>
