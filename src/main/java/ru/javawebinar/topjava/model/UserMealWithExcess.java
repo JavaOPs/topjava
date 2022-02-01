@@ -19,6 +19,34 @@ public class UserMealWithExcess {
     }
 
     @Override
+    public int hashCode() {
+        final int prime = 31;
+        int boolResult = excess ? 1 : 0;
+
+        return prime * ((dateTime == null ? 0 : dateTime.hashCode())
+                + (description == null ? 0 : description.hashCode())
+                    +(calories)
+                        + boolResult);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) {
+            return true;
+        }
+
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        UserMealWithExcess mealWithExcess = (UserMealWithExcess) obj;
+
+        return this.dateTime.equals(mealWithExcess.dateTime)
+                && (mealWithExcess.description != null && this.description.equals(mealWithExcess.description))
+                && (this.calories == mealWithExcess.calories)
+                && (mealWithExcess.excess == this.excess);
+    }
+
+    @Override
     public String toString() {
         return "UserMealWithExcess{" +
                 "dateTime=" + dateTime +
