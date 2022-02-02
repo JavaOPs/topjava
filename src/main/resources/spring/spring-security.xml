@@ -16,6 +16,14 @@
 
     <beans:bean name="noopEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder"/>
 
+    <http>
+        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <form-login/>
+        <logout/>
+        <csrf disabled="true"/>
+    </http>
+
     <authentication-manager>
         <authentication-provider>
             <password-encoder ref="noopEncoder"/>
