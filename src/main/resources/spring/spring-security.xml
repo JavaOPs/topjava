@@ -30,12 +30,19 @@
     </http>
 
     <authentication-manager>
-        <authentication-provider>
+        <authentication-provider user-service-ref="userService">
             <password-encoder ref="noopEncoder"/>
+<!--
+            <jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query="SELECT email, password, enabled FROM users WHERE email = ?"
+                               authorities-by-username-query="
+                                                       SELECT u.email, r.role FROM users u, user_roles r WHERE u.id = r.user_id AND u.email = ?"
+            />
             <user-service>
                 <user name="user@yandex.ru" password="password" authorities="ROLE_USER"/>
                 <user name="admin@gmail.com" password="admin" authorities="ROLE_ADMIN"/>
             </user-service>
+-->
         </authentication-provider>
     </authentication-manager>
 </beans:beans>
