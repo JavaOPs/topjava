@@ -64,12 +64,20 @@ public class UserMealsUtil {
 
         Map<LocalDate, Integer> dayCaloriesMap = new HashMap<>();
 
-        return meals.stream()
-                .peek(m -> {
-                    dayCaloriesMap.merge(m.getDateTime().toLocalDate(),m.getCalories(), Integer::sum);
-                })
-                .filter(m-> TimeUtil.isBetweenHalfOpen(m.getDateTime().toLocalTime(), startTime, endTime))
-                .map(m-> {
+        List<UserMeal> rightTime = new ArrayList<>();
+
+        meals.forEach(m -> {
+                    LocalDate mealDay = m.getDateTime().toLocalDate();
+
+                    dayCaloriesMap.merge(mealDay,m.getCalories(), Integer::sum);
+
+                    if (TimeUtil.isBetweenHalfOpen(m.getDateTime().toLocalTime(), startTime, endTime)){
+                        rightTime.add(m);
+                    }
+                });
+
+        return rightTime.stream()
+                .map(m -> {
                     if (dayCaloriesMap.get(m.getDateTime().toLocalDate()) > caloriesPerDay){
                         return new UserMealWithExcess(m.getDateTime(),m.getDescription(),m.getCalories(),true);
                     }

@@ -38,6 +38,7 @@ public class UserMealWithExcess {
         if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
+
         UserMealWithExcess mealWithExcess = (UserMealWithExcess) obj;
 
         return this.dateTime.equals(mealWithExcess.dateTime)
