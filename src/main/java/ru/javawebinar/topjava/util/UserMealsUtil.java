@@ -48,13 +48,7 @@ public class UserMealsUtil {
         }
 
         for (UserMeal m: rightTimeMeals) {
-
-            if (dayCaloriesMap.get(m.getDateTime().toLocalDate()) > caloriesPerDay){
-                resultArray.add(new UserMealWithExcess(m.getDateTime(),m.getDescription(),m.getCalories(),true));
-            }
-            else {
-                resultArray.add(new UserMealWithExcess(m.getDateTime(),m.getDescription(),m.getCalories(),false));
-            }
+            resultArray.add(new UserMealWithExcess(m.getDateTime(),m.getDescription(),m.getCalories(),dayCaloriesMap.get(m.getDateTime().toLocalDate()) > caloriesPerDay));
         }
 
         return resultArray;
@@ -77,14 +71,8 @@ public class UserMealsUtil {
                 });
 
         return rightTime.stream()
-                .map(m -> {
-                    if (dayCaloriesMap.get(m.getDateTime().toLocalDate()) > caloriesPerDay){
-                        return new UserMealWithExcess(m.getDateTime(),m.getDescription(),m.getCalories(),true);
-                    }
-                    else {
-                        return new UserMealWithExcess(m.getDateTime(),m.getDescription(),m.getCalories(),false);
-                    }
-                }).collect(Collectors.toList());
+                .map(m -> new UserMealWithExcess(m.getDateTime(),m.getDescription(),m.getCalories(),dayCaloriesMap.get(m.getDateTime().toLocalDate()) > caloriesPerDay))
+                .collect(Collectors.toList());
     }
 }
 
