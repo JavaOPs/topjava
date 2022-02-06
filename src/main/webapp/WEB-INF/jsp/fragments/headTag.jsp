@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="resources/images/icon-meal.png">
 
     <%--http://stackoverflow.com/a/24070373/548473--%>
-    <script src="webjars/jquery/3.6.0/jquery.min.js" defer></script>
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
     <script src="webjars/bootstrap/4.6.1/js/bootstrap.min.js" defer></script>
     <script src="webjars/datatables/1.11.3/js/jquery.dataTables.min.js" defer></script>
     <script src="webjars/datatables/1.11.3/js/dataTables.bootstrap4.min.js" defer></script>
