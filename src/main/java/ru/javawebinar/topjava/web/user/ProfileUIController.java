@@ -25,12 +25,11 @@ public class ProfileUIController extends AbstractUserController {
     public String updateProfile(@Valid UserTo userTo, BindingResult result, SessionStatus status) {
         if (result.hasErrors()) {
             return "profile";
-        } else {
-            super.update(userTo, SecurityUtil.authUserId());
-            SecurityUtil.get().setTo(userTo);
-            status.setComplete();
-            return "redirect:/meals";
         }
+        super.update(userTo, SecurityUtil.authUserId());
+        SecurityUtil.get().setTo(userTo);
+        status.setComplete();
+        return "redirect:/meals";
     }
 
     @GetMapping("/register")
@@ -45,10 +44,9 @@ public class ProfileUIController extends AbstractUserController {
         if (result.hasErrors()) {
             model.addAttribute("register", true);
             return "profile";
-        } else {
-            super.create(userTo);
-            status.setComplete();
-            return "redirect:/login?message=app.registered&username=" + userTo.getEmail();
         }
+        super.create(userTo);
+        status.setComplete();
+        return "redirect:/login?message=app.registered&username=" + userTo.getEmail();
     }
 }
