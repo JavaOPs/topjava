@@ -37,6 +37,7 @@ public class User extends AbstractNamedEntity {
         this.password = password;
         this.caloriesPerDay = caloriesPerDay;
         this.enabled = enabled;
+        this.registered = registered;
         setRoles(roles);
     }
 
