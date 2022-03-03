@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava;
 
+import org.hsqldb.lib.Collection;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.model.Role;
@@ -8,6 +9,7 @@ import ru.javawebinar.topjava.to.MealTo;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 import ru.javawebinar.topjava.web.user.AdminRestController;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -31,6 +33,9 @@ public class SpringMain {
             filteredMealsWithExcess.forEach(System.out::println);
             System.out.println();
             System.out.println(mealController.getBetween(null, null, null, null));
+            List<String> str = new java.util.ArrayList<>(List.of("1", "2", "2"));
+            str.add("e");
+            System.out.println(str);
         }
     }
 }
