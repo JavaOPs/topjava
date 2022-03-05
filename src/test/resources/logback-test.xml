@@ -10,6 +10,9 @@
             <pattern>%d{HH:mm:ss.SSS} %highlight(%-5level) %cyan(%class{50}.%M:%L) - %msg%n</pattern>
         </encoder>
     </appender>
+    <logger name="result" level="INFO" additivity="false">
+        <appender-ref ref="result"/>
+    </logger>
 
     <appender name="result" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
