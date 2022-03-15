@@ -211,7 +211,7 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
 
         <!--Test-->
