@@ -11,11 +11,6 @@ import static ru.javawebinar.topjava.Profiles.JDBC;
 @ActiveProfiles(JDBC)
 public class JdbcMealServiceTest extends AbstractMealServiceTest {
 
-    @BeforeClass
-    public static void checkOs() throws Exception {
-        Assume.assumeTrue(true);
-    }
-
     @Override
     public void createWithException() throws Exception {
         Assert.assertTrue(true);
