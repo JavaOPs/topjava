@@ -44,6 +44,7 @@ public class MealController extends AbstractMealController {
     public String create(HttpServletRequest request, Model model) {
         Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
         model.addAttribute("meal", meal);
+        model.addAttribute("create","создать");
         return "mealForm";
     }
 
