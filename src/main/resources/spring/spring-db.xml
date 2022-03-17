@@ -67,6 +67,11 @@
             <constructor-arg ref="jdbcTemplate"/>
         </bean>
 
+        <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource"  ref="dataSource" />
+        </bean>
+        <tx:annotation-driven transaction-manager="txManager"/>
+
     </beans>
 
     <beans profile="jpa, datajpa">
