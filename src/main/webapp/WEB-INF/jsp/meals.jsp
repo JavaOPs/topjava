@@ -5,13 +5,15 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
+<jsp:include page="fragments/headTag.jsp"/>
 <head>
     <title><spring:message code="meal.title"/></title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
-    <h3><a href="${pageContext.request.contextPath}"><spring:message code="app.home"/></a></h3>
+    <%--<h3><a href="${pageContext.request.contextPath}"><spring:message code="app.home"/></a></h3>--%>
     <hr/>
     <h2><spring:message code="meal.title"/></h2>
     <form method="get" action="${pageContext.request.contextPath}/meals/filter">
@@ -66,5 +68,6 @@
         </c:forEach>
     </table>
 </section>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
