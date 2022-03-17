@@ -4,14 +4,24 @@
 
 <html>
 <head>
-    <title>Meal</title>
+    <title><spring:message code="meal.title"/></title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <section>
     <h3><a href="${pageContext.request.contextPath}"><spring:message code="app.home"/></a></h3>
     <hr>
-    <h2>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h2>
+    <c:choose>
+        <c:when test="${action=='create'}">
+            <h2><spring:message code="meal.create"/></h2>
+            <br />
+        </c:when>
+        <c:otherwise>
+            <h2><spring:message code="meal.update"/></h2>
+            <br />
+        </c:otherwise>
+    </c:choose>
+
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
     <form method="post" action="${pageContext.request.contextPath}/meals">
         <input type="hidden" name="id" value="${meal.id}">
