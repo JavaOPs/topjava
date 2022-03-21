@@ -6,14 +6,12 @@
 
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
-<head>
-    <title><spring:message code="meal.title"/></title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
-    <%--<h3><a href="${pageContext.request.contextPath}"><spring:message code="app.home"/></a></h3>--%>
+    <head>
+        <title><spring:message code="meal.title"/></title>
+    </head>
     <hr/>
     <h2><spring:message code="meal.title"/></h2>
     <form method="get" action="${pageContext.request.contextPath}/meals/filter">
@@ -62,7 +60,7 @@
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
                 <td><a href="meals/update?id=${meal.id}"><spring:message code="app.update"/></a></td>
-                <td> <a href="meals/delete?id=${meal.id}"><spring:message code="app.delete"/></a> </td>
+                <td><a href="meals/delete?id=${meal.id}"><spring:message code="app.delete"/></a></td>
 
             </tr>
         </c:forEach>

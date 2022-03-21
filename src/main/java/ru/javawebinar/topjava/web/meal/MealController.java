@@ -33,7 +33,7 @@ public class MealController extends AbstractMealController {
         return "redirect:/meals";
     }
 
-    @GetMapping("/update")
+    @GetMapping("update")
     public String update(HttpServletRequest request, Model model) {
         Meal meal = get(getId(request));
         model.addAttribute("meal", meal);
@@ -41,7 +41,7 @@ public class MealController extends AbstractMealController {
         return "mealForm";
     }
 
-    @GetMapping("/create")
+    @GetMapping("create")
     public String create(HttpServletRequest request, Model model) {
         Meal meal = new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000);
         model.addAttribute("meal", meal);

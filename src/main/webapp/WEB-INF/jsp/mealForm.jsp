@@ -3,26 +3,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <html>
-<jsp:include page="fragments/headTag.jsp"/>
+<%--<jsp:include page="fragments/headTag.jsp"/>--%>
 <head>
-    <title><spring:message code="meal.title"/></title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><spring:message code="app.title"/></title>
+    <link rel="stylesheet" href="../resources/css/style.css">
 </head>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 <section>
-    <h3><a href="${pageContext.request.contextPath}"><spring:message code="app.home"/></a></h3>
     <hr>
-    <c:choose>
-        <c:when test="${action=='create'}">
-            <h2><spring:message code="meal.create"/></h2>
-            <br />
-        </c:when>
-        <c:otherwise>
-            <h2><spring:message code="meal.update"/></h2>
-            <br />
-        </c:otherwise>
-    </c:choose>
+    <h2>
+        <spring:message code="meal.${action=='create' ? 'create' : 'update'}"/>
+    </h2>
 
     <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request"/>
     <form method="post" action="${pageContext.request.contextPath}/meals">

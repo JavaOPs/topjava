@@ -13,7 +13,10 @@ import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 @Transactional(readOnly = true)
@@ -62,21 +65,39 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public User get(int id) {
-        List<User> users = jdbcTemplate.query("SELECT * FROM users JOIN user_roles ON users.id = user_roles.user_id WHERE id=?", ROW_MAPPER, id);
-        return DataAccessUtils.singleResult(users);
+        List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE id=?", ROW_MAPPER, id);
+        List<Role> roles = jdbcTemplate.query("SELECT * FROM user_roles WHERE user_id=?", new RoleRowMapper(), id);
+        User user = DataAccessUtils.singleResult(users);
+        assert user != null;
+        user.setRoles(roles);
+        return user;
     }
 
     @Override
     public User getByEmail(String email) {
-//        return jdbcTemplate.queryForObject("SELECT * FROM users WHERE email=?", ROW_MAPPER, email);
-        List<User> users = jdbcTemplate.query("SELECT * FROM users JOIN user_roles ur on users.id = ur.user_id WHERE email=?", ROW_MAPPER, email);
-        return DataAccessUtils.singleResult(users);
+        List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE email=?", ROW_MAPPER, email);
+        User user = DataAccessUtils.singleResult(users);
+        assert user != null;
+        List<Role> roles = jdbcTemplate.query("SELECT * FROM user_roles WHERE user_id=?", new RoleRowMapper(), user.getId());
+        user.setRoles(roles);
+        return user;
     }
 
     @Override
     public List<User> getAll() {
-        System.out.println(jdbcTemplate.query("SELECT users.name, ur.role FROM users JOIN user_roles ur on users.id = ur.user_id ORDER BY name, email", ROW_MAPPER));
-        //return jdbcTemplate.query("SELECT * FROM users JOIN user_roles ur on users.id = ur.user_id ORDER BY name, email", ROW_MAPPER);
-        return jdbcTemplate.query("SELECT users.name, users.email, ur.role FROM users JOIN user_roles ur on users.id = ur.user_id ORDER BY name, email", ROW_MAPPER);
+        return collectAllUsers(jdbcTemplate.query("SELECT * FROM users left join user_roles ur on users.id = ur.user_id " +
+                "ORDER BY name, email", new UserRowMapper()));
+    }
+
+    public List<User> collectAllUsers(List<User> users) {
+        Map<Integer, User> usersMap = new HashMap<>();
+        users.forEach(user -> {
+            if (usersMap.containsKey(user.id())) {
+                usersMap.get(user.getId()).getRoles().add(user.getRoles().stream().findFirst().orElse(null));
+            } else {
+                usersMap.put(user.getId(), user);
+            }
+        });
+        return new ArrayList<>(usersMap.values());
     }
 }
