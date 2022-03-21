@@ -2,6 +2,7 @@ package ru.javawebinar.topjava.repository.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -13,10 +14,9 @@ import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.*;
 
 @Repository
 @Transactional(readOnly = true)
@@ -48,14 +48,31 @@ public class JdbcUserRepository implements UserRepository {
         if (user.isNew()) {
             Number newKey = insertUser.executeAndReturnKey(parameterSource);
             user.setId(newKey.intValue());
-
+            if (!user.getRoles().isEmpty()) {
+                batchUpdateRole("INSERT INTO user_roles(user_id, role) VALUES (?,?)", user);
+            }
         } else if (namedParameterJdbcTemplate.update("""
                    UPDATE users SET name=:name, email=:email, password=:password, 
                    registered=:registered, enabled=:enabled, calories_per_day=:caloriesPerDay WHERE id=:id
-                """, parameterSource) == 0) {
-            return null;
+                """, parameterSource) != 0) {
+            //batchUpdateRole("UPDATE ",user);
+            return user;
         }
-        return user;
+        return null;
+    }
+
+    private void batchUpdateRole(String sql, User user){
+        jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                ps.setInt(1, user.getId());
+                ps.setString(2, user.getRoles().stream().skip(i).findFirst().get().toString());
+            }
+            @Override
+            public int getBatchSize() {
+                return user.getRoles().size();
+            }
+        });
     }
 
     @Override
@@ -90,7 +107,7 @@ public class JdbcUserRepository implements UserRepository {
                 "ORDER BY name, email", new UserRowMapper()));
     }
 
-    public List<User> collectAllUsers(List<User> users) {
+    private List<User> collectAllUsers(List<User> users) {
         Map<Integer, User> usersMap = new HashMap<>();
         users.forEach(user -> {
             if (usersMap.containsKey(user.id())) {
