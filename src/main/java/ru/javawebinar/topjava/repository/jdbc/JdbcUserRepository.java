@@ -44,7 +44,6 @@ public class JdbcUserRepository implements UserRepository {
     @Transactional
     public User save(User user) {
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(user);
-
         if (user.isNew()) {
             Number newKey = insertUser.executeAndReturnKey(parameterSource);
             user.setId(newKey.intValue());
@@ -109,7 +108,7 @@ public class JdbcUserRepository implements UserRepository {
     }
 
     private List<User> collectAllUsers(List<User> users) {
-        Map<Integer, User> usersMap = new HashMap<>();
+        Map<Integer, User> usersMap = new LinkedHashMap<>();
         users.forEach(user -> {
             if (usersMap.containsKey(user.id())) {
                 usersMap.get(user.getId()).getRoles().add(user.getRoles().stream().findFirst().orElse(null));

@@ -7,9 +7,7 @@ import ru.javawebinar.topjava.model.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Component
@@ -32,6 +30,8 @@ public class UserRowMapper implements RowMapper<User> {
 
         if (rs.getString("role")!=null) {
             roles.add(Role.valueOf(rs.getString("role")));
+            user.setRoles(roles);
+        } else {
             user.setRoles(roles);
         }
 
