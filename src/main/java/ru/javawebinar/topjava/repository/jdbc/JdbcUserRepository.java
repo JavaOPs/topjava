@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.javawebinar.topjava.model.Role;
@@ -43,6 +44,7 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     @Transactional
     public User save(User user) {
+        user.validation();
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(user);
         if (user.isNew()) {
             Number newKey = insertUser.executeAndReturnKey(parameterSource);
@@ -51,7 +53,7 @@ public class JdbcUserRepository implements UserRepository {
                 batchUpdateRole(user);
             }
         } else if (namedParameterJdbcTemplate.update("""
-                   UPDATE users SET name=:name, email=:email, password=:password, 
+                   UPDATE users SET name=:name, email=:email, password=:password,
                    registered=:registered, enabled=:enabled, calories_per_day=:caloriesPerDay WHERE id=:id
                 """, parameterSource) != 0) {
             jdbcTemplate.update("DELETE FROM user_roles WHERE user_id=?", user.getId());
@@ -61,13 +63,15 @@ public class JdbcUserRepository implements UserRepository {
         return user;
     }
 
-    private void batchUpdateRole(User user){
+    private void batchUpdateRole(User user) {
         jdbcTemplate.batchUpdate("INSERT INTO user_roles(user_id, role) VALUES (?,?)", new BatchPreparedStatementSetter() {
             @Override
-            public void setValues(PreparedStatement ps, int i) throws SQLException {
-                ps.setInt(1, user.getId());
-                ps.setString(2, user.getRoles().stream().skip(i).findFirst().get().toString());
+            public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
+                ps.setInt(1, user.id());
+                ps.setString(2, user.getRoles().stream().skip(i)
+                        .findFirst().orElseThrow().toString());
             }
+
             @Override
             public int getBatchSize() {
                 return user.getRoles().size();
@@ -87,7 +91,7 @@ public class JdbcUserRepository implements UserRepository {
         if (!users.isEmpty()) {
             List<Role> roles = jdbcTemplate.query("SELECT * FROM user_roles WHERE user_id=?", new RoleRowMapper(), id);
             User user = DataAccessUtils.singleResult(users);
-            user.setRoles(roles);
+            Objects.requireNonNull(user).setRoles(roles);
             return user;
         }
         return null;

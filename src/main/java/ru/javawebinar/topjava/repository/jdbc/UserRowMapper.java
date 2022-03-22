@@ -30,11 +30,8 @@ public class UserRowMapper implements RowMapper<User> {
 
         if (rs.getString("role")!=null) {
             roles.add(Role.valueOf(rs.getString("role")));
-            user.setRoles(roles);
-        } else {
-            user.setRoles(roles);
         }
-
+        user.setRoles(roles);
 
 
         return user;

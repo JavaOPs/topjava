@@ -5,6 +5,8 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import javax.validation.*;
+import java.util.Set;
 
 @MappedSuperclass
 // http://stackoverflow.com/questions/594597/hibernate-annotations-which-is-better-field-or-property-access
@@ -44,6 +46,14 @@ public abstract class AbstractBaseEntity implements Persistable<Integer> {
     @Override
     public boolean isNew() {
         return this.id == null;
+    }
+
+    public void validation() {
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Set<ConstraintViolation<Object>> violations = validatorFactory.getValidator().validate(this);
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
+        }
     }
 
     @Override
