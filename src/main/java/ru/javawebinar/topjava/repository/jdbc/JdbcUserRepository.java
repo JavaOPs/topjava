@@ -58,7 +58,7 @@ public class JdbcUserRepository implements UserRepository {
             batchUpdateRole(user);
             return user;
         }
-        return null;
+        return user;
     }
 
     private void batchUpdateRole(User user){
@@ -84,11 +84,13 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public User get(int id) {
         List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE id=?", ROW_MAPPER, id);
-        List<Role> roles = jdbcTemplate.query("SELECT * FROM user_roles WHERE user_id=?", new RoleRowMapper(), id);
-        User user = DataAccessUtils.singleResult(users);
-        assert user != null;
-        user.setRoles(roles);
-        return user;
+        if (!users.isEmpty()) {
+            List<Role> roles = jdbcTemplate.query("SELECT * FROM user_roles WHERE user_id=?", new RoleRowMapper(), id);
+            User user = DataAccessUtils.singleResult(users);
+            user.setRoles(roles);
+            return user;
+        }
+        return null;
     }
 
     @Override
