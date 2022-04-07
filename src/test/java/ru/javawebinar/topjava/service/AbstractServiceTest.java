@@ -17,7 +17,7 @@ import static ru.javawebinar.topjava.util.ValidationUtil.getRootCause;
 })
 //@ExtendWith(SpringExtension.class)
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
-@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
+@Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"), executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 @ExtendWith(TimingExtension.class)
 public abstract class AbstractServiceTest {
 
