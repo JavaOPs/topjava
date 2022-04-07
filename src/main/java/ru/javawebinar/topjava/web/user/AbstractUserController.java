@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.service.UserService;
+import ru.javawebinar.topjava.to.UserTo;
+import ru.javawebinar.topjava.util.UserUtil;
 
 import java.util.List;
 
@@ -25,6 +27,10 @@ public abstract class AbstractUserController {
     public User get(int id) {
         log.info("get {}", id);
         return service.get(id);
+    }
+
+    public void create(UserTo userTo) {
+        create(UserUtil.createNewFromTo(userTo));
     }
 
     public User create(User user) {
