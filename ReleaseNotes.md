@@ -1,5 +1,10 @@
 # TopJava Release Notes
 
+### Topjava 25
+- в `NoHtmlValidator` делаю проверку через `Jsoup.isValid`
+- в `user_roles.role` добавил `NOT NULL`
+- в тестах добавил 3-го пользователя `Guset` без ролей и еды
+
 ### Topjava 24
 - migrate to JDK 17
 - добавил логирование в `RootController`
