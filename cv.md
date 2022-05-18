@@ -3,7 +3,7 @@
 ![cv](https://cloud.githubusercontent.com/assets/13649199/10877471/93ea86b8-8157-11e5-9bfa-95e3fba75c58.jpg)
 
 -  <a href="http://habrahabr.ru/company/ua-hosting/blog/272617/">Научиться программировать сложнее, чем кажется</a>
-- [Собеседование. Разработка ПО. Вопросы.](https://drive.google.com/open?id=0B9Ye2auQ_NsFQVc2WUdCR0xvLWM)
+- [Собеседование. Разработка ПО. Вопросы.](https://drive.google.com/file/d/0B9Ye2auQ_NsFQVc2WUdCR0xvLWM/view?usp=sharing&resourcekey=0-HaWoRxoyboMSKjg5P2I1cQ)
 - [Набор ссылок для тренировки и прохождения интервью](https://github.com/andreis/interview)
 
 ### Составление резюме:
@@ -20,6 +20,7 @@
 ### <a href="http://javaops.ru/story.html">Наши истории (делимся опытом и успехом)</a>
 
 ### Тесты/задачи онлайн:
+- [Interviewing: the most profitable skill you can learn (pramp.com)](https://www.pramp.com/)
 - [Java Programming Test](https://tests4geeks.com/java)
 - <a href="http://www.javadeathmatch.com/">game: test Java skills</a>
 - <a href="https://codility.com/programmers/lessons">Codility lesson tests</a>
@@ -28,7 +29,6 @@
 - <a href="http://www.spoj.com/">Sphere online judge</a>
 - <a href="https://codility.com/programmers/lessons/">Codility programmers lessons</a>
 - <a href="https://www.hackerrank.com/">Hackerrank practice coding</a>
-- [Interviewing: the most profitable skill you can learn (pramp.com)](https://www.pramp.com/)
 - [start.interviewing.io](https://start.interviewing.io/)
 
 ## [Тестовое собеседование, самые спрашиваемые темы](http://javaops.ru/interview/test.html)
@@ -37,6 +37,8 @@
 - <a href="https://www.youtube.com/watch?v=Deb5wMHjBHY">Михаил Портнов. Собеседование на работу: как продать себя грамотно</a>
 - <a href="https://www.youtube.com/watch?v=qKsc8PoHJwM">Михаил Портнов. Какие вопросы мы задаем на собеседовании?</a>
 - <a href="https://www.youtube.com/watch?v=hry2CNuOxBg">Михаил Портнов. Собеседование на работу: жизненный путь</a>
+- [Лёша Корепанов. Признаки плохих компаний для программиста](https://www.youtube.com/watch?v=Sj-WSWr-n7U)
+- [Лёша Корепанов. Как отвечать на вопросы, которые ты не знаешь. Техническое интервью для программиста](https://www.youtube.com/watch?v=Beoh3tfgPEk)
 - <a href="https://www.youtube.com/playlist?list=PL7XXjge0nKZczMtQbNk9c2cplvuLZomTh">Канал: Резюме, поиск работы, интервью</a>
 -  <a href="https://www.youtube.com/watch?v=ft0Nj8Cm9kk">Яков Файн: Как стать профессиональным Java разработчиком</a>
 -  <a href="https://jsehelper.blogspot.ru/p/blog-page.html">Ответы на вопросы на собеседовании Junior Java Developer</a>
@@ -48,7 +50,7 @@
 -  <a href="http://habrahabr.ru/post/181033/">Тест на знание SQL</a>
 -  <a href="http://jsehelper.blogspot.ru/p/blog-page.html">Вопросы на собеседовании Java Junior Developer</a>
 -  <a href="https://play.google.com/store/apps/details?id=com.ab.jiq">Java вопросы с собеседований на Android</a>
--  <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFLTRFY293RUVPVms">Сборка вопросов от JavaRush</a>
+-  <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFLTRFY293RUVPVms/view?usp=sharing&resourcekey=0-TXwkTG380W0Dm04cdZa4NA">Сборка вопросов от JavaRush</a>
 > про clone и finalize объязательно прочтите <a href="http://www.ozon.ru/context/detail/id/24828676/">Джошуа Блох: Java. Эффективное программирование (второе издание)</a>
 
 -  <a href="http://bookvoed.ru/book?id=2593572">Cracking the Coding Interview</a>
@@ -88,9 +90,13 @@
 - <a href="https://rabota.yandex.ru/search?job_industry=275&text=java">Яндекс агрегатор</a>
 - <a href="hh.ru">HH</a>
 - <a href="https://www.linkedin.com/">LinkedIn</a>
+- <a href="https://career.habr.com/">ХабрКарьера</a>
+- [headz.io](https://app.headz.io/candidates/new)
 - <a href="http://djinni.co/">djinni.co (более актуально для Украины)</a>
 
-## Как выжить на испытательном сроке
+[Как изучать Java. Подборка от JavaRush](https://javarush.ru/groups/posts/3538-v-zakladki-kak-izuchatjh-java-boljhshaja-podborka-po-planu-obuchenija-instrumentam-i-poiskam-mo)  
+<h2 id="probation">Как выжить на испытательном сроке</h2>
+
 - Учись грамотно формулировать проблему. Проблема "у меня не работает" может иметь тысячи причин. В
                 процессе формулирования очень часто приходит ее решение.
 - Учись инвестигировать проблему. Внимательное чтение логов и умение дебажить - основные навыки
@@ -106,6 +112,13 @@
 - Выдели самое главное путем опроса босса и важных коллег. Не распыляйся на мелочи.</li>
 - [**5 вещей, которые разработчик должен сделать прежде чем попросить о помощи**](https://techrocks.ru/2018/07/16/5-things-a-developer-should-do-before-asking-for-help/)
 - [**Советы новичкам**](http://blog.csssr.ru/2016/09/19/how-to-be-a-beginner-developer)
+- [ТОП-13 ошибок начинающего программиста](https://proglib.io/p/beginners-fails/)
+- [25 ошибок начинающего программиста](https://habr.com/ru/post/413129/)
+- [Путеводитель по синдрому самозванца](https://vc.ru/hr/167443-eshche-odin-putevoditel-po-sindromu-samozvanca-korni-prichiny-simptomy-i-posledstviya-chast-1)
 - [Нетехнические навыки](https://tproger.ru/experts/softskills-for-job)
-
+- Видео [Junior и испытательный срок на первой работе](https://www.youtube.com/watch?v=GsGlsCbok-c)
+- Типичные ошибки начинающих программистов от JavaRush:
+  - [Часть 1](https://javarush.ru/groups/posts/3044-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-1)
+  - [Часть 2](https://javarush.ru/groups/posts/3055-razbor-tipichnihkh-oshibok-nachinajujshikh-programmistov-chastjh-2)
+- [От джуна к миддлу: практические советы](https://tproger.ru/articles/ot-dzhuna-k-middlu-prakticheskie-sovety)
 ## [Отзывы по стажировке Topjava](https://vk.com/topic-74381644_30447246)
