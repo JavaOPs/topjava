@@ -29,10 +29,6 @@ Java Enterprise Online Project
 - [Быть программистом: от детства к зрелости](https://www.youtube.com/watch?v=D5Hej0TyLaU)
 - [Литература](https://javaops.ru/view/books)
 
-#### Spring Pet-Clinic
-- <a href="https://github.com/spring-projects/spring-petclinic">Spring PetClinic Sample Application </a>
-- <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">Presentation</a>
-
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 2. <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFSUNrdVc0bDZuX2s/view?resourcekey=0-6scb0PBj2A3Oqf6rsU2egQ">Системы управления версиями. Git.</a>
 -  **<a href="https://github.com/JavaOPs/topjava/wiki/Git">Wiki по ведению проекта в Git</a>**
 -  <a href="http://ru.wikipedia.org/wiki/Система_управления_версиями">Система управления версиями</a>. <a href="http://ru.wikipedia.org/wiki/%D0%A1%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F_%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F%D0%BC%D0%B8#.D0.A0.D0.B0.D1.81.D0.BF.D1.80.D0.B5.D0.B4.D0.B5.D0.BB.D1.91.D0.BD.D0.BD.D1.8B.D0.B5_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC.D1.8B_.D1.83.D0.BF.D1.80.D0.B0.D0.B2.D0.BB.D0.B5.D0.BD.D0.B8.D1.8F_.D0.B2.D0.B5.D1.80.D1.81.D0.B8.D1.8F.D0.BC.D0.B8">VCS/DVSC</a>.
@@ -64,6 +60,8 @@ Java Enterprise Online Project
 > - добавил `UserMealWithExcess.toString()` и метод для выполнения _Optional домашнего задания_
 > - метод фильтрации в `TimeUtil` переименовали в `isBetweenHalfOpen` (также изменилась логика сравнения - `startTime` включается в интервал) 
 
+### GitHub поменял политику - теперь пушить нужно через токен. IDEA предложит его сгенерить при пуше или можно [создать токен в настройках](https://githubhelp.com/EvgenKuz/Intellij-IDEA-GitHub-SetUp)
+ 
 ##  Инструкция по шагам (из видео):</h3>
 -  <a href="http://javaops.ru/view/soft">Установить ПО (git, JDK8, IntelliJ IDEA, Maven)</a>
 -  Создать аккаунт на <a href="https://github.com">GitHub</a>
