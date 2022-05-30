@@ -28,7 +28,8 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        // TODO return filtered list with excess. Implement by cycles
+
+        System.out.println(" TODO return filtered list with excess. Implement by cycles");
         return null;
     }
 
