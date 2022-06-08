@@ -81,7 +81,20 @@ Java Enterprise Online Project
 -  Выполнить задание и залить на GitHub (commit + push)
 -  Переключиться в основную ветку проекта master.
 
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 4. [Тех.задание: библия или допускаются изменения. Полуоткрытый интервал.](https://drive.google.com/file/d/1BpTzjNFjS0TSekCyt_xvt6YoLvuw5KTZ/view?usp=sharing)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 4. [Maven](https://drive.google.com/file/d/1qEJTwv9FNUQjx-y9MSydH01xaAne0-hu)
+- Wiki: [Apache Maven](https://ru.wikipedia.org/wiki/Apache_Maven)
+- [The Central Repository](http://search.maven.org)
+- Дополнительно:
+    - [Мое Wiki Maven](https://github.com/JavaOPs/topjava/wiki/Maven)
+    - [Основы Maven](https://www.youtube.com/watch?v=0uwMKktzixU)
+    - JavaRush: [Основы Maven](https://javarush.ru/groups/posts/2523-chastjh-4osnovih-maven)
+    - Инструмент сборки проектов [Maven](https://www.examclouds.com/ru/java/java-core-russian/lesson20)
+    - [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/index.html)
+    - [Видео: Maven vs Gradle vs SBT (Архипов, Борисов, Садогурский)](https://www.youtube.com/watch?v=21qdRgFsTy0)
+    - [Build Lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
+    - [Dependency Mechanism](http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
+
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 5. [Тех.задание: библия или допускаются изменения. Полуоткрытый интервал.](https://drive.google.com/file/d/1BpTzjNFjS0TSekCyt_xvt6YoLvuw5KTZ/view?usp=sharing)
 - [Типы промежутков](https://ru.wikipedia.org/wiki/Промежуток_(математика))
 
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание HW0
@@ -90,8 +103,7 @@ Java Enterprise Online Project
 
 Реализовать метод `UserMealsUtil.filteredByCycles` через циклы (`forEach`):
 -  должны возвращаться только записи между `startTime` и `endTime`
--  поле `UserMealWithExcess.excess` должно показывать, 
-                                     превышает ли сумма калорий за весь день значение `caloriesPerDay`
+-  поле `UserMealWithExcess.excess` должно показывать, превышает ли сумма калорий за весь день значение `caloriesPerDay`
         
 Т.е `UserMealWithExcess` - это запись одной еды, но поле `excess` будет одинаково для всех записей за этот день.
     
