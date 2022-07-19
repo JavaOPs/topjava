@@ -46,6 +46,7 @@
 -  <a href="http://javastudy.ru/interview/list-of-question-java-interview/">Список вопросов с ответами для собеседования по Java</a>
 -  <a href="https://github.com/MaximAbramchuck/awesome-interviews#java">Сборка по вопросам на интервью</a>
 -  <a href="http://javastudy.ru/category/interview/">Сборка вопросов-ответов от JavaStudy</a>
+-  [Видео технических интервью от Максима Добрынина](https://www.youtube.com/playlist?list=PLxqzxxW1gWwJvVK11R_lJKAlP_9m3Gu2H)
 - [Вопросы по классам коллекциям от JavaRush-1](http://info.javarush.ru/translation/2013/10/08/Часто-задаваемые-на-собеседованиях-вопросы-по-классам-коллекциям-в-Java-Часть-1-.html)
 - [Вопросы по классам коллекциям от JavaRush-2](http://info.javarush.ru/translation/2013/10/08/Часто-задаваемые-на-собеседованиях-вопросы-по-классам-коллекциям-в-Java-Часть-2-.html)
 -  <a href="http://habrahabr.ru/post/181033/">Тест на знание SQL</a>
