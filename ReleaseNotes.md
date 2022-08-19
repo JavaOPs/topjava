@@ -1,5 +1,25 @@
 # TopJava Release Notes
 
+### Topjava 25
+- починили шаблоны запросов на создание в Swagger хчз [ApiModelProperty](https://www.baeldung.com/spring-swagger-hide-field)
+- в новой версии Data JPA `getById`->`getReferenceById`
+- мелкие правки
+
+### Topjava 25
+- поправил `NoHtmlValidator`: `Jsoup.clean().equals -> `Jsoup.isValid`
+- починил `role VARCHAR NOT NULL`
+- добавил нового тестового пользователя `guest`
+
+### Topjava 24
+- migrate to LTS JDK 17
+- add `AbstractBaseEntity.id()`
+- fix for `User.registered`: `@Column(..., updatable = false)`
+- add `@QueryHints` in `CrudUserRepository`
+- add loggin in `RootController`
+- fix `@Sql(.., , executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)` for controller tests after service tests
+- rename `MATCHER` to `USER_MATCHER/MEAL_MATCHER`
+- treat in `ActiveDbProfileResolver` attribute `profiles`
+
 ### Topjava 23
 - migrate to JDK 16
 - в новой spring-data-jpa `getOne` заменили на `getById`
