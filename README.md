@@ -197,6 +197,7 @@ Java Enterprise Online Project
 - <a href="http://www.intuit.ru/studies/courses/1102/134/info">Основы работы с HTML/CSS/JavaScript</a>
 - <a href="http://itchief.ru/lessons/javascript/94-javascript-introduction">JavaScript - Основы</a>
 - <a href="http://learn.javascript.ru/first-steps">Основы JavaScript</a>
+- <a href="https://www.scaler.com/topics/javascript/">JavaScript Tutorial</a>    
 - <a href="http://itchief.ru/lessons/bootstrap-3/19-introduction-to-twitter-bootstrap-3">Bootstrap 3 - Основы</a>
 - <a href="http://anton.shevchuk.name/jquery/">jQuery для начинающих</a>
 
