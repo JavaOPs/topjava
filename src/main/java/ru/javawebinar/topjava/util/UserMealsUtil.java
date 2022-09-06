@@ -28,7 +28,7 @@ public class UserMealsUtil {
         System.out.println(filteredByCycles(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
         System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
 //        System.out.println(filteredByCyclesOptional(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
-//        System.out.println(filteredByStreamsOptional(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
+        System.out.println(filteredByStreamsOptional(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
@@ -87,5 +87,41 @@ public class UserMealsUtil {
                         meal.getCalories(),
                         caloriesPerDayMap.get(meal.getDateTime().toLocalDate()) > caloriesPerDay))
                 .collect(Collectors.toList());
+    }
+
+    public static List<UserMealWithExcess> filteredByStreamsOptional(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+        if (meals == null) {
+            return new ArrayList<>();
+        }
+
+        return meals.stream()
+                .collect(
+                        () -> new HashMap<LocalDate, Pair<Integer, List<UserMealWithExcess>>>(),
+                        (list, meal) -> {
+                            Pair<Integer, List<UserMealWithExcess>> pairCaloriesMeals = list.computeIfAbsent(
+                                    meal.getDateTime().toLocalDate(),
+                                    unused -> new Pair<>(0, new ArrayList<>()));
+
+                            int caloriesOldValue = pairCaloriesMeals.getArgA();
+                            int caloriesNewValue = caloriesOldValue + meal.getCalories();
+                            boolean isCaloriesExcessed = caloriesNewValue > caloriesPerDay;
+
+                            pairCaloriesMeals.setArgA(caloriesNewValue);
+
+                            List<UserMealWithExcess> mealWithExcessList = pairCaloriesMeals.getArgB();
+                            if (isBetweenHalfOpen(meal.getDateTime().toLocalTime(), startTime, endTime)) {
+                                mealWithExcessList.add(new UserMealWithExcess(
+                                        meal.getDateTime(),
+                                        meal.getDescription(),
+                                        meal.getCalories(),
+                                        isCaloriesExcessed));
+                            }
+
+                            if (caloriesOldValue <= caloriesPerDay && isCaloriesExcessed) {
+                                mealWithExcessList.forEach(m -> m.setExcess(true));
+                            }
+                        },
+                        HashMap::putAll
+                ).values().stream().flatMap(pair -> pair.getArgB().stream()).collect(Collectors.toList());
     }
 }
