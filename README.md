@@ -38,7 +38,7 @@ Java Enterprise Online Project
     -  <a href="https://git-scm.com/book/ru/v2">Книга Git</a>
     -  <a href="https://illustrated-git.readthedocs.org/en/latest/#working-with-remote-repositories">Working with remote repositories</a>
     -  <a href="https://www.youtube.com/playlist?list=PLIU76b8Cjem5B3sufBJ_KFTpKkMEvaTQR">Видео по обучению Git</a>
-    -  <a href="https://blog.interlinked.org/tutorials/git.html">Git Overview</a>
+    -  <a href="https://web.archive.org/web/20150111050753/http://blog.interlinked.org/tutorials/git.html">Git Overview</a>
     -  [Основы Git за 20 минут](https://www.youtube.com/watch?v=TMeZGvtQnT8)
     -  [Git - для новичков](https://www.youtube.com/watch?list=PLY4rE9dstrJyTdVJpv7FibSaXB4BHPInb&v=PEKN8NtBDQ0)
     - [Руководство по написанию комментариев в коммитах](https://techrocks.ru/2019/12/02/writing-good-commit-messages)
