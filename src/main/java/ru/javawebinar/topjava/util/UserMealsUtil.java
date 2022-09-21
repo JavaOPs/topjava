@@ -35,7 +35,6 @@ public class UserMealsUtil {
 
         // Люди ищут решение домашки на staskoverflow ))
         // https://ru.stackoverflow.com/questions/1174993/Как-сделать-суммирование-вводимых-в-hashmap-значений-java
-        // Жалко, что я наткнулся на эту ссылку уже после того, как сам разобрался. Хотя наверно так даже лучше.
 
         List<UserMealWithExcess> resultList = new ArrayList<>();
         if (meals == null) {
@@ -49,9 +48,6 @@ public class UserMealsUtil {
                     meal.getCalories(),
                     Integer::sum);
 
-            // такой вариант решения потребовал добавить сеттер для поля excess в UserMealWithExcess
-            // можно реализовать используя только конструктор, но тогда это сравнение надо будет вынести отсюда
-            // и придется повторно проходить по всему meals, а не только по отобранному списку resultList
             if (isBetweenHalfOpen(meal.getDateTime().toLocalTime(), startTime, endTime)) {
                 resultList.add(new UserMealWithExcess(
                         meal.getDateTime(),
@@ -98,6 +94,14 @@ public class UserMealsUtil {
 
         Map<LocalDate, Pair<Integer, List<UserMealWithExcess>>> mealsPerDayMap = new HashMap<>();
 
+        /*
+        Как вариант я вижу обернуть в UserMealsWithExcess переменную excess и сделать ее объектом.
+        В цикле собирать выходной список и параллельно вести еще мапу с ключом - датой.
+        А для значения мапы использовать объект - пару значений.
+        Чтобы хранить в нем сумму калорий на этот день и ссылку на объект excess. Как только поймали превышение,
+        сразу опа и присвоили excess.setValue(true). И сразу у всех в выходном списке все присвоилось.
+        */
+
         meals.forEach(meal -> {
         });
 
@@ -138,32 +142,5 @@ public class UserMealsUtil {
                         },
                         HashMap::putAll
                 ).values().stream().flatMap(pair -> pair.getArgB().stream()).collect(Collectors.toList());
-    }
-
-    private void processMeals(Map<LocalDate, Pair<Integer, List<UserMealWithExcess>>> mealsPerDayMap,
-                              List<UserMeal> meals, UserMeal meal, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-
-        Pair<Integer, List<UserMealWithExcess>> pairCaloriesMeals = mealsPerDayMap.computeIfAbsent(
-                meal.getDateTime().toLocalDate(),
-                unused -> new Pair<>(0, new ArrayList<>()));
-
-        int caloriesOldValue = pairCaloriesMeals.getArgA();
-        int caloriesNewValue = caloriesOldValue + meal.getCalories();
-        boolean isCaloriesExcessed = caloriesNewValue > caloriesPerDay;
-
-        pairCaloriesMeals.setArgA(caloriesNewValue);
-
-        List<UserMealWithExcess> mealWithExcessList = pairCaloriesMeals.getArgB();
-        if (isBetweenHalfOpen(meal.getDateTime().toLocalTime(), startTime, endTime)) {
-            mealWithExcessList.add(new UserMealWithExcess(
-                    meal.getDateTime(),
-                    meal.getDescription(),
-                    meal.getCalories(),
-                    isCaloriesExcessed));
-        }
-
-        if (caloriesOldValue <= caloriesPerDay && isCaloriesExcessed) {
-            mealWithExcessList.forEach(m -> m.setExcess(true));
-        }
     }
 }
