@@ -2,12 +2,9 @@ package ru.javawebinar.topjava.util;
 
 import java.util.Objects;
 
-public  class Pair<A, B>  {
+public class Pair<A, B> {
     private A argA;
-    private B argB;
-
-    public Pair() {
-    }
+    private final B argB;
 
     public Pair(A arg1, B arg2) {
         this.argA = arg1;
@@ -24,10 +21,6 @@ public  class Pair<A, B>  {
 
     public B getArgB() {
         return argB;
-    }
-
-    public void setArgB(B argB) {
-        this.argB = argB;
     }
 
     @Override

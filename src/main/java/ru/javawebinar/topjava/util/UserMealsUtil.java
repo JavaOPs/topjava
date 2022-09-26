@@ -31,41 +31,30 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-
-        // Люди ищут решение домашки на staskoverflow ))
-        // https://ru.stackoverflow.com/questions/1174993/Как-сделать-суммирование-вводимых-в-hashmap-значений-java
-
-        List<UserMealWithExcess> resultList = new ArrayList<>();
-        if (meals == null) {
-            return resultList;
-        }
+        Objects.requireNonNull(meals, "Meals list must not be null");
 
         Map<LocalDate, Integer> caloriesPerDayMap = new HashMap<>();
-        meals.forEach(meal -> {
-            caloriesPerDayMap.merge(
-                    meal.getDateTime().toLocalDate(),
-                    meal.getCalories(),
-                    Integer::sum);
+        meals.forEach(meal -> caloriesPerDayMap.merge(
+                meal.getDateTime().toLocalDate(),
+                meal.getCalories(),
+                Integer::sum));
 
+        List<UserMealWithExcess> resultList = new ArrayList<>();
+        meals.forEach(meal -> {
             if (isBetweenHalfOpen(meal.getDateTime().toLocalTime(), startTime, endTime)) {
                 resultList.add(new UserMealWithExcess(
                         meal.getDateTime(),
                         meal.getDescription(),
                         meal.getCalories(),
-                        new BooleanValue(false)));
-
+                        new BooleanValue(caloriesPerDayMap.get(meal.getDateTime().toLocalDate()) > caloriesPerDay)));
             }
         });
-
-        resultList.forEach(meal -> meal.setExcess(caloriesPerDayMap.get(meal.getDateTime().toLocalDate()) > caloriesPerDay));
 
         return resultList;
     }
 
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        if (meals == null) {
-            return new ArrayList<>();
-        }
+        Objects.requireNonNull(meals, "Meals list must not be null");
 
         Map<LocalDate, Integer> caloriesPerDayMap = meals.stream()
                 .collect(Collectors.toMap(
@@ -85,22 +74,10 @@ public class UserMealsUtil {
     }
 
     public static List<UserMealWithExcess> filteredByCyclesOptional(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+        Objects.requireNonNull(meals, "Meals list must not be null");
 
         List<UserMealWithExcess> resultList = new ArrayList<>();
-        if (meals == null) {
-            return resultList;
-        }
-
-
-        /*
-        Как вариант я вижу обернуть в UserMealsWithExcess переменную excess и сделать ее объектом.
-        В цикле собирать выходной список и параллельно вести еще мапу с ключом - датой.
-        А для значения мапы использовать объект - пару значений.
-        Чтобы хранить в нем сумму калорий на этот день и ссылку на объект excess. Как только поймали превышение,
-        сразу опа и присвоили excess.setValue(true). И сразу у всех в выходном списке все присвоилось.
-        */
         Map<LocalDate, Pair<Integer, BooleanValue>> caloriesPerDayAndExcessMap = new HashMap<>();
-
         meals.forEach(meal -> {
             Pair<Integer, BooleanValue> pairCaloriesAndExcess = caloriesPerDayAndExcessMap.computeIfAbsent(
                     meal.getDateTime().toLocalDate(),

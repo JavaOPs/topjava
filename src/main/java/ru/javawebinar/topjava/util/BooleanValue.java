@@ -9,10 +9,6 @@ public class BooleanValue {
         this.value = value;
     }
 
-    public boolean isTrue() {
-        return value;
-    }
-
     public void setValue(boolean value) {
         this.value = value;
     }
