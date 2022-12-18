@@ -9,7 +9,7 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 - Большое внимание уделяется деталям: популяция базы, использование транзакционности, тесты сервисов и REST контроллеров, настройка EntityManagerFactory, выбор реализации пула коннектов. Особое внимание уделяется работе с базой: через Spring JDBC, Spring ORM и Spring Data Jpa.
 - Используются самые востребованные на сегодняшний момент фреймворки: Maven, Spring Security 4 вместе с Spring Security Test, наиболее удобный для работы с базой проекта Spring Data Jpa, библиотека логирования logback, реализующая SLF4J, повсеместно используемый Bootstrap и jQuery.
 
-#### <a href="http://topjava.herokuapp.com/" target=_blank>Демо разрабатываемого приложения</a>
+#### <a href="http://javaops-demo.ru/topjava" target=_blank>Демо разрабатываемого приложения</a>
 
 ## План проекта (ссылки на некоторые темы открыты для просмотра)
 ### Архитектура проекта. Персистентность.
@@ -65,7 +65,7 @@ Hibernate, делаем конверторы для типов LocalDateTime (Ja
 - Смена локали
 - Фильтрация JSON с помощью @JsonView
 - Защита от XSS (Cross Site Scripting)
-- <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFZkpVM19QWFBOQ2c/view?usp=sharing&resourcekey=0-vYSzcNBBM0BLS6dLerJ4rw">Деплой в Heroku</a>
+- Деплой на [собственный выделенный сервер](https://github.com/JavaOPs/startup)
 - Локализация datatables, ошибок валидации
 - Обработка ошибок 404 (NotFound)
 - Доступ к AuthorizedUser
