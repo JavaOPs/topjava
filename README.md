@@ -64,7 +64,8 @@ Java Enterprise Online Project
 > - добавил `UserMealWithExcess.toString()` и метод для выполнения _Optional домашнего задания_
 > - метод фильтрации в `TimeUtil` переименовали в `isBetweenHalfOpen` (также изменилась логика сравнения - `startTime` включается в интервал) 
 
-### GitHub поменял политику - теперь пушить нужно через токен. IDEA предложит его сгенерить при пуше или можно [создать токен в настройках](https://githubhelp.com/EvgenKuz/Intellij-IDEA-GitHub-SetUp)
+### GitHub поменял политику - теперь пушить нужно через токен. IDEA предложит его сгенерить при пуше или можно [создать токен в настройках](https://www.jetbrains.com/help/idea/github.html#register-account)
+- [Способы авторизации в GitHub](https://topjava.ru/blog/vvedeniye-v-git-github-ustanovka-i-nastroyka#6)
  
 ##  Инструкция по шагам (из видео):</h3>
 -  <a href="http://javaops.ru/view/soft">Установить ПО (git, JDK8, IntelliJ IDEA, Maven)</a>
@@ -86,6 +87,7 @@ Java Enterprise Online Project
 -  Переключиться в основную ветку проекта master.
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 7. [Maven](https://drive.google.com/file/d/1qEJTwv9FNUQjx-y9MSydH01xaAne0-hu)
+- [Руководство по Maven](https://topjava.ru/blog/apache-maven-osnovy-1)
 - Wiki: [Apache Maven](https://ru.wikipedia.org/wiki/Apache_Maven)
 - [The Central Repository](http://search.maven.org)
 - Дополнительно:
