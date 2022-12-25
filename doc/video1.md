@@ -1,6 +1,6 @@
 ## Вступление, история, команда, источники
 
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 1. [Видео](https://drive.google.com/file/d/1ZPW2MizaVw3PzoQmedDPOlgy9RmOajCK)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) [Видео](https://drive.google.com/file/d/1ZPW2MizaVw3PzoQmedDPOlgy9RmOajCK)
  
 Друзья, всем привет.  
 Спасибо большое, что выбрали Java online projects и курс “Topjava”.

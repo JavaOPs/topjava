@@ -1,6 +1,6 @@
 ## Обзор наиболее востребованных технологий, которые будут изучаться на курсе TopJava. Часть 3
 
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 2.3. [Видео](https://drive.google.com/file/d/1MjmpkBV0AnO914P-C8H7SWY7k7ReMU4t)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) [Видео](https://drive.google.com/file/d/1MjmpkBV0AnO914P-C8H7SWY7k7ReMU4t)
 
 ### О работе с фронтэндом и JavaScript
 Курс включает себя минимальную практику работы с JavaScript. 

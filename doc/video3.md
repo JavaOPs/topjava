@@ -1,6 +1,6 @@
 ## Рекомендуемые подходы обучения на курсе
 
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 3. [Видео](https://drive.google.com/file/d/1v5sVL8ivNvSXEPVlrYibFLD5byywRkmT)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) [Видео](https://drive.google.com/file/d/1v5sVL8ivNvSXEPVlrYibFLD5byywRkmT)
 
 В предыдущих уроках мы сделали обзор технологий, 
 которые будут использоваться в нашем курсе и создаваемом проекте.

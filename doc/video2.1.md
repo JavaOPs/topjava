@@ -1,6 +1,6 @@
 ## Обзор наиболее востребованных технологий, которые будут изучаться на курсе TopJava. Часть 1
 
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 2.1. [Видео](https://drive.google.com/file/d/1foI_YIiQWM3Q3h928Fj8eqykY4NSx7Yp)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) [Видео](https://drive.google.com/file/d/1foI_YIiQWM3Q3h928Fj8eqykY4NSx7Yp)
 
 В курсе TopJava предпочтение отдается наиболее востребованным
 технологиям, используемым Java Enterprise разработчиками.  
