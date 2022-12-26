@@ -1,6 +1,6 @@
 Java Enterprise Online Project 
 ===============================
-Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
+Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), DataTables, jQuery + plugins, Java 8 Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
 
 ![topjava_structure](https://javaops.ru/static/images/projects/top-scheme.jpg)
 
@@ -28,18 +28,18 @@ Java Enterprise Online Project
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 2.3. [Часть 3](doc/video2.3.md)
 
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 3. [Рекомендуемые подходы обучения на курсе](doc/video3.md)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 3. [Рекомендуемые подходы к обучению на курсе](doc/video3.md)
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 4. [Структура приложения (многоуровневая архитектура)](doc/video4.md)
-### [Демо приложение](http://javaops-demo.ru/topjava)
+### [Демо приложения](http://javaops-demo.ru/topjava)
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 5. [Системы управления версиями. Git](doc/video5-vcs-git.md)</a>
 
 ##  ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 6. <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFZDdaaU5fZEo4X3c/view?resourcekey=0-DvpzWIlMHZ7KX_v1SMuiAw">Работа с проектом (выполнять инструкции)</a>
-- **ВНИМАНИЕ: выбирайте для проекта простой пусть без пробелов и русских букв, например (Windows) `c:\projects\topjava\`. Иначе впоследствии будут проблемы**
-- **Плагин уже Git Intergation не требуется и вкладку `Version control` в IDEA переименовали в `Git`**
+- **ВНИМАНИЕ: выбирайте для проекта простой пусть без пробелов и русских букв, например, `c:\projects\topjava\` (Windows). Иначе впоследствии будут проблемы**
+- **Плагин Git Intergation уже не требуется, а вкладку `Version control` в IDEA переименовали в `Git`**
 
-Для переключения режима отображения изменений из вкладки Commit в Git: Local Changes нужно переключить `Settings/Preferences | Version Control | Commit | Use non-modal commit interface` или в контекстном меню вкладки `Commit`:
+Для переключения режима отображения изменений из вкладки `Commit` в `Git: Local Changes` нужно переключить `Settings/Preferences | Version Control | Commit | Use non-modal commit interface` или в контекстном меню вкладки `Commit`:
 
 ![image](https://user-images.githubusercontent.com/13649199/105491518-72d8f300-5cc7-11eb-8b79-c46382562deb.png)  ![image](https://user-images.githubusercontent.com/13649199/105488663-05c35e80-5cc3-11eb-962e-30f403d623e8.png)
 
@@ -48,38 +48,38 @@ Java Enterprise Online Project
 > Проект постоянно улучшается, поэтому видео иногда отличается от кода проекта. Изменения указываю после видео: 
 > - переименовал класс `UserMealWithExceed` и его поле `exceed` в `UserMealWithExcess.excess`
 > - в `UserMeals/UserMealWithExcess` поля изменились на `private`
-> - обновил данные `UserMealsUtil.meals` и переименовал некоторые пременные, поля и методы
+> - обновил данные `UserMealsUtil.meals` и переименовал некоторые переменные, поля и методы
 > - добавил `UserMealWithExcess.toString()` и метод для выполнения _Optional домашнего задания_
-> - метод фильтрации в `TimeUtil` переименовали в `isBetweenHalfOpen` (также изменилась логика сравнения - `startTime` включается в интервал) 
+> - метод фильтрации в `TimeUtil` переименовал в `isBetweenHalfOpen` (также изменилась логика сравнения: `startTime` включается в интервал, а `endTime` - не включается) 
 
-### GitHub поменял политику - теперь пушить нужно через токен. IDEA предложит его сгенерить при пуше или можно [создать токен в настройках](https://www.jetbrains.com/help/idea/github.html#register-account)
+### GitHub поменял политику: теперь пушить нужно через токен. IDEA предложит его сгенерировать при пуше, или можно [создать токен в настройках](https://www.jetbrains.com/help/idea/github.html#register-account)
 - [Способы авторизации в GitHub](https://topjava.ru/blog/vvedeniye-v-git-github-ustanovka-i-nastroyka#6)
  
 ##  Инструкция по шагам (из видео):</h3>
--  <a href="http://javaops.ru/view/soft">Установить ПО (git, JDK8, IntelliJ IDEA, Maven)</a>
+-  <a href="http://javaops.ru/view/soft">Установить ПО (Git, JDK8, IntelliJ IDEA, Maven)</a>
 -  Создать аккаунт на <a href="https://github.com">GitHub</a>
 -  Сделать Fork **ЭТОГО** проекта (https://github.com/JavaOPs/topjava) </a>
 -  Сделать локальный репозиторий проекта:
             <pre>git clone https://github.com/[Ваш аккаунт]/topjava.git</pre>
 
-> Вместо Fork, можно сделать [клонирование проекта](https://github.com/JavaOPs/topjava/wiki/Git#user-content-Клонирование-проекта): он не будет привязан к исходному https://github.com/JavaOPs/topjava и у него не будет истории.
+> Вместо Fork можно сделать [клонирование проекта](https://github.com/JavaOPs/topjava/wiki/Git#user-content-Клонирование-проекта): он не будет привязан к исходному https://github.com/JavaOPs/topjava и у него не будет истории.
 
 - Открыть и настроить проект в IDEA
    - <a href="http://stackoverflow.com/questions/29695918/intellij-idea-console-issue#33035499">Выставить кодировку UTF-8 в консоли</a>
    - <a href="https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9F%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%BA%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D1%83-utf-8">Поставить кодировку UTF-8</a>
-   - Опционально: <a href="https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9F%D0%BE%D0%BC%D0%B5%D0%BD%D1%8F%D1%82%D1%8C-%D1%84%D0%BE%D0%BD%D1%82-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E-dejavu">Поменять фонт по умолчанию (DejaVu)</a> или на **новый [JetBrains Mono](https://habr.com/ru/company/jugru/news/t/484134/)**
--  По ходу видео сделать Apply Patch... скаченного патча Prepare_ to_ HW0.patch
--  Закоммитить и запушить изменения (commit + push)
+   - Опционально: <a href="https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9F%D0%BE%D0%BC%D0%B5%D0%BD%D1%8F%D1%82%D1%8C-%D1%84%D0%BE%D0%BD%D1%82-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E-dejavu">поменять шрифт по умолчанию на DejaVu</a> или на **новый [JetBrains Mono](https://habr.com/ru/company/jugru/news/t/484134/)**
+-  По ходу видео сделать `Apply Patch...` скачанного патча `Prepare_to_HW0.patch`
+-  Закоммитить и запушить изменения (`commit` + `push`)
 -  Сделать ветку домашнего задания
--  Выполнить задание и залить на GitHub (commit + push)
--  Переключиться в основную ветку проекта master.
+-  Выполнить задание и залить на GitHub (`commit` + `push`)
+-  Переключиться в основную ветку проекта `master`.
 
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 7. [Maven](https://drive.google.com/file/d/1qEJTwv9FNUQjx-y9MSydH01xaAne0-hu)
 - [Руководство по Maven](https://topjava.ru/blog/apache-maven-osnovy-1)
 - Wiki: [Apache Maven](https://ru.wikipedia.org/wiki/Apache_Maven)
 - [The Central Repository](http://search.maven.org)
 - Дополнительно:
-    - [Мое Wiki Maven](https://github.com/JavaOPs/topjava/wiki/Maven)
+    - [Мой Wiki по Maven](https://github.com/JavaOPs/topjava/wiki/Maven)
     - [Основы Maven](https://www.youtube.com/watch?v=0uwMKktzixU)
     - JavaRush: [Основы Maven](https://javarush.ru/groups/posts/2523-chastjh-4osnovih-maven)
     - Инструмент сборки проектов [Maven](https://www.examclouds.com/ru/java/java-core-russian/lesson20)
@@ -88,18 +88,18 @@ Java Enterprise Online Project
     - [Build Lifecycle](http://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
     - [Dependency Mechanism](http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
 
-## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 8. [Как правильно относиться к тех.заданию (ТЗ). Полуоткрытый интервал.](https://drive.google.com/file/d/1BpTzjNFjS0TSekCyt_xvt6YoLvuw5KTZ)
+## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 8. [Как правильно относиться к техзаданию (ТЗ). Полуоткрытый интервал.](https://drive.google.com/file/d/1BpTzjNFjS0TSekCyt_xvt6YoLvuw5KTZ)
 - [Типы промежутков](https://ru.wikipedia.org/wiki/Промежуток_(математика))
 
 ## ![hw](https://cloud.githubusercontent.com/assets/13649199/13672719/09593080-e6e7-11e5-81d1-5cb629c438ca.png) Домашнее задание HW0
 
-### ВНИМАНИЕ: НЕ НАДО в репозиторий делать Pull Request со своими решениями! См. видео выше - работа с проектом
+### ВНИМАНИЕ: НЕ НАДО в репозиторий делать Pull Request со своими решениями! См. видео выше ("Работа с проектом")
 
 Реализовать метод `UserMealsUtil.filteredByCycles` через циклы (`forEach`):
 -  должны возвращаться только записи между `startTime` и `endTime`
 -  поле `UserMealWithExcess.excess` должно показывать, превышает ли сумма калорий за весь день значение `caloriesPerDay`
         
-Т.е `UserMealWithExcess` - это запись одной еды, но поле `excess` будет одинаково для всех записей за этот день.
+Т. е. `UserMealWithExcess` - это запись одной еды, но поле `excess` будет одинаково для всех записей за этот день.
     
 > - Проверьте результат выполнения ДЗ (можно проверить логику в [http://javaops-demo.ru/topjava](http://javaops-demo.ru/topjava), список еды)
 > - Оцените Time complexity алгоритма. Если она больше O(N), например O(N*N) или N*log(N), сделайте O(N).  
@@ -113,7 +113,7 @@ Java Enterprise Online Project
 -  <a href="https://ru.wikipedia.org/wiki/Временная_сложность_алгоритма">Временная сложность алгоритма</a>
 -  <a href="https://ru.wikipedia.org/wiki/Вычислительная_сложность">Вычислительная сложность</a>
 
-#### ВНИМАНИЕ: варианты Optional делайте в `UserMealsUtil` в одной ветке в разных методах. Проще делать, проще проверять
+#### ВНИМАНИЕ: варианты Optional делайте в одной ветке в разных методах `UserMealsUtil`. Проще делать, проще проверять
 
 ### Optional (Java 8 Stream API)
 ```
@@ -128,7 +128,7 @@ Java Enterprise Online Project
 -  <a href="http://habrahabr.ru/post/224593/">Лямбда-выражения в Java 8</a>
 -  <a href="https://github.com/winterbe/java8-tutorial">A Guide to Java 8</a>
 -  <a href="http://habrahabr.ru/company/luxoft/blog/270383/">Шпаргалка Java Stream API</a>
--  <a href="https://www.youtube.com/watch?v=hEyCK4ueBlc">Алексея Владыкин: Элементы функционального программирования в Java</a>
+-  <a href="https://www.youtube.com/watch?v=hEyCK4ueBlc">Алексей Владыкин: Элементы функционального программирования в Java</a>
 -  <a href="https://www.youtube.com/watch?v=iD8H7cmxw_w">Yakov Fain о новом в Java 8</a>
 -  <a href="http://stackoverflow.com/questions/28319064/java-8-best-way-to-transform-a-list-map-or-foreach">stream.map vs forEach</a
 -  Дополнительно
@@ -136,55 +136,56 @@ Java Enterprise Online Project
    - [Сергей Куксенко — Stream API, часть 2](https://www.youtube.com/watch?v=i0Jr2l3jrDA)
 
 ### Optional 2 (+5 бонусов, только после выполнения базового и Optional задания!)
-Сделать реализацию со сложностью O(N) (обратите внимание на п.13 замечаний)  
-Решение должно быть рабочим в общем случае (работать в приложении с многими пользователями, не только при запуске main)  
-Нельзя 2 раза проходить по исходному списку (в том числе его отфильтрованной или преобразованной копии)
 - циклом за 1 проход по `List<UserMeal>`
     - без циклов по другим коллекциям/массивам (к ним также относим методы коллекций `addAll()/removeAll()`)
 - через Stream API за 1 проход по исходному списку `meals.stream()`
     - нельзя использовать внешние коллекции, не являющиеся частью коллектора
-    - возможно дополнительные проходы по частям списка, при этом превышение должно считаться один раз для всего подсписка. Те например нельзя разбить список на на 2 подсписка с четными и нечетными датами и затем их объединить, с подсчетом превышения для каждого элемента.
+    - возможны дополнительные проходы по частям списка, при этом превышение должно считаться один раз для всего подсписка. Т. е., например, нельзя разбить список на 2 подсписка с четными и нечетными датами и затем их объединить с подсчетом превышения для каждого элемента.
+
+Временная сложность реализации должна быть O(N) (обратите внимание на п. 13 замечаний)  
+Решение должно быть рабочим в общем случае (должно работать в приложении с многими пользователями, не только при запуске `main`)  
+Нельзя 2 раза проходить по исходному списку (в том числе по его отфильтрованной или преобразованной копии)
 
 Ресурсы:
 - [Java 8 Stream API, часть шестая: собственный коллектор](https://easyjava.ru/java/language/java-8-stream-api-chast-shestaya-sobstvennyj-kollektor)
 - [Руководство по Java 8 Stream API: Collector](https://annimon.com/article/2778#collector)
 
 ### Замечания по использованию Stream API:
-- Когда встречаешь что-то непривычное, приходится перестраивать мозги. Например, переход с процедурного на ООП программирование дается непросто. Те, кто не знает шаблонов (и не хотят учить) также их встречают плохо. Хорошая новость в том, что если это принять и начать использовать, то начинаешь получать от этого удовольствие. И тут главное не впасть в другую крайность:
+- Когда встречаешь что-то непривычное, приходится перестраивать мозги. Например, переход с процедурного на ООП-программирование дается непросто. Те, кто не знает шаблонов (и не хотят учить), также их встречают плохо. Хорошая новость в том, что если это принять и начать использовать, то начинаешь получать от этого удовольствие. И тут главное не впасть в другую крайность:
   - [Используйте Stream API проще (или не используйте вообще)](https://habrahabr.ru/post/337350/)
-- Если вас беспокоить производительность стримов, обязательно прочитайте про оптимизацию 
+- Если вас беспокоит производительность стримов, обязательно прочитайте про оптимизацию 
     - ["Что? Где? Когда?"](http://optimization.guide/intro.html)
     - [Перформанс: что в имени тебе моём?](https://habrahabr.ru/company/jugru/blog/338732/)
     - [Performance это праздник](https://habrahabr.ru/post/326242/)
     
-При использовании Stream API производительность улучшиться только на больших задачах, где возможно распараллеливание.
-Еще - просто так запустить и померять скорость JVM нельзя (как минимум дать прогреться и запустить очень большое число раз). Лучше использовать какие-нибудь бенчмарки, например [JMH](http://tutorials.jenkov.com/java-performance/jmh.html), который мы юзаем на другом проекте (Mastejava).
+При использовании Stream API производительность улучшится только на больших задачах, где возможно распараллеливание.
+Еще: просто так запустить и померить скорость JVM нельзя (как минимум надо дать прогреться и запустить очень большое число раз). Лучше использовать какие-нибудь бенчмарки, например [JMH](http://tutorials.jenkov.com/java-performance/jmh.html), который мы используем на другом проекте (Mastejava).
   
 ## ![error](https://cloud.githubusercontent.com/assets/13649199/13672935/ef09ec1e-e6e7-11e5-9f79-d1641c05cbe6.png) Замечания к HW0
-- 1: Код проекта менять можно! Одна из распространенных ошибок как в тестовых заданиях на собеседовании, так и при работе на проекте, что ничего нельзя менять. Конечно при правках в рабочем проекте обязательно нужно проконсультироваться/проревьюироваться у авторов кода (находится по истории VCS)
-- 2: Наследовать `UserMealWithExcess` от `UserMeal` нельзя, т.к. это разные сущности: Transfer Object и Entity. Мы будет их проходить на 2м уроке. Это относится и к зависимости.
-- 3: Правильная реализация должна быть простой и красивой, можно сделать 2-мя способами: через стримы и через циклы. Сложность должна быть O(N), т.е. без вложенных стримов и циклов.
+- 1: Код проекта менять можно! Одна из распространенных ошибок как в тестовых заданиях на собеседовании, так и при работе на проекте, что ничего нельзя менять. Конечно, при правках в рабочем проекте обязательно нужно проконсультироваться/проревьюироваться у авторов кода (находятся по истории VCS)
+- 2: Наследовать `UserMealWithExcess` от `UserMeal` нельзя, т. к. это разные сущности: Transfer Object и Entity. Мы будем их проходить на 2-м уроке. Это относится и к их зависимости друг от друга.
+- 3: Правильная реализация должна быть простой и красивой, можно сделать 2-мя способами: через стримы и через циклы. Сложность должна быть O(N), т. е. без вложенных стримов и циклов.
 - 4: При реализации через циклы посмотрите в `Map` на методы `getOrDefault` или `merge`
 - 5: **При реализации через `Stream` заменяйте `forEach` оператором `stream.map(..)`**
-- 6: Объявляйте переменные непосредственно перед использованием (если возможно - сразу с инициализацией). При объявлении коллекций используйте тип переменной - интерфейс (Map, List, ..)
-- 7: Если IDEA предлагает оптимизацию (желтым подчеркивает), например заменить лямбду на метод-референс, соглашайтесь (Alt+Enter)
+- 6: Объявляйте переменные непосредственно перед использованием (если возможно - сразу с инициализацией). При объявлении коллекций в качестве типа переменной используйте интерфейс (Map, List, ..)
+- 7: Если IDEA предлагает оптимизацию (желтым подчеркивает), например, заменить лямбду на ссылку на метод (method reference), соглашайтесь (Alt+Enter)
 - 8: Пользуйтесь форматированием кода в IDEA: `Alt+Ctrl+L`
-- 9: Перед check-in проверяйте чендж-лист (курсор на файл и Ctrl+D): не оставляйте в коде ничего лишнего (закомментированный код, TODO и пр.). Если файл не меняется (например только пробелы или переводы строк), не надо его чекинить, делайте ему `revert` (Git -> Revert / `Ctrl+Alt+Z`).
-- 10: `System.out.println` нельзя делать нигде, кроме как в `main`. Позже введем логирование.
-- 11: Результаты, возвращаемые `UserMealsUtil.filteredByStreams` мы будем использовать [в нашем приложении](http://javaops-demo.ru/topjava) для фильтрации по времени и отображения еды правильным цветом.
-- 12: Обращайте внимание на комментарии к вашим коммитам в git. Они должны быть короткие и информативные (лучше на english)
+- 9: Перед check-in (отправкой изменений на GitHub) просматривайте внесенные изменения (Git -> [Log](https://www.jetbrains.com/help/idea/log-tab.html) -> курсор на файл и Ctrl+D): не оставляйте в коде ничего лишнего (закомментированный код, TODO и пр.). Если файл не меняется (например только пробелы или переводы строк), не надо его чекинить, делайте ему `revert` (Git -> Revert / `Ctrl+Alt+Z`).
+- 10: `System.out.println` нельзя использовать нигде, кроме как в `main`. Позже введем логирование.
+- 11: Результаты, возвращаемые `UserMealsUtil.filteredByStreams`, мы будем использовать [в нашем приложении](http://javaops-demo.ru/topjava) для фильтрации по времени и отображения еды правильным цветом.
+- 12: Обращайте внимание на комментарии к вашим коммитам в Git. Они должны быть короткие и информативные (лучше на english)
 - 13: Не полагайтесь в решении на то, что список еды будет подаваться отсортированным. Такого условия нет.
 -----
 
->  - ДЗ первого урока будет связано с созданием небольшого [CRUD](https://ru.wikipedia.org/wiki/CRUD) приложения (в памяти, без базы данных) на JSP и сервлетах
->  - основы JavaSсript необходимы для понимания проекта, начиная с 8-го занятия
+>  - ДЗ первого урока будет связано с созданием небольшого [CRUD](https://ru.wikipedia.org/wiki/CRUD)-приложения (в памяти, без базы данных) на JSP и сервлетах
+>  - основы JavaScript необходимы для понимания проекта, начиная с 8-го занятия
 
 ### Полезные ресурсы
 #### HTML, JavaScript, CSS 
 - [Basic HTML and HTML5](https://learn.freecodecamp.org/responsive-web-design/basic-html-and-html5/say-hello-to-html-elements/)
 - [Справочник по WEB](https://developer.mozilla.org/ru/)
-- [Видео по WEB технологиям](https://www.youtube.com/user/WebMagistersRu/playlists)
-- [Изучение JavaScript в одном видео уроке за час](https://www.youtube.com/watch?v=QBWWplFkdzw)
+- [Видео по WEB-технологиям](https://www.youtube.com/user/WebMagistersRu/playlists)
+- [Изучение JavaScript в одном видеоуроке за час](https://www.youtube.com/watch?v=QBWWplFkdzw)
 - <a href="http://www.w3schools.com/default.asp">HTML, CSS, JAVASCRIPT, SQL, JQUERY, BOOTSTRAP</a>
 - <a href="https://www.youtube.com/watch?v=j0ycGQKqMT4">Введение в программирование на JavaScript</a>
 - <a href="http://anton.shevchuk.name/javascript/html-css-javascript-standarts/">Стандарты кодирования для HTML, CSS и JavaScript’a</a>
@@ -196,7 +197,7 @@ Java Enterprise Online Project
 
 #### Java (базовые вещи)
 - <a href="http://www.intuit.ru/studies/courses/16/16/info">Интуит. Программирование на Java</a>
-- <a href="https://github.com/JavaOPs/masterjava#Первое-занятие-многопоточность">1й урок MasterJava: Многопоточность</a>
+- <a href="https://github.com/JavaOPs/masterjava#Первое-занятие-многопоточность">1-й урок MasterJava: Многопоточность</a>
 - [Основы Java garbage collection](http://web.archive.org/web/20180831013112/https://ggenikus.github.io/blog/2014/05/04/gc)
 - <a href="https://habrahabr.ru/post/134102/">Размер Java объектов</a>
 - <a href="http://www.quizful.net/post/java-reflection-api">Введение в Java Reflection API</a>

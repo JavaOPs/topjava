@@ -1,16 +1,16 @@
 # TopJava Release Notes
 
-### Topjava 26
+### TopJava 26
 - починили шаблоны запросов на создание в Swagger хчз [ApiModelProperty](https://www.baeldung.com/spring-swagger-hide-field)
 - в новой версии Data JPA `getById`->`getReferenceById`
 - мелкие правки
 
-### Topjava 25
+### TopJava 25
 - поправил `NoHtmlValidator`: `Jsoup.clean().equals -> `Jsoup.isValid`
 - починил `role VARCHAR NOT NULL`
 - добавил нового тестового пользователя `guest`
 
-### Topjava 24
+### TopJava 24
 - migrate to LTS JDK 17
 - add `AbstractBaseEntity.id()`
 - fix for `User.registered`: `@Column(..., updatable = false)`
@@ -20,7 +20,7 @@
 - rename `MATCHER` to `USER_MATCHER/MEAL_MATCHER`
 - treat in `ActiveDbProfileResolver` attribute `profiles`
 
-### Topjava 23
+### TopJava 23
 - migrate to JDK 16
 - в новой spring-data-jpa `getOne` заменили на `getById`
 - в UserUtil#prepareToSave убрал проверку пароля на `hasText`. На UI поле проверяется на `@NotBlank`
@@ -29,7 +29,7 @@
 - `TestMatcher` переименовал в `MatcherFactory`
 - Для Swagger UI пометил `AuthorizedUser` аннотацией `@ApiIgnore` 
 
-### Topjava 22
+### TopJava 22
  - очистка пароля `AuthorizedUser#userTo`
  - заменил `@SafeHtml`, который удалили из `hibernate.validator` на [Jsoup.clean](https://stackoverflow.com/a/68888601/548473)
  - перенес запрет на обновление admin/user в `UserService`
@@ -37,7 +37,7 @@
  - проверку класса в `classpath` в `Profiles#getActiveDbProfile` делаю на `org.springframework.util.ClassUtils#isPresent`
  - удалил `type="text/javascript"`
  
-### Topjava 21
+### TopJava 21
 - **добавили документирование REST API: Swagger**
 - мигрировали на JDK 15 и используем текстовые блоки
 - Вынес `produces = MediaType.APPLICATION_JSON_VALUE` на уровень контроллеров
@@ -47,7 +47,7 @@
 - Из тестов сервисов убрал `throws Exception` (в IDEA больше не генерятся по умолчанию)
 - **Мигрировали на Spring Boot 2.4.1**
 
-### Topjava 20
+### TopJava 20
 - мигрировали на JDK 14
 - в `@SafeHtml` запрещаем весь html (`whitelistType = NONE`)
 - в `topjava.common.js` в `makeEditable()` вместо объекта контекст передаю 3 параметра
@@ -57,7 +57,7 @@
 - в API добавили `/users/{id}/with-meals` (см. [двунаправленные отношения](https://www.codeflow.site/ru/article/jackson-bidirectional-relationships-and-infinite-recursion))
 - добавил `UserTestData.USER_WITH_MEALS_MATCHER` (проверки пользователя сразу с едой) и константу id `NOT_FOUND`
 
-### Topjava 19
+### TopJava 19
 - Изменилась логика для интервалов времени (исключаем `endTime`)
 - Заменил собственный `MessageUtil` велосипед на спринговый `MessageSourceAccessor`
 - В ролях убрал префиксы `ROLE_` ([Role and GrantedAuthority](https://stackoverflow.com/a/19542316/548473)) 
@@ -73,7 +73,7 @@
   - Для `InMemory` тестов подключаю только `inmemory.xml` (добавил туда необходимую конфигурацию из `spring-app.xml`)
   
 
-### Topjava 18
+### TopJava 18
 
 - В `ErrorType` добавил `HttpStatus status`
 - В PostgreSQL обнаружилась бага: граничное значение `0:00` из-за ошибок округления попадает в предыдущий интервал.
@@ -91,7 +91,7 @@
   - В тестах `delete` и `create` проверяю результат напрямую (не через `getAll`)
 
 
-### Topjava 17
+### TopJava 17
 - Удалил `Impl` из названий репозиториев
 - Удалил интерфейсы к сервисам, использую классы
 - Добавил `AdminRestController.enable`, вызов через PATCH метод
@@ -99,13 +99,13 @@
 - Перенес работу в UI с профилем из `RootController` в `ProfileUIController`
 - `SLF4JBridgeHandler` инициализирую только в профиле `postgres`
 
-### Topjava 16
+### TopJava 16
 - Выделил общий код реализации хранения в памяти в `InMemoryBaseRepositoryImpl`
 - Сделал подтверждение для удаления записей
 - Обновились видео 7-го занятия. [Выложил его как пример занятия, некоторые видео открыты](https://github.com/JavaOPs/topjava/blob/master/doc/lesson07.md)
 - Сделали валидации дублирования email через `WebDataBinder` и `Validator`
 
-### Topjava 15
+### TopJava 15
 - Миграция на Servlet API 4.0 / Tomcat 9.x
 - [Миграция на JDK11](http://javaops.ru/view/resources/jdk8_11)
 - JUnit5 fix: <a href="https://junit.org/junit5/docs/current/user-guide/#running-tests-build-maven">junit-platform-surefire-provider не нужен</a></h4>
@@ -115,7 +115,7 @@
 - В javascript место глабальных переменных и одинаковой функции обновления таблицы задаю их в объекте контекст, который передаю в `makeEditable()` как параметр
 - Починил `back` в браузере после логина. Кнопки входа и регистрации отображаю только для `isAnonymous()`
 
-### Topjava 14
+### TopJava 14
 - [Миграция на JUnit 5](http://javaops.ru/view/resources/junit5)
 - Для измерения времени в тестах использую [Spring StopWatch](https://www.logicbig.com/how-to/code-snippets/jcode-spring-framework-stopwatch.html)
 - `SimpleJdbcInsert` и `NamedParameterJdbcTemplate` конструируются (и берут настройки) из `jdbcTemplate`
@@ -128,13 +128,13 @@
 - Преименовал js файлы согласно [javascript filename naming convention](https://stackoverflow.com/questions/7273316/what-is-the-javascript-filename-naming-convention)
 - Сделал проверку startTime/endTime на фильтре времени (после обновления datetimepicker до 2.5.20)
 
-### Topjava 13
+### TopJava 13
 - [Миграция на Botstrap 4](https://getbootstrap.com/docs/4.1/migration/)
 - Добавил [Responsive behaviors](https://getbootstrap.com/docs/4.1/components/navbar/#responsive-behaviors) - при уменшении ширины экрана навигация сворачивается в кнопку
 - Для отображения цвета еды и выключенного юзера использую [data-* атрибуты](https://developer.mozilla.org/ru/docs/Web/Guide/HTML/Using_data_attributes)
 - В `inputField.tag` передаю как параметр код для локализации label, а в `i18n.jsp` передаю как параметр `page`. См. [JSP include action with parameter example](https://beginnersbook.com/2013/12/jsp-include-with-parameter-example)
 
-### Topjava 12
+### TopJava 12
 - [Миграция на Spring 5](http://javaops.ru/view/resources/spring5)
 - обновил версии: Ehcache 3.x, datatables, datetimepicker
 - добавил видео решений HW0 с одним проходом
@@ -147,7 +147,7 @@
 - заменил в jQuery [success на done](https://stackoverflow.com/a/22213543/548473)
 - вместо `lang.jsp` сделал общий `bodyHeader.jsp`
 
-### Topjava 11
+### TopJava 11
 - добавил
   - доп. решение HW1 через одним return и O(N)
   - раскрасил лог ([Logback layouts coloring](https://logback.qos.ch/manual/layouts.html#coloring))
@@ -173,7 +173,7 @@
   - переименовал `ModelMatcher` в `BeanMatcher` и починил: можно сравнивать только упорядоченные коллекции (List)
   - поменял зависимость `org.hibernate:hibernate-validator`  на `org.hibernate.validator:hibernate-validator` (warning при сборке)
   
-### Topjava 10
+### TopJava 10
 - добавил
   -  доступ к AuthorizedUser через [`@AuthenticationPrincipal`](http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#mvc-authentication-principal) и [authentication Tag](http://docs.spring.io/spring-security/site/docs/current/reference/html/taglibs.html#the-authentication-tag)
   - [Обработку 404 NotFound](https://stackoverflow.com/questions/18322279/spring-mvc-spring-security-and-error-handling)
@@ -202,7 +202,7 @@
   - distinct из запроса Hibernate на пользователей с ролями. [Оптимизация запроса distinct: 15.16.2](https://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html#hql-distinct) 
   - лишние `<div>` тэги (`shadow` и `view-box`)
 
-### Topjava 9
+### TopJava 9
 - добавил
   - выбор профиля базы через `ActiveProfilesResolver`/`AllActiveProfileResolver` на основе драйвера базы в classpath
   - видео <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFVmdpNDJSNXRTWUE">Cascade. Auto generate DDL.</a>
@@ -221,7 +221,7 @@
   - вместо `Persistable` ввел интерфейс `HasId` и наследую от него как Entity, так и TO
   - сделал универсальную обработку исключений дублирования email и dateTime
 
-### Topjava 8
+### TopJava 8
 - добавил:
   - [защиту от XSS (Cross-Site Scripting)](http://stackoverflow.com/a/40644276/548473)
   - интеграцию с <a href="https://dependencyci.com/">Dependency Ci</a> и <a href="https://travis-ci.org/">Travis Ci</a> 
@@ -245,7 +245,7 @@
   - перенес вызовы `UserUtil.prepareToSave` из `AbstractUserController` в `UserServiceImpl`
   - зарефакторил обработку ошибок (`ExceptionInfoHandler`)
 
-### Topjava 7
+### TopJava 7
 - добавил:
   - [JPA 2.1 EntityGraph](https://docs.oracle.com/javaee/7/tutorial/persistence-entitygraphs002.htm)
   - [Jackson @JsonView](https://habrahabr.ru/post/307392/)
@@ -260,7 +260,7 @@
   - матчеров тестирования (сделал автоматические обертки и сравнение на основе передаваемого компаратора)
   - вынес форматирование даты в `functions.tld`
 
-### Topjava 3-6
+### TopJava 3-6
 - добавил
   - [выпускной проект](https://drive.google.com/open?id=0B9Ye2auQ_NsFcG83dEVDVTVMamc)
   - в таблицу meals составной индекс 
