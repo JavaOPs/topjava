@@ -199,6 +199,7 @@ Java Enterprise Online Project
 - <a href="http://learn.javascript.ru/first-steps">Основы JavaScript</a>
 - <a href="http://itchief.ru/lessons/bootstrap-3/19-introduction-to-twitter-bootstrap-3">Bootstrap 3 - Основы</a>
 - <a href="http://anton.shevchuk.name/jquery/">jQuery для начинающих</a>
+- <a href="https://www.scaler.com/topics/html/">Подробно изучите HTML-программирование</a>  
 
 #### Java (базовые вещи)
 - [Сборник видео "Изучаем Java"](https://www.youtube.com/playlist?list=PLyxk-1FCKqockmP-fXZmHQ7UlYP3qvZRa)
