@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 
 public class MealsUtil {
 
-    public static final List<Meal> MEAL_LIST = Arrays.asList(
+    public static final int DEFAULT_CALORIES_PER_DAY = 2000;
+
+    public static final Collection<Meal> MEALS = Arrays.asList(
             new Meal(1, LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500),
             new Meal(2, LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000),
             new Meal(3, LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500),
@@ -23,11 +25,11 @@ public class MealsUtil {
             new Meal(7, LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
     );
 
-    public static List<MealTo> getWithExcesses(List<Meal> mealList, int caloriesPerDay) {
-        return getFilteredByStreams(mealList, LocalTime.MIN, LocalTime.MAX, caloriesPerDay);
+    public static List<MealTo> getWithExcesses(Collection<Meal> meals, int caloriesPerDay) {
+        return getFilteredByStreams(meals, LocalTime.MIN, LocalTime.MAX, caloriesPerDay);
     }
 
-    public static List<MealTo> getFilteredByCycles(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    public static List<MealTo> getFilteredByCycles(Collection<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         final Map<LocalDate, Integer> caloriesSumByDay = new HashMap<>();
         final Map<LocalDate, AtomicBoolean> excessesMap = new HashMap<>();
 
@@ -45,7 +47,7 @@ public class MealsUtil {
         return mealsWithExcesses;
     }
 
-    public static List<MealTo> getFilteredByStreams(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    public static List<MealTo> getFilteredByStreams(Collection<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         return meals.stream().collect(Collectors.groupingBy(Meal::getDate)).values().stream()
                 .flatMap(dayMeals -> {
                     AtomicBoolean excess = new AtomicBoolean(dayMeals.stream().mapToInt(Meal::getCalories).sum() > caloriesPerDay);

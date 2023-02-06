@@ -10,16 +10,19 @@
     <section>
         <h2><a href="index.html">Home</a></h2>
         <h3>Meal list</h3>
-        <hr>
+        <a href="meals?action=create">Add meal</a>
+        <br><br>
         <table class="mealTable">
             <thead>
                 <tr>
                     <th>Date</th>
                     <th>Description</th>
                     <th>Calories</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
-            <c:forEach items="${mealList}" var="meal">
+            <c:forEach items="${meals}" var="meal">
                 <jsp:useBean id="meal" class="ru.javawebinar.topjava.model.MealTo" scope="page" />
                 <tr class="${meal.excess.get()? 'excess' : 'normal'}">
                     <td>
@@ -27,6 +30,8 @@
                     </td>
                     <td>${meal.description}</td>
                     <td>${meal.calories}</td>
+                    <td><a href="meals?action=update&id=${meal.id}">Update</a></td>
+                    <td><a href="meals?action=delete&id=${meal.id}">Delete</a></td>
                 </tr>
             </c:forEach>
         </table>
