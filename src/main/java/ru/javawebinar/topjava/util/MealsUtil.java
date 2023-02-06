@@ -1,7 +1,7 @@
 package ru.javawebinar.topjava.util;
 
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.model.MealWithExcess;
+import ru.javawebinar.topjava.model.MealTo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,15 +23,15 @@ public class MealsUtil {
             new Meal(7, LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410)
     );
 
-    public static List<MealWithExcess> getWithExcesses(List<Meal> mealList, int caloriesPerDay) {
+    public static List<MealTo> getWithExcesses(List<Meal> mealList, int caloriesPerDay) {
         return getFilteredByStreams(mealList, LocalTime.MIN, LocalTime.MAX, caloriesPerDay);
     }
 
-    public static List<MealWithExcess> getFilteredByCycles(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    public static List<MealTo> getFilteredByCycles(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         final Map<LocalDate, Integer> caloriesSumByDay = new HashMap<>();
         final Map<LocalDate, AtomicBoolean> excessesMap = new HashMap<>();
 
-        final List<MealWithExcess> mealsWithExcesses = new ArrayList<>();
+        final List<MealTo> mealsWithExcesses = new ArrayList<>();
         meals.forEach(meal -> {
             AtomicBoolean wrapBoolean = excessesMap.computeIfAbsent(meal.getDate(), date -> new AtomicBoolean());
             Integer dailyCalories = caloriesSumByDay.merge(meal.getDate(), meal.getCalories(), Integer::sum);
@@ -45,7 +45,7 @@ public class MealsUtil {
         return mealsWithExcesses;
     }
 
-    public static List<MealWithExcess> getFilteredByStreams(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+    public static List<MealTo> getFilteredByStreams(List<Meal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         return meals.stream().collect(Collectors.groupingBy(Meal::getDate)).values().stream()
                 .flatMap(dayMeals -> {
                     AtomicBoolean excess = new AtomicBoolean(dayMeals.stream().mapToInt(Meal::getCalories).sum() > caloriesPerDay);
@@ -54,7 +54,7 @@ public class MealsUtil {
                 }).collect(Collectors.toList());
     }
 
-    private static MealWithExcess createWithExcess(Meal meal, AtomicBoolean excess) {
-        return new MealWithExcess(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
+    private static MealTo createWithExcess(Meal meal, AtomicBoolean excess) {
+        return new MealTo(meal.getId(), meal.getDateTime(), meal.getDescription(), meal.getCalories(), excess);
     }
 }
