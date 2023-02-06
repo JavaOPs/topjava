@@ -7,4 +7,5 @@ package ru.javawebinar.topjava.web;
 public class ServletUrls {
 
     public static final String USERS = "/users";
+    public static final String MEALS = "/meals";
 }
