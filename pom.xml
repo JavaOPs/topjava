@@ -114,7 +114,7 @@
                     <groupId>jakarta.servlet.jsp.jstl</groupId>
                 </exclusion>
             </exclusions>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>

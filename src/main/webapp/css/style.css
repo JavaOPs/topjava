@@ -1,0 +1,26 @@
+.home li{
+    font-size: 18px;
+}
+
+.normal{
+    color: green;
+}
+
+.excess{
+    color: red;
+}
+
+.mealTable{
+    width: 30%;
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.mealTable td{
+    border: 1px solid black;
+}
+
+.mealTable th{
+    border: 1px solid black;
+}
