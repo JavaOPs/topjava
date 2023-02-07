@@ -2,19 +2,30 @@ package ru.javawebinar.topjava.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Getter
-@EqualsAndHashCode
-public class Meal {
+@Setter
+@EqualsAndHashCode (callSuper = true, onlyExplicitlyIncluded = true)
+@ToString
+public class Meal extends AbstractBaseEntity {
 
-    private final Integer id;
     private final LocalDateTime dateTime;
     private final String description;
     private final int calories;
+
+    public Meal() {
+        this(null, LocalDateTime.now(), "", 0);
+    }
+
+    public Meal(LocalDateTime dateTime, String description, int calories) {
+        this(null, dateTime, description, calories);
+    }
 
     public Meal(Integer id, LocalDateTime dateTime, String description, int calories) {
         this.id = id;

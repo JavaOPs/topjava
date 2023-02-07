@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Getter
+@Setter
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 public class MealTo {
 
-    @Setter
     private Integer id;
     private final LocalDateTime dateTime;
     private final String description;
