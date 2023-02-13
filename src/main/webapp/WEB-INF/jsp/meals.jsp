@@ -10,6 +10,28 @@
     <section>
         <h2><a href="index.html">Home</a></h2>
         <h3>Meal list</h3>
+        <hr>
+        <form method="get" action="meals" class="edit">
+            <input type="hidden" name="action" value="filter">
+            <dl>
+                <dt>From date</dt>
+                <dd><input type="date" name="startDate" value="${param.startDate}"></dd>
+            </dl>
+            <dl>
+                <dt>To date</dt>
+                <dd><input type="date" name="endDate" value="${param.endDate}"></dd>
+            </dl>
+            <dl>
+                <dt>From time</dt>
+                <dd><input type="time" name="startTime" value="${param.startTime}"></dd>
+            </dl>
+            <dl>
+                <dt>To time</dt>
+                <dd><input type="time" name="endTime" value="${param.endTime}"></dd>
+            </dl>
+            <button type="submit">Filter</button>
+        </form>
+        <hr>
         <a href="meals?action=create">Add meal</a>
         <br><br>
         <table class="mealTable">
@@ -24,7 +46,7 @@
             </thead>
             <c:forEach items="${meals}" var="meal">
                 <jsp:useBean id="meal" class="ru.javawebinar.topjava.to.MealTo" scope="page" />
-                <tr class="${meal.excess.get()? 'excess' : 'normal'}">
+                <tr data-mealExcess="${meal.excess}">
                     <td>
                         <%=DateTimeUtil.toString(meal.getDateTime())%>
                     </td>

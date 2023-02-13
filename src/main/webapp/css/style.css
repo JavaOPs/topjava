@@ -41,3 +41,11 @@
     margin-left: 8px;
     vertical-align: top;
 }
+
+tr[data-mealExcess="false"] {
+    color: green;
+}
+
+tr[data-mealExcess="true"] {
+    color: red;
+}
