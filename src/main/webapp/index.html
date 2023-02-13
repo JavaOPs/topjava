@@ -6,11 +6,20 @@
     <title>Calories Management</title>
 </head>
 <body>
-    <h3>Calories Management Web Application</h3>
-    <hr>
-    <ul class="home">
-        <li><a href="users">Users</a></li>
-        <li><a href="meals">Meals</a></li>
-    </ul>
+<h3>Calories Management Web Application</h3>
+<hr>
+<ul class="home">
+    <li><a href="users">Users</a></li>
+    <li><a href="meals">Meals</a></li>
+</ul>
+<hr>
+<form method="post" action="users">
+    <b>Meals of&nbsp;</b>
+    <select name="userId">
+        <option value="1" selected>User</option>
+        <option value="2">Admin</option>
+    </select>
+    <button type="submit">Choose</button>
+</form>
 </body>
 </html>

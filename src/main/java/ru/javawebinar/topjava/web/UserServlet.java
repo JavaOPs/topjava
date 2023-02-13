@@ -16,6 +16,13 @@ public class UserServlet extends HttpServlet {
     private static final Logger LOG = LoggerFactory.getLogger(UserServlet.class);
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        int userId = Integer.parseInt(req.getParameter("userId"));
+        SecurityUtil.setId(userId);
+        resp.sendRedirect("meals");
+    }
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LOG.debug("Redirect to userList");
         request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp").forward(request, response);
