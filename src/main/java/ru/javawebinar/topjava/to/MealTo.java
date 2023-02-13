@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava.model;
+package ru.javawebinar.topjava.to;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
