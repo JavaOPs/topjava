@@ -2,7 +2,7 @@ package ru.javawebinar.topjava.util;
 
 import org.springframework.lang.Nullable;
 import ru.javawebinar.topjava.model.Meal;
-import ru.javawebinar.topjava.model.MealTo;
+import ru.javawebinar.topjava.to.MealTo;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -33,7 +33,7 @@ public class MealsUtil {
         return meals.stream().collect(Collectors.groupingBy(Meal::getDate)).values().stream()
                 .flatMap(dayMeals -> {
                     AtomicBoolean excess = new AtomicBoolean(dayMeals.stream().mapToInt(Meal::getCalories).sum() > caloriesPerDay);
-                    return dayMeals.stream().filter(meal -> TimeUtil.isBetween(meal.getTime(), startTime, endTime))
+                    return dayMeals.stream().filter(meal -> DateTimeUtil.isBetween(meal.getTime(), startTime, endTime))
                             .map(meal -> createWithExcess(meal, excess));
                 }).collect(Collectors.toList());
     }
