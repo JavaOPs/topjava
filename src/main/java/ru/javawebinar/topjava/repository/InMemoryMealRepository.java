@@ -1,5 +1,8 @@
 package ru.javawebinar.topjava.repository;
 
+import lombok.EqualsAndHashCode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.MealsUtil;
 
@@ -12,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Alexei Valchuk, 06.02.2023, email: a.valchukav@gmail.com
  */
 
+@Repository
 public class InMemoryMealRepository implements MealRepository {
 
     private final Map<Integer, Meal> repository = new ConcurrentHashMap<>();

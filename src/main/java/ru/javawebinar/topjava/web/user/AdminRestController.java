@@ -1,6 +1,9 @@
 package ru.javawebinar.topjava.web.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.service.UserService;
 
 import java.util.List;
 
@@ -8,7 +11,13 @@ import java.util.List;
  * @author Alexei Valchuk, 07.02.2023, email: a.valchukav@gmail.com
  */
 
+@Controller
 public class AdminRestController extends AbstractUserController{
+
+    @Autowired
+    public AdminRestController(UserService service) {
+        super(service);
+    }
 
     @Override
     public List<User> getAll() {
