@@ -6,8 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.javawebinar.topjava.SpringConfig;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.web.meal.MealRestController;
 
@@ -28,13 +27,13 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.parseLocalTime;
 @WebServlet(ServletUrls.MEALS)
 public class MealServlet extends HttpServlet {
 
-    private AnnotationConfigApplicationContext context;
+    private ClassPathXmlApplicationContext context;
     private MealRestController mealController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        context = new ClassPathXmlApplicationContext("spring/spring-app.xml");
         mealController = context.getBean(MealRestController.class);
     }
 
