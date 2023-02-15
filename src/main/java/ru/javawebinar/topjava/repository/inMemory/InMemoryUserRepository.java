@@ -15,11 +15,10 @@ import java.util.stream.Collectors;
  */
 
 @Repository
-@Primary
 public class InMemoryUserRepository extends InMemoryBaseRepository<User> implements UserRepository{
 
-    public static final int USER_ID = 1;
-    public static final int ADMIN_ID = 2;
+    public static final int USER_ID = 100000;
+    public static final int ADMIN_ID = 100001;
 
     {
         save(new User(1, "User", "user@mail.ru", "password", Role.ROLE_USER));

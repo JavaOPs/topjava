@@ -12,6 +12,8 @@ import lombok.*;
 @EqualsAndHashCode
 public abstract class AbstractBaseEntity {
 
+    public static final Integer START_SEQ = 100000;
+
     protected Integer id;
 
     public AbstractBaseEntity(Integer id) {
