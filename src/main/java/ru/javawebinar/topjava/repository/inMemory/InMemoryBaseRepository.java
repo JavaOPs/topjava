@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static ru.javawebinar.topjava.model.AbstractBaseEntity.*;
+
 /**
  * @author Alexei Valchuk, 13.02.2023, email: a.valchukav@gmail.com
  */
@@ -19,7 +21,7 @@ public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
 
     protected static final Logger LOG = LoggerFactory.getLogger(InMemoryUserRepository.class);
 
-    private static final AtomicInteger counter = new AtomicInteger(0);
+    private static final AtomicInteger counter = new AtomicInteger(START_SEQ);
 
     private final Map<Integer, T> repository = new ConcurrentHashMap<>();
 
