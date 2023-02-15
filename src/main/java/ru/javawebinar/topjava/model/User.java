@@ -19,7 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(callSuper = true, exclude = "roles")
+@ToString(callSuper = true, exclude = {"password", "roles"})
 public class User extends AbstractNamedEntity {
 
     private String email;
