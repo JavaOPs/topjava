@@ -9,16 +9,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+
 @Getter
 @Setter
 @EqualsAndHashCode (callSuper = true, onlyExplicitlyIncluded = true)
 @ToString
 public class Meal extends AbstractBaseEntity {
 
-    private final LocalDateTime dateTime;
-    private final String description;
-    private final int calories;
-
+    private LocalDateTime dateTime;
+    private String description;
+    private int calories;
+    
     public Meal() {
         this(null, LocalDateTime.now(), "", 0);
     }
