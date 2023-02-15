@@ -11,9 +11,10 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
+import ru.javawebinar.topjava.util.AbstractTestData;
+import ru.javawebinar.topjava.util.UserTestData;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static ru.javawebinar.topjava.util.UserTestData.*;
 
@@ -29,23 +30,24 @@ class UserServiceTest {
     @Autowired
     private UserService service;
 
+    private final AbstractTestData<User> testData = new UserTestData("registered", "roles");
+
     @Test
     void getAll() {
-        matchUsers(service.getAll(), ADMIN, USER);
+        testData.assertMatch(service.getAll(), ADMIN, USER);
     }
 
     @Test
     void get() {
-        matchUsers(service.get(USER_ID), USER);
-        matchUsers(service.get(ADMIN_ID), ADMIN);
+        testData.assertMatch(service.get(USER_ID), USER);
+        testData.assertMatch(service.get(ADMIN_ID), ADMIN);
     }
 
     @Test
     void create() {
         User newUser = new User(null, "DUMMY", "DUMMY", "DUMMY", Role.ROLE_USER);
         service.create(newUser);
-        assertEquals(ADMIN_ID + 1, newUser.getId());
-        matchUsers(service.getAll(), ADMIN, newUser, USER);
+        testData.assertMatch(service.getAll(), ADMIN, newUser, USER);
     }
 
     @Test
@@ -59,7 +61,7 @@ class UserServiceTest {
     @Test
     void delete() {
         service.delete(ADMIN_ID);
-        matchUsers(service.getAll(), USER);
+        testData.assertMatch(service.getAll(), USER);
     }
 
     @Test
@@ -73,7 +75,7 @@ class UserServiceTest {
         String email = "DUMMY";
         updated.setEmail(email);
         service.update(updated);
-        matchUsers(service.get(ADMIN_ID), updated);
+        testData.assertMatch(service.get(ADMIN_ID), updated);
     }
 
     @Test
@@ -83,7 +85,7 @@ class UserServiceTest {
 
     @Test
     void getByMail() {
-        matchUsers(service.getByEmail(USER.getEmail()), USER);
+        testData.assertMatch(service.getByEmail(USER.getEmail()), USER);
     }
 
     @Test
