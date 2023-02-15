@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.util;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.lang.Nullable;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.to.MealTo;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
+@UtilityClass
 public class MealsUtil {
 
     public static final int DEFAULT_CALORIES_PER_DAY = 2000;

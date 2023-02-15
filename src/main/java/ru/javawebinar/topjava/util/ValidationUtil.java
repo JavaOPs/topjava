@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.util;
 
+import lombok.experimental.UtilityClass;
 import ru.javawebinar.topjava.model.AbstractBaseEntity;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
@@ -7,6 +8,7 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
  * @author Alexei Valchuk, 07.02.2023, email: a.valchukav@gmail.com
  */
 
+@UtilityClass
 public class ValidationUtil {
 
     public static <T> T checkNotFoundWithId(T object, int id) {
