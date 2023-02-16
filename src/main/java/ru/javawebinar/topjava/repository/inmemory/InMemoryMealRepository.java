@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository.ADMIN_ID;
 import static ru.javawebinar.topjava.repository.inmemory.InMemoryUserRepository.USER_ID;
@@ -30,6 +31,7 @@ public class InMemoryMealRepository implements MealRepository {
         save(new Meal(LocalDateTime.of(2015, Month.JUNE, 1, 14, 0), "Админ ланч", 510), ADMIN_ID);
         save(new Meal(LocalDateTime.of(2015, Month.JUNE, 1, 21, 0), "Админ ужин", 1500), ADMIN_ID);
     }
+
 
     @Override
     public Meal save(Meal meal, int userId) {
@@ -64,4 +66,3 @@ public class InMemoryMealRepository implements MealRepository {
                         .collect(Collectors.toList());
     }
 }
-

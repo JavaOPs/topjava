@@ -4,7 +4,6 @@ import ru.javawebinar.topjava.model.Meal;
 
 import java.util.List;
 
-// TODO add userId
 public interface MealRepository {
     // null if updated meal does not belong to userId
     Meal save(Meal meal, int userId);
