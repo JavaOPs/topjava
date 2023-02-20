@@ -1,11 +1,11 @@
-package ru.javawebinar.topjava.repository.inMemory;
+package ru.javawebinar.topjava.inMemory;
 
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 import ru.javawebinar.topjava.util.Util;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -47,8 +47,8 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
-        return getAllFiltered(userId, meal -> Util.isBetweenInclusive(meal.getDateTime(), startDate, endDate));
+    public List<Meal> getBetweenInclusive(LocalDate startDate, LocalDate endDate, int userId) {
+        return getAllFiltered(userId, meal -> Util.isBetweenInclusive(meal.getDate(), startDate, endDate));
     }
 
     private List<Meal> getAllFiltered(int userId, Predicate<Meal> filter) {

@@ -1,6 +1,5 @@
-package ru.javawebinar.topjava.repository.inMemory;
+package ru.javawebinar.topjava.inMemory;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
