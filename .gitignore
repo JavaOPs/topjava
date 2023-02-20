@@ -6,3 +6,4 @@ log
 *.patch
 
 
+/src/main/java/META-INF/MANIFEST.MF
