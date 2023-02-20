@@ -1,24 +1,25 @@
 package ru.javawebinar.topjava.repository.jdbc;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.stereotype.Repository;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
+
+import static ru.javawebinar.topjava.util.DateTimeUtil.getEndExclusive;
+import static ru.javawebinar.topjava.util.DateTimeUtil.getStartInclusive;
 
 /**
  * @author Alexei Valchuk, 15.02.2023, email: a.valchukav@gmail.com
  */
 
-@Repository
+//@Repository
 public class JdbcMealRepository implements MealRepository {
 
     private static final BeanPropertyRowMapper<Meal> ROW_MAPPER = new BeanPropertyRowMapper<>(Meal.class);
@@ -27,7 +28,7 @@ public class JdbcMealRepository implements MealRepository {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final SimpleJdbcInsert mealInsert;
 
-    @Autowired
+//    @Autowired
     public JdbcMealRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.mealInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("meals").usingGeneratedKeyColumns("id");
 
@@ -73,9 +74,11 @@ public class JdbcMealRepository implements MealRepository {
     }
 
     @Override
-    public List<Meal> getBetween(LocalDateTime startDate, LocalDateTime endDate, int userId) {
+    public List<Meal> getBetweenInclusive(LocalDate startDate, LocalDate endDate, int userId) {
+        startDate = (startDate == null ? LocalDate.MIN : startDate);
+        endDate = (endDate == null ? LocalDate.MAX : endDate);
         return jdbcTemplate.query(
-                "SELECT * FROM meals WHERE user_id=?  AND date_time BETWEEN  ? AND ? ORDER BY date_time DESC",
-                ROW_MAPPER, userId, startDate, endDate);
+                "SELECT * FROM meals WHERE user_id=? AND date_time >=? AND date_time < ? ORDER BY date_time DESC",
+                ROW_MAPPER, userId, getStartInclusive(startDate), getEndExclusive(endDate));
     }
 }
