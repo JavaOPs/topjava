@@ -13,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.util.AbstractTestData;
+import ru.javawebinar.topjava.util.TimingExtension;
 import ru.javawebinar.topjava.util.UserTestData;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
@@ -24,6 +25,7 @@ import static ru.javawebinar.topjava.util.UserTestData.*;
  */
 
 @ExtendWith(SpringExtension.class)
+@ExtendWith(TimingExtension.class)
 @ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 class UserServiceTest {
@@ -53,8 +55,11 @@ class UserServiceTest {
     @Test
     void create() {
         User newUser = new User(null, "DUMMY", "DUMMY", "DUMMY", Role.ROLE_USER);
-        service.create(newUser);
-        testData.assertMatch(service.getAll(), ADMIN, newUser, USER);
+        User created = service.create(newUser);
+        Integer newId = created.getId();
+        newUser.setId(newId);
+        testData.assertMatch(created, newUser);
+        testData.assertMatch(service.get(newId), newUser);
     }
 
     @Test

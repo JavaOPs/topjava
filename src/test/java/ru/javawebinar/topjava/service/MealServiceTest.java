@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.util.AbstractTestData;
 import ru.javawebinar.topjava.util.MealTestData;
+import ru.javawebinar.topjava.util.TimingExtension;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
@@ -26,6 +27,7 @@ import static ru.javawebinar.topjava.util.UserTestData.USER_ID;
  */
 
 @ExtendWith(SpringExtension.class)
+@ExtendWith(TimingExtension.class)
 @ContextConfiguration(locations = {"classpath:spring/spring-app.xml", "classpath:spring/spring-db.xml"})
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 class MealServiceTest {
@@ -37,12 +39,12 @@ class MealServiceTest {
     @Autowired
     private MealService service;
 
-    private final AbstractTestData<Meal> testData = new MealTestData();
+    private final AbstractTestData<Meal> testData = new MealTestData("user");
 
     @Test
     public void delete() {
         service.delete(MEAL1_ID, USER_ID);
-        testData.assertMatch(service.getAll(USER_ID), MEAL6, MEAL5, MEAL4, MEAL3, MEAL2);
+        testData.assertMatch(service.getAll(USER_ID), MEAL7, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2);
     }
 
     @Test
@@ -60,8 +62,10 @@ class MealServiceTest {
         Meal newMeal = getCreated();
         Meal created = service.create(newMeal, USER_ID);
         newMeal.setId(created.getId());
-        testData.assertMatch(newMeal, created);
-        testData.assertMatch(service.getAll(USER_ID), newMeal, MEAL6, MEAL5, MEAL4, MEAL3, MEAL2, MEAL1);
+        Integer newId = created.getId();
+        newMeal.setId(newId);
+        testData.assertMatch(created, newMeal);
+        testData.assertMatch(service.get(newId, USER_ID), newMeal);
     }
 
     @Test
@@ -102,5 +106,10 @@ class MealServiceTest {
         testData.assertMatch(service.getBetweenDates(
                 LocalDate.of(2015, Month.MAY, 30),
                 LocalDate.of(2015, Month.MAY, 30), USER_ID), MEAL3, MEAL2, MEAL1);
+    }
+
+    @Test
+    public void getBetweenWithNullDates() {
+        testData.assertMatch(service.getBetweenDates(null, null, USER_ID), MEALS);
     }
 }
