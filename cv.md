@@ -30,6 +30,7 @@
 - <a href="https://codility.com/programmers/lessons/">Codility programmers lessons</a>
 - <a href="https://www.hackerrank.com/">Hackerrank practice coding</a>
 - [start.interviewing.io](https://start.interviewing.io/)
+- [Meetapro - mock interviews with top FAANG engineers](https://meetapro.com)
 
 ## [Тестовое собеседование, самые спрашиваемые темы](http://javaops.ru/interview/test.html)
 
