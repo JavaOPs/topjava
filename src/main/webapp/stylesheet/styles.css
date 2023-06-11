@@ -6,3 +6,19 @@ th, td {
     border: 2px solid black;
     padding: 10px;
 }
+
+form {
+    display: table;
+}
+
+p {
+    display: table-row;
+}
+
+label {
+    display: table-cell;
+}
+
+input {
+    display: table-cell;
+}
