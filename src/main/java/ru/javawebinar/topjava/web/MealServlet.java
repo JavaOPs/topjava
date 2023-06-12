@@ -45,10 +45,12 @@ public class MealServlet extends HttpServlet {
                 response.sendRedirect("/topjava/meals");
                 break;
             case ("update"):
-                forwardToEdit(request, response, storage.get(Integer.parseInt(request.getParameter("id"))));
-                break;
             case ("add"):
-                forwardToEdit(request, response, new Meal(LocalDateTime.now(), "Еда", 500));
+                Meal meal = action.equals("update") ? storage.get(Integer.parseInt(request.getParameter("id"))) :
+                        new Meal(LocalDateTime.now(), "Еда", 500);
+                log.debug("forward to edit");
+                request.setAttribute("meal", createTo(meal, meal.getCalories() > caloriesPerDay));
+                request.getRequestDispatcher("edit.jsp").forward(request, response);
                 break;
             default:
                 throw new RuntimeException("unknown " + action + " passes to the doGet");
@@ -78,11 +80,5 @@ public class MealServlet extends HttpServlet {
         List<MealTo> filteredByStreams = filteredByStreams(storage.getAllSorted(), caloriesPerDay);
         request.setAttribute("list", filteredByStreams);
         request.getRequestDispatcher("meals.jsp").forward(request, response);
-    }
-
-    private void forwardToEdit(HttpServletRequest request, HttpServletResponse response, Meal meal) throws ServletException, IOException {
-        log.debug("forward to edit");
-        request.setAttribute("meal", createTo(meal, meal.getCalories() > caloriesPerDay));
-        request.getRequestDispatcher("edit.jsp").forward(request, response);
     }
 }
