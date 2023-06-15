@@ -23,7 +23,7 @@ public abstract class AbstractUserController {
     }
 
     public User get(int id) {
-        log.info("get {}", id);
+        log.info("get with id={}", id);
         return service.get(id);
     }
 
@@ -34,7 +34,7 @@ public abstract class AbstractUserController {
     }
 
     public void delete(int id) {
-        log.info("delete {}", id);
+        log.info("delete with id={}", id);
         service.delete(id);
     }
 
