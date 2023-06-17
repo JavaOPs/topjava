@@ -23,9 +23,15 @@ public class MealRestController {
     @Autowired
     private MealService mealService;
 
-    public MealTo save(Meal meal) {
+    public MealTo create(Meal meal) {
         int userId = authUserId();
-        log.info("user with id={} saves a mealTo with id={}", userId, meal.getId());
+        log.info("user with id={} creates a mealTo with id={}", userId, meal.getId());
+        return creatTo(userId, mealService.create(meal, userId));
+    }
+
+    public MealTo update(Meal meal, int id) {
+        int userId = authUserId();
+        log.info("user with id={} updates a mealTo with id={}", userId, id);
         return creatTo(userId, mealService.create(meal, userId));
     }
 

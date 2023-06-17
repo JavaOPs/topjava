@@ -24,19 +24,20 @@ import static ru.javawebinar.topjava.util.MealsUtil.createTo;
 public class MealServlet extends HttpServlet {
     private static final Logger log = LoggerFactory.getLogger(MealServlet.class);
 
-    private MealRestController repository;
+    private MealRestController mealController;
 
     private ConfigurableApplicationContext appCtx;
 
     @Override
     public void init() {
         appCtx = new ClassPathXmlApplicationContext("spring/spring-app.xml");
-        repository = appCtx.getBean(MealRestController.class);
+        mealController = appCtx.getBean(MealRestController.class);
     }
 
     @Override
     public void destroy() {
         appCtx.close();
+        super.destroy();
     }
 
     @Override
@@ -48,9 +49,13 @@ public class MealServlet extends HttpServlet {
                 LocalDateTime.parse(request.getParameter("dateTime")),
                 request.getParameter("description"),
                 Integer.parseInt(request.getParameter("calories")));
-
-        log.info(meal.isNew() ? "Create {}" : "Update {}", meal);
-        repository.save(meal);
+        if (meal.isNew()) {
+            log.info("Create {}", meal);
+            mealController.create(meal);
+        } else {
+            log.info("Update {}", meal);
+            mealController.update(meal, meal.getId());
+        }
         response.sendRedirect("meals");
     }
 
@@ -62,15 +67,15 @@ public class MealServlet extends HttpServlet {
             case "delete":
                 int id = getId(request);
                 log.info("Delete id={}", id);
-                repository.delete(id);
+                mealController.delete(id);
                 response.sendRedirect("meals");
                 break;
             case "create":
             case "update":
                 final MealTo meal = "create".equals(action) ?
                         createTo(new Meal(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES), "", 1000), false) :
-                        repository.get(getId(request));
-                log.info(("create".equals(action) ? "create" : "update") + " id={}", meal.getId());
+                        mealController.get(getId(request));
+                log.info(("create".equals(action) ? "create" : "update") + " meal with id={}", meal.getId());
                 request.setAttribute("meal", meal);
                 request.getRequestDispatcher("/mealForm.jsp").forward(request, response);
                 break;
@@ -80,13 +85,13 @@ public class MealServlet extends HttpServlet {
                 LocalDate endDate = getLocalDate(request, "endDate");
                 LocalTime startTime = getLocalTime(request, "startTime");
                 LocalTime endTime = getLocalTime(request, "endTime");
-                request.setAttribute("meals", repository.getBetweenHalfOpen(startDate, endDate, startTime, endTime));
+                request.setAttribute("meals", mealController.getBetweenHalfOpen(startDate, endDate, startTime, endTime));
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
             case "all":
             default:
                 log.info("getAll");
-                request.setAttribute("meals", repository.getAll());
+                request.setAttribute("meals", mealController.getAll());
                 request.getRequestDispatcher("/meals.jsp").forward(request, response);
                 break;
         }
