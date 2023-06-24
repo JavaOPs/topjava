@@ -28,6 +28,11 @@ public class DateTimeUtil {
     }
 
     public static @Nullable
+    LocalDateTime parseLocalDateTime(@Nullable String str) {
+        return StringUtils.hasLength(str) ? LocalDateTime.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) : null;
+    }
+
+    public static @Nullable
     LocalDate parseLocalDate(@Nullable String str) {
         return StringUtils.hasLength(str) ? LocalDate.parse(str) : null;
     }
