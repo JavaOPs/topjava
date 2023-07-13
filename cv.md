@@ -34,6 +34,7 @@
 ## [Тестовое собеседование, самые спрашиваемые темы](http://javaops.ru/interview/test.html)
 
 ### Интервью:
+- [Собеседования для бэкендеров: как готовиться, тренироваться и не облажаться](https://habr.com/ru/companies/getmatch/articles/744760/)
 - [10 неочевидных фактов об ИТ-собеседованиях](https://proglib.io/p/molchanie-intervyuera-ili-10-neochevidnyh-faktov-ob-it-sobesedovaniyah-2022-06-14)
 - <a href="https://www.youtube.com/watch?v=Deb5wMHjBHY">Михаил Портнов. Собеседование на работу: как продать себя грамотно</a>
 - <a href="https://www.youtube.com/watch?v=qKsc8PoHJwM">Михаил Портнов. Какие вопросы мы задаем на собеседовании?</a>
