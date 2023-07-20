@@ -22,3 +22,11 @@ tr[data-meal-excess="false"] {
 tr[data-meal-excess="true"] {
     color: red;
 }
+
+header, footer {
+    background: none repeat scroll 0 0 #A6C9E2;
+    color: #2E6E9E;
+    font-size: 20px;
+    padding: 5px 20px;
+    margin: 6px 0;
+}
