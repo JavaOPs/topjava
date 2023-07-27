@@ -20,13 +20,13 @@ public class RootController {
 
     @GetMapping("/")
     public String root() {
-        log.info("root");
+        log.info("GET /root");
         return "index";
     }
 
     @GetMapping("/users")
     public String getUsers(Model model) {
-        log.info("users");
+        log.info("GET /users");
         model.addAttribute("users", service.getAll());
         return "users";
     }
@@ -34,6 +34,7 @@ public class RootController {
     @PostMapping("/users")
     public String setUser(HttpServletRequest request) {
         int userId = Integer.parseInt(request.getParameter("userId"));
+        log.info("POST /users");
         log.info("setUser {}", userId);
         SecurityUtil.setAuthUserId(userId);
         return "redirect:meals";
