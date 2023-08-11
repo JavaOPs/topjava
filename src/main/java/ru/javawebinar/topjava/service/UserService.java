@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.to.UserTo;
+import ru.javawebinar.topjava.util.UsersUtil;
 
 import java.util.List;
 
@@ -50,7 +52,16 @@ public class UserService {
     @CacheEvict(value = "users", allEntries = true)
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(repository.save(user), user.id());
+//      checkNotFoundWithId : check works only for JDBC, disabled
+        repository.save(user);
+    }
+
+    @CacheEvict(value = "users", allEntries = true)
+    @Transactional
+    public void update(UserTo userTo) {
+        User user = get(userTo.id());
+        User updatedUser = UsersUtil.updateFromTo(user, userTo);
+        repository.save(updatedUser);   // !! need only for JDBC implementation
     }
 
     @CacheEvict(value = "users", allEntries = true)
