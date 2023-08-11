@@ -22,6 +22,10 @@ function add() {
     $("#editRow").modal();
 }
 
+function filter() {
+    alert("It doesn't work!!!");
+}
+
 function deleteRow(id) {
     $.ajax({
         url: ctx.ajaxUrl + id,
@@ -39,6 +43,19 @@ function updateTable() {
 }
 
 function save() {
+    $.ajax({
+        type: "POST",
+        url: ctx.ajaxUrl,
+        data: form.serialize()
+    }).done(function () {
+        $("#editRow").modal("hide");
+        updateTable();
+        successNoty("Saved");
+    });
+}
+
+function saveMeal() {
+    form = $('#mealForm');
     $.ajax({
         type: "POST",
         url: ctx.ajaxUrl,
