@@ -1,6 +1,8 @@
 package ru.javawebinar.topjava.web;
 
+import org.junit.jupiter.api.Assumptions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
@@ -36,7 +38,14 @@ public abstract class AbstractControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
+    private Environment env;
+
+    @Autowired
     private WebApplicationContext webApplicationContext;
+
+    protected void assumeDataJpa() {
+        Assumptions.assumeTrue(env.acceptsProfiles(org.springframework.core.env.Profiles.of(Profiles.DATAJPA)), "DATA-JPA only");
+    }
 
     @PostConstruct
     private void postConstruct() {
