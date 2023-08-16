@@ -10,7 +10,7 @@ const ctx = {
             data: $("#filter").serialize()
         }).done(updateTableByData);
     }
-}
+};
 
 function clearFilter() {
     $("#filter")[0].reset();
