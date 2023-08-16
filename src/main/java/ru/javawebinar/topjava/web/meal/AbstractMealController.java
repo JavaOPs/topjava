@@ -41,6 +41,13 @@ public abstract class AbstractMealController {
         return MealsUtil.getTos(service.getAll(userId), SecurityUtil.authUserCaloriesPerDay());
     }
 
+    public void create(MealTo mealTo) {
+        int userId = SecurityUtil.authUserId();
+        log.info("create {} for user {}", mealTo, userId);
+        checkNew(mealTo);
+        service.create(MealsUtil.createNewFromTo(mealTo), userId);
+    }
+
     public Meal create(Meal meal) {
         int userId = SecurityUtil.authUserId();
         log.info("create {} for user {}", meal, userId);
@@ -55,6 +62,13 @@ public abstract class AbstractMealController {
         service.update(meal, userId);
     }
 
+    public void update(MealTo mealTo, int id) {
+        int userId = SecurityUtil.authUserId();
+        log.info("update {} for user {}", mealTo, userId);
+        assureIdConsistent(mealTo, id);
+        service.update(mealTo, userId);
+    }
+
     /**
      * <ol>Filter separately
      * <li>by date</li>
@@ -62,7 +76,7 @@ public abstract class AbstractMealController {
      * </ol>
      */
     public List<MealTo> getBetween(@Nullable LocalDate startDate, @Nullable LocalTime startTime,
-                                            @Nullable LocalDate endDate, @Nullable LocalTime endTime) {
+                                   @Nullable LocalDate endDate, @Nullable LocalTime endTime) {
         int userId = SecurityUtil.authUserId();
         log.info("getBetween dates({} - {}) time({} - {}) for user {}", startDate, endDate, startTime, endTime, userId);
 
