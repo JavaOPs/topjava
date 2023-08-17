@@ -26,9 +26,9 @@ public class ValidationUtil {
     private ValidationUtil() {
     }
 
-    public static <T> void validate(T bean) {
+    public static <T> void validate(T bean, Class<?>... groups) {
         // https://alexkosarev.name/2018/07/30/bean-validation-api/
-        Set<ConstraintViolation<T>> violations = validator.validate(bean);
+        Set<ConstraintViolation<T>> violations = validator.validate(bean, groups);
         if (!violations.isEmpty()) {
             throw new ConstraintViolationException(violations);
         }
