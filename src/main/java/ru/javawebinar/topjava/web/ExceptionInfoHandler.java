@@ -69,7 +69,7 @@ public class ExceptionInfoHandler {
     @ExceptionHandler(BindException.class)
     public ErrorInfo bindValidationError(HttpServletRequest req, BindException e) {
         String[] details = e.getBindingResult().getFieldErrors().stream()
-                .map(fe -> String.format("[%s] %s", fe.getField(), fe.getDefaultMessage()))
+                .map(messageSourceAccessor::getMessage)
                 .toArray(String[]::new);
 
         return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR, details);
