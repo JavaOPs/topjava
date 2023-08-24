@@ -34,7 +34,7 @@
               p:password="${database.password}"/>
     </beans>
 
-    <beans profile="postgres">
+    <beans profile="postgres,vds">
         <!--
             For postgres driver logging
             It uses java.util.logging and logged via jul-to-slf4j bridge
@@ -51,7 +51,17 @@
               p:driverClassName="org.postgresql.Driver"
               p:url="${database.url}"
               p:username="${database.username}"
-              p:password="${database.password}"/>
+              p:password="${database.password}"
+              p:validationQuery="SELECT 1"
+              p:maxActive="10"
+              p:minIdle="2"
+              p:maxWait="20000"
+              p:initialSize="2"
+              p:maxIdle="5"
+              p:testOnBorrow="true"
+              p:removeAbandoned="true"
+              p:testOnConnect="true"
+              p:testWhileIdle="true"/>
     </beans>
 
     <beans profile="tomcat">
@@ -71,7 +81,7 @@
 
         <bean id="transactionManager"
               class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-            <property name="dataSource" ref="dataSource" />
+            <property name="dataSource" ref="dataSource"/>
         </bean>
     </beans>
 
