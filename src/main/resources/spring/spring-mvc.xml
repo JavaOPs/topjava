@@ -11,7 +11,8 @@
     <bean class="ru.javawebinar.topjava.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
     <!-- serve static resources (*.html, ...) from src/main/webapp/ -->
-    <mvc:default-servlet-handler/>
+    <!--https://stackoverflow.com/a/44393203/548473-->
+    <!--<mvc:default-servlet-handler/>-->
 
     <security:global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
