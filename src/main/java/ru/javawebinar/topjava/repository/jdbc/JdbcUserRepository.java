@@ -13,7 +13,7 @@ import org.springframework.util.CollectionUtils;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
-import ru.javawebinar.topjava.util.ValidationUtil;
+import ru.javawebinar.topjava.util.validation.ValidationUtil;
 
 import java.util.*;
 

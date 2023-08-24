@@ -19,8 +19,8 @@ import ru.javawebinar.topjava.util.UsersUtil;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.UsersUtil.prepareToSave;
-import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
-import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
+import static ru.javawebinar.topjava.util.validation.ValidationUtil.checkNotFound;
+import static ru.javawebinar.topjava.util.validation.ValidationUtil.checkNotFoundWithId;
 
 @Service("userService")
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)

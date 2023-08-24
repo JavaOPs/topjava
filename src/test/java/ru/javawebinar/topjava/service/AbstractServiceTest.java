@@ -9,7 +9,7 @@ import ru.javawebinar.topjava.ActiveDbProfileResolver;
 import ru.javawebinar.topjava.TimingExtension;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static ru.javawebinar.topjava.util.ValidationUtil.getRootCause;
+import static ru.javawebinar.topjava.util.validation.ValidationUtil.getRootCause;
 
 @SpringJUnitConfig(locations = {
         "classpath:spring/spring-app.xml",
