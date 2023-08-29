@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>Calories Management</name>
-    <url>http://topjava.herokuapp.com/</url>
+    <url>http://javaops-demo.ru/topjava</url>
 
     <properties>
         <java.version>1.8</java.version>
