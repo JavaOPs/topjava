@@ -5,6 +5,7 @@
 -  <a href="http://habrahabr.ru/company/ua-hosting/blog/272617/">Научиться программировать сложнее, чем кажется</a>
 - [Собеседование. Разработка ПО. Вопросы.](https://drive.google.com/file/d/0B9Ye2auQ_NsFQVc2WUdCR0xvLWM/view?usp=sharing&resourcekey=0-HaWoRxoyboMSKjg5P2I1cQ)
 - [Набор ссылок для тренировки и прохождения интервью](https://github.com/andreis/interview)
+- [Полезные советы Jun-ам](https://github.com/JavaOPs)
 
 ### Составление резюме:
 -  [VisualCV: create resume in minutes](https://www.visualcv.com/)
