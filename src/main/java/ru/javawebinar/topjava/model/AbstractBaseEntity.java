@@ -15,6 +15,7 @@ public abstract class AbstractBaseEntity implements Persistable<Integer> {
 
     @Id
     @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = START_SEQ)
+    //    @Column(name = "id", unique = true, nullable = false, columnDefinition = "integer default nextval('global_seq')")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
 //  See https://hibernate.atlassian.net/browse/HHH-3718 and https://hibernate.atlassian.net/browse/HHH-12034
 //  Proxy initialization when accessing its identifier managed now by JPA_PROXY_COMPLIANCE setting
