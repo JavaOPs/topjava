@@ -91,7 +91,7 @@
 ### После прохождения испытательного срока жду твою [историю успеха](http://javaops.ru/view/story)
 
 ### Основные сайты поиска работы:
-- [Актуальная подборка Junior вакансий от CodeReview](https://jobs.yourcodereview.com/jobs?utm_source=partner&utm_medium=javaops&utm_campaign=landing)
+- [Актуальная подборка Junior вакансий от CodeReview](https://jobs.yourcodereview.com?utm_source=partner&utm_medium=javaops&utm_campaign=landing)
 - <a href="https://rabota.yandex.ru/search?job_industry=275&text=java">Яндекс агрегатор</a>
 - <a href="hh.ru">HH</a>
 - <a href="https://www.linkedin.com/">LinkedIn</a>
