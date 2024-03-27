@@ -37,8 +37,7 @@
         <!--    Tests  -->
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
         <assertj.version>3.25.3</assertj.version>
-        <hamcrest.version>1.3</hamcrest.version>
-        <jsonassert.version>1.5.1</jsonassert.version>
+        <hamcrest.version>2.2</hamcrest.version>
     </properties>
 
     <build>
@@ -241,14 +240,8 @@
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-all</artifactId>
+            <artifactId>hamcrest-core</artifactId>
             <version>${hamcrest.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.skyscreamer</groupId>
-            <artifactId>jsonassert</artifactId>
-            <version>${jsonassert.version}</version>
             <scope>test</scope>
         </dependency>
 
