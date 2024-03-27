@@ -17,6 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.version>5.3.32</spring.version>
         <spring-data-jpa.version>2.7.18</spring-data-jpa.version>
+        <jackson.version>2.17.0</jackson.version>
         <tomcat.version>9.0.86</tomcat.version>
 
         <!-- Hibernate -->
@@ -211,6 +212,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
 
         <!--Test-->
