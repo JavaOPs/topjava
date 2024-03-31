@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.version>5.3.32</spring.version>
+        <spring.security.version>5.8.8</spring.security.version>
         <spring-data-jpa.version>2.7.18</spring-data-jpa.version>
         <jackson.version>2.17.0</jackson.version>
         <tomcat.version>9.0.86</tomcat.version>
@@ -149,6 +150,18 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data-jpa.version}</version>
+        </dependency>
+
+        <!--security-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <!--- ORM -->
