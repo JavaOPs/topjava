@@ -1,9 +1,6 @@
 package ru.javawebinar.topjava.service.user;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.rules.Stopwatch;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
@@ -28,6 +25,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertThrows;
+import static ru.javawebinar.topjava.MealTestData.MEAL_MATCHER;
 import static ru.javawebinar.topjava.UserTestData.*;
 
 @ContextConfiguration({
@@ -127,5 +125,11 @@ public class UserServiceTest {
     public void getAll() {
         List<User> all = service.getAll();
         USER_MATCHER.assertMatch(all, admin, guest, user);
+    }
+
+    @Test
+    public void getByIdWithMeals() {
+        User user = service.getUserWithMeals(USER_ID);
+        MEAL_MATCHER.assertMatch(user.getMeals(), meals);
     }
 }

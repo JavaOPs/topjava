@@ -47,4 +47,8 @@ public class UserService {
     public void update(User user) {
         checkNotFoundWithId(repository.save(user), user.getId());
     }
+
+    public User getUserWithMeals(int id) {
+        return repository.getByIdWithMeals(id);
+    }
 }

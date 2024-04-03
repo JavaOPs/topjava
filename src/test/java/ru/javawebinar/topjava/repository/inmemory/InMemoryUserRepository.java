@@ -34,4 +34,9 @@ public class InMemoryUserRepository extends InMemoryBaseRepository<User> impleme
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public User getByIdWithMeals(int id) {
+        return null;
+    }
 }
