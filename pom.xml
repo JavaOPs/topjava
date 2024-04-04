@@ -9,15 +9,15 @@
     <version>1.0-SNAPSHOT</version>
 
     <name>Calories Management</name>
-    <url>http://javaops-demo.ru/topjava</url>
+    <url>https://javaops-demo.ru/topjava</url>
 
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.version>5.3.30</spring.version>
-        <spring-data-jpa.version>2.7.17</spring-data-jpa.version>
-        <tomcat.version>9.0.82</tomcat.version>
+        <spring.version>5.3.32</spring.version>
+        <spring-data-jpa.version>2.7.18</spring-data-jpa.version>
+        <tomcat.version>9.0.86</tomcat.version>
 
         <!-- Hibernate -->
         <hibernate.version>5.6.15.Final</hibernate.version>
@@ -28,14 +28,14 @@
         <ehcache.version>3.10.8</ehcache.version>
 
         <!-- Logging -->
-        <logback.version>1.2.12</logback.version>
+        <logback.version>1.2.13</logback.version>
         <slf4j.version>1.7.36</slf4j.version>
 
         <!--DB-->
-        <postgresql.version>42.6.0</postgresql.version>
+        <postgresql.version>42.7.1</postgresql.version>
         <!--    Tests  -->
         <junit.version>4.13.2</junit.version>
-        <assertj.version>3.24.2</assertj.version>
+        <assertj.version>3.25.3</assertj.version>
     </properties>
 
     <build>
@@ -50,7 +50,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.12.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
