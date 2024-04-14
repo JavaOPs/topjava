@@ -1,12 +1,16 @@
 package ru.javawebinar.topjava.web.json;
 
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.javawebinar.topjava.View;
 import ru.javawebinar.topjava.model.Meal;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.javawebinar.topjava.MealTestData.*;
 
 class JsonUtilTest {
@@ -26,5 +30,13 @@ class JsonUtilTest {
         log.info(json);
         List<Meal> actual = JsonUtil.readValues(json, Meal.class);
         MEAL_MATCHER.assertMatch(actual, meals);
+    }
+
+    @Test
+    public void writeWithView() {
+        ObjectWriter uiWriter = JacksonObjectMapper.getMapper().writerWithView(View.JsonUI.class);
+        String json = JsonUtil.writeValue(adminMeal1, uiWriter);
+        System.out.println(json);
+        assertThat(json, containsString("dateTimeUI"));
     }
 }
