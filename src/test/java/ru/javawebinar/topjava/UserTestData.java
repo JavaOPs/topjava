@@ -26,9 +26,9 @@ public class UserTestData {
     public static final int GUEST_ID = START_SEQ + 2;
     public static final int NOT_FOUND = 10;
 
-    public static final User user = new User(USER_ID, "User", "user@yandex.ru", "password", Role.USER);
-    public static final User admin = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", Role.ADMIN, Role.USER);
-    public static final User guest = new User(GUEST_ID, "Guest", "guest@gmail.com", "guest");
+    public static final User user = new User(USER_ID, "User", "user@yandex.ru", "password", 2005, Role.USER);
+    public static final User admin = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", 1900, Role.ADMIN, Role.USER);
+    public static final User guest = new User(GUEST_ID, "Guest", "guest@gmail.com", "guest", 2000);
 
     static {
         user.setMeals(meals);
