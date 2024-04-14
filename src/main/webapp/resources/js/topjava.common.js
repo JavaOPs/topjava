@@ -13,12 +13,14 @@ function makeEditable(datatableApi) {
 }
 
 function add() {
+    $("#modalTitle").html(i18n["addTitle"]);
     form.find(":input").val("");
     $("#editRow").modal();
 }
 
 function updateRow(id) {
     form.find(":input").val("");
+    $("#modalTitle").html(i18n["editTitle"]);
     $.get(ctx.ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
@@ -28,13 +30,13 @@ function updateRow(id) {
 }
 
 function deleteRow(id) {
-    if (confirm('Are you sure?')) {
+    if (confirm(i18n['common.confirm'])) {
         $.ajax({
             url: ctx.ajaxUrl + id,
             type: "DELETE"
         }).done(function () {
             ctx.updateTable();
-            successNoty("Deleted");
+            successNoty("common.deleted");
         });
     }
 }
@@ -51,7 +53,7 @@ function save() {
     }).done(function () {
         $("#editRow").modal("hide");
         ctx.updateTable();
-        successNoty("Saved");
+        successNoty("common.saved");
     });
 }
 
@@ -64,10 +66,10 @@ function closeNoty() {
     }
 }
 
-function successNoty(text) {
+function successNoty(key) {
     closeNoty();
     new Noty({
-        text: "<span class='fa fa-lg fa-check'></span> &nbsp;" + text,
+        text: "<span class='fa fa-lg fa-check'></span> &nbsp;" + i18n[key],
         type: 'success',
         layout: "bottomRight",
         timeout: 1000
@@ -89,7 +91,7 @@ function renderDeleteBtn(data, type, row) {
 function failNoty(jqXHR) {
     closeNoty();
     failedNote = new Noty({
-        text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;Error status: " + jqXHR.status + (jqXHR.responseJSON ? "<br>" + jqXHR.responseJSON : ""),
+        text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;" + i18n["common.errorStatus"] + ": " + jqXHR.status + (jqXHR.responseJSON ? "<br>" + jqXHR.responseJSON : ""),
         type: "error",
         layout: "bottomRight"
     });
