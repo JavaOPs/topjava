@@ -1,22 +1,17 @@
 package ru.javawebinar.topjava.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.javawebinar.topjava.View;
-import ru.javawebinar.topjava.View.ValidatedUI;
 import ru.javawebinar.topjava.util.DateTimeUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.validation.groups.Default;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -39,25 +34,25 @@ public class Meal extends AbstractBaseEntity {
     public static final String GET_BETWEEN = "Meal.getBetween";
 
     @Column(name = "date_time", nullable = false)
-    @NotNull(groups = {ValidatedUI.class, Default.class})
-    @JsonView(View.JsonREST.class)
+    @NotNull
+    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
-    @NotBlank(groups = {ValidatedUI.class, Default.class})
-    @Size(min = 2, max = 120, groups = {ValidatedUI.class, Default.class})
+    @NotBlank
+    @Size(min = 2, max = 120)
     private String description;
 
     @Column(name = "calories", nullable = false)
-    @NotNull(groups = {ValidatedUI.class, Default.class})
-    @Range(min = 10, max = 5000, groups = {ValidatedUI.class, Default.class})
+    @NotNull
+    @Range(min = 10, max = 5000)
     private Integer calories;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
-    @NotNull
+    @NotNull(groups = View.Persist.class)
     private User user;
 
     public Meal() {
@@ -108,19 +103,6 @@ public class Meal extends AbstractBaseEntity {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-
-    @JsonGetter
-    @JsonView(View.JsonUI.class)
-    @JsonFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
-    public LocalDateTime getDateTimeUI() {
-        return dateTime;
-    }
-
-    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
-    public void setDateTimeUI(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     @Override
