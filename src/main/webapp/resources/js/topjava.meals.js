@@ -12,6 +12,11 @@ const ctx = {
     }
 };
 
+function clearFilter() {
+    $("#filter")[0].reset();
+    $.get(mealAjaxUrl, updateTableByData);
+}
+
 $(function () {
     makeEditable(
         $("#datatable").DataTable({
