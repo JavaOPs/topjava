@@ -25,7 +25,7 @@ public class DataJpaMealRepository implements MealRepository {
             crudRepository.save(meal);
             return meal;
         }
-        return get(meal.getId(), userId) != null ? crudRepository.save(meal) : null;
+        return get(meal.id(), userId) != null ? crudRepository.save(meal) : null;
     }
 
     @Override
