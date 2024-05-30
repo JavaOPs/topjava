@@ -35,7 +35,7 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
 @Ignore
-public abstract class BaseMealServiceTest {
+public abstract class BaseMealServiceTest extends BaseServiceTest{
 
     @Autowired
     private MealService service;
