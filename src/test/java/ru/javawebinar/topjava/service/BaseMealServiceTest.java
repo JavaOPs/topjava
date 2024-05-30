@@ -36,32 +36,9 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
 @Ignore
 public abstract class BaseMealServiceTest {
-    private static final Logger log = getLogger("result");
-
-    private static final StringBuilder results = new StringBuilder();
-
-    @Rule
-    // http://stackoverflow.com/questions/14892125/what-is-the-best-practice-to-determine-the-execution-time-of-the-bussiness-relev
-    public final Stopwatch stopwatch = new Stopwatch() {
-        @Override
-        protected void finished(long nanos, Description description) {
-            String result = String.format("\n%-25s %7d", description.getMethodName(), TimeUnit.NANOSECONDS.toMillis(nanos));
-            results.append(result);
-            log.info(result + " ms\n");
-        }
-    };
 
     @Autowired
     private MealService service;
-
-    @AfterClass
-    public static void printResult() {
-        log.info("\n---------------------------------" +
-                "\nTest                 Duration, ms" +
-                "\n---------------------------------" +
-                results +
-                "\n---------------------------------");
-    }
 
     @Test
     public void delete() {
@@ -82,7 +59,7 @@ public abstract class BaseMealServiceTest {
     @Test
     public void create() {
         Meal created = service.create(getNew(), USER_ID);
-        int newId = created.getId();
+        int newId = created.id();
         Meal newMeal = getNew();
         newMeal.setId(newId);
         MEAL_MATCHER.assertMatch(created, newMeal);
