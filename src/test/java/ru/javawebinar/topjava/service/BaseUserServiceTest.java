@@ -32,7 +32,7 @@ import static ru.javawebinar.topjava.UserTestData.*;
 @ActiveProfiles(resolver = ActiveDbProfileResolver.class)
 public abstract class BaseUserServiceTest extends BaseServiceTest{
     @Autowired
-    private UserService service;
+    protected UserService service;
 
     @Autowired
     private CacheManager cacheManager;
@@ -99,9 +99,4 @@ public abstract class BaseUserServiceTest extends BaseServiceTest{
         USER_MATCHER.assertMatch(all, admin, guest, user);
     }
 
-    @Test
-    public void getByIdWithMeals() {
-        User user = service.getUserWithMeals(USER_ID);
-        MEAL_MATCHER.assertMatch(user.getMeals(), meals);
-    }
 }

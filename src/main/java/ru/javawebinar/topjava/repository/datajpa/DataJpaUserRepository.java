@@ -43,8 +43,6 @@ public class DataJpaUserRepository implements UserRepository {
     }
 
     public User getByIdWithMeals(int id) {
-        User user = crudRepository.getByIdWithMeals(id);
-        user.getMeals().size();
-        return user;
+        return crudRepository.getByIdWithMeals(id);
     }
 }
