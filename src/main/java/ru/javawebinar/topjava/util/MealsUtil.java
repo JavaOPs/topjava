@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MealsUtil {
+
     public static void main(String[] args) {
         List<Meal> meals = Arrays.asList(
                 new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500),
