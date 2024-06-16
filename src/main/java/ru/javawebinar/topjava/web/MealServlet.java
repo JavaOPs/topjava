@@ -27,6 +27,7 @@ public class MealServlet extends HttpServlet {
         userMealDao = new UserMealDaoImpl();
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
@@ -39,12 +40,13 @@ public class MealServlet extends HttpServlet {
         response.sendRedirect("meals");
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
         if (action == null) {
-            log.info("getMeals");
-            request.setAttribute("meals", MealsUtil.getMealWithExcess(MealsUtil.meals, MealsUtil.CALORIES_PER_DAY));
+            log.info("getAllMeals");
+            request.setAttribute("mealList", MealsUtil.getMealWithExcess(userMealDao.getAllMeals(), MealsUtil.CALORIES_PER_DAY));
             request.getRequestDispatcher("/meals.jsp").forward(request, response);
         } else if (action.equals("delete")) {
             int id = getId(request);
@@ -53,7 +55,7 @@ public class MealServlet extends HttpServlet {
             response.sendRedirect("meals");
         } else {
             final Meal meal = action.equals("create") ?
-                    new Meal(LocalDateTime.now(), "Заполните поле", 500) :
+                    new Meal(LocalDateTime.now(), "", 1000) :
                     userMealDao.getMealById(getId(request));
             request.setAttribute("meal", meal);
             request.getRequestDispatcher("/mealEdit.jsp").forward(request, response);
@@ -62,6 +64,6 @@ public class MealServlet extends HttpServlet {
 
     private int getId(HttpServletRequest request) {
         String paramId = Objects.requireNonNull(request.getParameter("id"));
-        return Integer.valueOf(paramId);
+        return Integer.parseInt(paramId);
     }
 }
