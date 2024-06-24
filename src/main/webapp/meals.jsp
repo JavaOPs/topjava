@@ -26,7 +26,6 @@
     </thead>
     <tbody>
     <c:forEach items="${mealList}" var="meal">
-        <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.MealTo" />
         <tr class="${meal.excess ? 'excess' : 'normal'}">
             <td>
                 <fmt:parseDate value="${meal.dateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parseDateTime" />
@@ -35,10 +34,25 @@
             <td>${meal.description}</td>
             <td>${meal.calories}</td>
             <td><a href="meals?action=update&id=${meal.id}">Update</a> </td>
-            <td><a href="meals?action=delete&id=${meal.id}">Delete</a> </td>
+            <td>
+                <a href="#" onclick="deleteMeal(${meal.id}); return false;">Delete</a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+
+<form id="deleteForm" method="post" action="meals">
+    <input type="hidden" name="action" value="delete"/>
+    <input type="hidden" name="id" id="deleteId"/>
+</form>
+
+<script>
+    function deleteMeal(id) {
+            document.getElementById('deleteId').value = id;
+            document.getElementById('deleteForm').submit();
+    }
+</script>
+
 </body>
 </html>

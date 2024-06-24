@@ -25,11 +25,15 @@
 <body>
 <h3><a href="index.html">Home</a></h3>
 <hr>
-<h2>${param.action == 'create' ? 'Create meal' : 'Edit meal'}</h2>
+<h2><c:choose>
+    <c:when test="${param.action == 'create'}">Create meal</c:when>
+    <c:otherwise>Edit meal</c:otherwise>
+</c:choose></h2></h2>
 <hr>
 <jsp:useBean id="meal" type="ru.javawebinar.topjava.model.Meal" scope="request" />
 <form method="post" action="meals">
     <input type="hidden" name="id" value="${meal.id}">
+    <input type="hidden" name="action" value="${param.action}">
     <dl>
         <dt>DataTime:</dt>
         <dd><input type="datetime-local" value="${meal.dateTime}" name="dateTime"></dd>
@@ -43,7 +47,14 @@
         <dd><input type="number" value="${meal.calories}" name="calories"></dd>
     </dl>
     <button type="submit">Save</button>
-    <button onclick="window.history.back()">Cancel</button>
+    <button type="button" id="cancelButton">Cancel</button>
+
+    <script>
+        document.getElementById('cancelButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            window.location.href = 'meals';
+        });
+    </script>
 </form>
 </body>
 </html>

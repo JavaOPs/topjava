@@ -5,8 +5,9 @@ import ru.javawebinar.topjava.model.Meal;
 import java.util.Collection;
 
 public interface UserMealDao {
-    Meal addMeal(Meal meal);
-    void deleteMealById(int id);
-    Meal getMealById(int id);
-    Collection<Meal> getAllMeals();
+    Meal create(Meal meal);
+    Meal update(Meal meal);
+    void deleteById(int id);
+    Meal getById(int id);
+    Collection<Meal> getAll();
 }

@@ -14,17 +14,17 @@ public class UserMealDaoImpl implements UserMealDao{
     private AtomicInteger atomicId = new AtomicInteger(0);
 
     {
-                addMeal(new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500));
-                addMeal(new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000));
-                addMeal(new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500));
-                addMeal(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100));
-                addMeal(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000));
-                addMeal(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500));
-                addMeal(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410));
+                create(new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), "Завтрак", 500));
+                create(new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 13, 0), "Обед", 1000));
+                create(new Meal(LocalDateTime.of(2020, Month.JANUARY, 30, 20, 0), "Ужин", 500));
+                create(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 0, 0), "Еда на граничное значение", 100));
+                create(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 10, 0), "Завтрак", 1000));
+                create(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 13, 0), "Обед", 500));
+                create(new Meal(LocalDateTime.of(2020, Month.JANUARY, 31, 20, 0), "Ужин", 410));
     }
 
     @Override
-    public Meal addMeal(Meal meal) {
+    public Meal create(Meal meal) {
         if (meal.isNew()) {
             meal.setId(atomicId.incrementAndGet());
         }
@@ -32,17 +32,26 @@ public class UserMealDaoImpl implements UserMealDao{
     }
 
     @Override
-    public void deleteMealById(int id) {
+    public Meal update(Meal meal) {
+        if (!meal.isNew()) {
+            return userMeals.put(meal.getId(), meal);
+        } else {
+            throw new IllegalArgumentException("Can't update food");
+        }
+    }
+
+    @Override
+    public void deleteById(int id) {
         userMeals.remove(id);
     }
 
     @Override
-    public Meal getMealById(int id) {
+    public Meal getById(int id) {
         return userMeals.get(id);
     }
 
     @Override
-    public Collection<Meal> getAllMeals() {
+    public Collection<Meal> getAll() {
         return userMeals.values();
     }
 }
