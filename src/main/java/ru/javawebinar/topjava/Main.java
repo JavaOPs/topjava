@@ -6,8 +6,8 @@ package ru.javawebinar.topjava;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.format("Hello TopJava Enterprise!");
-        System.out.println("testGitHubCommit");
-        System.out.println("TestcommittoHM0 branch");
+        TestGetText.getText("Right now, im last time testing Git!!");
+        TestGetText testTest = new TestGetText("Its just a messege", 100);
+        testTest.getSomethingMore();
     }
 }
