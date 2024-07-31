@@ -6,8 +6,6 @@ package ru.javawebinar.topjava;
  */
 public class Main {
     public static void main(String[] args) {
-        TestGetText.getText("Right now, im last time testing Git!!");
-        TestGetText testTest = new TestGetText("Its just a messege", 100);
-        testTest.getSomethingMore();
+        System.out.println("Text");
     }
 }
