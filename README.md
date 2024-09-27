@@ -14,7 +14,7 @@
 ## <a href="description.md">Описание и план проекта</a>
 ### <a href="http://javaops-demo.ru/topjava" target=_blank>Демо разрабатываемого приложения</a>
 ### [Изменения проекта (Release Notes)](ReleaseNotes.md)
-### <a href='https://github.com/JavaOPs/topjava/wiki/Стажировка-"Enterprise-Java-разработчик-(TopJava)"'>Требования к участникам, Wiki</a>
+### <a href='https://github.com/JavaOPs/topjava/wiki/Стажировка--Enterprise-Java-разработчик-(TopJava)-'>Требования к участникам, Wiki</a>
 ### <a href="cv.md">Составление резюме, подготовка к интервью, поиск работы</a>
 
 Обновленное вводное занятие (обязательно смотреть все видео)
