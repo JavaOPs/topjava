@@ -1,7 +1,7 @@
 # TopJava Release Notes
 
 ### TopJava 26
-- починили шаблоны запросов на создание в Swagger хчз [ApiModelProperty](https://www.baeldung.com/spring-swagger-hide-field)
+- починили шаблоны запросов на создание в Swagger через [ApiModelProperty](https://www.baeldung.com/spring-swagger-hide-field)
 - в новой версии Data JPA `getById`->`getReferenceById`
 - мелкие правки
 
