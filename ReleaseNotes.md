@@ -6,7 +6,7 @@
 - мелкие правки
 
 ### TopJava 25
-- поправил `NoHtmlValidator`: `Jsoup.clean().equals -> `Jsoup.isValid`
+- поправил `NoHtmlValidator`: `Jsoup.clean().equals` -> `Jsoup.isValid`
 - починил `role VARCHAR NOT NULL`
 - добавил нового тестового пользователя `guest`
 
