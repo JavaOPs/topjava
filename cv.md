@@ -119,7 +119,7 @@
 - Готовься к стендапам/летучкам. Задавай на них вменяемые вопросы. Выказывай заинтересованность
 - Выдели самое главное путем опроса босса и важных коллег. Не распыляйся на мелочи.</li>
 - [**5 вещей, которые разработчик должен сделать прежде чем попросить о помощи**](https://techrocks.ru/2018/07/16/5-things-a-developer-should-do-before-asking-for-help/)
-- [**Советы новичкам**](http://blog.csssr.ru/2016/09/19/how-to-be-a-beginner-developer)
+- [**Советы новичкам**](https://blog.csssr.com/ru/article/how-to-be-a-beginner-developer)
 - [ТОП-13 ошибок начинающего программиста](https://proglib.io/p/beginners-fails/)
 - [25 ошибок начинающего программиста](https://habr.com/ru/post/413129/)
 - [Путеводитель по синдрому самозванца](https://vc.ru/hr/167443-eshche-odin-putevoditel-po-sindromu-samozvanca-korni-prichiny-simptomy-i-posledstviya-chast-1)
