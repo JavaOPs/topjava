@@ -40,6 +40,9 @@
 ##  ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 6. <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFZDdaaU5fZEo4X3c/view?resourcekey=0-DvpzWIlMHZ7KX_v1SMuiAw" name="project">Работа с проектом (выполнять инструкции)</a>
 - **ВНИМАНИЕ: выбирайте для проекта простой пусть без пробелов и русских букв, например, `c:\projects\topjava\` (Windows). Иначе впоследствии будут проблемы**
 - **Плагин Git Intergation уже не требуется, а вкладку `Version control` в IDEA переименовали в `Git`**
+- **C Ultimate IDEA сейчас сложности**, надеемся что временные.
+  -  Скачать IDEA и установливать плагины [можно по инструкции](https://github.com/JavaOPs/topjava/wiki/IDEA#download)
+  -  После Trial 30 дней [способы продлить использование](https://github.com/JavaOPs/topjava/wiki/IDEA#licence)
 
 Для переключения режима отображения изменений из вкладки `Commit` в `Git: Local Changes` нужно переключить `Settings/Preferences | Version Control | Commit | Use non-modal commit interface` или в контекстном меню вкладки `Commit`:
 
