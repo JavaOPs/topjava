@@ -1,6 +1,6 @@
 [Java Enterprise Online Project](https://javaops.ru/view/topjava)
 ===============================
-Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), DataTables, jQuery + plugins, Java 8 Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
+Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), DataTables, jQuery + plugins, Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
 
 ![topjava_structure](https://javaops.ru/static/images/projects/top-scheme.jpg)
 
@@ -14,7 +14,7 @@
 ## <a href="description.md">Описание и план проекта</a>
 ### <a href="http://javaops-demo.ru/topjava" target=_blank>Демо разрабатываемого приложения</a>
 ### [Изменения проекта (Release Notes)](ReleaseNotes.md)
-### <a href='https://github.com/JavaOPs/topjava/wiki/Стажировка--Enterprise-Java-разработчик-(TopJava)-'>Требования к участникам, Wiki</a>
+### <a href='https://github.com/JavaOPs/topjava/wiki/Стажировка--Enterprise-Java-разработчик-(TopJava)'>Требования к участникам, Wiki</a>
 ### <a href="cv.md">Составление резюме, подготовка к интервью, поиск работы</a>
 
 Обновленное вводное занятие (обязательно смотреть все видео)
@@ -38,7 +38,7 @@
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 5. [Системы управления версиями. Git](doc/video5-vcs-git.md)</a>
 
 ##  ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 6. <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFZDdaaU5fZEo4X3c/view?resourcekey=0-DvpzWIlMHZ7KX_v1SMuiAw" name="project">Работа с проектом (выполнять инструкции)</a>
-- **ВНИМАНИЕ: выбирайте для проекта простой пусть без пробелов и русских букв, например, `c:\projects\topjava\` (Windows). Иначе впоследствии будут проблемы**
+- **ВНИМАНИЕ: выбирайте для проекта простой путь без пробелов и русских букв, например, `c:\projects\topjava\` (Windows). Иначе впоследствии будут проблемы**
 - **Плагин Git Intergation уже не требуется, а вкладку `Version control` в IDEA переименовали в `Git`**
 - **C Ultimate IDEA сейчас сложности**, надеемся что временные.
   -  Скачать IDEA и установливать плагины [можно по инструкции](https://github.com/JavaOPs/topjava/wiki/IDEA#download)
@@ -67,11 +67,11 @@
 -  Сделать локальный репозиторий проекта:
             <pre>git clone https://github.com/[Ваш аккаунт]/topjava.git</pre>
 
-> Вместо Fork можно сделать [клонирование проекта](https://github.com/JavaOPs/topjava/wiki/Git#user-content-Клонирование-проекта): он не будет привязан к исходному https://github.com/JavaOPs/topjava и у него не будет истории.
+> Вместо Fork можно сделать [клонирование проекта](https://github.com/JavaOPs/topjava//Git#user-content-Клонирование-проекта): он не будет привязан к исходному https://github.com/JavaOPs/topjava и у него не будет истории.
 
 - Открыть и настроить проект в IDEA
    - <a href="http://stackoverflow.com/questions/29695918/intellij-idea-console-issue#33035499">Выставить кодировку UTF-8 в консоли</a>
-   - <a href="https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9F%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%BA%D0%BE%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D1%83-utf-8">Поставить кодировку UTF-8</a>
+   - <a href="https://github.com/JavaOPs/topjava/wiki/IDEA#user-content-utf8-console">Поставить кодировку UTF-8</a>
    - Опционально: <a href="https://github.com/JavaOPs/topjava/wiki/IDEA#%D0%9F%D0%BE%D0%BC%D0%B5%D0%BD%D1%8F%D1%82%D1%8C-%D1%84%D0%BE%D0%BD%D1%82-%D0%BF%D0%BE-%D1%83%D0%BC%D0%BE%D0%BB%D1%87%D0%B0%D0%BD%D0%B8%D1%8E-dejavu">поменять шрифт по умолчанию на DejaVu</a> или на **новый [JetBrains Mono](https://habr.com/ru/company/jugru/news/t/484134/)**
 -  По ходу видео сделать `Apply Patch...` скачанного патча `Prepare_to_HW0.patch`
 -  Закоммитить и запушить изменения (`commit` + `push`)
@@ -121,9 +121,9 @@
 
 #### ВНИМАНИЕ: варианты Optional делайте в одной ветке в разных методах `UserMealsUtil`. Проще делать, проще проверять
 
-### Optional (Java 8 Stream API)
+### Optional (Stream API)
 ```
-Реализовать метод `UserMealsUtil.filteredByStreams` через Java 8 Stream API.
+Реализовать метод `UserMealsUtil.filteredByStreams` через Stream API.
 ```
 -  <a href="http://www.youtube.com/watch?v=_PDIVhEs6TM">Видео: Доступно о Java 8 Lambda</a>
 -  <a href="https://devcolibri.com/java-8-killer-features-%D1%87%D0%B0%D1%81%D1%82%D1%8C-1/">Java 8: Lambda выражения</a>
@@ -147,7 +147,7 @@
     - без циклов по другим коллекциям/массивам (к ним также относим методы коллекций `addAll()/removeAll()`)
 - через Stream API за 1 проход по исходному списку `meals.stream()`
     - нельзя использовать внешние коллекции, не являющиеся частью коллектора
-  - возможно дополнительные проходы по частям списка, при этом превышение должно считаться один раз для всего подсписка. Те например нельзя разбить список на на 2 подсписка с четными и нечетными датами и затем их объединить, с подсчетом превышения для каждого элемента.
+    - возможно дополнительные проходы по частям списка, при этом превышение должно считаться один раз для всего подсписка. Те например нельзя разбить список на 2 подсписка с четными и нечетными датами и затем их объединить, с подсчетом превышения для каждого элемента.
 
 Временная сложность реализации должна быть O(N) (обратите внимание на п. 13 замечаний)  
 Решение должно быть рабочим в общем случае (должно работать в приложении с многими пользователями, не только при запуске `main`)  
